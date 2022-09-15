@@ -775,27 +775,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     1,
                                                 fit: BoxFit.cover,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 8, 8, 8),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.45,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                      ),
-                                                      child: Text(
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.4,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(8, 8, 8, 8),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
                                                         getJsonField(
                                                           recordItem,
                                                           r'''$.fields['🏡 Address']''',
@@ -816,20 +816,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                           .bold,
                                                                 ),
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.45,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFFEEEEEE),
-                                                        shape:
-                                                            BoxShape.rectangle,
-                                                      ),
-                                                      child: Text(
+                                                      Text(
                                                         getJsonField(
                                                           recordItem,
                                                           r'''$.fields['⚡❗Status']''',
@@ -849,46 +836,34 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                           .bold,
                                                                 ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 4, 4, 4),
-                                                      child: Container(
-                                                        width: 30,
-                                                        height: 30,
-                                                        clipBehavior:
-                                                            Clip.antiAlias,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Image.network(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              recordItem,
-                                                              r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0, 4, 4, 4),
+                                                        child: Container(
+                                                          width: 30,
+                                                          height: 30,
+                                                          clipBehavior:
+                                                              Clip.antiAlias,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Image.network(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              getJsonField(
+                                                                recordItem,
+                                                                r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                              ),
+                                                              'https://static.thenounproject.com/png/630729-200.png',
                                                             ),
-                                                            'https://static.thenounproject.com/png/630729-200.png',
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.45,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                      ),
-                                                      child: Text(
+                                                      Text(
                                                         getJsonField(
                                                           recordItem,
                                                           r'''$.fields['💵 Purchase Price']''',
@@ -906,20 +881,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                           .bold,
                                                                 ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      '5 Days ago',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                fontSize: 10,
-                                                              ),
-                                                    ),
-                                                  ],
+                                                      Text(
+                                                        '5 Days ago',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Nunito',
+                                                                  fontSize: 10,
+                                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ],
