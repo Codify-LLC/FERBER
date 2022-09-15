@@ -708,7 +708,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ).toList();
                           return Container(
                             width: double.infinity,
-                            height: MediaQuery.of(context).size.height * 0.2,
+                            height: MediaQuery.of(context).size.height * 0.25,
                             child: PageView.builder(
                               controller: pageViewController ??= PageController(
                                   initialPage: min(0, record.length - 1)),
@@ -846,10 +846,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      getJsonField(
+                                                      '\$ ${getJsonField(
                                                         recordItem,
                                                         r'''$.fields['💵 Purchase Price']''',
-                                                      ).toString(),
+                                                      ).toString()}',
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1
