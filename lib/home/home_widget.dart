@@ -101,7 +101,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       body: FutureBuilder<ApiCallResponse>(
         future: GetTransactionsCall.call(
-          maxRecords: 2,
+          maxRecords: 100,
         ),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.

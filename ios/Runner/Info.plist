@@ -43,6 +43,10 @@
 
 	<key>NSLocationWhenInUseUsageDescription</key>
       <string>In order to search nearby, this app requires access to your current location.</string>
+	<key>NSCameraUsageDescription</key>
+      <string>App need to access to your camera </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+      <string>App need access to your gallery photos</string>
 	<key>NSContactsUsageDescription</key>
       <string>App need too access to your contacts</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

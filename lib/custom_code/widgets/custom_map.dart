@@ -47,7 +47,7 @@ class _CustomMapState extends State<CustomMap> {
         future: initialiseMap(),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
           return FlutterFlowGoogleMap(
             markers: snapshot.data!,

@@ -1,7 +1,10 @@
+import '../auth/auth_util.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +18,8 @@ class EditSettingsWidget extends StatefulWidget {
 
 class _EditSettingsWidgetState extends State<EditSettingsWidget> {
   TextEditingController? textController1;
+
+  String uploadedFileUrl = '';
 
   TextEditingController? textController2;
 
@@ -163,15 +168,17 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: Container(
-                            width: 80,
-                            height: 80,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/Devivo.PNG',
+                          child: AuthUserStreamWidget(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.network(
+                                currentUserPhoto,
+                              ),
                             ),
                           ),
                         ),
@@ -179,8 +186,44 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            final selectedMedia =
+                                await selectMediaWithSourceBottomSheet(
+                              context: context,
+                              allowPhoto: true,
+                            );
+                            if (selectedMedia != null &&
+                                selectedMedia.every((m) => validateFileFormat(
+                                    m.storagePath, context))) {
+                              showUploadMessage(
+                                context,
+                                'Uploading file...',
+                                showLoading: true,
+                              );
+                              final downloadUrls = (await Future.wait(
+                                      selectedMedia.map((m) async =>
+                                          await uploadData(
+                                              m.storagePath, m.bytes))))
+                                  .where((u) => u != null)
+                                  .map((u) => u!)
+                                  .toList();
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              if (downloadUrls.length == selectedMedia.length) {
+                                setState(
+                                    () => uploadedFileUrl = downloadUrls.first);
+                                showUploadMessage(
+                                  context,
+                                  'Success!',
+                                );
+                              } else {
+                                showUploadMessage(
+                                  context,
+                                  'Failed to upload media',
+                                );
+                                return;
+                              }
+                            }
                           },
                           text: 'Edit Photo',
                           options: FFButtonOptions(
