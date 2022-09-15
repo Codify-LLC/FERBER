@@ -335,7 +335,7 @@ class GetTransactionsCall {
       );
   static dynamic addressesList(dynamic response) => getJsonField(
         response,
-        r'''$.records[:].fields['Property Image']..url''',
+        r'''$.records[:]..fields['🏡 Address']''',
         true,
       );
 }

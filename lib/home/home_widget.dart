@@ -9,7 +9,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../seller_intake_step1/seller_intake_step1_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -149,9 +148,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: custom_widgets.CustomMap(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 1,
-                    addresses: functions
-                        .fetchAddressesFromJSON('🏡 Address',
-                            formMainGetTransactionsResponse.jsonBody)
+                    addresses: (GetTransactionsCall.addressesList(
+                      formMainGetTransactionsResponse.jsonBody,
+                    ) as List)
+                        .map<String>((s) => s.toString())
                         .toList(),
                   ),
                 ),
@@ -713,27 +713,26 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                          child: Builder(
-                            builder: (context) {
-                              final record = GetTransactionsCall.recordsList(
-                                formMainGetTransactionsResponse.jsonBody,
-                              ).toList();
-                              return Container(
-                                width: double.infinity,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: PageView.builder(
-                                  controller: pageViewController ??=
-                                      PageController(
-                                          initialPage:
-                                              min(0, record.length - 1)),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: record.length,
-                                  itemBuilder: (context, recordIndex) {
-                                    final recordItem = record[recordIndex];
-                                    return ClipRRect(
+                        Builder(
+                          builder: (context) {
+                            final record = GetTransactionsCall.recordsList(
+                              formMainGetTransactionsResponse.jsonBody,
+                            ).toList();
+                            return Container(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: PageView.builder(
+                                controller: pageViewController ??=
+                                    PageController(
+                                        initialPage: min(0, record.length - 1)),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: record.length,
+                                itemBuilder: (context, recordIndex) {
+                                  final recordItem = record[recordIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        2, 2, 2, 2),
+                                    child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Container(
                                         width: 100,
@@ -901,12 +900,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                          ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
