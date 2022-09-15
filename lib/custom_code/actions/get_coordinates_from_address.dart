@@ -13,10 +13,13 @@ Future<List<LatLng>> getCoordinatesFromAddress(List<String> address) async {
   List<LatLng> markersList = [];
   // get location Coordinates From Address
   for (final add in address) {
-    final geoCoderPlacemark = await locationFromAddress(add);
-    final location = LatLng(
-        geoCoderPlacemark.first.latitude, geoCoderPlacemark.first.longitude);
-    markersList.add(location);
+    try {
+      final location = await locationFromAddress(add);
+      markersList
+          .add(LatLng(location.first.latitude, location.first.longitude));
+    } catch (e) {
+      print(e);
+    }
   }
   return markersList;
 }
