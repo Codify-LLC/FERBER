@@ -683,15 +683,12 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        ListView.builder(
+                        ListView(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: listViewContactsListRecordList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewContactsListRecord =
-                                listViewContactsListRecordList[listViewIndex];
-                            return Slidable(
+                          children: [
+                            Slidable(
                               actionPane: const SlidableScrollActionPane(),
                               secondaryActions: [
                                 IconSlideAction(
@@ -716,8 +713,8 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
                                 tileColor: Colors.white,
                                 dense: false,
                               ),
-                            );
-                          },
+                            ),
+                          ],
                         ),
                       ],
                     ),

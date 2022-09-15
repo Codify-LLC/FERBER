@@ -4,11 +4,10 @@ import '../components/main_m_e_n_u_widget.dart';
 import '../components/search_results_widget.dart';
 import '../detail_new/detail_new_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
-import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../seller_intake_step1/seller_intake_step1_widget.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,8 +26,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   TextEditingController? searchValurTextFieldMLSController;
 
   String? dropDownSearchTYpeValue;
-  LatLng? googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -43,7 +40,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -111,23 +107,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Expanded(
                   child: Stack(
                     children: [
-                      FlutterFlowGoogleMap(
-                        controller: googleMapsController,
-                        onCameraIdle: (latLng) => googleMapsCenter = latLng,
-                        initialLocation: googleMapsCenter ??=
-                            LatLng(28.493431, -81.293925),
-                        markerColor: GoogleMarkerColor.rose,
-                        mapType: MapType.terrain,
-                        style: GoogleMapStyle.standard,
-                        initialZoom: 14,
-                        allowInteraction: false,
-                        allowZoom: true,
-                        showZoomControls: false,
-                        showLocation: true,
-                        showCompass: false,
-                        showMapToolbar: false,
-                        showTraffic: false,
-                        centerMapOnMarkerTap: true,
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 1,
+                        child: custom_widgets.CustomMap(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 1,
+                        ),
                       ),
                       Stack(
                         children: [
@@ -702,96 +688,94 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Builder(
-                                          builder: (context) {
-                                            final records = getJsonField(
-                                              rowResponse.jsonBody,
-                                              r'''$''',
-                                            ).map((e) => e).toList();
-                                            return SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    records.length,
-                                                    (recordsIndex) {
-                                                  final recordsItem =
-                                                      records[recordsIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 0, 0, 0),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(10, 0, 0, 0),
+                                                child: Material(
+                                                  color: Colors.transparent,
+                                                  elevation: 2,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                  child: Container(
+                                                    width: 280,
+                                                    height: 170,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
                                                     child: InkWell(
                                                       onTap: () async {
-                                                        await googleMapsController
-                                                            .future
-                                                            .then(
-                                                          (c) =>
-                                                              c.animateCamera(
-                                                            CameraUpdate.newLatLng(
-                                                                googleMapsCenter!
-                                                                    .toGoogleMaps()),
+                                                        await Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                DetailNewWidget(),
                                                           ),
                                                         );
                                                       },
-                                                      child: Material(
-                                                        color:
-                                                            Colors.transparent,
-                                                        elevation: 2,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                        ),
-                                                        child: Container(
-                                                          width: 280,
-                                                          height: 170,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            width: 280,
+                                                            height: 100,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                              image:
+                                                                  DecorationImage(
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                image:
+                                                                    Image.asset(
+                                                                  'assets/images/house-2177865_1920-1200x750.jpg',
+                                                                ).image,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        0),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            0),
+                                                                topLeft: Radius
                                                                     .circular(
                                                                         15),
-                                                          ),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              await Navigator
-                                                                  .push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          DetailNewWidget(),
-                                                                ),
-                                                              );
-                                                            },
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        15),
+                                                              ),
+                                                            ),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
                                                               children: [
                                                                 Container(
                                                                   width: 280,
                                                                   height: 100,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    image:
-                                                                        DecorationImage(
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      image: Image
-                                                                          .asset(
-                                                                        'assets/images/house-2177865_1920-1200x750.jpg',
-                                                                      ).image,
-                                                                    ),
+                                                                    color: Color(
+                                                                        0x33000000),
                                                                     borderRadius:
                                                                         BorderRadius
                                                                             .only(
@@ -809,142 +793,33 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                               15),
                                                                     ),
                                                                   ),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width:
-                                                                            280,
-                                                                        height:
-                                                                            100,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0x33000000),
-                                                                          borderRadius:
-                                                                              BorderRadius.only(
-                                                                            bottomLeft:
-                                                                                Radius.circular(0),
-                                                                            bottomRight:
-                                                                                Radius.circular(0),
-                                                                            topLeft:
-                                                                                Radius.circular(15),
-                                                                            topRight:
-                                                                                Radius.circular(15),
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Expanded(
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                                                                                child: Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    Text(
-                                                                                      getJsonField(
-                                                                                        functions.fetchValueFromJSONData(
-                                                                                            '🏡 Address',
-                                                                                            getJsonField(
-                                                                                              recordsItem.jsonBody,
-                                                                                              r'''$.fields''',
-                                                                                            )),
-                                                                                        r'''$''',
-                                                                                      ).toString(),
-                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                            fontFamily: 'Poppins',
-                                                                                            color: Colors.white,
-                                                                                            fontSize: 20,
-                                                                                            fontWeight: FontWeight.w800,
-                                                                                          ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10,
-                                                                          5,
-                                                                          0,
-                                                                          0),
                                                                   child: Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
                                                                     children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Container(
-                                                                            width:
-                                                                                40,
-                                                                            height:
-                                                                                40,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: Color(0xFFEEEEEE),
-                                                                              image: DecorationImage(
-                                                                                fit: BoxFit.cover,
-                                                                                image: Image.asset(
-                                                                                  'assets/images/Devivo.PNG',
-                                                                                ).image,
-                                                                              ),
-                                                                              shape: BoxShape.circle,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            'ACTIVE',
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'Nunito',
-                                                                                  color: Color(0xFF5CE430),
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0,
-                                                                              0,
                                                                               10,
-                                                                              0),
+                                                                              10,
+                                                                              10,
+                                                                              10),
                                                                           child:
                                                                               Column(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,
                                                                             crossAxisAlignment:
-                                                                                CrossAxisAlignment.end,
+                                                                                CrossAxisAlignment.start,
                                                                             children: [
                                                                               Text(
-                                                                                'Hello World',
+                                                                                '6114 CURRY FORD ROAD 23 135, ORLANDO FL 32822',
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                       fontFamily: 'Poppins',
-                                                                                      fontSize: 25,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                    ),
-                                                                              ),
-                                                                              Text(
-                                                                                '5 Days ago',
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'Nunito',
-                                                                                      fontSize: 12,
+                                                                                      color: Colors.white,
+                                                                                      fontSize: 20,
+                                                                                      fontWeight: FontWeight.w800,
                                                                                     ),
                                                                               ),
                                                                             ],
@@ -957,14 +832,113 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                               ],
                                                             ),
                                                           ),
-                                                        ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10,
+                                                                        5,
+                                                                        0,
+                                                                        0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: 40,
+                                                                      height:
+                                                                          40,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: Color(
+                                                                            0xFFEEEEEE),
+                                                                        image:
+                                                                            DecorationImage(
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                          image:
+                                                                              Image.asset(
+                                                                            'assets/images/Devivo.PNG',
+                                                                          ).image,
+                                                                        ),
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      'ACTIVE',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Nunito',
+                                                                            color:
+                                                                                Color(0xFF5CE430),
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Expanded(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            10,
+                                                                            0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .end,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Hello World',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'Poppins',
+                                                                                fontSize: 25,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                        ),
+                                                                        Text(
+                                                                          '5 Days ago',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'Nunito',
+                                                                                fontSize: 12,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                  );
-                                                }),
+                                                  ),
+                                                ),
                                               ),
-                                            );
-                                          },
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

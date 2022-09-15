@@ -1,6 +1,5 @@
 import '../add_contects_all/add_contects_all_widget.dart';
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
@@ -1272,8 +1271,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                     onPressed: () {
                                       print('Button pressed ...');
                                     },
-                                    text:
-                                        'Total ${buttonContactsListRecordList.length.toString()} Contacts Added',
+                                    text: 'Add Contacts',
                                     options: FFButtonOptions(
                                       width: 330,
                                       height: 60,

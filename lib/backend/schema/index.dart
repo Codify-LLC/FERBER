@@ -5,7 +5,6 @@ export '../../flutter_flow/lat_lng.dart';
 
 export 'structs/attachments_struct.dart';
 export 'structs/collaborator_object_struct.dart';
-export 'structs/last_modified_by_struct.dart';
 export 'structs/thumbnail_type_struct.dart';
 export 'structs/transaction_record_struct.dart';
 export 'structs/transaction_record_fields_struct.dart';

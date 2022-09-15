@@ -7,6 +7,7 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
+import '../../flutter_flow/flutter_flow_google_map.dart';
 
 class CustomMap extends StatefulWidget {
   const CustomMap({

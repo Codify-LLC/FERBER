@@ -3,17 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>843605775839-830dhm3toodmn8dnn90euj60rorflaql.apps.googleusercontent.com</string>
+	<string>843605775839-sl1vp3tj9m5ot6jtjofhukfbpvgq6d77.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.843605775839-830dhm3toodmn8dnn90euj60rorflaql</string>
+	<string>com.googleusercontent.apps.843605775839-sl1vp3tj9m5ot6jtjofhukfbpvgq6d77</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>843605775839-jkdetv1jfoj3smrpitdvop3mvljro5t1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAGCsH8JWvwRzqeGyCMoyMvx221PwsGq2c</string>
+	<string>AIzaSyCXIR81Xg4OSzAMmHfewa80Bx1C9Lpzank</string>
 	<key>GCM_SENDER_ID</key>
 	<string>843605775839</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.flutterflow.courts</string>
+	<string>com.ferbertransactions.app</string>
 	<key>PROJECT_ID</key>
 	<string>ferber-c668f</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:843605775839:ios:c54a6cadb3429e4641a06a</string>
+	<string>1:843605775839:ios:a7c8658f7d3150fb41a06a</string>
 </dict>
 </plist>

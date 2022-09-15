@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../components/add_contects_widget.dart';
 import '../components/all_contacts_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
@@ -29,18 +28,11 @@ class AddServicesWidget extends StatefulWidget {
 
 class _AddServicesWidgetState extends State<AddServicesWidget>
     with TickerProviderStateMixin {
-  Map<ContactsRecord, bool> checkboxListTileValueMap = {};
-  List<ContactsRecord> get checkboxListTileCheckedItems =>
-      checkboxListTileValueMap.entries
-          .where((e) => e.value)
-          .map((e) => e.key)
-          .toList();
-
-  String? photopgraphySigninstallValue;
-
   TextEditingController? listDateActiveDateController1;
 
   DateTime? datePicked1;
+  String? photopgraphySigninstallValue;
+  bool? checkboxListTileValue;
   String? inspectionValue;
 
   TextEditingController? listDateActiveDateController2;
@@ -398,59 +390,47 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                             ],
                                           ),
                                         ),
-                                        AuthUserStreamWidget(
-                                          child: ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            primary: false,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                allcontectsListViewContactsRecordList
-                                                    .length,
-                                            itemBuilder: (context,
-                                                allcontectsListViewIndex) {
-                                              final allcontectsListViewContactsRecord =
-                                                  allcontectsListViewContactsRecordList[
-                                                      allcontectsListViewIndex];
-                                              return Theme(
-                                                data: ThemeData(
-                                                  unselectedWidgetColor:
-                                                      Color(0xFF95A1AC),
+                                        ListView(
+                                          padding: EdgeInsets.zero,
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          children: [
+                                            Theme(
+                                              data: ThemeData(
+                                                unselectedWidgetColor:
+                                                    Color(0xFF95A1AC),
+                                              ),
+                                              child: CheckboxListTile(
+                                                value: checkboxListTileValue ??=
+                                                    false,
+                                                onChanged: (newValue) =>
+                                                    setState(() =>
+                                                        checkboxListTileValue =
+                                                            newValue!),
+                                                title: Text(
+                                                  'Title',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .title3,
                                                 ),
-                                                child: CheckboxListTile(
-                                                  value: checkboxListTileValueMap[
-                                                          allcontectsListViewContactsRecord] ??=
-                                                      false,
-                                                  onChanged: (newValue) =>
-                                                      setState(() =>
-                                                          checkboxListTileValueMap[
-                                                                  allcontectsListViewContactsRecord] =
-                                                              newValue!),
-                                                  title: Text(
-                                                    'Title',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title3,
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Subtitle',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle2,
-                                                  ),
-                                                  tileColor: Color(0xFFF5F5F5),
-                                                  activeColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryColor,
-                                                  dense: false,
-                                                  controlAffinity:
-                                                      ListTileControlAffinity
-                                                          .trailing,
+                                                subtitle: Text(
+                                                  'Subtitle',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle2,
                                                 ),
-                                              );
-                                            },
-                                          ),
+                                                tileColor: Color(0xFFF5F5F5),
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                dense: false,
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .trailing,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         Padding(
                                           padding:

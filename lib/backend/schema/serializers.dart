@@ -17,7 +17,6 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ThumbnailsStruct,
   ThumbnailTypeStruct,
   AttachmentsStruct,
-  LastModifiedByStruct,
   CollaboratorObjectStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
