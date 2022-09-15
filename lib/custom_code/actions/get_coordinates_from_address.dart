@@ -12,13 +12,11 @@ Future<List<LatLng>> getCoordinatesFromAddress(List<String> address) async {
   // Add your function code here!
   List<LatLng> markersList = [];
   // get location Coordinates From Address
-  address.map((addressElement) async {
-    final geoCoderPlacemark = await locationFromAddress(addressElement);
-    if (geoCoderPlacemark.first != null) {
-      final location = LatLng(
-          geoCoderPlacemark.first.latitude, geoCoderPlacemark.first.longitude);
-      markersList.add(location);
-    }
-  }).toList(growable: false);
+  for (final add in address) {
+    final geoCoderPlacemark = await locationFromAddress(add);
+    final location = LatLng(
+        geoCoderPlacemark.first.latitude, geoCoderPlacemark.first.longitude);
+    markersList.add(location);
+  }
   return markersList;
 }
