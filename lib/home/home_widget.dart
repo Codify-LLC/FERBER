@@ -4,6 +4,7 @@ import '../components/main_m_e_n_u_widget.dart';
 import '../components/search_results_widget.dart';
 import '../detail_new/detail_new_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../seller_intake_step1/seller_intake_step1_widget.dart';
@@ -26,6 +27,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   TextEditingController? searchValurTextFieldMLSController;
 
   String? dropDownSearchTYpeValue;
+  LatLng? googleMapsCenter;
+  final googleMapsController = Completer<GoogleMapController>();
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,6 +43,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -107,6 +111,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Expanded(
                   child: Stack(
                     children: [
+                      FlutterFlowGoogleMap(
+                        controller: googleMapsController,
+                        onCameraIdle: (latLng) => googleMapsCenter = latLng,
+                        initialLocation: googleMapsCenter ??=
+                            LatLng(13.106061, -59.613158),
+                        markerColor: GoogleMarkerColor.violet,
+                        mapType: MapType.normal,
+                        style: GoogleMapStyle.standard,
+                        initialZoom: 14,
+                        allowInteraction: true,
+                        allowZoom: true,
+                        showZoomControls: true,
+                        showLocation: true,
+                        showCompass: false,
+                        showMapToolbar: false,
+                        showTraffic: false,
+                        centerMapOnMarkerTap: true,
+                      ),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 1,
