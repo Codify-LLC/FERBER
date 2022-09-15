@@ -790,11 +790,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   .size
                                                                   .width *
                                                               0.45,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.08,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
                                                                 .of(context)
@@ -815,7 +810,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryColor,
-                                                                  fontSize: 18,
+                                                                  fontSize: 14,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -831,15 +826,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       decoration: BoxDecoration(
                                                         color:
                                                             Color(0xFFEEEEEE),
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: Image.network(
-                                                            getJsonField(
-                                                              recordItem,
-                                                              r'''$.fields..['📂 Misc Docs']''',
-                                                            ),
-                                                          ).image,
-                                                        ),
                                                         shape:
                                                             BoxShape.rectangle,
                                                       ),
@@ -857,11 +843,38 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       'Nunito',
                                                                   color: Color(
                                                                       0xFF5CE430),
-                                                                  fontSize: 14,
+                                                                  fontSize: 12,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
                                                                 ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 4, 4, 4),
+                                                      child: Container(
+                                                        width: 30,
+                                                        height: 30,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            getJsonField(
+                                                              recordItem,
+                                                              r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                            ),
+                                                            'https://static.thenounproject.com/png/630729-200.png',
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                     Container(
@@ -887,7 +900,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Poppins',
-                                                                  fontSize: 14,
+                                                                  fontSize: 12,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -903,7 +916,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Nunito',
-                                                                fontSize: 12,
+                                                                fontSize: 10,
                                                               ),
                                                     ),
                                                   ],
