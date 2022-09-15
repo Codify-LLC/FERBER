@@ -47,13 +47,14 @@ class _CustomMapState extends State<CustomMap> {
         future: initialiseMap(),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           return FlutterFlowGoogleMap(
             markers: snapshot.data!,
             controller: googleMapsController,
             onCameraIdle: (latLng) => googleMapsCenter = latLng,
-            initialLocation: googleMapsCenter ??= LatLng(28.493431, -81.293925),
+            initialLocation: googleMapsCenter ??=
+                const LatLng(28.493431, -81.293925),
             markerColor: GoogleMarkerColor.rose,
             mapType: MapType.terrain,
             style: GoogleMapStyle.standard,
