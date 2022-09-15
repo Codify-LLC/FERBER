@@ -27,10 +27,17 @@ String stringtoImage(String? stringImgPath) {
   return 'assets/images/$stringImgPath';
 }
 
-dynamic fetchValueFromJSONData(
-  String? key,
+List<String> fetchAddressesFromJSON(
+  String key,
   dynamic jsonData,
 ) {
-  // get value from json data using key
-  return jsonData[key];
+  // fetch Value From JSON Data
+  List<String> addresses = [];
+  if (jsonData is List) {
+    for (final jsonDataElement in jsonData) {
+      var tempValue = jsonDataElement[key];
+      if (tempValue != null) addresses.add(tempValue);
+    }
+  }
+  return addresses;
 }

@@ -15,6 +15,7 @@ class FFAppState {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _HideFab = prefs.getBool('ff_HideFab') ?? _HideFab;
+    _falseVar = prefs.getBool('ff_falseVar') ?? _falseVar;
   }
 
   late SharedPreferences prefs;
@@ -35,6 +36,13 @@ class FFAppState {
   List<int> ContactListAdd = [];
 
   bool HomePageWidgetShow = false;
+
+  bool _falseVar = false;
+  bool get falseVar => _falseVar;
+  set falseVar(bool _value) {
+    _falseVar = _value;
+    prefs.setBool('ff_falseVar', _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

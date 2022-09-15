@@ -14,12 +14,12 @@ class CustomMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.markers,
+    required this.addresses,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final List<LatLng> markers;
+  final List<String> addresses;
 
   @override
   _CustomMapState createState() => _CustomMapState();
@@ -29,24 +29,44 @@ class _CustomMapState extends State<CustomMap> {
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
 
+  Future<List<FlutterFlowMarker>> initialiseMap() async {
+    List<FlutterFlowMarker> markersList = [];
+    await getCoordinatesFromAddress(widget.addresses).then((value) {
+      int index = 0;
+      value.forEach((element) {
+        markersList.add(FlutterFlowMarker(widget.addresses[index], element));
+        index++;
+      });
+    });
+    return markersList;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FlutterFlowGoogleMap(
-      controller: googleMapsController,
-      onCameraIdle: (latLng) => googleMapsCenter = latLng,
-      initialLocation: googleMapsCenter ??= LatLng(28.493431, -81.293925),
-      markerColor: GoogleMarkerColor.rose,
-      mapType: MapType.terrain,
-      style: GoogleMapStyle.standard,
-      initialZoom: 14,
-      allowInteraction: false,
-      allowZoom: true,
-      showZoomControls: false,
-      showLocation: true,
-      showCompass: false,
-      showMapToolbar: false,
-      showTraffic: false,
-      centerMapOnMarkerTap: true,
-    );
+    return FutureBuilder<List<FlutterFlowMarker>>(
+        future: initialiseMap(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.data == null) {
+            return CircularProgressIndicator();
+          }
+          return FlutterFlowGoogleMap(
+            markers: snapshot.data!,
+            controller: googleMapsController,
+            onCameraIdle: (latLng) => googleMapsCenter = latLng,
+            initialLocation: googleMapsCenter ??= LatLng(28.493431, -81.293925),
+            markerColor: GoogleMarkerColor.rose,
+            mapType: MapType.terrain,
+            style: GoogleMapStyle.standard,
+            initialZoom: 14,
+            allowInteraction: false,
+            allowZoom: true,
+            showZoomControls: false,
+            showLocation: true,
+            showCompass: false,
+            showMapToolbar: false,
+            showTraffic: false,
+            centerMapOnMarkerTap: true,
+          );
+        });
   }
 }
