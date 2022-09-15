@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "843605775839",
+    "project_id": "ferber-c668f",
+    "storage_bucket": "ferber-c668f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843605775839:android:16c6567b4ea162d141a06a",
+        "android_client_info": {
+          "package_name": "com.flutterflow.courts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843605775839-ou76n2bndhotsv7gl72rfr94plfnqe3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApCSIKEKHpMiVExB3yvwjMciW8eI8mkO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843605775839-ou76n2bndhotsv7gl72rfr94plfnqe3q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "843605775839-830dhm3toodmn8dnn90euj60rorflaql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.courts"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
