@@ -8,15 +8,17 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 import 'package:geocoding/geocoding.dart';
 
-Future<LatLng?> getCoordinatesFromAddress(String address) async {
+Future<List<LatLng>> getCoordinatesFromAddress(List<String> address) async {
   // Add your function code here!
+  List<LatLng> markersList = [];
   // get location Coordinates From Address
-  final geoCoderPlacemark = await locationFromAddress(address);
-  if (geoCoderPlacemark.first != null) {
-    final location = LatLng(
-        geoCoderPlacemark.first.latitude, geoCoderPlacemark.first.longitude);
-    return location;
-  } else {
-    return null;
-  }
+  address.map((addressElement) async {
+    final geoCoderPlacemark = await locationFromAddress(addressElement);
+    if (geoCoderPlacemark.first != null) {
+      final location = LatLng(
+          geoCoderPlacemark.first.latitude, geoCoderPlacemark.first.longitude);
+      markersList.add(location);
+    }
+  }).toList(growable: false);
+  return markersList;
 }

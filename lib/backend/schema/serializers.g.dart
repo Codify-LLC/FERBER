@@ -9,6 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AttachmentsStruct.serializer)
       ..add(CollaboratorObjectStruct.serializer)
+      ..add(FlutterFlowMarkerStruct.serializer)
       ..add(ThumbnailTypeStruct.serializer)
       ..add(ThumbnailsStruct.serializer)
       ..add(TransactionRecordFieldsStruct.serializer)

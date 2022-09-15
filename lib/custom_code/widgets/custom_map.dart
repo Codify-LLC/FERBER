@@ -14,10 +14,12 @@ class CustomMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
+    required this.markers,
   }) : super(key: key);
 
   final double? width;
   final double? height;
+  final List<LatLng> markers;
 
   @override
   _CustomMapState createState() => _CustomMapState();
