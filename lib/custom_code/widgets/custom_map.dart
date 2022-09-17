@@ -9,23 +9,39 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 import '../../flutter_flow/flutter_flow_google_map.dart';
 
-class CustomMap extends StatefulWidget {
-  const CustomMap({
+class customMap extends StatefulWidget {
+  const customMap({
     Key? key,
     this.width,
     this.height,
     required this.addresses,
+    this.allowInteraction = false,
+    this.allowZoom = false,
+    this.showZoomControls = false,
+    this.showLocation = false,
+    this.showCompass = false,
+    this.showMapToolbar = false,
+    this.showTraffic = false,
+    this.centerMapOnMarkerTap = false,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<String> addresses;
+  final bool allowInteraction;
+  final bool allowZoom;
+  final bool showZoomControls;
+  final bool showLocation;
+  final bool showCompass;
+  final bool showMapToolbar;
+  final bool showTraffic;
+  final bool centerMapOnMarkerTap;
 
   @override
-  _CustomMapState createState() => _CustomMapState();
+  _customMapState createState() => _customMapState();
 }
 
-class _CustomMapState extends State<CustomMap> {
+class _customMapState extends State<customMap> {
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
 
@@ -57,14 +73,14 @@ class _CustomMapState extends State<CustomMap> {
             markerColor: GoogleMarkerColor.rose,
             mapType: MapType.terrain,
             style: GoogleMapStyle.standard,
-            allowInteraction: true,
-            allowZoom: true,
-            showZoomControls: false,
-            showLocation: true,
-            showCompass: false,
-            showMapToolbar: false,
-            showTraffic: false,
-            centerMapOnMarkerTap: true,
+            allowInteraction: widget.allowInteraction,
+            allowZoom: widget.allowZoom,
+            showZoomControls: widget.showZoomControls,
+            showLocation: widget.showLocation,
+            showCompass: widget.showCompass,
+            showMapToolbar: widget.showMapToolbar,
+            showTraffic: widget.showTraffic,
+            centerMapOnMarkerTap: widget.centerMapOnMarkerTap,
           );
         });
   }

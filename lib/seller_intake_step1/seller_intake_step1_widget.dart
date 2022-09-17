@@ -38,11 +38,11 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
     with TickerProviderStateMixin {
   TextEditingController? addressTextFielController;
 
-  TextEditingController? textController1;
+  TextEditingController? listingPriceTextFieldController1;
 
   String? statusDropDownValue;
 
-  TextEditingController? listingPriceTextFieldController;
+  TextEditingController? listingPriceTextFieldController2;
 
   List<String>? choiceChipsValues;
 
@@ -294,8 +294,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
     );
 
     addressTextFielController = TextEditingController();
-    textController1 = TextEditingController();
-    listingPriceTextFieldController = TextEditingController();
+    listingPriceTextFieldController1 = TextEditingController();
+    listingPriceTextFieldController2 = TextEditingController();
     listDateActiveDateController =
         TextEditingController(text: dateTimeFormat('yMd', datePicked1));
     listingExpirationDateController =
@@ -411,9 +411,10 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       30, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController1,
+                                    controller:
+                                        listingPriceTextFieldController1,
                                     onChanged: (_) => EasyDebounce.debounce(
-                                      'textController1',
+                                      'listingPriceTextFieldController1',
                                       Duration(milliseconds: 2000),
                                       () => setState(() {}),
                                     ),
@@ -663,10 +664,10 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     5, 0, 0, 0),
                                             child: TextFormField(
                                               controller:
-                                                  listingPriceTextFieldController,
+                                                  listingPriceTextFieldController2,
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
-                                                'listingPriceTextFieldController',
+                                                'listingPriceTextFieldController2',
                                                 Duration(milliseconds: 2000),
                                                 () => setState(() {}),
                                               ),

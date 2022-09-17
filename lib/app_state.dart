@@ -16,6 +16,8 @@ class FFAppState {
     prefs = await SharedPreferences.getInstance();
     _HideFab = prefs.getBool('ff_HideFab') ?? _HideFab;
     _falseVar = prefs.getBool('ff_falseVar') ?? _falseVar;
+    _statusVisiblityCheck =
+        prefs.getStringList('ff_statusVisiblityCheck') ?? _statusVisiblityCheck;
   }
 
   late SharedPreferences prefs;
@@ -42,6 +44,23 @@ class FFAppState {
   set falseVar(bool _value) {
     _falseVar = _value;
     prefs.setBool('ff_falseVar', _value);
+  }
+
+  List<String> _statusVisiblityCheck = ['Active', 'Pending', 'Closed'];
+  List<String> get statusVisiblityCheck => _statusVisiblityCheck;
+  set statusVisiblityCheck(List<String> _value) {
+    _statusVisiblityCheck = _value;
+    prefs.setStringList('ff_statusVisiblityCheck', _value);
+  }
+
+  void addToStatusVisiblityCheck(String _value) {
+    _statusVisiblityCheck.add(_value);
+    prefs.setStringList('ff_statusVisiblityCheck', _statusVisiblityCheck);
+  }
+
+  void removeFromStatusVisiblityCheck(String _value) {
+    _statusVisiblityCheck.remove(_value);
+    prefs.setStringList('ff_statusVisiblityCheck', _statusVisiblityCheck);
   }
 }
 

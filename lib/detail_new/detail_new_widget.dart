@@ -11,7 +11,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DetailNewWidget extends StatefulWidget {
-  const DetailNewWidget({Key? key}) : super(key: key);
+  const DetailNewWidget({
+    Key? key,
+    this.address,
+    this.status,
+    this.displayDate,
+    this.transactionsRecord,
+    this.imagePath,
+    this.purchasePrice,
+  }) : super(key: key);
+
+  final String? address;
+  final String? status;
+  final String? displayDate;
+  final dynamic transactionsRecord;
+  final String? imagePath;
+  final String? purchasePrice;
 
   @override
   _DetailNewWidgetState createState() => _DetailNewWidgetState();
@@ -112,8 +127,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
             children: [
               Align(
                 alignment: AlignmentDirectional(0, -1),
-                child: Image.asset(
-                  'assets/images/IMG_1071.jpg',
+                child: Image.network(
+                  widget.imagePath!,
                   width: double.infinity,
                   height: 500,
                   fit: BoxFit.cover,
@@ -152,8 +167,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                             color: Color(0xFF57636C),
                             size: 20,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
+                          onPressed: () async {
+                            Navigator.pop(context);
                           },
                         ),
                       ),
@@ -169,7 +184,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                           size: 20,
                         ),
                         onPressed: () async {
-                          await Share.share('');
+                          await Share.share(
+                              'https://www.ferbertransactions.com/');
                         },
                       ),
                     ],
@@ -180,7 +196,7 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                 padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisSize: MainAxisSize.max,
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Align(
@@ -189,7 +205,7 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
                           child: Container(
                             width: double.infinity,
-                            height: 700,
+                            height: MediaQuery.of(context).size.height * 0.7,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               boxShadow: [
@@ -220,7 +236,7 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 5, 0, 0),
                                         child: Text(
-                                          '5823 Cockatiel Ct. Lakeland, FL 33809',
+                                          widget.address!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2
                                               .override(
@@ -245,18 +261,40 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'PENDING',
+                                        widget.status!,
                                         style: FlutterFlowTheme.of(context)
                                             .title2
                                             .override(
                                               fontFamily: 'Outfit',
                                               color: Color(0xFFF9950F),
-                                              fontSize: 29,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Text(
-                                        '\$295,000',
+                                        widget.status!,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title2
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color: Color(0xFFF9950F),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      Text(
+                                        widget.status!,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title2
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color: Color(0xFFF9950F),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      Text(
+                                        '\$${widget.purchasePrice}',
                                         style: FlutterFlowTheme.of(context)
                                             .title2
                                             .override(
@@ -264,7 +302,7 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .customColor4,
-                                              fontSize: 28,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
@@ -281,7 +319,35 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'Closing 5/22/22',
+                                        widget.displayDate!,
+                                        textAlign: TextAlign.end,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .customColor3,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      Text(
+                                        widget.displayDate!,
+                                        textAlign: TextAlign.end,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .customColor3,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      Text(
+                                        widget.displayDate!,
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -306,33 +372,24 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 4, 0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          child: Image.asset(
-                                            'assets/images/FT-LOGO-3.png',
-                                            width: 40,
-                                            height: 40,
-                                            fit: BoxFit.cover,
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: 35,
+                                            height: 35,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Image.network(
+                                              getJsonField(
+                                                widget.transactionsRecord,
+                                                r'''$''',
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 4, 0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          child: Image.asset(
-                                            'assets/images/284720-resized.jpg',
-                                            width: 40,
-                                            height: 40,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                        ],
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1000,212 +1057,6 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                                                             .normal,
                                                                   ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 12, 20, 2),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            'Activity Log (1)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFF090F13),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: ListView(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 8, 0, 0),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.92,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFF1F4F8),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                8, 0, 0, 0),
-                                                    child: Card(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      color: Color(0xFFD22C23),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8, 8, 8, 8),
-                                                        child: Icon(
-                                                          Icons
-                                                              .play_circle_outline_rounded,
-                                                          color: Colors.white,
-                                                          size: 24,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12, 0, 0, 0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Call Recording',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .subtitle1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Lexend Deca',
-                                                                  color: Color(
-                                                                      0xFF090F13),
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        4,
-                                                                        0,
-                                                                        0),
-                                                            child: Text(
-                                                              'Added 7/26/22',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Lexend Deca',
-                                                                    color: Color(
-                                                                        0xFF95A1AC),
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 12, 0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                          '1',
-                                                          textAlign:
-                                                              TextAlign.end,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFFF60000),
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                              ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      4, 0, 0),
-                                                          child: Text(
-                                                            'Admin',
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Lexend Deca',
-                                                                  color: Color(
-                                                                      0xFF090F13),
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
                                                           ),
                                                         ),
                                                       ],

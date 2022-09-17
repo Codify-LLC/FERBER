@@ -27,17 +27,10 @@ String stringtoImage(String? stringImgPath) {
   return 'assets/images/$stringImgPath';
 }
 
-List<String> fetchAddressesFromJSON(
-  String key,
-  dynamic jsonData,
+bool searchCheck(
+  String searchTerm,
+  String entityString,
 ) {
-  // fetch Value From JSON Data
-  List<String> addresses = [];
-  if (jsonData is List) {
-    for (final jsonDataElement in jsonData) {
-      var tempValue = jsonDataElement[key];
-      if (tempValue != null) addresses.add(tempValue);
-    }
-  }
-  return addresses;
+  // Add your function code here!
+  return searchTerm.contains(entityString);
 }

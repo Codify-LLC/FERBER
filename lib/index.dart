@@ -8,8 +8,8 @@ export 'events_page1/events_page1_widget.dart' show EventsPage1Widget;
 export 'add_services/add_services_widget.dart' show AddServicesWidget;
 export 'onboard/onboard_widget.dart' show OnboardWidget;
 export 'inbox/inbox_widget.dart' show InboxWidget;
-export 'success_new/success_new_widget.dart' show SuccessNewWidget;
 export 'subscribtions/subscribtions_widget.dart' show SubscribtionsWidget;
+export 'success_new/success_new_widget.dart' show SuccessNewWidget;
 export 'search_results_main/search_results_main_widget.dart'
     show SearchResultsMainWidget;
 export 'stats_new/stats_new_widget.dart' show StatsNewWidget;

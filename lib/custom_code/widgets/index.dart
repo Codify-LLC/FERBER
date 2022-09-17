@@ -1,1 +1,1 @@
-export 'custom_map.dart' show CustomMap;
+export 'custom_map.dart' show customMap;

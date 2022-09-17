@@ -297,6 +297,7 @@ class BuyerIntakeFormCall {
 class GetTransactionsCall {
   static Future<ApiCallResponse> call({
     int? maxRecords = 100,
+    String? fields = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'GetTransactions',
@@ -308,6 +309,7 @@ class GetTransactionsCall {
       },
       params: {
         'maxRecords': maxRecords,
+        'fields': fields,
       },
       returnBody: true,
     );
