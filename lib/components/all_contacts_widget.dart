@@ -17,7 +17,6 @@ class AllContactsWidget extends StatefulWidget {
 class _AllContactsWidgetState extends State<AllContactsWidget>
     with TickerProviderStateMixin {
   TextEditingController? textController;
-
   final formKey = GlobalKey<FormState>();
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
@@ -48,6 +47,12 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
     );
 
     textController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
   }
 
   @override

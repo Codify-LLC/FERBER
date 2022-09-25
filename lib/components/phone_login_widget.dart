@@ -16,13 +16,18 @@ class PhoneLoginWidget extends StatefulWidget {
 
 class _PhoneLoginWidgetState extends State<PhoneLoginWidget> {
   TextEditingController? phonenumberFieldController;
-
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     phonenumberFieldController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    phonenumberFieldController?.dispose();
+    super.dispose();
   }
 
   @override

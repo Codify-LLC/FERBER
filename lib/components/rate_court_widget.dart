@@ -15,9 +15,7 @@ class RateCourtWidget extends StatefulWidget {
 
 class _RateCourtWidgetState extends State<RateCourtWidget> {
   TextEditingController? textController1;
-
   double? ratingBarValue;
-
   TextEditingController? textController2;
 
   @override
@@ -25,6 +23,13 @@ class _RateCourtWidgetState extends State<RateCourtWidget> {
     super.initState();
     textController1 = TextEditingController();
     textController2 = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textController1?.dispose();
+    textController2?.dispose();
+    super.dispose();
   }
 
   @override

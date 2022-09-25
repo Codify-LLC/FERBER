@@ -173,7 +173,8 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                                                             ),
                                                           );
                                                         },
-                                                      );
+                                                      ).then((value) =>
+                                                          setState(() {}));
                                                     },
                                                     child: Material(
                                                       color: Colors.transparent,
@@ -421,7 +422,8 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                                                         ),
                                                       );
                                                     },
-                                                  );
+                                                  ).then((value) =>
+                                                      setState(() {}));
                                                 },
                                                 child: Row(
                                                   mainAxisSize:
@@ -478,7 +480,8 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                                                               ),
                                                             );
                                                           },
-                                                        );
+                                                        ).then((value) =>
+                                                            setState(() {}));
                                                       },
                                                       child: Material(
                                                         color:

@@ -224,65 +224,35 @@ class _DetailspropertyWidgetState extends State<DetailspropertyWidget>
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x520E151B),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        buttonSize: 40,
+                        fillColor: Colors.white,
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          color: Color(0xFF57636C),
+                          size: 20,
                         ),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 8,
-                          borderWidth: 1,
-                          buttonSize: 40,
-                          fillColor: Colors.white,
-                          icon: Icon(
-                            Icons.arrow_back_rounded,
-                            color: Color(0xFF57636C),
-                            size: 20,
-                          ),
-                          onPressed: () async {
-                            Navigator.pop(context);
-                          },
-                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
                       ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0x44FFFFFF),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x520E151B),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        buttonSize: 40,
+                        fillColor: Colors.white,
+                        icon: Icon(
+                          Icons.ios_share,
+                          color: Color(0xFF57636C),
+                          size: 20,
                         ),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 8,
-                          borderWidth: 1,
-                          buttonSize: 40,
-                          fillColor: Colors.white,
-                          icon: Icon(
-                            Icons.ios_share,
-                            color: Color(0xFF57636C),
-                            size: 20,
-                          ),
-                          onPressed: () async {
-                            await Share.share('');
-                          },
-                        ),
+                        onPressed: () async {
+                          await Share.share('');
+                        },
                       ),
                     ],
                   ),
@@ -473,7 +443,8 @@ class _DetailspropertyWidgetState extends State<DetailspropertyWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,
@@ -559,7 +530,8 @@ class _DetailspropertyWidgetState extends State<DetailspropertyWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,
@@ -645,7 +617,8 @@ class _DetailspropertyWidgetState extends State<DetailspropertyWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,

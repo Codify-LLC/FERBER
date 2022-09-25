@@ -3,7 +3,7 @@ import '../buyer_intake_step1/buyer_intake_step1_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/lat_lng.dart';
-import '../main.dart';
+import '../profile_t_e_a_m_new/profile_t_e_a_m_new_widget.dart';
 import '../seller_intake_step1/seller_intake_step1_widget.dart';
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
@@ -279,8 +279,7 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'ProfileTEAMNew'),
+                            builder: (context) => ProfileTEAMNewWidget(),
                           ),
                         );
                       },

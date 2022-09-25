@@ -34,8 +34,8 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
             color: FlutterFlowTheme.of(context).primaryColor,
             size: 28,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            Navigator.pop(context);
           },
         ),
         title: Text(

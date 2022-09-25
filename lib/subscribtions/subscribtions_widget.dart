@@ -65,16 +65,42 @@ class _SubscribtionsWidgetState extends State<SubscribtionsWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Subscribtions',
-                              style:
-                                  FlutterFlowTheme.of(context).title2.override(
+                            if (responsiveVisibility(
+                              context: context,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              Text(
+                                'Subscribtions',
+                                style: FlutterFlowTheme.of(context)
+                                    .title2
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: Color(0xFF14181B),
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                              ),
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                            ))
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
+                                child: Text(
+                                  'Subscribtions',
+                                  style: FlutterFlowTheme.of(context)
+                                      .title2
+                                      .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF14181B),
                                         fontSize: 28,
                                         fontWeight: FontWeight.normal,
                                       ),
-                            ),
+                                ),
+                              ),
                             InkWell(
                               onTap: () async {
                                 Navigator.pop(context);

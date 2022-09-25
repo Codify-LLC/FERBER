@@ -1,4 +1,5 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:csv/csv.dart';
 import 'flutter_flow/lat_lng.dart';
 
 class FFAppState {
@@ -13,14 +14,15 @@ class FFAppState {
   }
 
   Future initializePersistedState() async {
-    prefs = await SharedPreferences.getInstance();
-    _HideFab = prefs.getBool('ff_HideFab') ?? _HideFab;
-    _falseVar = prefs.getBool('ff_falseVar') ?? _falseVar;
+    secureStorage = FlutterSecureStorage();
+    _HideFab = await secureStorage.getBool('ff_HideFab') ?? _HideFab;
+    _falseVar = await secureStorage.getBool('ff_falseVar') ?? _falseVar;
     _statusVisiblityCheck =
-        prefs.getStringList('ff_statusVisiblityCheck') ?? _statusVisiblityCheck;
+        await secureStorage.getStringList('ff_statusVisiblityCheck') ??
+            _statusVisiblityCheck;
   }
 
-  late SharedPreferences prefs;
+  late FlutterSecureStorage secureStorage;
 
   bool BuyerIntakeAddMore2 = false;
 
@@ -28,7 +30,11 @@ class FFAppState {
   bool get HideFab => _HideFab;
   set HideFab(bool _value) {
     _HideFab = _value;
-    prefs.setBool('ff_HideFab', _value);
+    secureStorage.setBool('ff_HideFab', _value);
+  }
+
+  void deleteHideFab() {
+    secureStorage.delete(key: 'ff_HideFab');
   }
 
   bool contactPhoneButotn = false;
@@ -43,24 +49,34 @@ class FFAppState {
   bool get falseVar => _falseVar;
   set falseVar(bool _value) {
     _falseVar = _value;
-    prefs.setBool('ff_falseVar', _value);
+    secureStorage.setBool('ff_falseVar', _value);
+  }
+
+  void deleteFalseVar() {
+    secureStorage.delete(key: 'ff_falseVar');
   }
 
   List<String> _statusVisiblityCheck = ['Active', 'Pending', 'Closed'];
   List<String> get statusVisiblityCheck => _statusVisiblityCheck;
   set statusVisiblityCheck(List<String> _value) {
     _statusVisiblityCheck = _value;
-    prefs.setStringList('ff_statusVisiblityCheck', _value);
+    secureStorage.setStringList('ff_statusVisiblityCheck', _value);
+  }
+
+  void deleteStatusVisiblityCheck() {
+    secureStorage.delete(key: 'ff_statusVisiblityCheck');
   }
 
   void addToStatusVisiblityCheck(String _value) {
     _statusVisiblityCheck.add(_value);
-    prefs.setStringList('ff_statusVisiblityCheck', _statusVisiblityCheck);
+    secureStorage.setStringList(
+        'ff_statusVisiblityCheck', _statusVisiblityCheck);
   }
 
   void removeFromStatusVisiblityCheck(String _value) {
     _statusVisiblityCheck.remove(_value);
-    prefs.setStringList('ff_statusVisiblityCheck', _statusVisiblityCheck);
+    secureStorage.setStringList(
+        'ff_statusVisiblityCheck', _statusVisiblityCheck);
   }
 }
 
@@ -72,4 +88,38 @@ LatLng? _latLngFromString(String? val) {
   final lat = double.parse(split.first);
   final lng = double.parse(split.last);
   return LatLng(lat, lng);
+}
+
+extension FlutterSecureStorageExtensions on FlutterSecureStorage {
+  Future<String?> getString(String key) async => await read(key: key);
+  Future<void> setString(String key, String value) async =>
+      await write(key: key, value: value);
+
+  Future<bool?> getBool(String key) async => (await read(key: key)) == 'true';
+  Future<void> setBool(String key, bool value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<int?> getInt(String key) async =>
+      int.tryParse(await read(key: key) ?? '');
+  Future<void> setInt(String key, int value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<double?> getDouble(String key) async =>
+      double.tryParse(await read(key: key) ?? '');
+  Future<void> setDouble(String key, double value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<List<String>?> getStringList(String key) async =>
+      await read(key: key).then((result) {
+        if (result == null || result.isEmpty) {
+          return null;
+        }
+        return CsvToListConverter()
+            .convert(result)
+            .first
+            .map((e) => e.toString())
+            .toList();
+      });
+  Future<void> setStringList(String key, List<String> value) async =>
+      await write(key: key, value: ListToCsvConverter().convert([value]));
 }

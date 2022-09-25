@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,16 +28,11 @@ class AddContectsWidget extends StatefulWidget {
 
 class _AddContectsWidgetState extends State<AddContectsWidget>
     with TickerProviderStateMixin {
-  TextEditingController? textController1;
-
-  TextEditingController? textController2;
-
-  TextEditingController? textController3;
-
   String? roleDropDownValue;
-
+  TextEditingController? textController1;
+  TextEditingController? textController2;
+  TextEditingController? textController3;
   TextEditingController? textController4;
-
   final formKey = GlobalKey<FormState>();
   final animationsMap = {
     'rowOnPageLoadAnimation1': AnimationInfo(
@@ -131,6 +125,15 @@ class _AddContectsWidgetState extends State<AddContectsWidget>
     textController2 = TextEditingController();
     textController3 = TextEditingController();
     textController4 = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textController1?.dispose();
+    textController2?.dispose();
+    textController3?.dispose();
+    textController4?.dispose();
+    super.dispose();
   }
 
   @override
@@ -708,7 +711,16 @@ class _AddContectsWidgetState extends State<AddContectsWidget>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                constraints: BoxConstraints(
+                                  maxWidth: 300,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
                                 child: FFButtonWidget(
                                   onPressed: () {
                                     print('ButtonRegister pressed ...');
@@ -734,54 +746,6 @@ class _AddContectsWidgetState extends State<AddContectsWidget>
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ListView(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  children: [
-                                    Slidable(
-                                      actionPane:
-                                          const SlidableScrollActionPane(),
-                                      secondaryActions: [
-                                        IconSlideAction(
-                                          caption: 'Delete',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                          icon: Icons.share,
-                                          onTap: () {
-                                            print(
-                                                'SlidableActionWidget pressed ...');
-                                          },
-                                        ),
-                                      ],
-                                      child: ListTile(
-                                        title: Text(
-                                          'Lorem ipsum dolor...',
-                                          style: FlutterFlowTheme.of(context)
-                                              .title3,
-                                        ),
-                                        subtitle: Text(
-                                          'Lorem ipsum dolor...',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle2,
-                                        ),
-                                        tileColor: Color(0xFFF5F5F5),
-                                        dense: false,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ],

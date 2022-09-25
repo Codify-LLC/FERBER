@@ -1,6 +1,7 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../login/login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class _OnboardWidgetState extends State<OnboardWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/greystamp.png',
+                  'assets/images/logo.png',
                   width: 200,
                   height: 100,
                   fit: BoxFit.fitHeight,
@@ -322,8 +323,14 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginWidget(),
+                        ),
+                        (r) => false,
+                      );
                     },
                     text: 'Continue',
                     options: FFButtonOptions(

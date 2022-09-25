@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,16 +27,11 @@ class AddContectsAllWidget extends StatefulWidget {
 
 class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
     with TickerProviderStateMixin {
-  TextEditingController? textController1;
-
-  TextEditingController? textController2;
-
-  TextEditingController? textController3;
-
   String? roleDropDownValue;
-
+  TextEditingController? textController1;
+  TextEditingController? textController2;
+  TextEditingController? textController3;
   TextEditingController? textController4;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'rowOnPageLoadAnimation1': AnimationInfo(
@@ -133,6 +127,15 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
   }
 
   @override
+  void dispose() {
+    textController1?.dispose();
+    textController2?.dispose();
+    textController3?.dispose();
+    textController4?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -185,7 +188,7 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
                           ),
                         );
                       },
-                    );
+                    ).then((value) => setState(() {}));
                   },
                   child: Text(
                     'VIew All',
@@ -644,79 +647,33 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
                 ).animated([animationsMap['rowOnPageLoadAnimation4']!]),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(25, 20, 25, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          print('ButtonRegister pressed ...');
-                        },
-                        text: 'Add Contact',
-                        options: FFButtonOptions(
-                          width: 125,
-                          height: 60,
-                          color: Color(0xFF111417),
-                          textStyle:
-                              FlutterFlowTheme.of(context).title3.override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  constraints: BoxConstraints(
+                    maxWidth: 330,
+                  ),
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('ButtonRegister pressed ...');
+                    },
+                    text: 'Add Contact',
+                    options: FFButtonOptions(
+                      color: Color(0xFF111417),
+                      textStyle: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
                           ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                      elevation: 0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            Slidable(
-                              actionPane: const SlidableScrollActionPane(),
-                              secondaryActions: [
-                                IconSlideAction(
-                                  caption: 'Delete',
-                                  color: FlutterFlowTheme.of(context)
-                                      .tertiaryColor,
-                                  icon: Icons.delete,
-                                  onTap: () {
-                                    print('SlidableActionWidget pressed ...');
-                                  },
-                                ),
-                              ],
-                              child: ListTile(
-                                title: Text(
-                                  'Lorem ipsum dolor...',
-                                  style: FlutterFlowTheme.of(context).title3,
-                                ),
-                                subtitle: Text(
-                                  'Lorem ipsum dolor...',
-                                  style: FlutterFlowTheme.of(context).subtitle2,
-                                ),
-                                tileColor: Colors.white,
-                                dense: false,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),

@@ -449,7 +449,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,
@@ -535,7 +536,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,
@@ -621,7 +623,8 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               width: 110,
@@ -1083,6 +1086,9 @@ class _DetailNewWidgetState extends State<DetailNewWidget>
               Container(
                 width: double.infinity,
                 height: 110,
+                constraints: BoxConstraints(
+                  maxWidth: 800,
+                ),
                 decoration: BoxDecoration(
                   color: Color(0xFF1D2429),
                   boxShadow: [
