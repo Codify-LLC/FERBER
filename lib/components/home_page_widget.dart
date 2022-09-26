@@ -850,7 +850,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: Builder(
                             builder: (context) {
                               final record =
-                                  filteredRecords!.toList().take(100).toList();
+                                  searchValurTextFieldAddressController!.text !=
+                                              null &&
+                                          searchValurTextFieldAddressController!
+                                                  .text !=
+                                              ''
+                                      ? filteredRecords!
+                                      : GetTransactionsCall.recordsList(
+                                          formMainGetTransactionsResponse
+                                              .jsonBody,
+                                        ).toList().take(100).toList();
                               if (record.isEmpty) {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
