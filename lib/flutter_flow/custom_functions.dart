@@ -34,3 +34,8 @@ bool searchCheck(
   // Add your function code here!
   return searchTerm.contains(entityString);
 }
+
+List<String> stringToList(List<String> jSONStringList) {
+  // json string to list of strings
+  return jSONStringList;
+}

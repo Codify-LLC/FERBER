@@ -125,6 +125,7 @@ class _AddContectsWidgetState extends State<AddContectsWidget>
     textController2 = TextEditingController();
     textController3 = TextEditingController();
     textController4 = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

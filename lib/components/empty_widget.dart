@@ -14,6 +14,13 @@ class EmptyWidget extends StatefulWidget {
 
 class _EmptyWidgetState extends State<EmptyWidget> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional(0, 0),

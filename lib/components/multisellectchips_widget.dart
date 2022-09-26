@@ -43,6 +43,8 @@ class _MultisellectchipsWidgetState extends State<MultisellectchipsWidget>
           .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

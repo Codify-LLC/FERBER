@@ -59,6 +59,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget>
           .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

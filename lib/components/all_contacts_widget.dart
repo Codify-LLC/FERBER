@@ -47,6 +47,7 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
     );
 
     textController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -129,7 +130,7 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        Navigator.pop(context);
+                                        context.pop();
                                       },
                                       child: Card(
                                         clipBehavior:

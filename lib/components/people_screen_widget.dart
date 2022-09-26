@@ -43,6 +43,8 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
           .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -78,6 +78,8 @@ class FFAppState {
     secureStorage.setStringList(
         'ff_statusVisiblityCheck', _statusVisiblityCheck);
   }
+
+  int Navigator = 0;
 }
 
 LatLng? _latLngFromString(String? val) {

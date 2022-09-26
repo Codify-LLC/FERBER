@@ -22,6 +22,7 @@ class _PhoneLoginWidgetState extends State<PhoneLoginWidget> {
   void initState() {
     super.initState();
     phonenumberFieldController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -119,7 +120,7 @@ class _PhoneLoginWidgetState extends State<PhoneLoginWidget> {
                                         alignment: AlignmentDirectional(0, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            Navigator.pop(context);
+                                            context.pop();
                                           },
                                           child: Icon(
                                             Icons.close_rounded,

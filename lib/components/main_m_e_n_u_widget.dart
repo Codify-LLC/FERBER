@@ -1,10 +1,6 @@
-import '../add_services/add_services_widget.dart';
-import '../buyer_intake_step1/buyer_intake_step1_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/lat_lng.dart';
-import '../profile_t_e_a_m_new/profile_t_e_a_m_new_widget.dart';
-import '../seller_intake_step1/seller_intake_step1_widget.dart';
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,6 +23,13 @@ class MainMENUWidget extends StatefulWidget {
 }
 
 class _MainMENUWidgetState extends State<MainMENUWidget> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -92,17 +95,19 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: InkWell(
                       onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BuyerIntakeStep1Widget(
-                              mLSID: widget.mLSID,
-                              participantsID:
-                                  random_data.randomInteger(999, 99999999),
-                              address: widget.address,
-                              coordinates: widget.coordinates,
-                            ),
-                          ),
+                        context.pushNamed(
+                          'BuyerIntakeStep1',
+                          queryParams: {
+                            'mLSID':
+                                serializeParam(widget.mLSID, ParamType.String),
+                            'participantsID': serializeParam(
+                                random_data.randomInteger(999, 99999999),
+                                ParamType.int),
+                            'address': serializeParam(
+                                widget.address, ParamType.String),
+                            'coordinates': serializeParam(
+                                widget.coordinates, ParamType.LatLng),
+                          }.withoutNulls,
                         );
                       },
                       child: Container(
@@ -144,16 +149,17 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: InkWell(
                       onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SellerIntakeStep1Widget(
-                              participantsID:
-                                  random_data.randomInteger(99999, 999999999),
-                              address: widget.address,
-                              mlsID: widget.mLSID,
-                            ),
-                          ),
+                        context.pushNamed(
+                          'SellerIntakeStep1',
+                          queryParams: {
+                            'participantsID': serializeParam(
+                                random_data.randomInteger(99999, 999999999),
+                                ParamType.int),
+                            'address': serializeParam(
+                                widget.address, ParamType.String),
+                            'mlsID':
+                                serializeParam(widget.mLSID, ParamType.String),
+                          }.withoutNulls,
                         );
                       },
                       child: Container(
@@ -230,12 +236,7 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: InkWell(
                       onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddServicesWidget(),
-                          ),
-                        );
+                        context.pushNamed('AddServices');
                       },
                       child: Container(
                         width: double.infinity,
@@ -276,12 +277,7 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: InkWell(
                       onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProfileTEAMNewWidget(),
-                          ),
-                        );
+                        context.pushNamed('Home');
                       },
                       child: Container(
                         width: double.infinity,

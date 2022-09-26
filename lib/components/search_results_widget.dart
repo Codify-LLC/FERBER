@@ -1,5 +1,4 @@
 import '../backend/api_requests/api_calls.dart';
-import '../detailsproperty/detailsproperty_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -24,6 +23,13 @@ class SearchResultsWidget extends StatefulWidget {
 }
 
 class _SearchResultsWidgetState extends State<SearchResultsWidget> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -105,37 +111,44 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                         children: [
                                           InkWell(
                                             onTap: () async {
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailspropertyWidget(
-                                                    mLsID: getJsonField(
-                                                      unparsedAddressItem,
-                                                      r'''$..ListingId''',
-                                                    ).toString(),
-                                                    address: getJsonField(
-                                                      unparsedAddressItem,
-                                                      r'''$..UnparsedAddress''',
-                                                    ).toString(),
-                                                    standardStatus:
-                                                        getJsonField(
-                                                      unparsedAddressItem,
-                                                      r'''$..StandardStatus''',
-                                                    ).toString(),
-                                                    listPrice: getJsonField(
-                                                      unparsedAddressItem,
-                                                      r'''$..ListPrice''',
-                                                    ).toString(),
-                                                    sTELLARExpectedClosingDate:
-                                                        functions
-                                                            .closingDateFun(
-                                                                getJsonField(
-                                                      unparsedAddressItem,
-                                                      r'''$..STELLAR_ExpectedClosingDate''',
-                                                    ).toString()),
-                                                  ),
-                                                ),
+                                              context.pushNamed(
+                                                'Detailsproperty',
+                                                queryParams: {
+                                                  'mLsID': serializeParam(
+                                                      getJsonField(
+                                                        unparsedAddressItem,
+                                                        r'''$..ListingId''',
+                                                      ).toString(),
+                                                      ParamType.String),
+                                                  'address': serializeParam(
+                                                      getJsonField(
+                                                        unparsedAddressItem,
+                                                        r'''$..UnparsedAddress''',
+                                                      ).toString(),
+                                                      ParamType.String),
+                                                  'standardStatus':
+                                                      serializeParam(
+                                                          getJsonField(
+                                                            unparsedAddressItem,
+                                                            r'''$..StandardStatus''',
+                                                          ).toString(),
+                                                          ParamType.String),
+                                                  'listPrice': serializeParam(
+                                                      getJsonField(
+                                                        unparsedAddressItem,
+                                                        r'''$..ListPrice''',
+                                                      ).toString(),
+                                                      ParamType.String),
+                                                  'sTELLARExpectedClosingDate':
+                                                      serializeParam(
+                                                          functions
+                                                              .closingDateFun(
+                                                                  getJsonField(
+                                                            unparsedAddressItem,
+                                                            r'''$..STELLAR_ExpectedClosingDate''',
+                                                          ).toString()),
+                                                          ParamType.DateTime),
+                                                }.withoutNulls,
                                               );
                                             },
                                             child: ListTile(
@@ -235,35 +248,44 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                       children: [
                                         InkWell(
                                           onTap: () async {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailspropertyWidget(
-                                                  mLsID: getJsonField(
-                                                    listingIdItem,
-                                                    r'''$..ListingId''',
-                                                  ).toString(),
-                                                  address: getJsonField(
-                                                    listingIdItem,
-                                                    r'''$..UnparsedAddress''',
-                                                  ).toString(),
-                                                  standardStatus: getJsonField(
-                                                    listingIdItem,
-                                                    r'''$..StandardStatus''',
-                                                  ).toString(),
-                                                  listPrice: getJsonField(
-                                                    listingIdItem,
-                                                    r'''$..ListPrice''',
-                                                  ).toString(),
-                                                  sTELLARExpectedClosingDate:
-                                                      functions.closingDateFun(
-                                                          getJsonField(
-                                                    listingIdItem,
-                                                    r'''$..STELLAR_ExpectedClosingDate''',
-                                                  ).toString()),
-                                                ),
-                                              ),
+                                            context.pushNamed(
+                                              'Detailsproperty',
+                                              queryParams: {
+                                                'mLsID': serializeParam(
+                                                    getJsonField(
+                                                      listingIdItem,
+                                                      r'''$..ListingId''',
+                                                    ).toString(),
+                                                    ParamType.String),
+                                                'address': serializeParam(
+                                                    getJsonField(
+                                                      listingIdItem,
+                                                      r'''$..UnparsedAddress''',
+                                                    ).toString(),
+                                                    ParamType.String),
+                                                'standardStatus':
+                                                    serializeParam(
+                                                        getJsonField(
+                                                          listingIdItem,
+                                                          r'''$..StandardStatus''',
+                                                        ).toString(),
+                                                        ParamType.String),
+                                                'listPrice': serializeParam(
+                                                    getJsonField(
+                                                      listingIdItem,
+                                                      r'''$..ListPrice''',
+                                                    ).toString(),
+                                                    ParamType.String),
+                                                'sTELLARExpectedClosingDate':
+                                                    serializeParam(
+                                                        functions
+                                                            .closingDateFun(
+                                                                getJsonField(
+                                                          listingIdItem,
+                                                          r'''$..STELLAR_ExpectedClosingDate''',
+                                                        ).toString()),
+                                                        ParamType.DateTime),
+                                              }.withoutNulls,
                                             );
                                           },
                                           child: ListTile(
