@@ -85,7 +85,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 16, 16, 16),
                                       child: Image.asset(
-                                        'assets/images/ft_logo.png',
+                                        'assets/images/lotus.jpg',
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
