@@ -309,7 +309,6 @@ class GetTransactionsCall {
       },
       params: {
         'maxRecords': maxRecords,
-        'fields': fields,
       },
       returnBody: true,
     );
@@ -338,6 +337,11 @@ class GetTransactionsCall {
   static dynamic addressesList(dynamic response) => getJsonField(
         response,
         r'''$.records[:]..fields['🏡 Address']''',
+        true,
+      );
+  static dynamic mls(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:]..fields['MLS']''',
         true,
       );
 }

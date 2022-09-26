@@ -344,7 +344,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       String>.empty();
                                                                 }
                                                                 return (GetTransactionsCall
-                                                                        .addressesList(
+                                                                        .mls(
                                                                   formMainGetTransactionsResponse
                                                                       .jsonBody,
                                                                 ) as List)
@@ -436,7 +436,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       false,
                                                                   decoration:
                                                                       InputDecoration(
-                                                                    labelText:
+                                                                    hintText:
                                                                         'Search',
                                                                     enabledBorder:
                                                                         UnderlineInputBorder(
@@ -640,7 +640,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       false,
                                                                   decoration:
                                                                       InputDecoration(
-                                                                    labelText:
+                                                                    hintText:
                                                                         'Search',
                                                                     enabledBorder:
                                                                         UnderlineInputBorder(
