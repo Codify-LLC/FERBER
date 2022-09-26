@@ -6,7 +6,7 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
-import 'package:geocoding/geocoding.dart';
+import 'package:google_geocoding/google_geocoding.dart';
 
 Future<List<LatLng>> getCoordinatesFromAddress(List<String> address) async {
   // Add your function code here!
@@ -14,9 +14,11 @@ Future<List<LatLng>> getCoordinatesFromAddress(List<String> address) async {
   // get location Coordinates From Address
   for (final add in address) {
     try {
-      final location = await locationFromAddress(add);
-      markersList
-          .add(LatLng(location.first.latitude, location.first.longitude));
+      var googleGeocoding =
+          GoogleGeocoding("AIzaSyBuDRETwhHPLUCvwGcqotDA7tB6tcik_Pk");
+      var result = await googleGeocoding.geocoding.get(add, []);
+      markersList.add(LatLng((result?.results![0].geometry!.location!.lat)!,
+          (result?.results![0].geometry!.location!.lng)!));
     } catch (e) {
       print(e);
     }

@@ -26,7 +26,9 @@ class _AllPropertyListingWidgetState extends State<AllPropertyListingWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
-      future: GetTransactionsCall.call(),
+      future: GetTransactionsCall.call(
+        maxRecords: 100,
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {

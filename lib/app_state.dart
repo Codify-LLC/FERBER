@@ -20,6 +20,8 @@ class FFAppState {
     _statusVisiblityCheck =
         await secureStorage.getStringList('ff_statusVisiblityCheck') ??
             _statusVisiblityCheck;
+    _GoogleMapsAPIKey = await secureStorage.getString('ff_GoogleMapsAPIKey') ??
+        _GoogleMapsAPIKey;
   }
 
   late FlutterSecureStorage secureStorage;
@@ -80,6 +82,17 @@ class FFAppState {
   }
 
   int Navigator = 0;
+
+  String _GoogleMapsAPIKey = 'AIzaSyBuDRETwhHPLUCvwGcqotDA7tB6tcik_Pk';
+  String get GoogleMapsAPIKey => _GoogleMapsAPIKey;
+  set GoogleMapsAPIKey(String _value) {
+    _GoogleMapsAPIKey = _value;
+    secureStorage.setString('ff_GoogleMapsAPIKey', _value);
+  }
+
+  void deleteGoogleMapsAPIKey() {
+    secureStorage.delete(key: 'ff_GoogleMapsAPIKey');
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

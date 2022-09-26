@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../backend/backend.dart';
 import '../components/all_property_listing_widget.dart';
 import '../components/search_results_widget.dart';
 import '../flutter_flow/flutter_flow_autocomplete_options_list.dart';
@@ -8,14 +7,13 @@ import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:text_search/text_search.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   final formKey = GlobalKey<FormState>();
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
-  List<String> simpleSearchResults = [];
+  List<dynamic>? filteredRecords;
   final searchValurTextFieldAddressKey = GlobalKey();
   TextEditingController? searchValurTextFieldAddressController;
   String? searchValurTextFieldAddressSelectedOption;
@@ -621,27 +619,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     Duration(
                                                                         milliseconds:
                                                                             2000),
-                                                                    () async {
-                                                                      setState(
-                                                                          () {
-                                                                        simpleSearchResults = TextSearch(functions
-                                                                                .stringToList((GetTransactionsCall.addressesList(
-                                                                                  formMainGetTransactionsResponse.jsonBody,
-                                                                                ) as List)
-                                                                                    .map<String>((s) => s.toString())
-                                                                                    .toList())
-                                                                                .map((str) => TextSearchItem(str, [str]))
-                                                                                .toList())
-                                                                            .search(valueOrDefault<String>(
-                                                                              searchValurTextFieldAddressController!.text,
-                                                                              '\"\"',
-                                                                            ))
-                                                                            .map((r) => r.object)
-                                                                            .take(10)
-                                                                            .toList();
-                                                                      });
-                                                                    },
+                                                                    () => setState(
+                                                                        () {}),
                                                                   ),
+                                                                  onFieldSubmitted:
+                                                                      (_) async {
+                                                                    filteredRecords =
+                                                                        await actions
+                                                                            .searchRecordsData(
+                                                                      searchValurTextFieldAddressController!
+                                                                          .text,
+                                                                      GetTransactionsCall
+                                                                          .recordsList(
+                                                                        formMainGetTransactionsResponse
+                                                                            .jsonBody,
+                                                                      ).toList(),
+                                                                    );
+
+                                                                    setState(
+                                                                        () {});
+                                                                  },
                                                                   obscureText:
                                                                       false,
                                                                   decoration:
@@ -855,17 +852,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {
-                              final record = GetTransactionsCall.recordsList(
-                                formMainGetTransactionsResponse.jsonBody,
-                              ).toList();
+                              final record = filteredRecords!
+                                  .map((e) => e)
+                                  .toList()
+                                  .take(100)
+                                  .toList();
                               if (record.isEmpty) {
-                                return Center(
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height * 1,
-                                    child: AllPropertyListingWidget(),
-                                  ),
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * 1,
+                                  child: AllPropertyListingWidget(),
                                 );
                               }
                               return Container(
@@ -881,91 +878,82 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   itemCount: record.length,
                                   itemBuilder: (context, recordIndex) {
                                     final recordItem = record[recordIndex];
-                                    return Visibility(
-                                      visible: functions.searchCheck(
-                                          searchValurTextFieldAddressController!
-                                              .text,
-                                          getJsonField(
-                                            recordItem,
-                                            r'''$.fields['⚡❗Status']''',
-                                          ).toString()),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'DetailNew',
-                                              queryParams: {
-                                                'address': serializeParam(
-                                                    getJsonField(
-                                                      recordItem,
-                                                      r'''$.fields['🏡 Address']''',
-                                                    ).toString(),
-                                                    ParamType.String),
-                                                'status': serializeParam(
-                                                    getJsonField(
-                                                      recordItem,
-                                                      r'''$.fields['⚡❗Status']''',
-                                                    ).toString(),
-                                                    ParamType.String),
-                                                'displayDate': serializeParam(
-                                                    '', ParamType.String),
-                                                'transactionsRecord':
-                                                    serializeParam(recordItem,
-                                                        ParamType.JSON),
-                                                'imagePath': serializeParam(
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 12, 12, 12),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'DetailNew',
+                                            queryParams: {
+                                              'address': serializeParam(
+                                                  getJsonField(
+                                                    recordItem,
+                                                    r'''$.fields['🏡 Address']''',
+                                                  ).toString(),
+                                                  ParamType.String),
+                                              'status': serializeParam(
+                                                  getJsonField(
+                                                    recordItem,
+                                                    r'''$.fields['⚡❗Status']''',
+                                                  ).toString(),
+                                                  ParamType.String),
+                                              'displayDate': serializeParam(
+                                                  '', ParamType.String),
+                                              'transactionsRecord':
+                                                  serializeParam(recordItem,
+                                                      ParamType.JSON),
+                                              'imagePath': serializeParam(
+                                                  getJsonField(
+                                                    recordItem,
+                                                    r'''$.fields['Property Image'][0].url''',
+                                                  ),
+                                                  ParamType.String),
+                                              'purchasePrice': serializeParam(
+                                                  valueOrDefault<String>(
+                                                    recordItem,
+                                                    '\$.fields[\'💵 Purchase Price\']',
+                                                  ),
+                                                  ParamType.String),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Image.network(
+                                                  valueOrDefault<String>(
                                                     getJsonField(
                                                       recordItem,
                                                       r'''$.fields['Property Image'][0].url''',
                                                     ),
-                                                    ParamType.String),
-                                                'purchasePrice': serializeParam(
-                                                    valueOrDefault<String>(
-                                                      recordItem,
-                                                      '\$.fields[\'💵 Purchase Price\']',
-                                                    ),
-                                                    ParamType.String),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            child: Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Image.network(
-                                                    valueOrDefault<String>(
-                                                      getJsonField(
-                                                        recordItem,
-                                                        r'''$.fields['Property Image'][0].url''',
-                                                      ),
-                                                      'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
-                                                    ),
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.45,
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            1,
-                                                    fit: BoxFit.cover,
+                                                    'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
                                                   ),
-                                                  Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.45,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      1,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -1234,8 +1222,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
