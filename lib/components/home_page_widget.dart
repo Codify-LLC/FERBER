@@ -619,26 +619,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     Duration(
                                                                         milliseconds:
                                                                             2000),
-                                                                    () => setState(
-                                                                        () {}),
-                                                                  ),
-                                                                  onFieldSubmitted:
-                                                                      (_) async {
-                                                                    filteredRecords =
-                                                                        await actions
-                                                                            .searchRecordsData(
-                                                                      searchValurTextFieldAddressController!
-                                                                          .text,
-                                                                      GetTransactionsCall
-                                                                          .recordsList(
-                                                                        formMainGetTransactionsResponse
-                                                                            .jsonBody,
-                                                                      ).toList(),
-                                                                    );
+                                                                    () async {
+                                                                      filteredRecords =
+                                                                          await actions
+                                                                              .searchRecordsData(
+                                                                        searchValurTextFieldAddressController!
+                                                                            .text,
+                                                                        GetTransactionsCall
+                                                                            .recordsList(
+                                                                          formMainGetTransactionsResponse
+                                                                              .jsonBody,
+                                                                        ).toList(),
+                                                                      );
 
-                                                                    setState(
-                                                                        () {});
-                                                                  },
+                                                                      setState(
+                                                                          () {});
+                                                                    },
+                                                                  ),
                                                                   obscureText:
                                                                       false,
                                                                   decoration:
@@ -852,11 +849,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {
-                              final record = filteredRecords!
-                                  .map((e) => e)
-                                  .toList()
-                                  .take(100)
-                                  .toList();
+                              final record =
+                                  filteredRecords!.toList().take(100).toList();
                               if (record.isEmpty) {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
