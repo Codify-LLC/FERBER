@@ -70,7 +70,7 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [

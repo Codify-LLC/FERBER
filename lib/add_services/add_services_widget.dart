@@ -195,7 +195,6 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
           key: scaffoldKey,
           appBar: responsiveVisibility(
             context: context,
-            tabletLandscape: false,
             desktop: false,
           )
               ? AppBar(

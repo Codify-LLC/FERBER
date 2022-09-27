@@ -12,5 +12,7 @@ Future<dynamic> searchRecordsData(
   List<dynamic> json,
 ) async {
   // Add your function code here!
-  return json.where((record) => record.contains(searchString)).toList();
+  return json
+      .where((record) => record.toString().contains(searchString))
+      .toList();
 }

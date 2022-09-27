@@ -93,6 +93,8 @@ class FFAppState {
   void deleteGoogleMapsAPIKey() {
     secureStorage.delete(key: 'ff_GoogleMapsAPIKey');
   }
+
+  bool showMenu = false;
 }
 
 LatLng? _latLngFromString(String? val) {

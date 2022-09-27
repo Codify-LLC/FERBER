@@ -47,7 +47,6 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
           key: scaffoldKey,
           appBar: responsiveVisibility(
             context: context,
-            tabletLandscape: false,
             desktop: false,
           )
               ? AppBar(

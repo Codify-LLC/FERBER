@@ -281,7 +281,6 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
           key: scaffoldKey,
           appBar: responsiveVisibility(
             context: context,
-            tabletLandscape: false,
             desktop: false,
           )
               ? AppBar(

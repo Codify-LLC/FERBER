@@ -86,10 +86,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => RegisterWidget(),
             ),
             FFRoute(
-              name: 'DetailNew',
-              path: 'detailNew',
+              name: 'PropertyDetails',
+              path: 'propertyDetails',
               requireAuth: true,
-              builder: (context, params) => DetailNewWidget(
+              builder: (context, params) => PropertyDetailsWidget(
                 address: params.getParam('address', ParamType.String),
                 status: params.getParam('status', ParamType.String),
                 displayDate: params.getParam('displayDate', ParamType.String),
@@ -141,21 +141,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SearchResultsMainWidget(
                 searchType: params.getParam('searchType', ParamType.String),
                 searchValue: params.getParam('searchValue', ParamType.String),
-              ),
-            ),
-            FFRoute(
-              name: 'Detailsproperty',
-              path: 'detailsproperty',
-              requireAuth: true,
-              builder: (context, params) => DetailspropertyWidget(
-                mLsID: params.getParam('mLsID', ParamType.String),
-                address: params.getParam('address', ParamType.String),
-                propertyID: params.getParam('propertyID', ParamType.int),
-                standardStatus:
-                    params.getParam('standardStatus', ParamType.String),
-                listPrice: params.getParam('listPrice', ParamType.String),
-                sTELLARExpectedClosingDate: params.getParam(
-                    'sTELLARExpectedClosingDate', ParamType.DateTime),
               ),
             ),
             FFRoute(

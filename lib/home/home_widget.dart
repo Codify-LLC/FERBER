@@ -49,242 +49,266 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Row(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 1,
+              child: Stack(
+                children: [
+                  Column(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Expanded(
+                        flex: 10,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                            ))
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 4,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 1,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 260,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFF9F9F9),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  24, 24, 24, 24),
+                                          child: Image.asset(
+                                            'assets/images/lotus.jpg',
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 24, 0, 0),
+                                        child: FlutterFlowChoiceChips(
+                                          initiallySelected:
+                                              choiceChipsValue1 != null
+                                                  ? [choiceChipsValue1!]
+                                                  : [
+                                                      valueOrDefault<String>(
+                                                        widget.defaultPage,
+                                                        'Home',
+                                                      )
+                                                    ],
+                                          options: [
+                                            ChipData('Home', Icons.home_sharp),
+                                            ChipData('People', Icons.people),
+                                            ChipData('Events',
+                                                Icons.event_available),
+                                            ChipData(
+                                                'Statistics', Icons.bar_chart),
+                                            ChipData('Inbox', Icons.inbox)
+                                          ],
+                                          onChanged: (val) => setState(() =>
+                                              choiceChipsValue1 = val?.first),
+                                          selectedChipStyle: ChipStyle(
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .tertiaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .title3
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                            iconColor: Colors.white,
+                                            iconSize: 25,
+                                            labelPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 4, 50, 4),
+                                            elevation: 0,
+                                          ),
+                                          unselectedChipStyle: ChipStyle(
+                                            backgroundColor: Color(0xFFF9F9F9),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .title3
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                            iconColor: Color(0xFF323B45),
+                                            iconSize: 25,
+                                            labelPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 4, 50, 4),
+                                            elevation: 0,
+                                          ),
+                                          chipSpacing: 400,
+                                          rowSpacing: 20,
+                                          multiselect: false,
+                                          initialized:
+                                              choiceChipsValue1 != null,
+                                          alignment: WrapAlignment.start,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            if (isWeb
+                                ? (choiceChipsValue1 == 'Home')
+                                : (choiceChipsValue2 == 'Home'))
+                              Expanded(
+                                flex: 4,
+                                child: HomePageWidget(),
+                              ),
+                            if (isWeb
+                                ? (choiceChipsValue1 == 'Inbox')
+                                : (choiceChipsValue2 == 'Inbox'))
+                              Expanded(
+                                flex: 4,
+                                child: InboxWidget(),
+                              ),
+                            if (isWeb
+                                ? (choiceChipsValue1 == 'Statistics')
+                                : (choiceChipsValue2 == 'Statistics'))
+                              Expanded(
+                                flex: 4,
+                                child: StatsWidget(),
+                              ),
+                            if (isWeb
+                                ? (choiceChipsValue1 == 'Events')
+                                : (choiceChipsValue2 == 'Events'))
+                              Expanded(
+                                flex: 4,
+                                child: EventsWidget(),
+                              ),
+                            if (isWeb
+                                ? (choiceChipsValue1 == 'People')
+                                : (choiceChipsValue2 == 'People'))
+                              Expanded(
+                                flex: 4,
+                                child: TeamProfileWidget(),
+                              ),
+                          ],
+                        ),
+                      ),
                       if (responsiveVisibility(
                         context: context,
-                        phone: false,
-                        tablet: false,
+                        tabletLandscape: false,
+                        desktop: false,
                       ))
                         Expanded(
                           child: Material(
                             color: Colors.transparent,
-                            elevation: 2,
+                            elevation: 5,
                             child: ClipRRect(
                               child: Container(
-                                width: MediaQuery.of(context).size.width * 0.24,
-                                height: MediaQuery.of(context).size.height * 1,
-                                constraints: BoxConstraints(
-                                  maxWidth: 400,
-                                ),
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFF9F9F9),
+                                  color: Colors.white,
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 16, 16, 16),
-                                      child: Image.asset(
-                                        'assets/images/lotus.jpg',
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 16, 0, 0),
-                                      child: FlutterFlowChoiceChips(
-                                        initiallySelected:
-                                            choiceChipsValue1 != null
-                                                ? [choiceChipsValue1!]
-                                                : [
-                                                    valueOrDefault<String>(
-                                                      widget.defaultPage,
-                                                      'Home',
-                                                    )
-                                                  ],
-                                        options: [
-                                          ChipData('Home', Icons.home_sharp),
-                                          ChipData('People', Icons.people),
-                                          ChipData(
-                                              'Events', Icons.event_available),
-                                          ChipData(
-                                              'Statistics', Icons.bar_chart),
-                                          ChipData('Inbox', Icons.inbox)
-                                        ],
-                                        onChanged: (val) => setState(() =>
-                                            choiceChipsValue1 = val?.first),
-                                        selectedChipStyle: ChipStyle(
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .tertiaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .title3
-                                                  .override(
-                                                    fontFamily: 'Nunito',
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                          iconColor: Colors.white,
-                                          iconSize: 25,
-                                          labelPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 4, 50, 4),
-                                          elevation: 0,
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 8, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: FlutterFlowChoiceChips(
+                                          initiallySelected:
+                                              choiceChipsValue2 != null
+                                                  ? [choiceChipsValue2!]
+                                                  : [
+                                                      valueOrDefault<String>(
+                                                        widget.defaultPage,
+                                                        'Home',
+                                                      )
+                                                    ],
+                                          options: [
+                                            ChipData('Home', Icons.home_sharp),
+                                            ChipData('People', Icons.people),
+                                            ChipData('Events',
+                                                Icons.event_available),
+                                            ChipData(
+                                                'Statistics', Icons.bar_chart),
+                                            ChipData('Inbox', Icons.inbox)
+                                          ],
+                                          onChanged: (val) => setState(() =>
+                                              choiceChipsValue2 = val?.first),
+                                          selectedChipStyle: ChipStyle(
+                                            backgroundColor: Colors.white,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Colors.white,
+                                                      fontSize: 1,
+                                                      fontWeight:
+                                                          FontWeight.w100,
+                                                    ),
+                                            iconColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .tertiaryColor,
+                                            iconSize: 25,
+                                            elevation: 0,
+                                          ),
+                                          unselectedChipStyle: ChipStyle(
+                                            backgroundColor: Colors.white,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Colors.white,
+                                                      fontSize: 1,
+                                                      fontWeight:
+                                                          FontWeight.w100,
+                                                    ),
+                                            iconColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .iconGray,
+                                            iconSize: 25,
+                                            elevation: 0,
+                                          ),
+                                          chipSpacing: 20,
+                                          multiselect: false,
+                                          initialized:
+                                              choiceChipsValue2 != null,
+                                          alignment: WrapAlignment.spaceBetween,
                                         ),
-                                        unselectedChipStyle: ChipStyle(
-                                          backgroundColor: Color(0xFFF9F9F9),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .title3
-                                                  .override(
-                                                    fontFamily: 'Nunito',
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                          iconColor: Color(0xFF323B45),
-                                          iconSize: 25,
-                                          labelPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 4, 50, 4),
-                                          elevation: 0,
-                                        ),
-                                        chipSpacing: 400,
-                                        rowSpacing: 20,
-                                        multiselect: false,
-                                        initialized: choiceChipsValue1 != null,
-                                        alignment: WrapAlignment.start,
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      if (isWeb
-                          ? (choiceChipsValue1 == 'Home')
-                          : (choiceChipsValue2 == 'Home'))
-                        Expanded(
-                          flex: 4,
-                          child: HomePageWidget(),
-                        ),
-                      if (isWeb
-                          ? (choiceChipsValue1 == 'Inbox')
-                          : (choiceChipsValue2 == 'Inbox'))
-                        Expanded(
-                          flex: 4,
-                          child: InboxWidget(),
-                        ),
-                      if (isWeb
-                          ? (choiceChipsValue1 == 'Statistics')
-                          : (choiceChipsValue2 == 'Statistics'))
-                        Expanded(
-                          flex: 4,
-                          child: StatsWidget(),
-                        ),
-                      if (isWeb
-                          ? (choiceChipsValue1 == 'Events')
-                          : (choiceChipsValue2 == 'Events'))
-                        Expanded(
-                          flex: 4,
-                          child: EventsWidget(),
-                        ),
-                      if (isWeb
-                          ? (choiceChipsValue1 == 'People')
-                          : (choiceChipsValue2 == 'People'))
-                        Expanded(
-                          flex: 4,
-                          child: TeamProfileWidget(),
-                        ),
                     ],
                   ),
-                ),
-                if (responsiveVisibility(
-                  context: context,
-                  tabletLandscape: false,
-                  desktop: false,
-                ))
-                  Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 5,
-                      child: ClipRRect(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: FlutterFlowChoiceChips(
-                                    initiallySelected: choiceChipsValue2 != null
-                                        ? [choiceChipsValue2!]
-                                        : [
-                                            valueOrDefault<String>(
-                                              widget.defaultPage,
-                                              'Home',
-                                            )
-                                          ],
-                                    options: [
-                                      ChipData('Home', Icons.home_sharp),
-                                      ChipData('People', Icons.people),
-                                      ChipData('Events', Icons.event_available),
-                                      ChipData('Statistics', Icons.bar_chart),
-                                      ChipData('Inbox', Icons.inbox)
-                                    ],
-                                    onChanged: (val) => setState(
-                                        () => choiceChipsValue2 = val?.first),
-                                    selectedChipStyle: ChipStyle(
-                                      backgroundColor: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            color: Colors.white,
-                                            fontSize: 1,
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                      iconColor: FlutterFlowTheme.of(context)
-                                          .tertiaryColor,
-                                      iconSize: 25,
-                                      elevation: 0,
-                                    ),
-                                    unselectedChipStyle: ChipStyle(
-                                      backgroundColor: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            color: Colors.white,
-                                            fontSize: 1,
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                      iconColor:
-                                          FlutterFlowTheme.of(context).iconGray,
-                                      iconSize: 25,
-                                      elevation: 0,
-                                    ),
-                                    chipSpacing: 20,
-                                    multiselect: false,
-                                    initialized: choiceChipsValue2 != null,
-                                    alignment: WrapAlignment.spaceBetween,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

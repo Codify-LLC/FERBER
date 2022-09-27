@@ -63,38 +63,7 @@ class _AllPropertyListingWidgetState extends State<AllPropertyListingWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                     child: InkWell(
                       onTap: () async {
-                        context.pushNamed(
-                          'DetailNew',
-                          queryParams: {
-                            'address': serializeParam(
-                                getJsonField(
-                                  recordItem,
-                                  r'''$.fields['🏡 Address']''',
-                                ).toString(),
-                                ParamType.String),
-                            'status': serializeParam(
-                                getJsonField(
-                                  recordItem,
-                                  r'''$.fields['⚡❗Status']''',
-                                ).toString(),
-                                ParamType.String),
-                            'displayDate': serializeParam('', ParamType.String),
-                            'transactionsRecord':
-                                serializeParam(recordItem, ParamType.JSON),
-                            'imagePath': serializeParam(
-                                getJsonField(
-                                  recordItem,
-                                  r'''$.fields['Property Image'][0].url''',
-                                ),
-                                ParamType.String),
-                            'purchasePrice': serializeParam(
-                                valueOrDefault<String>(
-                                  recordItem,
-                                  '\$.fields[\'💵 Purchase Price\']',
-                                ),
-                                ParamType.String),
-                          }.withoutNulls,
-                        );
+                        context.pushNamed('PropertyDetails');
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
@@ -264,84 +233,6 @@ class _AllPropertyListingWidgetState extends State<AllPropertyListingWidget> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
-                                      if (FFAppState()
-                                          .statusVisiblityCheck
-                                          .contains(getJsonField(
-                                            recordItem,
-                                            r'''$.fields['⚡❗Status']''',
-                                          )))
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            if ('${getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString()}' ==
-                                                'Active')
-                                              Text(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Nunito',
-                                                          color:
-                                                              Color(0xFF5CE430),
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                              ),
-                                            if ('${getJsonField(
-                                                  recordItem,
-                                                  r'''$''',
-                                                ).toString()}' ==
-                                                'Pending')
-                                              Text(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Nunito',
-                                                          color:
-                                                              Color(0xFFDF723F),
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                              ),
-                                            if ('${getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString()}' ==
-                                                'Black')
-                                              Text(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Nunito',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .customColor4,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                              ),
-                                          ],
-                                        ),
                                     ],
                                   ),
                                 ),

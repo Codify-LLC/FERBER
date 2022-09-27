@@ -124,10 +124,7 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (responsiveVisibility(
-                      context: context,
-                      desktop: false,
-                    ))
+                    if (!isWeb)
                       FlutterFlowIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 8,

@@ -39,3 +39,8 @@ List<String> stringToList(List<String> jSONStringList) {
   // json string to list of strings
   return jSONStringList;
 }
+
+String toStringConverter(dynamic input) {
+  // Add your function code here!
+  return input.toString();
+}

@@ -42,7 +42,6 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
           key: scaffoldKey,
           appBar: responsiveVisibility(
             context: context,
-            tabletLandscape: false,
             desktop: false,
           )
               ? AppBar(
