@@ -235,7 +235,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 2, 24, 0),
+                                          24, 12, 24, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -264,65 +264,59 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                             'rowOnPageLoadAnimation1']!
                                       ]),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 10, 24, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            widget.status!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title2
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: Color(0xFFF9950F),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                          Text(
-                                            widget.status!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title2
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: Color(0xFFF9950F),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                          Text(
-                                            widget.status!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title2
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: Color(0xFFF9950F),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                          Text(
-                                            '\$${widget.purchasePrice}',
-                                            style: FlutterFlowTheme.of(context)
-                                                .title2
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
+                                    Align(
+                                      alignment: AlignmentDirectional(1, 0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24, 10, 24, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            if ((widget.status == 'Active') &&
+                                                (widget.status == 'Closed'))
+                                              Expanded(
+                                                child: Text(
+                                                  widget.status!,
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .customColor4,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
+                                                      .title2
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color:
+                                                            Color(0xFFF9950F),
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                 ),
-                                          ),
-                                        ],
-                                      ).animated([
-                                        animationsMap[
-                                            'rowOnPageLoadAnimation2']!
-                                      ]),
+                                              ),
+                                            Expanded(
+                                              child: Text(
+                                                '\$${widget.purchasePrice}',
+                                                textAlign: TextAlign.end,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .title2
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .customColor4,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ).animated([
+                                          animationsMap[
+                                              'rowOnPageLoadAnimation2']!
+                                        ]),
+                                      ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -332,22 +326,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          Text(
-                                            valueOrDefault<String>(
-                                              widget.displayDate,
-                                              '0/0/0',
+                                          Expanded(
+                                            child: Text(
+                                              isWeb
+                                                  ? getJsonField(
+                                                      widget.transactionsRecord,
+                                                      r'''$.fields['🥂 Closing Date']''',
+                                                    ).toString()
+                                                  : getJsonField(
+                                                      widget.transactionsRecord,
+                                                      r'''$.fields['List Date (Active Date)']''',
+                                                    ).toString(),
+                                              textAlign: TextAlign.end,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .customColor3,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                             ),
-                                            textAlign: TextAlign.end,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .customColor3,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
                                           ),
                                         ],
                                       ).animated([
@@ -357,7 +359,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 16, 0),
+                                          24, 0, 16, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -374,10 +376,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Image.network(
-                                                  getJsonField(
-                                                    widget.transactionsRecord,
-                                                    r'''$''',
-                                                  ),
+                                                  'https://picsum.photos/seed/797/600',
                                                 ),
                                               ),
                                             ],
@@ -748,7 +747,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  20, 12, 20, 2),
+                                                  24, 12, 20, 2),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [

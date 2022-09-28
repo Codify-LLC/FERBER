@@ -526,6 +526,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                               Radius.circular(4.0),
                                                                         ),
                                                                       ),
+                                                                      contentPadding:
+                                                                          EdgeInsetsDirectional.fromSTEB(
+                                                                              12,
+                                                                              0,
+                                                                              0,
+                                                                              0),
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -724,6 +730,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                               Radius.circular(4.0),
                                                                         ),
                                                                       ),
+                                                                      contentPadding:
+                                                                          EdgeInsetsDirectional.fromSTEB(
+                                                                              12,
+                                                                              0,
+                                                                              0,
+                                                                              0),
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)

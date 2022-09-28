@@ -63,24 +63,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                              tablet: false,
-                              tabletLandscape: false,
-                            ))
-                              Material(
-                                color: Colors.transparent,
-                                elevation: 4,
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 1,
-                                  constraints: BoxConstraints(
-                                    maxWidth: 260,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFF9F9F9),
-                                  ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 1,
+                              constraints: BoxConstraints(
+                                maxWidth: 250,
+                              ),
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Visibility(
+                                visible: responsiveVisibility(
+                                  context: context,
+                                  phone: false,
+                                  tablet: false,
+                                  tabletLandscape: false,
+                                ),
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: Color(0xFFF5F5F5),
+                                  elevation: 10,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -169,6 +172,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         ),
                                       ),
                                     ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                            ))
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 4,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 1,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 260,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFF9F9F9),
                                   ),
                                 ),
                               ),

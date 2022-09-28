@@ -6,12 +6,12 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class TestCall {
+class BridgeDataOutputCall {
   static Future<ApiCallResponse> call({
     String? listingId = '',
   }) {
     return ApiManager.instance.makeApiCall(
-      callName: 'Test',
+      callName: 'Bridge Data Output',
       apiUrl:
           'https://api.bridgedataoutput.com/api/v2/stellar/listings/${listingId}?access_token=cb92e2fa0c41b0abebb5b7333729c75f',
       callType: ApiCallType.GET,
@@ -45,6 +45,12 @@ class SearchByMLSorSTREETCall {
       returnBody: true,
     );
   }
+
+  static dynamic coordinates(dynamic response) => getJsonField(
+        response,
+        r'''$..Coordinates''',
+        true,
+      );
 }
 
 class AirtableTestCall {
