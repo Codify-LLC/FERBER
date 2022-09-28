@@ -105,6 +105,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     child: Stack(
                       alignment: AlignmentDirectional(0, 1),
                       children: [
+                        FlutterFlowGoogleMap(
+                          controller: googleMapsController,
+                          onCameraIdle: (latLng) => googleMapsCenter = latLng,
+                          initialLocation: googleMapsCenter ??=
+                              currentUserLocationValue!,
+                          markerColor: GoogleMarkerColor.violet,
+                          mapType: MapType.normal,
+                          style: GoogleMapStyle.standard,
+                          initialZoom: 14,
+                          allowInteraction: false,
+                          allowZoom: true,
+                          showZoomControls: true,
+                          showLocation: false,
+                          showCompass: false,
+                          showMapToolbar: false,
+                          showTraffic: false,
+                          centerMapOnMarkerTap: false,
+                        ),
                         if (responsiveVisibility(
                           context: context,
                           phone: false,
@@ -112,42 +130,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           tabletLandscape: false,
                           desktop: false,
                         ))
-                          FlutterFlowGoogleMap(
-                            controller: googleMapsController,
-                            onCameraIdle: (latLng) => googleMapsCenter = latLng,
-                            initialLocation: googleMapsCenter ??=
-                                currentUserLocationValue!,
-                            markerColor: GoogleMarkerColor.violet,
-                            mapType: MapType.normal,
-                            style: GoogleMapStyle.standard,
-                            initialZoom: 14,
-                            allowInteraction: false,
-                            allowZoom: true,
-                            showZoomControls: true,
-                            showLocation: false,
-                            showCompass: false,
-                            showMapToolbar: false,
-                            showTraffic: false,
-                            centerMapOnMarkerTap: false,
-                          ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 1,
-                          child: custom_widgets.customMap(
+                          Container(
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height * 1,
-                            addresses: (GetTransactionsCall.addressesList(
-                              formMainGetTransactionsResponse.jsonBody,
-                            ) as List)
-                                .map<String>((s) => s.toString())
-                                .toList(),
-                            allowInteraction: true,
-                            allowZoom: true,
-                            showZoomControls: true,
-                            showLocation: true,
-                            centerMapOnMarkerTap: false,
+                            child: custom_widgets.customMap(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 1,
+                              addresses: (GetTransactionsCall.addressesList(
+                                formMainGetTransactionsResponse.jsonBody,
+                              ) as List)
+                                  .map<String>((s) => s.toString())
+                                  .toList(),
+                              allowInteraction: true,
+                              allowZoom: true,
+                              showZoomControls: true,
+                              showLocation: true,
+                              centerMapOnMarkerTap: false,
+                            ),
                           ),
-                        ),
                         Align(
                           alignment: AlignmentDirectional(0, -1),
                           child: Column(
