@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/all_property_listing_widget.dart';
 import '../components/popup_menu_widget.dart';
 import '../components/search_results_widget.dart';
 import '../flutter_flow/flutter_flow_autocomplete_options_list.dart';
@@ -36,7 +35,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   final searchValurTextFieldMLSKey = GlobalKey();
   TextEditingController? searchValurTextFieldMLSController;
   String? searchValurTextFieldMLSSelectedOption;
-  PageController? pageViewController;
 
   @override
   void initState() {
@@ -143,9 +141,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ) as List)
                                 .map<String>((s) => s.toString())
                                 .toList(),
-                            allowInteraction: false,
+                            allowInteraction: true,
                             allowZoom: true,
-                            showZoomControls: false,
+                            showZoomControls: true,
                             showLocation: true,
                             centerMapOnMarkerTap: false,
                           ),
@@ -887,58 +885,39 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           .toList()
                                           .take(100)
                                           .toList();
-                              if (record.isEmpty) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 1,
-                                  child: AllPropertyListingWidget(),
-                                );
-                              }
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: PageView.builder(
-                                  controller: pageViewController ??=
-                                      PageController(
-                                          initialPage:
-                                              min(0, record.length - 1)),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: record.length,
-                                  itemBuilder: (context, recordIndex) {
-                                    final recordItem = record[recordIndex];
-                                    return InkWell(
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: record.length,
+                                itemBuilder: (context, recordIndex) {
+                                  final recordItem = record[recordIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 12, 12, 12),
+                                    child: InkWell(
                                       onTap: () async {
                                         context.pushNamed(
                                           'PropertyDetails',
                                           queryParams: {
                                             'address': serializeParam(
-                                                valueOrDefault<String>(
-                                                  getJsonField(
-                                                    recordItem,
-                                                    r'''$.fields['🏡 Address']''',
-                                                  ).toString(),
-                                                  'Address',
-                                                ),
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['🏡 Address']''',
+                                                ).toString(),
                                                 ParamType.String),
                                             'status': serializeParam(
-                                                valueOrDefault<String>(
-                                                  getJsonField(
-                                                    recordItem,
-                                                    r'''$.fields['⚡❗Status']''',
-                                                  ).toString(),
-                                                  'Status',
-                                                ),
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['⚡❗Status']''',
+                                                ).toString(),
                                                 ParamType.String),
                                             'transactionsRecord':
                                                 serializeParam(
                                                     recordItem, ParamType.JSON),
                                             'imagePath': serializeParam(
-                                                valueOrDefault<String>(
-                                                  getJsonField(
-                                                    recordItem,
-                                                    r'''$.fields['Property Image'][0].url''',
-                                                  ),
-                                                  'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['Property Image'][0].url''',
                                                 ),
                                                 ParamType.String),
                                             'purchasePrice': serializeParam(
@@ -950,32 +929,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           }.withoutNulls,
                                         );
                                       },
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          child: Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Image.network(
-                                                  valueOrDefault<String>(
-                                                    getJsonField(
-                                                      recordItem,
-                                                      r'''$.fields['Property Image'][0].url''',
-                                                    ),
-                                                    'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 100,
+                                          constraints: BoxConstraints(
+                                            maxWidth: 350,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Image.network(
+                                                  getJsonField(
+                                                    recordItem,
+                                                    r'''$.fields['Property Image']['0'].url''',
                                                   ),
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -987,23 +963,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       1,
                                                   fit: BoxFit.cover,
                                                 ),
-                                                Expanded(
-                                                  child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8, 8, 8, 8),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                8, 8, 8, 8),
+                                                    child:
+                                                        SingleChildScrollView(
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
@@ -1069,7 +1047,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   ),
                                                                 if ('${getJsonField(
                                                                       recordItem,
-                                                                      r'''$''',
+                                                                      r'''$.fields['⚡❗Status']''',
                                                                     ).toString()}' ==
                                                                     'Pending')
                                                                   Text(
@@ -1137,13 +1115,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               ),
                                                               child:
                                                                   Image.network(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['🤵 Agent Image Test1'][0].url''',
-                                                                  ),
-                                                                  'https://static.thenounproject.com/png/630729-200.png',
+                                                                getJsonField(
+                                                                  recordItem,
+                                                                  r'''$.fields['🤵 Agent Image Test1'][0].url''',
                                                                 ),
                                                                 fit: BoxFit
                                                                     .cover,
@@ -1172,33 +1146,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(1, 1),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 1,
-                            constraints: BoxConstraints(
-                              maxWidth: 400,
-                              maxHeight: 500,
-                            ),
-                            decoration: BoxDecoration(),
-                            child: PopupMenuWidget(
-                              menuVisiblity: false,
+                        if (formMainGetTransactionsResponse.jsonBody)
+                          Align(
+                            alignment: AlignmentDirectional(1, 1),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 1,
+                              constraints: BoxConstraints(
+                                maxWidth: 400,
+                                maxHeight: 500,
+                              ),
+                              decoration: BoxDecoration(),
+                              child: PopupMenuWidget(
+                                menuVisiblity: false,
+                              ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),
