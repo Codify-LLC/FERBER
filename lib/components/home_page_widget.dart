@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/popup_menu_widget.dart';
 import '../components/search_results_widget.dart';
 import '../flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -1182,21 +1181,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 },
                               );
                             },
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(1, 1),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 1,
-                            constraints: BoxConstraints(
-                              maxWidth: 400,
-                              maxHeight: 500,
-                            ),
-                            decoration: BoxDecoration(),
-                            child: PopupMenuWidget(
-                              menuVisiblity: false,
-                            ),
                           ),
                         ),
                       ],
