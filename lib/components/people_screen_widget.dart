@@ -177,7 +177,7 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                     builder: (context) {
                       final urls = getJsonField(
                         widget.record,
-                        r'''$['💲 Pre Approval or Proof of Funds (POF)', 'Property Image', '⭐ AS-IS Contract & etc', '📃 Broker Synopsis','📂 Misc Docs','🤵 Agent Image Test1', 'Brokerage']''',
+                        r'''$.fields['💲 Pre Approval or Proof of Funds (POF)', 'Property Image', '⭐ AS-IS Contract & etc', '📃 Broker Synopsis','📂 Misc Docs','🤵 Agent Image Test1', 'Brokerage']''',
                       ).toList();
                       return Column(
                         mainAxisSize: MainAxisSize.max,
@@ -225,7 +225,7 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                                           valueOrDefault<String>(
                                             getJsonField(
                                               urlsItem,
-                                              r'''$.name''',
+                                              r'''$.filename''',
                                             ).toString(),
                                             'Unknown File',
                                           ),
