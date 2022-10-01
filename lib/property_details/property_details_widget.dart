@@ -554,7 +554,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                       .height *
                                                                   1,
                                                               child:
-                                                                  PeopleScreenWidget(),
+                                                                  PeopleScreenWidget(
+                                                                record: widget
+                                                                    .transactionsRecord,
+                                                              ),
                                                             ),
                                                           );
                                                         },

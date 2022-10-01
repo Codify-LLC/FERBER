@@ -161,13 +161,15 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                         phone: false,
                         tablet: false,
                       ))
-                        Text(
-                          'Seller Intake',
-                          style: FlutterFlowTheme.of(context).title2.override(
-                                fontFamily: 'Outfit',
-                                fontSize: 28,
-                                fontWeight: FontWeight.normal,
-                              ),
+                        Expanded(
+                          child: Text(
+                            'Modify',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context).title1.override(
+                                  fontFamily: 'Nunito',
+                                  fontSize: 30,
+                                ),
+                          ),
                         ),
                     ],
                   ),

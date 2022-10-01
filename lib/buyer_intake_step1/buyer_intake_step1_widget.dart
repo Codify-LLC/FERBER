@@ -310,18 +310,14 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                         tablet: false,
                       ))
                         Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Buyer Intake',
-                              textAlign: TextAlign.center,
-                              style:
-                                  FlutterFlowTheme.of(context).title2.override(
-                                        fontFamily: 'Outfit',
-                                        fontSize: 28,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                            ),
+                          child: Text(
+                            'Buyer Intake',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context).title2.override(
+                                  fontFamily: 'Outfit',
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ),
                     ],

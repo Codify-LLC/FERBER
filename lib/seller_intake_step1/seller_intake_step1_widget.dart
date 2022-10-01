@@ -350,13 +350,16 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                         phone: false,
                         tablet: false,
                       ))
-                        Text(
-                          'Seller Intake',
-                          style: FlutterFlowTheme.of(context).title2.override(
-                                fontFamily: 'Outfit',
-                                fontSize: 28,
-                                fontWeight: FontWeight.normal,
-                              ),
+                        Expanded(
+                          child: Text(
+                            'Seller Intake',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context).title2.override(
+                                  fontFamily: 'Outfit',
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
                         ),
                     ],
                   ),

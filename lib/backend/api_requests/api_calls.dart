@@ -350,6 +350,11 @@ class GetTransactionsCall {
         r'''$.records[:]..fields['MLS']''',
         true,
       );
+  static dynamic fileURLs(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['💲 Pre Approval or Proof of Funds (POF)', 'Property Image', '⭐ AS-IS Contract & etc', '📃 Broker Synopsis','📂 Misc Docs','🤵 Agent Image Test1', 'Brokerage']''',
+        true,
+      );
 }
 
 class ApiPagingParams {
