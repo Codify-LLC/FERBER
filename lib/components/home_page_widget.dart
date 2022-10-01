@@ -955,9 +955,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             children: [
                                               Expanded(
                                                 child: Image.network(
-                                                  getJsonField(
-                                                    recordItem,
-                                                    r'''$.fields['Property Image']['0'].url''',
+                                                  valueOrDefault<String>(
+                                                    getJsonField(
+                                                      recordItem,
+                                                      r'''$.fields['Property Image']['0'].url''',
+                                                    ),
+                                                    'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
                                                   ),
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -996,10 +999,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            getJsonField(
-                                                              recordItem,
-                                                              r'''$.fields['🏡 Address']''',
-                                                            ).toString(),
+                                                            valueOrDefault<
+                                                                String>(
+                                                              getJsonField(
+                                                                recordItem,
+                                                                r'''$.fields['🏡 Address']''',
+                                                              ).toString(),
+                                                              'Unknown',
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle1
@@ -1026,10 +1033,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   ).toString()}' ==
                                                                   'Active')
                                                                 Text(
-                                                                  getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString(),
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      recordItem,
+                                                                      r'''$.fields['⚡❗Status']''',
+                                                                    ).toString(),
+                                                                    ' Unknown',
+                                                                  ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
@@ -1050,10 +1061,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   ).toString()}' ==
                                                                   'Pending')
                                                                 Text(
-                                                                  getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString(),
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      recordItem,
+                                                                      r'''$.fields['⚡❗Status']''',
+                                                                    ).toString(),
+                                                                    ' Unknown',
+                                                                  ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
@@ -1074,10 +1089,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   ).toString()}' ==
                                                                   'Black')
                                                                 Text(
-                                                                  getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString(),
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      recordItem,
+                                                                      r'''$.fields['⚡❗Status']''',
+                                                                    ).toString(),
+                                                                    'Unknown',
+                                                                  ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
@@ -1114,9 +1133,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               ),
                                                               child:
                                                                   Image.network(
-                                                                getJsonField(
-                                                                  recordItem,
-                                                                  r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  getJsonField(
+                                                                    recordItem,
+                                                                    r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                                  ),
+                                                                  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
                                                                 ),
                                                                 fit: BoxFit
                                                                     .cover,
@@ -1124,10 +1147,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            '\$ ${getJsonField(
-                                                              recordItem,
-                                                              r'''$.fields['💵 Purchase Price']''',
-                                                            ).toString()}',
+                                                            valueOrDefault<
+                                                                String>(
+                                                              '\$ ${getJsonField(
+                                                                recordItem,
+                                                                r'''$.fields['💵 Purchase Price']''',
+                                                              ).toString()}',
+                                                              '\$ Unknown',
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1
@@ -1157,22 +1184,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             },
                           ),
                         ),
-                        if (formMainGetTransactionsResponse.jsonBody)
-                          Align(
-                            alignment: AlignmentDirectional(1, 1),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 1,
-                              constraints: BoxConstraints(
-                                maxWidth: 400,
-                                maxHeight: 500,
-                              ),
-                              decoration: BoxDecoration(),
-                              child: PopupMenuWidget(
-                                menuVisiblity: false,
-                              ),
+                        Align(
+                          alignment: AlignmentDirectional(1, 1),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 1,
+                            constraints: BoxConstraints(
+                              maxWidth: 400,
+                              maxHeight: 500,
+                            ),
+                            decoration: BoxDecoration(),
+                            child: PopupMenuWidget(
+                              menuVisiblity: false,
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ),
