@@ -44,3 +44,21 @@ String toStringConverter(dynamic input) {
   // Add your function code here!
   return input.toString();
 }
+
+String imagePathFromList(
+  List<String> listOfStrings,
+  int index,
+) {
+  // return element at index from list
+  var a = listOfStrings;
+  return a[index];
+}
+
+String stringFromList(
+  List<String> listOfStrings,
+  int index,
+) {
+  // return element at index from list
+  var a = listOfStrings;
+  return a[index];
+}

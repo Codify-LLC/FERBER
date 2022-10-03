@@ -1,7 +1,10 @@
+import '../components/img_viewer_widget.dart';
+import '../components/pdf_reader_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -185,56 +188,167 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                           final urlsItem = urls[urlsIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: Card(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color: FlutterFlowTheme.of(context)
-                                        .customColor4,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8, 8, 8, 8),
-                                      child: FaIcon(
-                                        FontAwesomeIcons.filePdf,
-                                        color: Colors.white,
-                                        size: 24,
+                            child: InkWell(
+                              onTap: () async {
+                                if (functions.toStringConverter(getJsonField(
+                                      urlsItem,
+                                      r'''$.type''',
+                                    )) ==
+                                    'application/pdf') {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              1,
+                                          child: PdfReaderWidget(
+                                            pdfLink: functions.stringFromList(
+                                                (getJsonField(
+                                                  urlsItem,
+                                                  r'''$..url''',
+                                                ) as List)
+                                                    .map<String>(
+                                                        (s) => s.toString())
+                                                    .toList(),
+                                                0),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => setState(() {}));
+                                } else {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              1,
+                                          child: ImgViewerWidget(
+                                            imageURL:
+                                                functions.imagePathFromList(
+                                                    (getJsonField(
+                                                      urlsItem,
+                                                      r'''$..url''',
+                                                    ) as List)
+                                                        .map<String>(
+                                                            (s) => s.toString())
+                                                        .toList(),
+                                                    0),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => setState(() {}));
+                                }
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 0, 0, 0),
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      color: FlutterFlowTheme.of(context)
+                                          .customColor4,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 8, 8, 8),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.filePdf,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Padding(
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 0, 0, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            valueOrDefault<String>(
+                                              getJsonField(
+                                                urlsItem,
+                                                r'''$..filename''',
+                                              ).toString(),
+                                              'Unknown File',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 4, 0, 0),
+                                            child: Text(
+                                              'Added 7/26/22',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF95A1AC),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 0, 0, 0),
+                                        12, 0, 12, 0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          valueOrDefault<String>(
-                                            getJsonField(
-                                              urlsItem,
-                                              r'''$.filename''',
-                                            ).toString(),
-                                            'Unknown File',
-                                          ),
+                                          '1',
+                                          textAlign: TextAlign.end,
                                           style: FlutterFlowTheme.of(context)
-                                              .subtitle1
+                                              .subtitle2
                                               .override(
                                                 fontFamily: 'Lexend Deca',
-                                                color: Color(0xFF090F13),
-                                                fontSize: 18,
+                                                color: Color(0xFFF60000),
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -243,13 +357,14 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 4, 0, 0),
                                           child: Text(
-                                            'Added 7/26/22',
+                                            'Version',
+                                            textAlign: TextAlign.end,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
+                                                .bodyText1
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFF95A1AC),
-                                                  fontSize: 14,
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                           ),
@@ -257,47 +372,8 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                                       ],
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12, 0, 12, 0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        '1',
-                                        textAlign: TextAlign.end,
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFFF60000),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 4, 0, 0),
-                                        child: Text(
-                                          'Version',
-                                          textAlign: TextAlign.end,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Color(0xFF090F13),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         }),
