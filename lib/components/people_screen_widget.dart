@@ -190,10 +190,14 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                             child: InkWell(
                               onTap: () async {
-                                if (functions.toStringConverter(getJsonField(
-                                      urlsItem,
-                                      r'''$.type''',
-                                    )) ==
+                                if (functions.stringFromList(
+                                        (getJsonField(
+                                          urlsItem,
+                                          r'''$..type''',
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList(),
+                                        0) ==
                                     'application/pdf') {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
