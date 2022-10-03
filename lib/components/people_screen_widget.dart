@@ -191,11 +191,14 @@ class _PeopleScreenWidgetState extends State<PeopleScreenWidget>
                             child: InkWell(
                               onTap: () async {
                                 if (functions.stringFromList(
-                                        (getJsonField(
-                                          urlsItem,
-                                          r'''$..type''',
-                                        ) as List)
-                                            .map<String>((s) => s.toString())
+                                        functions
+                                            .stringToList((getJsonField(
+                                              urlsItem,
+                                              r'''$..type''',
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList())
                                             .toList(),
                                         0) ==
                                     'application/pdf') {
