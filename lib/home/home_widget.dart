@@ -96,15 +96,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 24, 0, 0),
                                         child: FlutterFlowChoiceChips(
-                                          initiallySelected:
-                                              choiceChipsValue1 != null
-                                                  ? [choiceChipsValue1!]
-                                                  : [
-                                                      valueOrDefault<String>(
-                                                        widget.defaultPage,
-                                                        'Home',
-                                                      )
-                                                    ],
+                                          initiallySelected: [
+                                            valueOrDefault<String>(
+                                              widget.defaultPage,
+                                              'Home',
+                                            )
+                                          ],
                                           options: [
                                             ChipData('Home', Icons.home_sharp),
                                             ChipData('People', Icons.people),
@@ -228,15 +225,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     children: [
                                       Expanded(
                                         child: FlutterFlowChoiceChips(
-                                          initiallySelected:
-                                              choiceChipsValue2 != null
-                                                  ? [choiceChipsValue2!]
-                                                  : [
-                                                      valueOrDefault<String>(
-                                                        widget.defaultPage,
-                                                        'Home',
-                                                      )
-                                                    ],
+                                          initiallySelected: [
+                                            valueOrDefault<String>(
+                                              widget.defaultPage,
+                                              'Home',
+                                            )
+                                          ],
                                           options: [
                                             ChipData('Home', Icons.home_sharp),
                                             ChipData('People', Icons.people),

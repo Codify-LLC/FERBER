@@ -31,7 +31,7 @@ class _SuccessNewWidgetState extends State<SuccessNewWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFFFAFAFA),
           body: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -49,7 +49,7 @@ class _SuccessNewWidgetState extends State<SuccessNewWidget> {
                         buttonSize: 60,
                         icon: Icon(
                           Icons.cancel,
-                          color: Color(0xFFA32019),
+                          color: FlutterFlowTheme.of(context).tertiaryColor,
                           size: 30,
                         ),
                         onPressed: () {
@@ -73,7 +73,7 @@ class _SuccessNewWidgetState extends State<SuccessNewWidget> {
                       child: Icon(
                         Icons.check_rounded,
                         color: Colors.white,
-                        size: 60,
+                        size: 40,
                       ),
                     ),
                   ),
@@ -198,31 +198,37 @@ class _SuccessNewWidgetState extends State<SuccessNewWidget> {
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: Color(0xFFD22C23),
+                                      fontWeight: FontWeight.w500,
                                     ),
                           ),
                         ),
-                        FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
-                          },
-                          text: 'Confirm & Finish',
-                          options: FFButtonOptions(
-                            width: 230,
-                            height: 50,
-                            color: Color(0xFFF1F4F8),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Color(0xFF090F13),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            elevation: 0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Confirm & Finish',
+                            options: FFButtonOptions(
+                              width: 230,
+                              height: 50,
+                              color: Color(0xFF111111),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(40),
                           ),
                         ),
                         FFButtonWidget(

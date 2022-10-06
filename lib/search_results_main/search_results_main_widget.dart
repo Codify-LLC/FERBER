@@ -40,6 +40,7 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -70,7 +71,6 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -101,7 +101,7 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                                           height: 50,
                                           child: SpinKitChasingDots(
                                             color: Color(0xFFD9180E),
-                                            size: 0,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -361,7 +361,7 @@ class _SearchResultsMainWidgetState extends State<SearchResultsMainWidget> {
                                           height: 50,
                                           child: SpinKitChasingDots(
                                             color: Color(0xFFD9180E),
-                                            size: 0,
+                                            size: 50,
                                           ),
                                         ),
                                       );

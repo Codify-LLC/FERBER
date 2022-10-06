@@ -3,6 +3,8 @@ import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,31 +18,43 @@ class MultisellectchipsWidget extends StatefulWidget {
 
 class _MultisellectchipsWidgetState extends State<MultisellectchipsWidget>
     with TickerProviderStateMixin {
-  List<String>? choiceChipsValues;
   final animationsMap = {
     'rowOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
     ),
   };
+  List<String>? choiceChipsValues;
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -101,9 +115,6 @@ class _MultisellectchipsWidgetState extends State<MultisellectchipsWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           FlutterFlowChoiceChips(
-                            initiallySelected: choiceChipsValues != null
-                                ? choiceChipsValues
-                                : [],
                             options: [
                               ChipData('FHA Eligible'),
                               ChipData('VA Eligible'),
@@ -151,7 +162,7 @@ class _MultisellectchipsWidgetState extends State<MultisellectchipsWidget>
             ),
           ),
         ],
-      ).animated([animationsMap['rowOnPageLoadAnimation']!]),
+      ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
     );
   }
 }

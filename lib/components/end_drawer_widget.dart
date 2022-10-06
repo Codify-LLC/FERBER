@@ -75,7 +75,6 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> {
                           ),
                         ),
                         expanded: FlutterFlowCheckboxGroup(
-                          initiallySelected: checkboxGroupValues ??= [],
                           options: [
                             'Closed',
                             'Pending',
@@ -89,7 +88,7 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> {
                             'New Offer (FerberListing)',
                             'Offer Denied',
                             'Done'
-                          ].toList(),
+                          ],
                           onChanged: (val) =>
                               setState(() => checkboxGroupValues = val),
                           activeColor:
@@ -98,6 +97,7 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> {
                           checkboxBorderColor: Color(0xFF95A1AC),
                           textStyle: FlutterFlowTheme.of(context).bodyText1,
                           checkboxBorderRadius: BorderRadius.circular(4),
+                          initialized: checkboxGroupValues != null,
                         ),
                         theme: ExpandableThemeData(
                           tapHeaderToExpand: true,

@@ -8,6 +8,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +30,216 @@ class AddServicesWidget extends StatefulWidget {
 
 class _AddServicesWidgetState extends State<AddServicesWidget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'dropDownOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'dropDownOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'dropDownOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'dropDownOnPageLoadAnimation4': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'dropDownOnPageLoadAnimation5': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+  };
   DateTime? datePicked1;
   TextEditingController? listDateActiveDateController1;
   String? photopgraphySigninstallValue;
@@ -40,142 +252,29 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
   String? lenderBuyerValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final animationsMap = {
-    'dropDownOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation5': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
-    listDateActiveDateController1 =
-        TextEditingController(text: dateTimeFormat('yMd', datePicked1));
-    listDateActiveDateController2 =
-        TextEditingController(text: dateTimeFormat('d/M/y', datePicked2));
+    listDateActiveDateController1 = TextEditingController(
+        text: dateTimeFormat(
+      'yMd',
+      datePicked1,
+      locale: FFLocalizations.of(context).languageCode,
+    ));
+    listDateActiveDateController2 = TextEditingController(
+        text: dateTimeFormat(
+      'd/M/y',
+      datePicked2,
+      locale: FFLocalizations.of(context).languageCode,
+    ));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -193,6 +292,7 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: Color(0xFF111111),
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -214,7 +314,7 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                       borderColor: Colors.transparent,
                       borderRadius: 30,
                       buttonSize: 48,
-                      fillColor: Color(0xFFF1F4F8),
+                      fillColor: Colors.transparent,
                       icon: Icon(
                         Icons.close_rounded,
                         color: Color(0xFFD22C23),
@@ -229,7 +329,6 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).black600,
           body: SafeArea(
             child: Form(
               key: formKey,
@@ -253,7 +352,7 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.8,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color(0xFFFAFAFA),
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(16),
                             bottomRight: Radius.circular(16),
@@ -305,10 +404,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                       margin: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 12, 20),
                                       hidesUnderline: true,
-                                    ).animated([
-                                      animationsMap[
-                                          'dropDownOnPageLoadAnimation1']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'dropDownOnPageLoadAnimation1']!),
                                   ),
                                 if (photopgraphySigninstallValue == 'ASAP')
                                   Padding(
@@ -511,9 +608,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                           ),
                                         ),
                                       ],
-                                    ).animated([
-                                      animationsMap['rowOnPageLoadAnimation1']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation1']!),
                                   ),
                                 if (photopgraphySigninstallValue ==
                                     'Specific Date')
@@ -755,9 +851,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                           ),
                                         ),
                                       ],
-                                    ).animated([
-                                      animationsMap['rowOnPageLoadAnimation2']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation2']!),
                                   ),
                                 if (widget.isBuyer == true)
                                   Padding(
@@ -796,10 +891,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                       margin: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 12, 20),
                                       hidesUnderline: true,
-                                    ).animated([
-                                      animationsMap[
-                                          'dropDownOnPageLoadAnimation2']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'dropDownOnPageLoadAnimation2']!),
                                   ),
                                 if (inspectionValue == 'Specific Date')
                                   Padding(
@@ -1040,9 +1133,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                           ),
                                         ),
                                       ],
-                                    ).animated([
-                                      animationsMap['rowOnPageLoadAnimation3']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation3']!),
                                   ),
                                 if (widget.isBuyer == true)
                                   Padding(
@@ -1080,10 +1172,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                       margin: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 12, 20),
                                       hidesUnderline: true,
-                                    ).animated([
-                                      animationsMap[
-                                          'dropDownOnPageLoadAnimation3']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'dropDownOnPageLoadAnimation3']!),
                                   ),
                                 if (widget.isBuyer == true)
                                   Padding(
@@ -1121,10 +1211,8 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                       margin: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 12, 20),
                                       hidesUnderline: true,
-                                    ).animated([
-                                      animationsMap[
-                                          'dropDownOnPageLoadAnimation4']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'dropDownOnPageLoadAnimation4']!),
                                   ),
                                 if (widget.isBuyer == true)
                                   Padding(
@@ -1162,18 +1250,20 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                                       margin: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 12, 20),
                                       hidesUnderline: true,
-                                    ).animated([
-                                      animationsMap[
-                                          'dropDownOnPageLoadAnimation5']!
-                                    ]),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'dropDownOnPageLoadAnimation5']!),
                                   ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.asset(
-                                    'assets/images/card_bg@2x.png',
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 110,
-                                    fit: BoxFit.cover,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      'assets/images/card_bg@2x.png',
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 110,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -1192,34 +1282,38 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            FFButtonWidget(
-                              onPressed: () async {
-                                if (formKey.currentState == null ||
-                                    !formKey.currentState!.validate()) {
-                                  return;
-                                }
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  if (formKey.currentState == null ||
+                                      !formKey.currentState!.validate()) {
+                                    return;
+                                  }
 
-                                context.pushNamed('SuccessNew');
-                              },
-                              text: 'Next Step',
-                              options: FFButtonOptions(
-                                width: 300,
-                                height: 70,
-                                color: FlutterFlowTheme.of(context).black600,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .title2
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.white,
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                elevation: 0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                  context.pushNamed('SuccessNew');
+                                },
+                                text: 'Next Step',
+                                options: FFButtonOptions(
+                                  width: 300,
+                                  height: 50,
+                                  color: FlutterFlowTheme.of(context)
+                                      .tertiaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .title3
+                                      .override(
+                                        fontFamily: 'Nunito',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                      ),
+                                  elevation: 0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                borderRadius: BorderRadius.circular(12),
                               ),
                             ),
                           ],
@@ -1227,19 +1321,22 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {
-                      context.pop();
-                    },
-                    child: Text(
-                      'Back',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Outfit',
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                          ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                    child: InkWell(
+                      onTap: () async {
+                        context.pop();
+                      },
+                      child: Text(
+                        'Back',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Outfit',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
                     ),
                   ),
                 ],

@@ -4,6 +4,8 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,52 +24,73 @@ class PopupMenuWidget extends StatefulWidget {
 class _PopupMenuWidgetState extends State<PopupMenuWidget>
     with TickerProviderStateMixin {
   LatLng? currentUserLocationValue;
+  var hasContainerTriggered = false;
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(400, 400),
-        scale: 0.1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 1),
-        scale: 1,
-        opacity: 1,
-      ),
+      applyInitialState: true,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(400, 400),
+          end: Offset(0, 1),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.1,
+          end: 1,
+        ),
+      ],
     ),
     'containerOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
-      duration: 600,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(400, 400),
-        scale: 0.1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      applyInitialState: true,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(400, 400),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.1,
+          end: 1,
+        ),
+      ],
     ),
   };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
-      this,
-    );
-    setupTriggerAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onActionTrigger),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -85,7 +108,7 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget>
           height: 50,
           child: SpinKitChasingDots(
             color: Color(0xFFD9180E),
-            size: 0,
+            size: 50,
           ),
         ),
       );
@@ -145,10 +168,12 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget>
                     ),
                   ),
                 ),
-              ).animated([
-                animationsMap['containerOnPageLoadAnimation']!,
-                animationsMap['containerOnActionTriggerAnimation']!
-              ]),
+              )
+                  .animateOnPageLoad(
+                      animationsMap['containerOnPageLoadAnimation']!)
+                  .animateOnActionTrigger(
+                      animationsMap['containerOnActionTriggerAnimation']!,
+                      hasBeenTriggered: hasContainerTriggered),
             ),
           ),
       ],

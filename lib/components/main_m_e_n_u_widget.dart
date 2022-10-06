@@ -98,15 +98,22 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                         context.pushNamed(
                           'BuyerIntakeStep1',
                           queryParams: {
-                            'mLSID':
-                                serializeParam(widget.mLSID, ParamType.String),
+                            'mLSID': serializeParam(
+                              widget.mLSID,
+                              ParamType.String,
+                            ),
                             'participantsID': serializeParam(
-                                random_data.randomInteger(999, 99999999),
-                                ParamType.int),
+                              random_data.randomInteger(999, 99999999),
+                              ParamType.int,
+                            ),
                             'address': serializeParam(
-                                widget.address, ParamType.String),
+                              widget.address,
+                              ParamType.String,
+                            ),
                             'coordinates': serializeParam(
-                                widget.coordinates, ParamType.LatLng),
+                              widget.coordinates,
+                              ParamType.LatLng,
+                            ),
                           }.withoutNulls,
                         );
                       },
@@ -153,12 +160,17 @@ class _MainMENUWidgetState extends State<MainMENUWidget> {
                           'SellerIntakeStep1',
                           queryParams: {
                             'participantsID': serializeParam(
-                                random_data.randomInteger(99999, 999999999),
-                                ParamType.int),
+                              random_data.randomInteger(99999, 999999999),
+                              ParamType.int,
+                            ),
                             'address': serializeParam(
-                                widget.address, ParamType.String),
-                            'mlsID':
-                                serializeParam(widget.mLSID, ParamType.String),
+                              widget.address,
+                              ParamType.String,
+                            ),
+                            'mlsID': serializeParam(
+                              widget.mLSID,
+                              ParamType.String,
+                            ),
                           }.withoutNulls,
                         );
                       },

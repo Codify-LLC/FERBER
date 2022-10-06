@@ -6,6 +6,8 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,70 +25,117 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
   final animationsMap = {
     'rowOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 50),
-        scale: 0.9,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 50),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.9,
+          end: 1,
+        ),
+      ],
     ),
     'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 450,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 76),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: Offset(0, 76),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
     ),
     'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 450,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 76),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: Offset(0, 76),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
     ),
     'containerOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 450,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 76),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: Offset(0, 76),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
     ),
   };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -348,10 +397,8 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                     ),
                                                   ),
                                                 ],
-                                              ).animated([
-                                                animationsMap[
-                                                    'rowOnPageLoadAnimation']!
-                                              ]),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'rowOnPageLoadAnimation']!),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -675,7 +722,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -686,7 +737,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -810,7 +865,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -821,7 +880,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -846,7 +909,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -945,7 +1012,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -956,7 +1027,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -981,7 +1056,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -1080,7 +1159,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1091,7 +1174,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1116,7 +1203,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -1215,7 +1306,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1226,7 +1321,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1251,7 +1350,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -1350,7 +1453,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1361,7 +1468,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1386,7 +1497,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -1485,7 +1600,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'relative',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1496,7 +1615,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                   ))
                                                                                     Expanded(
                                                                                       child: Text(
-                                                                                        dateTimeFormat('yMMMd', getCurrentTimestamp),
+                                                                                        dateTimeFormat(
+                                                                                          'yMMMd',
+                                                                                          getCurrentTimestamp,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
                                                                                         style: FlutterFlowTheme.of(context).bodyText1,
                                                                                       ),
                                                                                     ),
@@ -1521,7 +1644,11 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                                           Padding(
                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                                                                                             child: Text(
-                                                                                              dateTimeFormat('relative', getCurrentTimestamp),
+                                                                                              dateTimeFormat(
+                                                                                                'relative',
+                                                                                                getCurrentTimestamp,
+                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                              ),
                                                                                               style: FlutterFlowTheme.of(context).bodyText1,
                                                                                             ),
                                                                                           ),
@@ -1653,10 +1780,8 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                    ).animated([
-                                                                      animationsMap[
-                                                                          'containerOnPageLoadAnimation1']!
-                                                                    ]),
+                                                                    ).animateOnPageLoad(
+                                                                            animationsMap['containerOnPageLoadAnimation1']!),
                                                                   ),
                                                                 ],
                                                               ),
@@ -1811,10 +1936,8 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    ).animated([
-                                                                      animationsMap[
-                                                                          'containerOnPageLoadAnimation2']!
-                                                                    ]),
+                                                                    ).animateOnPageLoad(
+                                                                            animationsMap['containerOnPageLoadAnimation2']!),
                                                                   ),
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
@@ -1844,10 +1967,8 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                                                                         borderRadius:
                                                                             BorderRadius.circular(12),
                                                                       ),
-                                                                    ).animated([
-                                                                      animationsMap[
-                                                                          'containerOnPageLoadAnimation3']!
-                                                                    ]),
+                                                                    ).animateOnPageLoad(
+                                                                            animationsMap['containerOnPageLoadAnimation3']!),
                                                                   ),
                                                                 ],
                                                               ),

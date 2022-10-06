@@ -7,6 +7,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,6 +31,112 @@ class Modifyintakestep1Widget extends StatefulWidget {
 
 class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'dropDownOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+  };
   List<String>? choiceChipsValues;
   String? statusDropDownValue;
   TextEditingController? listingPriceTextFieldController;
@@ -37,75 +145,14 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
   TextEditingController? textController4;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final animationsMap = {
-    'dropDownOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -132,6 +179,7 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -193,7 +241,6 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -231,7 +278,7 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.8,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0xFFFAFAFA),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(16),
                                   bottomRight: Radius.circular(16),
@@ -374,19 +421,21 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                             color: Color(0xFF57636C),
                                             size: 15,
                                           ),
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
                                           elevation: 2,
-                                          borderColor: Color(0xFFF1F4F8),
-                                          borderWidth: 2,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          borderWidth: 1,
                                           borderRadius: 8,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20, 20, 12, 20),
                                           hidesUnderline: true,
-                                        ).animated([
-                                          animationsMap[
-                                              'dropDownOnPageLoadAnimation']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'dropDownOnPageLoadAnimation']!),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -416,7 +465,7 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryColor,
-                                                    width: 2,
+                                                    width: 1,
                                                   ),
                                                 ),
                                                 child: Row(
@@ -540,10 +589,8 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                               ),
                                             ),
                                           ],
-                                        ).animated([
-                                          animationsMap[
-                                              'rowOnPageLoadAnimation1']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'rowOnPageLoadAnimation1']!),
                                       ),
                                       Align(
                                         alignment: AlignmentDirectional(-1, 0),
@@ -568,10 +615,6 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                             MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(),
                                         child: FlutterFlowChoiceChips(
-                                          initiallySelected:
-                                              choiceChipsValues != null
-                                                  ? choiceChipsValues
-                                                  : [],
                                           options: [
                                             ChipData('Standard Addendum'),
                                             ChipData('Closing Extension'),
@@ -668,7 +711,7 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryColor,
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
@@ -779,10 +822,8 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation2']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation2']!),
                                         ),
                                       Align(
                                         alignment: AlignmentDirectional(-1, 0),
@@ -834,7 +875,7 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Padding(
@@ -941,10 +982,8 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation3']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation3']!),
                                         ),
                                     ],
                                   ),
@@ -968,12 +1007,11 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
                                 color:
                                     FlutterFlowTheme.of(context).tertiaryColor,
                                 textStyle: FlutterFlowTheme.of(context)
-                                    .title2
+                                    .title3
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.white,
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Nunito',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                     ),
                                 elevation: 0,
                                 borderSide: BorderSide(

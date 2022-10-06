@@ -61,7 +61,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           height: 50,
           child: SpinKitChasingDots(
             color: Color(0xFFD9180E),
-            size: 0,
+            size: 50,
           ),
         ),
       );
@@ -89,7 +89,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       height: 50,
                       child: SpinKitChasingDots(
                         color: Color(0xFFD9180E),
-                        size: 0,
+                        size: 50,
                       ),
                     ),
                   );
@@ -189,11 +189,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     queryParams: {
                                                       'participantsID':
                                                           serializeParam(
-                                                              random_data
-                                                                  .randomInteger(
-                                                                      65466,
-                                                                      65466),
-                                                              ParamType.int),
+                                                        random_data
+                                                            .randomInteger(
+                                                                65466, 65466),
+                                                        ParamType.int,
+                                                      ),
                                                     }.withoutNulls,
                                                   );
                                                 },
@@ -881,12 +881,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           searchValurTextFieldAddressController!
                                                   .text !=
                                               ''
-                                      ? filteredRecords!
+                                      ? filteredRecords
                                       : GetTransactionsCall.recordsList(
                                           formMainGetTransactionsResponse
                                               .jsonBody,
                                         )
-                                          .map((e) => e)
+                                          ?.map((e) => e)
                                           .toList()
                                           .take(100)
                                           .toList();
@@ -905,32 +905,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           'PropertyDetails',
                                           queryParams: {
                                             'address': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['🏡 Address']''',
-                                                ).toString(),
-                                                ParamType.String),
+                                              getJsonField(
+                                                recordItem,
+                                                r'''$.fields['🏡 Address']''',
+                                              ).toString(),
+                                              ParamType.String,
+                                            ),
                                             'status': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString(),
-                                                ParamType.String),
+                                              getJsonField(
+                                                recordItem,
+                                                r'''$.fields['⚡❗Status']''',
+                                              ).toString(),
+                                              ParamType.String,
+                                            ),
                                             'transactionsRecord':
                                                 serializeParam(
-                                                    recordItem, ParamType.JSON),
+                                              recordItem,
+                                              ParamType.JSON,
+                                            ),
                                             'imagePath': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['Property Image'][0].url''',
-                                                ),
-                                                ParamType.String),
+                                              getJsonField(
+                                                recordItem,
+                                                r'''$.fields['Property Image'][0].url''',
+                                              ),
+                                              ParamType.String,
+                                            ),
                                             'purchasePrice': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['💵 Purchase Price']''',
-                                                ).toString(),
-                                                ParamType.String),
+                                              getJsonField(
+                                                recordItem,
+                                                r'''$.fields['💵 Purchase Price']''',
+                                              ).toString(),
+                                              ParamType.String,
+                                            ),
                                           }.withoutNulls,
                                         );
                                       },

@@ -12,6 +12,8 @@ import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,6 +39,323 @@ class BuyerIntakeStep1Widget extends StatefulWidget {
 
 class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'dropDownOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'dropDownOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation4': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation5': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation6': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation7': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation8': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation9': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation10': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+  };
+  bool isMediaUploading = false;
+  String uploadedFileUrl = '';
+
   DateTime? datePicked1;
   String? statusDropDownValue;
   TextEditingController? textController1;
@@ -48,200 +367,18 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
   TextEditingController? inspectionPeriodTextFieldController;
   TextEditingController? additionalTermsTextFieldController;
   TextEditingController? internalNotesTextFieldController;
-  String uploadedFileUrl = '';
   String uploadedSignatureUrl = '';
   late SignatureController signatureController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final animationsMap = {
-    'dropDownOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation5': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation6': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation7': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation8': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation9': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation10': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -279,6 +416,7 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: Color(0xFFFAFAFA),
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -343,7 +481,6 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: Align(
               alignment: AlignmentDirectional(0, 0),
@@ -383,7 +520,7 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                 height:
                                     MediaQuery.of(context).size.height * 0.8,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Color(0xFFFAFAFA),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(16),
                                     bottomRight: Radius.circular(16),
@@ -409,111 +546,90 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                               size: 32,
                                             ),
                                             Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(21, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller: textController1,
-                                                  onChanged: (_) =>
-                                                      EasyDebounce.debounce(
-                                                    'textController1',
-                                                    Duration(
-                                                        milliseconds: 2000),
-                                                    () => setState(() {}),
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Purchase Price',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 0, 0),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        color:
-                                                            Color(0xFF57636C),
-                                                        fontSize: 34,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                  textAlign: TextAlign.start,
+                                              child: TextFormField(
+                                                controller: textController1,
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  'textController1',
+                                                  Duration(milliseconds: 2000),
+                                                  () => setState(() {}),
                                                 ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Purchase Price',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  errorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              12, 0, 0, 0),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Nunito',
+                                                          color:
+                                                              Color(0xFF57636C),
+                                                          fontSize: 34,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                textAlign: TextAlign.start,
                                               ),
                                             ),
                                           ],
@@ -547,19 +663,21 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                               color: Color(0xFF57636C),
                                               size: 15,
                                             ),
-                                            fillColor: Colors.white,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                             elevation: 2,
-                                            borderColor: Color(0xFFF1F4F8),
-                                            borderWidth: 2,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .gray200,
+                                            borderWidth: 1,
                                             borderRadius: 8,
                                             margin:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 20, 12, 20),
                                             hidesUnderline: true,
-                                          ).animated([
-                                            animationsMap[
-                                                'dropDownOnPageLoadAnimation1']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'dropDownOnPageLoadAnimation1']!),
                                         ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -577,7 +695,7 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8),
+                                                            10),
                                                   ),
                                                   child: Container(
                                                     width: 330,
@@ -588,13 +706,13 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                           .primaryBackground,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              8),
+                                                              10),
                                                       border: Border.all(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -724,10 +842,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation1']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation1']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -745,7 +861,7 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8),
+                                                            10),
                                                   ),
                                                   child: Container(
                                                     width: 330,
@@ -756,13 +872,13 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                           .primaryBackground,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              8),
+                                                              10),
                                                       border: Border.all(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -874,6 +990,10 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                                             4.0),
                                                                   ),
                                                                 ),
+                                                                filled: true,
+                                                                fillColor: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -892,10 +1012,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation2']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation2']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -932,18 +1050,20 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                 color: Color(0xFF57636C),
                                                 size: 15,
                                               ),
-                                              fillColor: Colors.white,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               elevation: 2,
-                                              borderColor: Color(0xFFF1F4F8),
-                                              borderWidth: 2,
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .gray200,
+                                              borderWidth: 1,
                                               borderRadius: 8,
                                               margin: EdgeInsetsDirectional
                                                   .fromSTEB(20, 20, 12, 20),
                                               hidesUnderline: true,
-                                            ).animated([
-                                              animationsMap[
-                                                  'dropDownOnPageLoadAnimation2']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'dropDownOnPageLoadAnimation2']!),
                                           ),
                                         if (typeofFinancingDropDownValue ==
                                             'Conventional')
@@ -994,8 +1114,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -1162,8 +1282,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: InkWell(
@@ -1202,10 +1322,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation3']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation3']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -1255,8 +1373,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -1301,8 +1419,12 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                                           0),
                                                                   child: Text(
                                                                     dateTimeFormat(
-                                                                        'd/M/y',
-                                                                        datePicked1),
+                                                                      'd/M/y',
+                                                                      datePicked1,
+                                                                      locale: FFLocalizations.of(
+                                                                              context)
+                                                                          .languageCode,
+                                                                    ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyText1
@@ -1360,8 +1482,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: InkWell(
@@ -1432,10 +1554,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation4']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation4']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -1485,8 +1605,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -1531,8 +1651,12 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                                           0),
                                                                   child: Text(
                                                                     dateTimeFormat(
-                                                                        'd/M/y',
-                                                                        datePicked2),
+                                                                      'd/M/y',
+                                                                      datePicked2,
+                                                                      locale: FFLocalizations.of(
+                                                                              context)
+                                                                          .languageCode,
+                                                                    ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyText1
@@ -1590,8 +1714,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: InkWell(
@@ -1662,10 +1786,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation5']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation5']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -1715,8 +1837,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -1883,8 +2005,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: InkWell(
@@ -1923,10 +2045,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation6']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation6']!),
                                           ),
                                         Padding(
                                           padding:
@@ -1939,15 +2059,19 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                 queryParams: {
                                                   'participantid':
                                                       serializeParam(
-                                                          widget.participantsID,
-                                                          ParamType.int),
+                                                    widget.participantsID,
+                                                    ParamType.int,
+                                                  ),
                                                   'contecID': serializeParam(
-                                                      random_data.randomInteger(
-                                                          999, 999999),
-                                                      ParamType.int),
+                                                    random_data.randomInteger(
+                                                        999, 999999),
+                                                    ParamType.int,
+                                                  ),
                                                   'isParticipent':
                                                       serializeParam(
-                                                          true, ParamType.bool),
+                                                    true,
+                                                    ParamType.bool,
+                                                  ),
                                                 }.withoutNulls,
                                               );
                                             },
@@ -1974,8 +2098,10 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                               borderSide: BorderSide(
-                                                color: Color(0xFFF1F4F8),
-                                                width: 2,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .gray200,
+                                                width: 1,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(8),
@@ -2015,8 +2141,10 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                             FontWeight.w500,
                                                       ),
                                                   borderSide: BorderSide(
-                                                    color: Color(0xFFF1F4F8),
-                                                    width: 2,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .gray200,
+                                                    width: 1,
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(8),
@@ -2073,8 +2201,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -2241,8 +2369,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: InkWell(
@@ -2281,10 +2409,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation7']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation7']!),
                                           ),
                                         if (statusDropDownValue == 'New Offer')
                                           Padding(
@@ -2318,8 +2444,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
-                                                        width: 2,
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Row(
@@ -2449,10 +2575,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                   ),
                                                 ),
                                               ],
-                                            ).animated([
-                                              animationsMap[
-                                                  'rowOnPageLoadAnimation8']!
-                                            ]),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'rowOnPageLoadAnimation8']!),
                                           ),
                                         Padding(
                                           padding:
@@ -2463,158 +2587,173 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Material(
-                                                color: Colors.transparent,
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                child: Container(
-                                                  width: 330,
-                                                  height: 140,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
+                                              Expanded(
+                                                child: Material(
+                                                  color: Colors.transparent,
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8),
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryColor,
-                                                      width: 2,
-                                                    ),
                                                   ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(5, 5,
-                                                                    10, 0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Text(
-                                                              'Pre Approval/Proof of Funds',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Nunito',
-                                                                    fontSize:
-                                                                        14,
-                                                                  ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: Text(
-                                                                          'Pre Approval or Proof of Funds (POF)'),
-                                                                      content: Text(
-                                                                          'We will NOT send an offer without one!'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () =>
-                                                                              Navigator.pop(alertDialogContext),
-                                                                          child:
-                                                                              Text('Ok'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                );
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .info_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .grayDark,
-                                                                size: 24,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                  child: Container(
+                                                    width: 330,
+                                                    height: 140,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      border: Border.all(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .gray200,
+                                                        width: 1,
                                                       ),
-                                                      Container(
-                                                        width: 330,
-                                                        height: 110,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                        ),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            final selectedFile =
-                                                                await selectFile(
-                                                                    allowedExtensions: [
-                                                                  'pdf'
-                                                                ]);
-                                                            if (selectedFile !=
-                                                                null) {
-                                                              showUploadMessage(
-                                                                context,
-                                                                'Uploading file...',
-                                                                showLoading:
-                                                                    true,
-                                                              );
-                                                              final downloadUrl =
-                                                                  await uploadData(
-                                                                      selectedFile
-                                                                          .storagePath,
-                                                                      selectedFile
-                                                                          .bytes);
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .hideCurrentSnackBar();
-                                                              if (downloadUrl !=
-                                                                  null) {
-                                                                setState(() =>
-                                                                    uploadedFileUrl =
-                                                                        downloadUrl);
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Success!',
-                                                                );
-                                                              } else {
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Failed to upload file',
-                                                                );
-                                                                return;
-                                                              }
-                                                            }
-                                                          },
-                                                          child: Column(
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(5,
+                                                                      5, 10, 0),
+                                                          child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
-                                                                    .center,
+                                                                    .spaceBetween,
                                                             children: [
-                                                              Row(
+                                                              Text(
+                                                                'Pre Approval/Proof of Funds',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Nunito',
+                                                                      fontSize:
+                                                                          14,
+                                                                    ),
+                                                              ),
+                                                              InkWell(
+                                                                onTap:
+                                                                    () async {
+                                                                  await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            'Pre Approval or Proof of Funds (POF)'),
+                                                                        content:
+                                                                            Text('We will NOT send an offer without one!'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                            child:
+                                                                                Text('Ok'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .info_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .grayDark,
+                                                                  size: 24,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 330,
+                                                          height: 110,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        5),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                final selectedFile =
+                                                                    await selectFile(
+                                                                        allowedExtensions: [
+                                                                      'pdf'
+                                                                    ]);
+                                                                if (selectedFile !=
+                                                                    null) {
+                                                                  setState(() =>
+                                                                      isMediaUploading =
+                                                                          true);
+                                                                  String?
+                                                                      downloadUrl;
+                                                                  try {
+                                                                    showUploadMessage(
+                                                                      context,
+                                                                      'Uploading file...',
+                                                                      showLoading:
+                                                                          true,
+                                                                    );
+                                                                    downloadUrl = await uploadData(
+                                                                        selectedFile
+                                                                            .storagePath,
+                                                                        selectedFile
+                                                                            .bytes);
+                                                                  } finally {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .hideCurrentSnackBar();
+                                                                    isMediaUploading =
+                                                                        false;
+                                                                  }
+                                                                  if (downloadUrl !=
+                                                                      null) {
+                                                                    setState(() =>
+                                                                        uploadedFileUrl =
+                                                                            downloadUrl!);
+                                                                    showUploadMessage(
+                                                                      context,
+                                                                      'Success!',
+                                                                    );
+                                                                  } else {
+                                                                    setState(
+                                                                        () {});
+                                                                    showUploadMessage(
+                                                                      context,
+                                                                      'Failed to upload file',
+                                                                    );
+                                                                    return;
+                                                                  }
+                                                                }
+                                                              },
+                                                              child: Column(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
@@ -2622,43 +2761,50 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                                     MainAxisAlignment
                                                                         .center,
                                                                 children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .cloud_upload,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .grayDark,
-                                                                    size: 24,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .cloud_upload,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .grayDark,
+                                                                        size:
+                                                                            24,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             5,
                                                                             0,
                                                                             0,
                                                                             0),
-                                                                    child: Text(
-                                                                      'Drop files here',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1,
-                                                                    ),
+                                                                        child:
+                                                                            Text(
+                                                                          'Drop files here',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation9']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation9']!),
                                         ),
                                         Padding(
                                           padding:
@@ -2690,8 +2836,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryColor,
-                                                      width: 2,
+                                                              .gray200,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -2824,9 +2970,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                                   FFButtonOptions(
                                                                 width: 330,
                                                                 height: 40,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
+                                                                color: Color(
+                                                                    0xFF111111),
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle2
@@ -2868,10 +3013,8 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation10']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation10']!),
                                         ),
                                       ],
                                     ),
@@ -2889,10 +3032,14 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                   context.pushNamed(
                                     'AddServices',
                                     queryParams: {
-                                      'isBuyer':
-                                          serializeParam(true, ParamType.bool),
-                                      'isSeller':
-                                          serializeParam(false, ParamType.bool),
+                                      'isBuyer': serializeParam(
+                                        true,
+                                        ParamType.bool,
+                                      ),
+                                      'isSeller': serializeParam(
+                                        false,
+                                        ParamType.bool,
+                                      ),
                                     }.withoutNulls,
                                   );
                                 },
@@ -2903,12 +3050,11 @@ class _BuyerIntakeStep1WidgetState extends State<BuyerIntakeStep1Widget>
                                   color: FlutterFlowTheme.of(context)
                                       .tertiaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .title2
+                                      .title3
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Colors.white,
-                                        fontSize: 28,
-                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Nunito',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(

@@ -80,7 +80,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                   height: 50,
                                   child: SpinKitChasingDots(
                                     color: Color(0xFFD9180E),
-                                    size: 0,
+                                    size: 50,
                                   ),
                                 ),
                               );
@@ -114,11 +114,12 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                                 'PropertyDetails',
                                                 queryParams: {
                                                   'address': serializeParam(
-                                                      getJsonField(
-                                                        unparsedAddressItem,
-                                                        r'''$..UnparsedAddress''',
-                                                      ).toString(),
-                                                      ParamType.String),
+                                                    getJsonField(
+                                                      unparsedAddressItem,
+                                                      r'''$..UnparsedAddress''',
+                                                    ).toString(),
+                                                    ParamType.String,
+                                                  ),
                                                 }.withoutNulls,
                                               );
                                             },
@@ -191,7 +192,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                   height: 50,
                                   child: SpinKitChasingDots(
                                     color: Color(0xFFD9180E),
-                                    size: 0,
+                                    size: 50,
                                   ),
                                 ),
                               );
@@ -223,11 +224,12 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                               'PropertyDetails',
                                               queryParams: {
                                                 'address': serializeParam(
-                                                    getJsonField(
-                                                      listingIdItem,
-                                                      r'''$..UnparsedAddress''',
-                                                    ).toString(),
-                                                    ParamType.String),
+                                                  getJsonField(
+                                                    listingIdItem,
+                                                    r'''$..UnparsedAddress''',
+                                                  ).toString(),
+                                                  ParamType.String,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },

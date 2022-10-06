@@ -60,7 +60,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFFFAFAFA),
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -91,7 +91,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           maxWidth: 500,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color(0xFFFAFAFA),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Form(
@@ -156,21 +156,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -178,7 +178,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedErrorBorder:
                                                 OutlineInputBorder(
@@ -187,8 +187,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -219,21 +223,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -241,7 +245,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedErrorBorder:
                                                 OutlineInputBorder(
@@ -250,8 +254,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -297,21 +305,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -319,7 +327,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedErrorBorder:
                                                 OutlineInputBorder(
@@ -328,8 +336,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -369,21 +381,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -391,7 +403,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedErrorBorder:
                                                 OutlineInputBorder(
@@ -400,8 +412,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                             suffixIcon: InkWell(
                                               onTap: () => setState(
                                                 () => passwordFieldVisibility =
@@ -462,21 +478,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .gray200,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -484,7 +500,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedErrorBorder:
                                                 OutlineInputBorder(
@@ -493,8 +509,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(10),
                                             ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                             suffixIcon: InkWell(
                                               onTap: () => setState(
                                                 () => confirmPasswordVisibility =

@@ -17,7 +17,9 @@ class EditSettingsWidget extends StatefulWidget {
 }
 
 class _EditSettingsWidgetState extends State<EditSettingsWidget> {
+  bool isMediaUploading = false;
   String uploadedFileUrl = '';
+
   TextEditingController? textController1;
   TextEditingController? textController2;
   bool? switchListTileValue;
@@ -45,12 +47,13 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
           )
               ? AppBar(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Color(0xFFFAFAFA),
                   automaticallyImplyLeading: false,
                   leading: FlutterFlowIconButton(
                     borderColor: Colors.transparent,
@@ -77,12 +80,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                       ))
                         Text(
                           'Edit Profile',
-                          style: FlutterFlowTheme.of(context).title2.override(
-                                fontFamily: 'Outfit',
-                                color: Color(0xFF090F13),
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style: FlutterFlowTheme.of(context).title2,
                         ),
                       if (responsiveVisibility(
                         context: context,
@@ -106,7 +104,6 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -115,7 +112,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 1,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: Color(0xFFFAFAFA),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
@@ -139,7 +136,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 1,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0xFFFAFAFA),
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 5,
@@ -243,7 +240,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 20, 0, 0),
+                                            0, 30, 0, 10),
                                         child: AuthUserStreamWidget(
                                           child: Container(
                                             width: 80,
@@ -274,35 +271,39 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            showUploadMessage(
-                                              context,
-                                              'Uploading file...',
-                                              showLoading: true,
-                                            );
-                                            final downloadUrls =
-                                                (await Future.wait(selectedMedia
-                                                        .map((m) async =>
-                                                            await uploadData(
-                                                                m.storagePath,
-                                                                m.bytes))))
-                                                    .where((u) => u != null)
-                                                    .map((u) => u!)
-                                                    .toList();
-                                            ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
+                                            setState(
+                                                () => isMediaUploading = true);
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
+                                              );
+                                              downloadUrls = (await Future.wait(
+                                                selectedMedia.map(
+                                                  (m) async => await uploadData(
+                                                      m.storagePath, m.bytes),
+                                                ),
+                                              ))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
+                                            } finally {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              isMediaUploading = false;
+                                            }
                                             if (downloadUrls.length ==
                                                 selectedMedia.length) {
                                               setState(() => uploadedFileUrl =
                                                   downloadUrls.first);
                                               showUploadMessage(
-                                                context,
-                                                'Success!',
-                                              );
+                                                  context, 'Success!');
                                             } else {
-                                              showUploadMessage(
-                                                context,
-                                                'Failed to upload media',
-                                              );
+                                              setState(() {});
+                                              showUploadMessage(context,
+                                                  'Failed to upload media');
                                               return;
                                             }
                                           }
@@ -311,7 +312,8 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                         options: FFButtonOptions(
                                           width: 130,
                                           height: 40,
-                                          color: Color(0xFFF1F4F8),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1
@@ -323,7 +325,8 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                                         FontWeight.normal,
                                                   ),
                                           borderSide: BorderSide(
-                                            color: Colors.transparent,
+                                            color: FlutterFlowTheme.of(context)
+                                                .gray200,
                                             width: 1,
                                           ),
                                         ),
@@ -348,83 +351,105 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Expanded(
-                                                  child: TextFormField(
-                                                    controller: textController1,
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelText:
-                                                          'Email Address',
-                                                      hintStyle:
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10, 10, 10, 0),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          textController1,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            'Email Address',
+                                                        hintStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lexend Deca',
+                                                                  color: Color(
+                                                                      0xFF95A1AC),
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .gray200,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .gray200,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBackground,
+                                                      ),
+                                                      style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText2
+                                                              .bodyText1
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF95A1AC),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .normal,
                                                               ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFF1F4F8),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFF1F4F8),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF090F13),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
                                                   ),
                                                 ),
                                               ],
@@ -438,141 +463,171 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Expanded(
-                                                  child: TextFormField(
-                                                    controller: textController2,
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Your Name',
-                                                      hintStyle:
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10, 10, 10, 0),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          textController2,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: 'Your Name',
+                                                        hintStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lexend Deca',
+                                                                  color: Color(
+                                                                      0xFF95A1AC),
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .gray200,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .gray200,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBackground,
+                                                      ),
+                                                      style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText2
+                                                              .bodyText1
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF95A1AC),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .normal,
                                                               ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFF1F4F8),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFF1F4F8),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF090F13),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SwitchListTile.adaptive(
-                                            value: switchListTileValue ??= true,
-                                            onChanged: (newValue) => setState(
-                                                () => switchListTileValue =
-                                                    newValue),
-                                            title: Text(
-                                              'Recieve Notifications',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xFF090F13),
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10, 10, 10, 0),
+                                            child: SwitchListTile.adaptive(
+                                              value: switchListTileValue ??=
+                                                  true,
+                                              onChanged: (newValue) => setState(
+                                                  () => switchListTileValue =
+                                                      newValue),
+                                              title: Text(
+                                                'Recieve Notifications',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color: Color(0xFF090F13),
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                              subtitle: Text(
+                                                'Turn on notifications.',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color: Color(0xFF95A1AC),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                              ),
+                                              tileColor: Colors.white,
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textColor,
+                                              activeTrackColor:
+                                                  Color(0x8D4B39EF),
+                                              dense: false,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .trailing,
                                             ),
-                                            subtitle: Text(
-                                              'Turn on notifications.',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xFF95A1AC),
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                            ),
-                                            tileColor: Colors.white,
-                                            activeColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .textColor,
-                                            activeTrackColor: Color(0x8D4B39EF),
-                                            dense: false,
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .trailing,
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 12, 0, 12),
+                                          0, 20, 0, 12),
                                       child: FFButtonWidget(
                                         onPressed: () {
                                           print('Button_Secondary pressed ...');
                                         },
                                         text: 'Save Changes',
                                         options: FFButtonOptions(
-                                          width: 230,
-                                          height: 50,
+                                          width: 220,
+                                          height: 45,
                                           color: FlutterFlowTheme.of(context)
                                               .background,
                                           textStyle:

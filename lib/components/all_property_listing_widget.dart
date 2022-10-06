@@ -38,7 +38,7 @@ class _AllPropertyListingWidgetState extends State<AllPropertyListingWidget> {
               height: 50,
               child: SpinKitChasingDots(
                 color: Color(0xFFD9180E),
-                size: 0,
+                size: 50,
               ),
             ),
           );

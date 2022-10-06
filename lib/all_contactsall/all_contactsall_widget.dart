@@ -31,6 +31,7 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -61,7 +62,6 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -77,7 +77,7 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
                           width: double.infinity,
                           height: MediaQuery.of(context).size.height * 0.9,
                           decoration: BoxDecoration(
-                            color: Color(0xFF090F13),
+                            color: Color(0xFF111111),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -99,34 +99,38 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              FFButtonWidget(
-                                                onPressed: () {
-                                                  print('Button pressed ...');
-                                                },
-                                                text: 'Next Step',
-                                                options: FFButtonOptions(
-                                                  width: 300,
-                                                  height: 70,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .black600,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .title2
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: Colors.white,
-                                                        fontSize: 28,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  elevation: 0,
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1,
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 20, 0, 20),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: 'Next Step',
+                                                  options: FFButtonOptions(
+                                                    width: 300,
+                                                    height: 50,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .tertiaryColor,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .title3
+                                                        .override(
+                                                          fontFamily: 'Nunito',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryColor,
+                                                        ),
+                                                    elevation: 0,
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
                                                 ),
                                               ),
                                             ],

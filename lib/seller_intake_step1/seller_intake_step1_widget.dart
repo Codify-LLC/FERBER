@@ -12,6 +12,8 @@ import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,6 +38,375 @@ class SellerIntakeStep1Widget extends StatefulWidget {
 
 class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'dropDownOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation4': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation5': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation6': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation7': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation8': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation9': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation10': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation11': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation12': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation13': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 0,
+        ),
+      ],
+    ),
+  };
+  bool isMediaUploading1 = false;
+  String uploadedFileUrl1 = '';
+
   DateTime? datePicked1;
   TextEditingController? listDateActiveDateController;
   List<String>? choiceChipsValues;
@@ -50,242 +421,42 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
   TextEditingController? cooperatingBrokerCommissionController1;
   TextEditingController? cooperatingBrokerCommissionController2;
   TextEditingController? notesController;
-  String uploadedFileUrl1 = '';
+  bool isMediaUploading2 = false;
   String uploadedFileUrl2 = '';
+
+  bool isMediaUploading3 = false;
   String uploadedFileUrl3 = '';
+
   String uploadedSignatureUrl = '';
   late SignatureController signatureController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final animationsMap = {
-    'dropDownOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation5': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation6': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation7': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation8': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation9': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation10': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation11': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation12': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'rowOnPageLoadAnimation13': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 200,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
     addressTextFielController = TextEditingController();
     listingPriceTextFieldController1 = TextEditingController();
     listingPriceTextFieldController2 = TextEditingController();
-    listDateActiveDateController =
-        TextEditingController(text: dateTimeFormat('yMd', datePicked1));
-    listingExpirationDateController =
-        TextEditingController(text: dateTimeFormat('yMd', datePicked2));
+    listDateActiveDateController = TextEditingController(
+        text: dateTimeFormat(
+      'yMd',
+      datePicked1,
+      locale: FFLocalizations.of(context).languageCode,
+    ));
+    listingExpirationDateController = TextEditingController(
+        text: dateTimeFormat(
+      'yMd',
+      datePicked2,
+      locale: FFLocalizations.of(context).languageCode,
+    ));
     totalCommissionController = TextEditingController();
     listingAgentCommissionController = TextEditingController();
     cooperatingBrokerCommissionController1 = TextEditingController();
@@ -321,6 +492,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: responsiveVisibility(
             context: context,
             desktop: false,
@@ -383,7 +555,6 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                   elevation: 0,
                 )
               : null,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -421,7 +592,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.8,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0xFFFAFAFA),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(16),
                                   bottomRight: Radius.circular(16),
@@ -564,19 +735,21 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                             color: Color(0xFF57636C),
                                             size: 15,
                                           ),
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
                                           elevation: 2,
-                                          borderColor: Color(0xFFF1F4F8),
-                                          borderWidth: 2,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .gray200,
+                                          borderWidth: 1,
                                           borderRadius: 8,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20, 20, 12, 20),
                                           hidesUnderline: true,
-                                        ).animated([
-                                          animationsMap[
-                                              'dropDownOnPageLoadAnimation']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'dropDownOnPageLoadAnimation']!),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -606,7 +779,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryColor,
-                                                    width: 2,
+                                                    width: 1,
                                                   ),
                                                 ),
                                                 child: Row(
@@ -730,10 +903,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                               ),
                                             ),
                                           ],
-                                        ).animated([
-                                          animationsMap[
-                                              'rowOnPageLoadAnimation1']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'rowOnPageLoadAnimation1']!),
                                       ),
                                       if (statusDropDownValue == 'Pre-listing')
                                         Padding(
@@ -767,7 +938,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -891,10 +1062,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation2']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation2']!),
                                         ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -945,11 +1114,6 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                         MainAxisSize.max,
                                                     children: [
                                                       FlutterFlowChoiceChips(
-                                                        initiallySelected:
-                                                            choiceChipsValues !=
-                                                                    null
-                                                                ? choiceChipsValues
-                                                                : [],
                                                         options: [
                                                           ChipData('FHA'),
                                                           ChipData('VA'),
@@ -1065,7 +1229,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -1216,7 +1380,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -1279,17 +1443,15 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     },
                                                     child: Icon(
                                                       Icons.calendar_today,
-                                                      color: Colors.black,
+                                                      color: Color(0xFF111111),
                                                       size: 24,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation3']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation3']!),
                                         ),
                                       if (statusDropDownValue == 'Pre-listing')
                                         Padding(
@@ -1339,7 +1501,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -1490,7 +1652,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -1553,17 +1715,15 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     },
                                                     child: Icon(
                                                       Icons.calendar_today,
-                                                      color: Colors.black,
+                                                      color: Color(0xFF111111),
                                                       size: 24,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation4']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation4']!),
                                         ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1579,17 +1739,19 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                   queryParams: {
                                                     'participantid':
                                                         serializeParam(
-                                                            widget
-                                                                .participantsID,
-                                                            ParamType.int),
+                                                      widget.participantsID,
+                                                      ParamType.int,
+                                                    ),
                                                     'contecID': serializeParam(
-                                                        random_data
-                                                            .randomInteger(
-                                                                999, 999999),
-                                                        ParamType.int),
+                                                      random_data.randomInteger(
+                                                          999, 999999),
+                                                      ParamType.int,
+                                                    ),
                                                     'isParticipent':
-                                                        serializeParam(true,
-                                                            ParamType.bool),
+                                                        serializeParam(
+                                                      true,
+                                                      ParamType.bool,
+                                                    ),
                                                   }.withoutNulls,
                                                 );
                                               },
@@ -1617,8 +1779,10 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                               FontWeight.w500,
                                                         ),
                                                 borderSide: BorderSide(
-                                                  color: Color(0xFFF1F4F8),
-                                                  width: 2,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                  width: 1,
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(8),
@@ -1660,8 +1824,11 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                               FontWeight.w500,
                                                         ),
                                                     borderSide: BorderSide(
-                                                      color: Color(0xFFF1F4F8),
-                                                      width: 2,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryColor,
+                                                      width: 1,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -1721,7 +1888,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -1882,7 +2049,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -1911,17 +2078,15 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     },
                                                     child: Icon(
                                                       Icons.info_rounded,
-                                                      color: Colors.black,
+                                                      color: Color(0xFF111111),
                                                       size: 24,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation5']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation5']!),
                                         ),
                                       if (statusDropDownValue == 'Pre-listing')
                                         Padding(
@@ -1971,7 +2136,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -2132,7 +2297,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -2161,20 +2326,15 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     },
                                                     child: Icon(
                                                       Icons.info_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
+                                                      color: Color(0xFF111111),
                                                       size: 24,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation6']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation6']!),
                                         ),
                                       if (statusDropDownValue == 'Pre-listing')
                                         Padding(
@@ -2224,7 +2384,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -2385,7 +2545,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -2421,10 +2581,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation7']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation7']!),
                                         ),
                                       if (statusDropDownValue == 'Pre-listing')
                                         Padding(
@@ -2474,7 +2632,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Row(
@@ -2635,7 +2793,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: InkWell(
@@ -2664,17 +2822,15 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     },
                                                     child: Icon(
                                                       Icons.info_rounded,
-                                                      color: Colors.black,
+                                                      color: Color(0xFF111111),
                                                       size: 24,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation8']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation8']!),
                                         ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -2704,7 +2860,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryColor,
-                                                    width: 2,
+                                                    width: 1,
                                                   ),
                                                 ),
                                                 child: Row(
@@ -2829,10 +2985,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                               ),
                                             ),
                                           ],
-                                        ).animated([
-                                          animationsMap[
-                                              'rowOnPageLoadAnimation9']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'rowOnPageLoadAnimation9']!),
                                       ),
                                       if (statusDropDownValue != 'Pre-listing')
                                         Padding(
@@ -2866,7 +3020,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -2918,31 +3072,41 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                                 ]);
                                                             if (selectedFile !=
                                                                 null) {
-                                                              showUploadMessage(
-                                                                context,
-                                                                'Uploading file...',
-                                                                showLoading:
-                                                                    true,
-                                                              );
-                                                              final downloadUrl =
-                                                                  await uploadData(
-                                                                      selectedFile
-                                                                          .storagePath,
-                                                                      selectedFile
-                                                                          .bytes);
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .hideCurrentSnackBar();
+                                                              setState(() =>
+                                                                  isMediaUploading1 =
+                                                                      true);
+                                                              String?
+                                                                  downloadUrl;
+                                                              try {
+                                                                showUploadMessage(
+                                                                  context,
+                                                                  'Uploading file...',
+                                                                  showLoading:
+                                                                      true,
+                                                                );
+                                                                downloadUrl = await uploadData(
+                                                                    selectedFile
+                                                                        .storagePath,
+                                                                    selectedFile
+                                                                        .bytes);
+                                                              } finally {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .hideCurrentSnackBar();
+                                                                isMediaUploading1 =
+                                                                    false;
+                                                              }
                                                               if (downloadUrl !=
                                                                   null) {
                                                                 setState(() =>
                                                                     uploadedFileUrl1 =
-                                                                        downloadUrl);
+                                                                        downloadUrl!);
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Success!',
                                                                 );
                                                               } else {
+                                                                setState(() {});
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Failed to upload file',
@@ -3000,10 +3164,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation10']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation10']!),
                                         ),
                                       if (statusDropDownValue ==
                                           'Executed Contract')
@@ -3038,7 +3200,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -3090,31 +3252,41 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                                 ]);
                                                             if (selectedFile !=
                                                                 null) {
-                                                              showUploadMessage(
-                                                                context,
-                                                                'Uploading file...',
-                                                                showLoading:
-                                                                    true,
-                                                              );
-                                                              final downloadUrl =
-                                                                  await uploadData(
-                                                                      selectedFile
-                                                                          .storagePath,
-                                                                      selectedFile
-                                                                          .bytes);
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .hideCurrentSnackBar();
+                                                              setState(() =>
+                                                                  isMediaUploading2 =
+                                                                      true);
+                                                              String?
+                                                                  downloadUrl;
+                                                              try {
+                                                                showUploadMessage(
+                                                                  context,
+                                                                  'Uploading file...',
+                                                                  showLoading:
+                                                                      true,
+                                                                );
+                                                                downloadUrl = await uploadData(
+                                                                    selectedFile
+                                                                        .storagePath,
+                                                                    selectedFile
+                                                                        .bytes);
+                                                              } finally {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .hideCurrentSnackBar();
+                                                                isMediaUploading2 =
+                                                                    false;
+                                                              }
                                                               if (downloadUrl !=
                                                                   null) {
                                                                 setState(() =>
                                                                     uploadedFileUrl2 =
-                                                                        downloadUrl);
+                                                                        downloadUrl!);
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Success!',
                                                                 );
                                                               } else {
+                                                                setState(() {});
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Failed to upload file',
@@ -3172,10 +3344,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation11']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation11']!),
                                         ),
                                       if (statusDropDownValue ==
                                           'Executed Contract')
@@ -3210,7 +3380,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -3262,31 +3432,41 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                                 ]);
                                                             if (selectedFile !=
                                                                 null) {
-                                                              showUploadMessage(
-                                                                context,
-                                                                'Uploading file...',
-                                                                showLoading:
-                                                                    true,
-                                                              );
-                                                              final downloadUrl =
-                                                                  await uploadData(
-                                                                      selectedFile
-                                                                          .storagePath,
-                                                                      selectedFile
-                                                                          .bytes);
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .hideCurrentSnackBar();
+                                                              setState(() =>
+                                                                  isMediaUploading3 =
+                                                                      true);
+                                                              String?
+                                                                  downloadUrl;
+                                                              try {
+                                                                showUploadMessage(
+                                                                  context,
+                                                                  'Uploading file...',
+                                                                  showLoading:
+                                                                      true,
+                                                                );
+                                                                downloadUrl = await uploadData(
+                                                                    selectedFile
+                                                                        .storagePath,
+                                                                    selectedFile
+                                                                        .bytes);
+                                                              } finally {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .hideCurrentSnackBar();
+                                                                isMediaUploading3 =
+                                                                    false;
+                                                              }
                                                               if (downloadUrl !=
                                                                   null) {
                                                                 setState(() =>
                                                                     uploadedFileUrl3 =
-                                                                        downloadUrl);
+                                                                        downloadUrl!);
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Success!',
                                                                 );
                                                               } else {
+                                                                setState(() {});
                                                                 showUploadMessage(
                                                                   context,
                                                                   'Failed to upload file',
@@ -3344,10 +3524,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation12']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation12']!),
                                         ),
                                       if (statusDropDownValue ==
                                           'Executed Contract')
@@ -3382,7 +3560,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryColor,
-                                                      width: 2,
+                                                      width: 1,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -3449,7 +3627,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryColor,
+                                                                    .gray200,
                                                             width: 330,
                                                             height: 150,
                                                           ),
@@ -3523,9 +3701,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                                     FFButtonOptions(
                                                                   width: 330,
                                                                   height: 40,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
+                                                                  color: Color(
+                                                                      0xFF111111),
                                                                   textStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle2
@@ -3568,10 +3745,8 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                                 ),
                                               ),
                                             ],
-                                          ).animated([
-                                            animationsMap[
-                                                'rowOnPageLoadAnimation13']!
-                                          ]),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'rowOnPageLoadAnimation13']!),
                                         ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -3588,7 +3763,7 @@ class _SellerIntakeStep1WidgetState extends State<SellerIntakeStep1Widget>
                                             children: [
                                               Icon(
                                                 Icons.assignment_sharp,
-                                                color: Colors.black,
+                                                color: Color(0xFF111111),
                                                 size: 24,
                                               ),
                                               Padding(

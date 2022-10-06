@@ -1,10 +1,12 @@
-import '../components/people_screen_widget.dart';
+import '../components/documents_screen_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,67 +39,100 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
   final animationsMap = {
     'rowOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 50),
-        scale: 0.9,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 50),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.9,
+          end: 1,
+        ),
+      ],
     ),
     'rowOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 50),
-        scale: 0.9,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 50),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.9,
+          end: 1,
+        ),
+      ],
     ),
     'rowOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 50),
-        scale: 0.9,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 50),
+          end: Offset(0, 0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.9,
+          end: 1,
+        ),
+      ],
     ),
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 700,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 120),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 700.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 700.ms,
+          begin: Offset(0, 120),
+          end: Offset(0, 0),
+        ),
+      ],
     ),
   };
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -105,9 +140,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -259,10 +295,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                             ),
                                           ),
                                         ],
-                                      ).animated([
-                                        animationsMap[
-                                            'rowOnPageLoadAnimation1']!
-                                      ]),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'rowOnPageLoadAnimation1']!),
                                     ),
                                     Align(
                                       alignment: AlignmentDirectional(1, 0),
@@ -312,10 +346,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                               ),
                                             ),
                                           ],
-                                        ).animated([
-                                          animationsMap[
-                                              'rowOnPageLoadAnimation2']!
-                                        ]),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'rowOnPageLoadAnimation2']!),
                                       ),
                                     ),
                                     Padding(
@@ -352,10 +384,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                             ),
                                           ),
                                         ],
-                                      ).animated([
-                                        animationsMap[
-                                            'rowOnPageLoadAnimation3']!
-                                      ]),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'rowOnPageLoadAnimation3']!),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -446,7 +476,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                       .height *
                                                                   1,
                                                               child:
-                                                                  PeopleScreenWidget(),
+                                                                  DocumentsScreenWidget(),
                                                             ),
                                                           );
                                                         },
@@ -554,7 +584,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                       .height *
                                                                   1,
                                                               child:
-                                                                  PeopleScreenWidget(
+                                                                  DocumentsScreenWidget(
                                                                 record: widget
                                                                     .transactionsRecord,
                                                               ),
@@ -666,7 +696,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                       .height *
                                                                   1,
                                                               child:
-                                                                  PeopleScreenWidget(),
+                                                                  DocumentsScreenWidget(),
                                                             ),
                                                           );
                                                         },
@@ -1269,7 +1299,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                         ],
                       ),
                     ),
-                  ).animated([animationsMap['containerOnPageLoadAnimation']!]),
+                  ).animateOnPageLoad(
+                      animationsMap['containerOnPageLoadAnimation']!),
                 ],
               ),
             ),

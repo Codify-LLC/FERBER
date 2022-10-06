@@ -4,6 +4,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,33 +18,37 @@ class AllContactsWidget extends StatefulWidget {
 
 class _AllContactsWidgetState extends State<AllContactsWidget>
     with TickerProviderStateMixin {
-  TextEditingController? textController;
-  final formKey = GlobalKey<FormState>();
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      duration: 400,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 100),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 400.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 400.ms,
+          begin: Offset(0, 100),
+          end: Offset(0, 0),
+        ),
+      ],
     ),
   };
+  TextEditingController? textController;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
       this,
     );
 
@@ -480,10 +486,8 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                ).animated([
-                                                  animationsMap[
-                                                      'containerOnPageLoadAnimation']!
-                                                ]),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'containerOnPageLoadAnimation']!),
                                               ),
                                             ],
                                           ),
