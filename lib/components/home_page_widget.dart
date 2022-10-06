@@ -7,7 +7,6 @@ import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -122,31 +121,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           showTraffic: false,
                           centerMapOnMarkerTap: true,
                         ),
-                        if (responsiveVisibility(
-                          context: context,
-                          phone: false,
-                          tablet: false,
-                          tabletLandscape: false,
-                          desktop: false,
-                        ))
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 1,
-                            child: custom_widgets.customMap(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 1,
-                              addresses: (GetTransactionsCall.addressesList(
-                                formMainGetTransactionsResponse.jsonBody,
-                              ) as List)
-                                  .map<String>((s) => s.toString())
-                                  .toList(),
-                              allowInteraction: true,
-                              allowZoom: true,
-                              showZoomControls: true,
-                              showLocation: true,
-                              centerMapOnMarkerTap: false,
-                            ),
-                          ),
                         Align(
                           alignment: AlignmentDirectional(0, -1),
                           child: Column(
@@ -873,320 +847,365 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 MediaQuery.of(context).size.height * 0.25,
                           ),
                           decoration: BoxDecoration(),
-                          child: Builder(
-                            builder: (context) {
-                              final record =
-                                  searchValurTextFieldAddressController!.text !=
-                                              null &&
-                                          searchValurTextFieldAddressController!
-                                                  .text !=
-                                              ''
-                                      ? filteredRecords
-                                      : GetTransactionsCall.recordsList(
-                                          formMainGetTransactionsResponse
-                                              .jsonBody,
-                                        )
-                                          ?.map((e) => e)
-                                          .toList()
-                                          .take(100)
-                                          .toList();
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: record.length,
-                                itemBuilder: (context, recordIndex) {
-                                  final recordItem = record[recordIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 12, 12, 12),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'PropertyDetails',
-                                          queryParams: {
-                                            'address': serializeParam(
-                                              getJsonField(
-                                                recordItem,
-                                                r'''$.fields['🏡 Address']''',
-                                              ).toString(),
-                                              ParamType.String,
-                                            ),
-                                            'status': serializeParam(
-                                              getJsonField(
-                                                recordItem,
-                                                r'''$.fields['⚡❗Status']''',
-                                              ).toString(),
-                                              ParamType.String,
-                                            ),
-                                            'transactionsRecord':
-                                                serializeParam(
-                                              recordItem,
-                                              ParamType.JSON,
-                                            ),
-                                            'imagePath': serializeParam(
-                                              getJsonField(
-                                                recordItem,
-                                                r'''$.fields['Property Image'][0].url''',
+                          child: Visibility(
+                            visible: getJsonField(
+                                  formMainGetTransactionsResponse.jsonBody,
+                                  r'''$.records''',
+                                ) !=
+                                null,
+                            child: Builder(
+                              builder: (context) {
+                                final record =
+                                    searchValurTextFieldAddressController!
+                                                    .text !=
+                                                null &&
+                                            searchValurTextFieldAddressController!
+                                                    .text !=
+                                                ''
+                                        ? filteredRecords
+                                        : GetTransactionsCall.recordsList(
+                                            formMainGetTransactionsResponse
+                                                .jsonBody,
+                                          )
+                                            ?.map((e) => e)
+                                            .toList()
+                                            .take(100)
+                                            .toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: record.length,
+                                  itemBuilder: (context, recordIndex) {
+                                    final recordItem = record[recordIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 12, 12, 12),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'PropertyDetails',
+                                            queryParams: {
+                                              'address': serializeParam(
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['🏡 Address']''',
+                                                ).toString(),
+                                                ParamType.String,
                                               ),
-                                              ParamType.String,
-                                            ),
-                                            'purchasePrice': serializeParam(
-                                              getJsonField(
+                                              'status': serializeParam(
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['⚡❗Status']''',
+                                                ).toString(),
+                                                ParamType.String,
+                                              ),
+                                              'transactionsRecord':
+                                                  serializeParam(
                                                 recordItem,
-                                                r'''$.fields['💵 Purchase Price']''',
-                                              ).toString(),
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 100,
-                                          constraints: BoxConstraints(
-                                            maxWidth: 350,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    getJsonField(
-                                                      recordItem,
-                                                      r'''$.fields['Property Image']['0'].url''',
-                                                    ),
-                                                    'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg',
-                                                  ),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.45,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      1,
-                                                  fit: BoxFit.cover,
+                                                ParamType.JSON,
+                                              ),
+                                              'imagePath': serializeParam(
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['Property Image'][0].url''',
                                                 ),
+                                                ParamType.String,
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
+                                              'purchasePrice': serializeParam(
+                                                getJsonField(
+                                                  recordItem,
+                                                  r'''$.fields['💵 Purchase Price']''',
+                                                ).toString(),
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 100,
+                                            constraints: BoxConstraints(
+                                              maxWidth: 350,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Expanded(
+                                                  child: Hero(
+                                                    tag: valueOrDefault<String>(
+                                                      getJsonField(
+                                                        recordItem,
+                                                        r'''$.fields['Property Image']['0'].url''' +
+                                                            '$recordIndex',
+                                                      ),
+                                                      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                    ),
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: Image.network(
+                                                      valueOrDefault<String>(
+                                                        getJsonField(
+                                                          recordItem,
+                                                          r'''$.fields['Property Image']['0'].url''',
+                                                        ),
+                                                        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                      ),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.45,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              1,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                8, 8, 8, 8),
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              getJsonField(
-                                                                recordItem,
-                                                                r'''$.fields['🏡 Address']''',
-                                                              ).toString(),
-                                                              'Unknown',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .subtitle1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              if ('${getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString()}' ==
-                                                                  'Active')
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      recordItem,
-                                                                      r'''$.fields['⚡❗Status']''',
-                                                                    ).toString(),
-                                                                    ' Unknown',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        color: Color(
-                                                                            0xFF5CE430),
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                              if ('${getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString()}' ==
-                                                                  'Pending')
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      recordItem,
-                                                                      r'''$.fields['⚡❗Status']''',
-                                                                    ).toString(),
-                                                                    ' Unknown',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        color: Color(
-                                                                            0xFFDF723F),
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                              if ('${getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['⚡❗Status']''',
-                                                                  ).toString()}' ==
-                                                                  'Black')
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      recordItem,
-                                                                      r'''$.fields['⚡❗Status']''',
-                                                                    ).toString(),
-                                                                    'Unknown',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .customColor4,
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        4,
-                                                                        4,
-                                                                        4),
-                                                            child: Container(
-                                                              width: 30,
-                                                              height: 30,
-                                                              clipBehavior: Clip
-                                                                  .antiAlias,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8, 8, 8, 8),
+                                                      child:
+                                                          SingleChildScrollView(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            if (getJsonField(
+                                                                  recordItem,
+                                                                  r'''$.fields['🏡 Address']''',
+                                                                ) !=
+                                                                null)
+                                                              Text(
+                                                                getJsonField(
+                                                                  recordItem,
+                                                                  r'''$.fields['🏡 Address']''',
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
                                                               ),
-                                                              child:
-                                                                  Image.network(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  getJsonField(
-                                                                    recordItem,
-                                                                    r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                            Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                if (('${getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ).toString()}' ==
+                                                                        'Active') &&
+                                                                    (getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ) !=
+                                                                        null))
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['⚡❗Status']''',
+                                                                      ).toString(),
+                                                                      ' Unknown',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Nunito',
+                                                                          color:
+                                                                              Color(0xFF5CE430),
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
                                                                   ),
-                                                                  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
+                                                                if (('${getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ).toString()}' ==
+                                                                        'Pending') &&
+                                                                    (getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ) !=
+                                                                        null))
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['⚡❗Status']''',
+                                                                      ).toString(),
+                                                                      ' Unknown',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Nunito',
+                                                                          color:
+                                                                              Color(0xFFDF723F),
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                  ),
+                                                                if (('${getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ).toString()}' ==
+                                                                        'Black') &&
+                                                                    (getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        ) !=
+                                                                        null))
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['⚡❗Status']''',
+                                                                      ).toString(),
+                                                                      'Unknown',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Nunito',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).customColor4,
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                  ),
+                                                              ],
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          4,
+                                                                          4,
+                                                                          4),
+                                                              child: Container(
+                                                                width: 30,
+                                                                height: 30,
+                                                                clipBehavior: Clip
+                                                                    .antiAlias,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
                                                                 ),
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                                child: Image
+                                                                    .network(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      recordItem,
+                                                                      r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                                    ),
+                                                                    'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
+                                                                  ),
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              '\$ ${getJsonField(
-                                                                recordItem,
-                                                                r'''$.fields['💵 Purchase Price']''',
-                                                              ).toString()}',
-                                                              '\$ Unknown',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                        ],
+                                                            if (getJsonField(
+                                                                  recordItem,
+                                                                  r'''$.fields['💵 Purchase Price']''',
+                                                                ) !=
+                                                                null)
+                                                              Text(
+                                                                '\$ ${getJsonField(
+                                                                  recordItem,
+                                                                  r'''$.fields['💵 Purchase Price']''',
+                                                                ).toString()}',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],

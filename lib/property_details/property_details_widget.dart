@@ -168,11 +168,15 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                 children: [
                   Align(
                     alignment: AlignmentDirectional(0, -1),
-                    child: Image.network(
-                      widget.imagePath!,
-                      width: double.infinity,
-                      height: 500,
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag: widget.imagePath!,
+                      transitionOnUserGestures: true,
+                      child: Image.network(
+                        widget.imagePath!,
+                        width: double.infinity,
+                        height: 500,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Align(
