@@ -32,36 +32,31 @@ class _AllContactsallWidgetState extends State<AllContactsallWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          appBar: responsiveVisibility(
-            context: context,
-            desktop: false,
-          )
-              ? AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  leading: FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30,
-                    borderWidth: 1,
-                    buttonSize: 58,
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 28,
-                    ),
-                    onPressed: () async {
-                      context.pop();
-                    },
-                  ),
-                  title: Text(
-                    'Contacts',
-                    style: FlutterFlowTheme.of(context).title2,
-                  ),
-                  actions: [],
-                  centerTitle: true,
-                  elevation: 0,
-                )
-              : null,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30,
+              borderWidth: 1,
+              buttonSize: 58,
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: FlutterFlowTheme.of(context).primaryColor,
+                size: 28,
+              ),
+              onPressed: () async {
+                context.pop();
+              },
+            ),
+            title: Text(
+              'Contacts',
+              style: FlutterFlowTheme.of(context).title2,
+            ),
+            actions: [],
+            centerTitle: true,
+            elevation: 0,
+          ),
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),

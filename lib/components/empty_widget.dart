@@ -30,9 +30,10 @@ class _EmptyWidgetState extends State<EmptyWidget> {
         children: [
           Lottie.asset(
             'assets/lottie_animations/empty.json',
-            width: 150,
-            height: 130,
+            width: 400,
+            height: 400,
             fit: BoxFit.cover,
+            frameRate: FrameRate(60),
             animate: true,
           ),
         ],

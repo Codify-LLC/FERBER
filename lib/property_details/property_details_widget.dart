@@ -1,9 +1,12 @@
 import '../components/documents_screen_widget.dart';
+import '../components/empty_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -135,6 +138,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
       ],
     ),
   };
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -158,117 +162,213 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
-          body: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: Stack(
-                alignment: AlignmentDirectional(0, 1),
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0, -1),
-                    child: Hero(
-                      tag: widget.imagePath!,
-                      transitionOnUserGestures: true,
-                      child: Image.network(
-                        widget.imagePath!,
-                        width: double.infinity,
-                        height: 500,
-                        fit: BoxFit.cover,
+          body: NestedScrollView(
+            headerSliverBuilder: (context, _) => [
+              SliverAppBar(
+                collapsedHeight: 56,
+                pinned: false,
+                floating: true,
+                snap: false,
+                backgroundColor: Colors.white,
+                iconTheme: IconThemeData(color: Colors.black),
+                automaticallyImplyLeading: true,
+                leading: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          context.pop();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          color: Colors.black,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(0, -0.87),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x520E151B),
-                                  offset: Offset(0, 2),
-                                )
+                ),
+                actions: [
+                  Visibility(
+                    visible: !isWeb,
+                    child: FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 8,
+                      borderWidth: 1,
+                      buttonSize: 60,
+                      icon: Icon(
+                        Icons.ios_share,
+                        color: Color(0xFF57636C),
+                        size: 30,
+                      ),
+                      onPressed: () async {
+                        await Share.share(
+                            'https://www.ferbertransactions.com/');
+                      },
+                    ),
+                  ),
+                ],
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Stack(
+                    children: [
+                      Builder(
+                        builder: (context) {
+                          final urls = getJsonField(
+                            widget.transactionsRecord,
+                            r'''$..fields['Property Image']''',
+                          ).toList();
+                          if (urls.isEmpty) {
+                            return Center(
+                              child: EmptyWidget(),
+                            );
+                          }
+                          return Container(
+                            width: double.infinity,
+                            height: 500,
+                            child: Stack(
+                              children: [
+                                PageView.builder(
+                                  controller: pageViewController ??=
+                                      PageController(
+                                          initialPage: min(0, urls.length - 1)),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: urls.length,
+                                  itemBuilder: (context, urlsIndex) {
+                                    final urlsItem = urls[urlsIndex];
+                                    return Image.network(
+                                      getJsonField(
+                                        urlsItem,
+                                        r'''$.url''',
+                                      ),
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0, 1),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 35),
+                                    child: smooth_page_indicator
+                                        .SmoothPageIndicator(
+                                      controller: pageViewController ??=
+                                          PageController(
+                                              initialPage:
+                                                  min(0, urls.length - 1)),
+                                      count: urls.length,
+                                      axisDirection: Axis.horizontal,
+                                      onDotClicked: (i) {
+                                        pageViewController!.animateToPage(
+                                          i,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.ease,
+                                        );
+                                      },
+                                      effect: smooth_page_indicator
+                                          .ExpandingDotsEffect(
+                                        expansionFactor: 2,
+                                        spacing: 8,
+                                        radius: 16,
+                                        dotWidth: 16,
+                                        dotHeight: 16,
+                                        dotColor: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        activeDotColor:
+                                            FlutterFlowTheme.of(context)
+                                                .tertiaryColor,
+                                        paintStyle: PaintingStyle.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
-                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8,
-                              borderWidth: 1,
-                              buttonSize: 40,
-                              fillColor: Colors.white,
-                              icon: Icon(
-                                Icons.arrow_back_rounded,
-                                color: Color(0xFF57636C),
-                                size: 20,
-                              ),
-                              onPressed: () async {
-                                context.pop();
-                              },
+                          );
+                        },
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0, 1.01),
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(0),
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
                             ),
                           ),
-                          if (!isWeb)
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8,
-                              borderWidth: 1,
-                              buttonSize: 40,
-                              fillColor: Colors.white,
-                              icon: Icon(
-                                Icons.ios_share,
-                                color: Color(0xFF57636C),
-                                size: 20,
-                              ),
-                              onPressed: () async {
-                                await Share.share(
-                                    'https://www.ferbertransactions.com/');
-                              },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(0),
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
                             ),
-                        ],
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(0),
+                                  bottomRight: Radius.circular(0),
+                                  topLeft: Radius.circular(24),
+                                  topRight: Radius.circular(24),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 110),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(0, 1),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
+                ),
+                bottom: PreferredSize(
+                  preferredSize:
+                      Size.fromHeight(MediaQuery.of(context).size.height * 0.4),
+                  child: Container(),
+                ),
+                centerTitle: true,
+                elevation: 0,
+              )
+            ],
+            body: Builder(
+              builder: (context) {
+                return GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 1,
+                    child: Stack(
+                      alignment: AlignmentDirectional(0, 1.01),
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0, 1),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 20,
+                            child: ClipRRect(
                               child: Container(
                                 width: double.infinity,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.7,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4,
-                                      color: Color(0x320E151B),
-                                      offset: Offset(0, -2),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(0),
-                                    bottomRight: Radius.circular(0),
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16),
-                                  ),
                                 ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -285,17 +385,26 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 5, 0, 0),
-                                            child: Text(
-                                              widget.address!,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: Color(0xFF57636C),
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.8,
+                                              decoration: BoxDecoration(),
+                                              child: Text(
+                                                widget.address!,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color:
+                                                              Color(0xFF57636C),
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -1216,97 +1325,111 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                         ),
                                       ],
                                     ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [],
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF1D2429),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x55000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(0),
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  FFButtonWidget(
+                                    onPressed: () {
+                                      print('Button pressed ...');
+                                    },
+                                    text: 'Virtual Tour',
+                                    options: FFButtonOptions(
+                                      width: 160,
+                                      height: 50,
+                                      color: Color(0xFF1D2429),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      elevation: 0,
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF14181B),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () {
+                                      print('Button pressed ...');
+                                    },
+                                    text: 'Make Offer',
+                                    options: FFButtonOptions(
+                                      width: 160,
+                                      height: 50,
+                                      color: Color(0xFFD9180E),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      elevation: 3,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['containerOnPageLoadAnimation']!),
+                      ],
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 110,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D2429),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x55000000),
-                          offset: Offset(0, 2),
-                        )
-                      ],
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: 'Virtual Tour',
-                            options: FFButtonOptions(
-                              width: 160,
-                              height: 50,
-                              color: Color(0xFF1D2429),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Color(0xFF14181B),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: 'Make Offer',
-                            options: FFButtonOptions(
-                              width: 160,
-                              height: 50,
-                              color: Color(0xFFD9180E),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                              elevation: 3,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation']!),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ));

@@ -355,6 +355,11 @@ class GetTransactionsCall {
         r'''$.records[:].fields['💲 Pre Approval or Proof of Funds (POF)', 'Property Image', '⭐ AS-IS Contract & etc', '📃 Broker Synopsis','📂 Misc Docs','🤵 Agent Image Test1', 'Brokerage']''',
         true,
       );
+  static dynamic images(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['Property Image']..url''',
+        true,
+      );
 }
 
 class ApiPagingParams {

@@ -202,83 +202,73 @@ class _AddContectsAllWidgetState extends State<AddContectsAllWidget>
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Color(0xFFFAFAFA),
-          appBar: responsiveVisibility(
-            context: context,
-            desktop: false,
-          )
-              ? AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  leading: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            context.pop();
-                          },
-                          child: Text(
-                            'Done',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            leading: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      context.pop();
+                    },
+                    child: Text(
+                      'Done',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Nunito',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                      ],
                     ),
                   ),
-                  title: Text(
-                    'Add Contact',
-                    style: FlutterFlowTheme.of(context).title2,
-                  ),
-                  actions: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.of(context).viewInsets,
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              1,
-                                      child: AllContactsWidget(),
-                                    ),
-                                  );
-                                },
-                              ).then((value) => setState(() {}));
-                            },
-                            child: Text(
-                              'VIew All',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                ],
+              ),
+            ),
+            title: Text(
+              'Add Contact',
+              style: FlutterFlowTheme.of(context).title2,
+            ),
+            actions: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height * 1,
+                                child: AllContactsWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      },
+                      child: Text(
+                        'VIew All',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Nunito',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
                             ),
-                          ),
-                        ],
                       ),
                     ),
                   ],
-                  centerTitle: true,
-                  elevation: 0,
-                )
-              : null,
+                ),
+              ),
+            ],
+            centerTitle: true,
+            elevation: 0,
+          ),
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),

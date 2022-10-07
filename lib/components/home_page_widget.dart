@@ -919,6 +919,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.scale,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                              ),
+                                            },
                                           );
                                         },
                                         child: ClipRRect(
@@ -947,7 +957,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     tag: valueOrDefault<String>(
                                                       getJsonField(
                                                         recordItem,
-                                                        r'''$.fields['Property Image']['0'].url''' +
+                                                        r'''$.fields['Property Image'][0].url''' +
                                                             '$recordIndex',
                                                       ),
                                                       'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
@@ -958,7 +968,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       valueOrDefault<String>(
                                                         getJsonField(
                                                           recordItem,
-                                                          r'''$.fields['Property Image']['0'].url''',
+                                                          r'''$.fields['Property Image'][0].url''',
                                                         ),
                                                         'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
                                                       ),

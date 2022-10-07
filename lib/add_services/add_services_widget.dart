@@ -293,42 +293,37 @@ class _AddServicesWidgetState extends State<AddServicesWidget>
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Color(0xFF111111),
-          appBar: responsiveVisibility(
-            context: context,
-            desktop: false,
-          )
-              ? AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  title: Text(
-                    'Services',
-                    style: FlutterFlowTheme.of(context).title2.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF14181B),
-                          fontSize: 28,
-                          fontWeight: FontWeight.normal,
-                        ),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Services',
+              style: FlutterFlowTheme.of(context).title2.override(
+                    fontFamily: 'Outfit',
+                    color: Color(0xFF14181B),
+                    fontSize: 28,
+                    fontWeight: FontWeight.normal,
                   ),
-                  actions: [
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      buttonSize: 48,
-                      fillColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.close_rounded,
-                        color: Color(0xFFD22C23),
-                        size: 30,
-                      ),
-                      onPressed: () async {
-                        context.pop();
-                      },
-                    ),
-                  ],
-                  centerTitle: false,
-                  elevation: 0,
-                )
-              : null,
+            ),
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                buttonSize: 48,
+                fillColor: Colors.transparent,
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: Color(0xFFD22C23),
+                  size: 30,
+                ),
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+            ],
+            centerTitle: false,
+            elevation: 0,
+          ),
           body: SafeArea(
             child: Form(
               key: formKey,

@@ -180,67 +180,62 @@ class _Modifyintakestep1WidgetState extends State<Modifyintakestep1Widget>
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          appBar: responsiveVisibility(
-            context: context,
-            desktop: false,
-          )
-              ? AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  title: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (responsiveVisibility(
-                        context: context,
-                        tabletLandscape: false,
-                        desktop: false,
-                      ))
-                        Text(
-                          'Modify Intake',
-                          style: FlutterFlowTheme.of(context).title2.override(
-                                fontFamily: 'Outfit',
-                                fontSize: 28,
-                                fontWeight: FontWeight.normal,
-                              ),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (responsiveVisibility(
+                  context: context,
+                  tabletLandscape: false,
+                  desktop: false,
+                ))
+                  Text(
+                    'Modify Intake',
+                    style: FlutterFlowTheme.of(context).title2.override(
+                          fontFamily: 'Outfit',
+                          fontSize: 28,
+                          fontWeight: FontWeight.normal,
                         ),
-                      if (responsiveVisibility(
-                        context: context,
-                        phone: false,
-                        tablet: false,
-                      ))
-                        Expanded(
-                          child: Text(
-                            'Modify',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).title1.override(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 30,
-                                ),
-                          ),
-                        ),
-                    ],
                   ),
-                  actions: [
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      buttonSize: 60,
-                      icon: Icon(
-                        Icons.close_rounded,
-                        color: FlutterFlowTheme.of(context).tertiaryColor,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
+                if (responsiveVisibility(
+                  context: context,
+                  phone: false,
+                  tablet: false,
+                ))
+                  Expanded(
+                    child: Text(
+                      'Modify',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).title1.override(
+                            fontFamily: 'Nunito',
+                            fontSize: 30,
+                          ),
                     ),
-                  ],
-                  centerTitle: true,
-                  elevation: 0,
-                )
-              : null,
+                  ),
+              ],
+            ),
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: FlutterFlowTheme.of(context).tertiaryColor,
+                  size: 30,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ],
+            centerTitle: true,
+            elevation: 0,
+          ),
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),

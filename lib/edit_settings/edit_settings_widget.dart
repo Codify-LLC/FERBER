@@ -48,62 +48,57 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          appBar: responsiveVisibility(
-            context: context,
-            desktop: false,
-          )
-              ? AppBar(
-                  backgroundColor: Color(0xFFFAFAFA),
-                  automaticallyImplyLeading: false,
-                  leading: FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30,
-                    borderWidth: 1,
-                    buttonSize: 60,
-                    icon: Icon(
-                      Icons.arrow_back_rounded,
-                      color: Color(0xFF090F13),
-                      size: 30,
-                    ),
-                    onPressed: () async {
-                      context.pop();
-                    },
+          appBar: AppBar(
+            backgroundColor: Color(0xFFFAFAFA),
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30,
+              borderWidth: 1,
+              buttonSize: 60,
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: Color(0xFF090F13),
+                size: 30,
+              ),
+              onPressed: () async {
+                context.pop();
+              },
+            ),
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (responsiveVisibility(
+                  context: context,
+                  tabletLandscape: false,
+                  desktop: false,
+                ))
+                  Text(
+                    'Edit Profile',
+                    style: FlutterFlowTheme.of(context).title2,
                   ),
-                  title: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      if (responsiveVisibility(
-                        context: context,
-                        tabletLandscape: false,
-                        desktop: false,
-                      ))
-                        Text(
-                          'Edit Profile',
-                          style: FlutterFlowTheme.of(context).title2,
-                        ),
-                      if (responsiveVisibility(
-                        context: context,
-                        phone: false,
-                        tablet: false,
-                      ))
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 55, 0),
-                          child: Text(
-                            'Edit Profile',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).title2.override(
-                                  fontFamily: 'Outfit',
-                                ),
+                if (responsiveVisibility(
+                  context: context,
+                  phone: false,
+                  tablet: false,
+                ))
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 55, 0),
+                    child: Text(
+                      'Edit Profile',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).title2.override(
+                            fontFamily: 'Outfit',
                           ),
-                        ),
-                    ],
+                    ),
                   ),
-                  actions: [],
-                  centerTitle: false,
-                  elevation: 0,
-                )
-              : null,
+              ],
+            ),
+            actions: [],
+            centerTitle: false,
+            elevation: 0,
+          ),
           body: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
