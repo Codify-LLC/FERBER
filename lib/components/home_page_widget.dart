@@ -1,13 +1,14 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/search_results_widget.dart';
-import '../flutter_flow/flutter_flow_autocomplete_options_list.dart';
+import '../components/buyer_and_seller_form_widget.dart';
+import '../components/custom_auto_complete_widget.dart';
+import '../components/empty_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
-import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../flutter_flow/random_data_util.dart' as random_data;
+import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -21,24 +22,18 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  LatLng? currentUserLocationValue;
-  final formKey = GlobalKey<FormState>();
-  LatLng? googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
-  List<dynamic>? filteredRecords;
-  final searchValurTextFieldAddressKey = GlobalKey();
+  ApiCallResponse? apiResult;
+  List<dynamic>? filteredRecordsSecond;
   TextEditingController? searchValurTextFieldAddressController;
-  String? searchValurTextFieldAddressSelectedOption;
-  String? dropDownSearchTYpeValue;
-  final searchValurTextFieldMLSKey = GlobalKey();
+  ApiCallResponse? apiResultcre;
+  List<dynamic>? filteredRecords;
   TextEditingController? searchValurTextFieldMLSController;
-  String? searchValurTextFieldMLSSelectedOption;
+  String? dropDownSearchTYpeValue;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
     searchValurTextFieldAddressController = TextEditingController();
     searchValurTextFieldMLSController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -53,18 +48,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (currentUserLocationValue == null) {
-      return Center(
-        child: SizedBox(
-          width: 50,
-          height: 50,
-          child: SpinKitChasingDots(
-            color: Color(0xFFD9180E),
-            size: 50,
-          ),
-        ),
-      );
-    }
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -76,50 +59,64 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
             child: FutureBuilder<ApiCallResponse>(
-              future: GetTransactionsCall.call(
-                maxRecords: 100,
+              future: AirtableAPIsGroup.listTransactionsRecordsCall.call(
+                sortField: 'Last Modified',
+                sortDirection: 'desc',
+                filterByFormula:
+                    'SEARCH(\'${searchValurTextFieldAddressController!.text}\', {🏡 Address})',
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
                   return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: SpinKitChasingDots(
-                        color: Color(0xFFD9180E),
-                        size: 50,
-                      ),
+                    child: Center(
+                      child: EmptyWidget(),
                     ),
                   );
                 }
-                final formMainGetTransactionsResponse = snapshot.data!;
+                final formMainListTransactionsRecordsResponse = snapshot.data!;
                 return Form(
                   key: formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autovalidateMode: AutovalidateMode.always,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 1,
                     child: Stack(
                       alignment: AlignmentDirectional(0, 1),
                       children: [
-                        FlutterFlowGoogleMap(
-                          controller: googleMapsController,
-                          onCameraIdle: (latLng) => googleMapsCenter = latLng,
-                          initialLocation: googleMapsCenter ??=
-                              currentUserLocationValue!,
-                          markerColor: GoogleMarkerColor.violet,
-                          mapType: MapType.normal,
-                          style: GoogleMapStyle.standard,
-                          initialZoom: 14,
-                          allowInteraction: false,
-                          allowZoom: true,
-                          showZoomControls: true,
-                          showLocation: false,
-                          showCompass: false,
-                          showMapToolbar: false,
-                          showTraffic: false,
-                          centerMapOnMarkerTap: true,
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 1,
+                          child: custom_widgets.Fmap4(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 1,
+                            coordinates: functions
+                                .dataToLatLang(
+                                    (AirtableAPIsGroup
+                                            .listTransactionsRecordsCall
+                                            .latitude(
+                                      formMainListTransactionsRecordsResponse
+                                          .jsonBody,
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList(),
+                                    (AirtableAPIsGroup
+                                            .listTransactionsRecordsCall
+                                            .longitude(
+                                      formMainListTransactionsRecordsResponse
+                                          .jsonBody,
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList())
+                                .toList(),
+                            recordItem:
+                                AirtableAPIsGroup.listTransactionsRecordsCall
+                                    .recordList(
+                                      formMainListTransactionsRecordsResponse
+                                          .jsonBody,
+                                    )
+                                    .toList(),
+                          ),
                         ),
                         Align(
                           alignment: AlignmentDirectional(0, -1),
@@ -129,7 +126,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             children: [
                               Container(
                                 width: double.infinity,
-                                height: 150,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -153,66 +149,96 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              InkWell(
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'SellerIntakeStep1',
-                                                    queryParams: {
-                                                      'participantsID':
-                                                          serializeParam(
-                                                        random_data
-                                                            .randomInteger(
-                                                                65466, 65466),
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
-                                                child: Text(
-                                                  'Hello ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    2, 20, 2, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      barrierColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Padding(
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
+                                                          child: Container(
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                1,
+                                                            child:
+                                                                BuyerAndSellerFormWidget(),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        setState(() {}));
+                                                  },
+                                                  child: Text(
+                                                    'Hello ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Nunito',
+                                                          fontSize: 28,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
                                                 ),
-                                              ),
-                                              AuthUserStreamWidget(
-                                                child: Text(
-                                                  currentUserDisplayName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .tertiaryColor,
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                Expanded(
+                                                  child: AuthUserStreamWidget(
+                                                    child: Text(
+                                                      currentUserDisplayName,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiaryColor,
+                                                                fontSize: 26,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            '{\$2,550,000]',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Nunito',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    2, 0, 2, 0),
+                                            child: Text(
+                                              '{\$Total Commission YTD]',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Nunito',
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -226,602 +252,721 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    12, 5, 12, 0),
+                                                    12, 0, 12, 0),
                                             child: Material(
                                               color: Colors.transparent,
-                                              elevation: 0,
+                                              elevation: 5,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.95,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 2,
-                                                      color: Color(0x4E000000),
-                                                      offset: Offset(0, 4),
-                                                    )
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.all(
-                                                    color: Color(0xFFF1F4F8),
-                                                    width: 2,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.95,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                      color: Color(0xFFF1F4F8),
+                                                      width: 2,
+                                                    ),
                                                   ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(8, 0, 8, 0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      FlutterFlowDropDown(
-                                                        initialOption:
-                                                            dropDownSearchTYpeValue ??=
-                                                                'Address',
-                                                        options: [
-                                                          'Address',
-                                                          'MLS ID'
-                                                        ],
-                                                        onChanged: (val) =>
-                                                            setState(() =>
-                                                                dropDownSearchTYpeValue =
-                                                                    val),
-                                                        width: 90,
-                                                        height: 50,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Nunito',
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 11,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                        hintText: 'Select',
-                                                        fillColor: Colors.white,
-                                                        elevation: 2,
-                                                        borderColor:
-                                                            Colors.transparent,
-                                                        borderWidth: 0,
-                                                        borderRadius: 0,
-                                                        margin:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(12, 0,
-                                                                    0, 0),
-                                                        hidesUnderline: true,
-                                                      ),
-                                                      if (dropDownSearchTYpeValue ==
-                                                          'MLS ID')
-                                                        Expanded(
-                                                          child: Autocomplete<
-                                                              String>(
-                                                            initialValue:
-                                                                TextEditingValue(),
-                                                            optionsBuilder:
-                                                                (textEditingValue) {
-                                                              if (textEditingValue
-                                                                      .text ==
-                                                                  '') {
-                                                                return const Iterable<
-                                                                    String>.empty();
-                                                              }
-                                                              return (GetTransactionsCall
-                                                                      .mls(
-                                                                formMainGetTransactionsResponse
-                                                                    .jsonBody,
-                                                              ) as List)
-                                                                  .map<String>(
-                                                                      (s) => s
-                                                                          .toString())
-                                                                  .toList()
-                                                                  .toList()
-                                                                  .where(
-                                                                      (option) {
-                                                                final lowercaseOption =
-                                                                    option
-                                                                        .toLowerCase();
-                                                                return lowercaseOption
-                                                                    .contains(
-                                                                        textEditingValue
-                                                                            .text
-                                                                            .toLowerCase());
-                                                              });
-                                                            },
-                                                            optionsViewBuilder:
-                                                                (context,
-                                                                    onSelected,
-                                                                    options) {
-                                                              return AutocompleteOptionsList(
-                                                                textFieldKey:
-                                                                    searchValurTextFieldMLSKey,
-                                                                textController:
-                                                                    searchValurTextFieldMLSController!,
-                                                                options: options
-                                                                    .toList(),
-                                                                onSelected:
-                                                                    onSelected,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                                textHighlightStyle:
-                                                                    TextStyle(),
-                                                                elevation: 4,
-                                                                optionBackgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                optionHighlightColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                maxHeight: 200,
-                                                              );
-                                                            },
-                                                            onSelected: (String
-                                                                selection) {
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                8, 0, 8, 0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        FlutterFlowDropDown(
+                                                          initialOption:
+                                                              dropDownSearchTYpeValue ??=
+                                                                  'MLS ID',
+                                                          options: [
+                                                            'Address',
+                                                            'MLS ID',
+                                                            'Agent'
+                                                          ],
+                                                          onChanged: (val) =>
                                                               setState(() =>
-                                                                  searchValurTextFieldMLSSelectedOption =
-                                                                      selection);
-                                                              FocusScope.of(
+                                                                  dropDownSearchTYpeValue =
+                                                                      val),
+                                                          width: 90,
+                                                          height: 50,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
                                                                       context)
-                                                                  .unfocus();
-                                                            },
-                                                            fieldViewBuilder: (
-                                                              context,
-                                                              textEditingController,
-                                                              focusNode,
-                                                              onEditingComplete,
-                                                            ) {
-                                                              searchValurTextFieldMLSController =
-                                                                  textEditingController;
-                                                              return TextFormField(
-                                                                key:
-                                                                    searchValurTextFieldMLSKey,
-                                                                controller:
-                                                                    textEditingController,
-                                                                focusNode:
-                                                                    focusNode,
-                                                                onEditingComplete:
-                                                                    onEditingComplete,
-                                                                onChanged: (_) =>
-                                                                    EasyDebounce
-                                                                        .debounce(
-                                                                  'searchValurTextFieldMLSController',
-                                                                  Duration(
-                                                                      milliseconds:
-                                                                          2000),
-                                                                  () => setState(
-                                                                      () {}),
-                                                                ),
-                                                                obscureText:
-                                                                    false,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      'Search',
-                                                                  enabledBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito',
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
                                                                   ),
-                                                                  focusedBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  errorBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  focusedErrorBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  contentPadding:
-                                                                      EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              12,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                              );
-                                                            },
-                                                          ),
+                                                          hintText: 'Select',
+                                                          fillColor:
+                                                              Colors.white,
+                                                          elevation: 2,
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderWidth: 0,
+                                                          borderRadius: 0,
+                                                          margin:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(12,
+                                                                      0, 0, 0),
+                                                          hidesUnderline: true,
                                                         ),
-                                                      if (dropDownSearchTYpeValue ==
-                                                          'Address')
-                                                        Expanded(
-                                                          child: Autocomplete<
-                                                              String>(
-                                                            initialValue:
-                                                                TextEditingValue(),
-                                                            optionsBuilder:
-                                                                (textEditingValue) {
-                                                              if (textEditingValue
-                                                                      .text ==
-                                                                  '') {
-                                                                return const Iterable<
-                                                                    String>.empty();
-                                                              }
-                                                              return (GetTransactionsCall
-                                                                      .addressesList(
-                                                                formMainGetTransactionsResponse
-                                                                    .jsonBody,
-                                                              ) as List)
-                                                                  .map<String>(
-                                                                      (s) => s
-                                                                          .toString())
-                                                                  .toList()
-                                                                  .toList()
-                                                                  .where(
-                                                                      (option) {
-                                                                final lowercaseOption =
-                                                                    option
-                                                                        .toLowerCase();
-                                                                return lowercaseOption
-                                                                    .contains(
-                                                                        textEditingValue
-                                                                            .text
-                                                                            .toLowerCase());
-                                                              });
-                                                            },
-                                                            optionsViewBuilder:
-                                                                (context,
-                                                                    onSelected,
-                                                                    options) {
-                                                              return AutocompleteOptionsList(
-                                                                textFieldKey:
-                                                                    searchValurTextFieldAddressKey,
-                                                                textController:
-                                                                    searchValurTextFieldAddressController!,
-                                                                options: options
-                                                                    .toList(),
-                                                                onSelected:
-                                                                    onSelected,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                                textHighlightStyle:
-                                                                    TextStyle(),
-                                                                elevation: 4,
-                                                                optionBackgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                optionHighlightColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                maxHeight: 200,
-                                                              );
-                                                            },
-                                                            onSelected: (String
-                                                                selection) {
-                                                              setState(() =>
-                                                                  searchValurTextFieldAddressSelectedOption =
-                                                                      selection);
-                                                              FocusScope.of(
-                                                                      context)
-                                                                  .unfocus();
-                                                            },
-                                                            fieldViewBuilder: (
-                                                              context,
-                                                              textEditingController,
-                                                              focusNode,
-                                                              onEditingComplete,
-                                                            ) {
-                                                              searchValurTextFieldAddressController =
-                                                                  textEditingController;
-                                                              return TextFormField(
-                                                                key:
-                                                                    searchValurTextFieldAddressKey,
-                                                                controller:
-                                                                    textEditingController,
-                                                                focusNode:
-                                                                    focusNode,
-                                                                onEditingComplete:
-                                                                    onEditingComplete,
-                                                                onChanged: (_) =>
-                                                                    EasyDebounce
-                                                                        .debounce(
-                                                                  'searchValurTextFieldAddressController',
-                                                                  Duration(
-                                                                      milliseconds:
-                                                                          2000),
-                                                                  () async {
+                                                        if (dropDownSearchTYpeValue ==
+                                                            'MLS ID')
+                                                          Expanded(
+                                                            child:
+                                                                TextFormField(
+                                                              controller:
+                                                                  searchValurTextFieldMLSController,
+                                                              onChanged: (_) =>
+                                                                  EasyDebounce
+                                                                      .debounce(
+                                                                'searchValurTextFieldMLSController',
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                                () async {
+                                                                  apiResultcre =
+                                                                      await SearchByMLSorSTREETCall
+                                                                          .call(
+                                                                    listingId:
+                                                                        searchValurTextFieldMLSController!
+                                                                            .text,
+                                                                  );
+                                                                  if ((apiResultcre
+                                                                          ?.succeeded ??
+                                                                      true)) {
                                                                     filteredRecords =
+                                                                        await actions
+                                                                            .searchRecordsData(
+                                                                      searchValurTextFieldMLSController!
+                                                                          .text,
+                                                                      AirtableAPIsGroup
+                                                                          .listTransactionsRecordsCall
+                                                                          .recordList(
+                                                                            formMainListTransactionsRecordsResponse.jsonBody,
+                                                                          )
+                                                                          .toList(),
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                              ),
+                                                              obscureText:
+                                                                  false,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    'Search',
+                                                                enabledBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                focusedBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                errorBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                focusedErrorBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                suffixIcon:
+                                                                    searchValurTextFieldMLSController!
+                                                                            .text
+                                                                            .isNotEmpty
+                                                                        ? InkWell(
+                                                                            onTap:
+                                                                                () async {
+                                                                              searchValurTextFieldMLSController?.clear();
+                                                                              apiResultcre = await SearchByMLSorSTREETCall.call(
+                                                                                listingId: searchValurTextFieldMLSController!.text,
+                                                                              );
+                                                                              if ((apiResultcre?.succeeded ?? true)) {
+                                                                                filteredRecords = await actions.searchRecordsData(
+                                                                                  searchValurTextFieldMLSController!.text,
+                                                                                  AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                      .recordList(
+                                                                                        formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                      )
+                                                                                      .toList(),
+                                                                                );
+                                                                              }
+
+                                                                              setState(() {});
+                                                                              setState(() {});
+                                                                            },
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.clear,
+                                                                              color: Color(0xFF757575),
+                                                                              size: 22,
+                                                                            ),
+                                                                          )
+                                                                        : null,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
+                                                            ),
+                                                          ),
+                                                        if (dropDownSearchTYpeValue ==
+                                                            'Address')
+                                                          Expanded(
+                                                            child:
+                                                                TextFormField(
+                                                              controller:
+                                                                  searchValurTextFieldAddressController,
+                                                              onChanged: (_) =>
+                                                                  EasyDebounce
+                                                                      .debounce(
+                                                                'searchValurTextFieldAddressController',
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                                () async {
+                                                                  apiResult =
+                                                                      await SearchByMLSorSTREETCall
+                                                                          .call(
+                                                                    unparsedAddress:
+                                                                        searchValurTextFieldAddressController!
+                                                                            .text,
+                                                                  );
+                                                                  if ((apiResult
+                                                                          ?.succeeded ??
+                                                                      true)) {
+                                                                    filteredRecordsSecond =
                                                                         await actions
                                                                             .searchRecordsData(
                                                                       searchValurTextFieldAddressController!
                                                                           .text,
-                                                                      GetTransactionsCall
-                                                                          .recordsList(
-                                                                        formMainGetTransactionsResponse
-                                                                            .jsonBody,
-                                                                      ).toList(),
+                                                                      AirtableAPIsGroup
+                                                                          .listTransactionsRecordsCall
+                                                                          .recordList(
+                                                                            formMainListTransactionsRecordsResponse.jsonBody,
+                                                                          )
+                                                                          .toList(),
                                                                     );
+                                                                  }
 
-                                                                    setState(
-                                                                        () {});
-                                                                  },
-                                                                ),
-                                                                obscureText:
-                                                                    false,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      'Search',
-                                                                  enabledBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                              ),
+                                                              obscureText:
+                                                                  false,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    'Search',
+                                                                enabledBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                focusedBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                errorBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                focusedErrorBorder:
+                                                                    InputBorder
+                                                                        .none,
+                                                                suffixIcon:
+                                                                    searchValurTextFieldAddressController!
+                                                                            .text
+                                                                            .isNotEmpty
+                                                                        ? InkWell(
+                                                                            onTap:
+                                                                                () async {
+                                                                              searchValurTextFieldAddressController?.clear();
+                                                                              apiResult = await SearchByMLSorSTREETCall.call(
+                                                                                unparsedAddress: searchValurTextFieldAddressController!.text,
+                                                                              );
+                                                                              if ((apiResult?.succeeded ?? true)) {
+                                                                                filteredRecordsSecond = await actions.searchRecordsData(
+                                                                                  searchValurTextFieldAddressController!.text,
+                                                                                  AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                      .recordList(
+                                                                                        formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                      )
+                                                                                      .toList(),
+                                                                                );
+                                                                              }
+
+                                                                              setState(() {});
+                                                                              setState(() {});
+                                                                            },
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.clear,
+                                                                              color: Color(0xFF757575),
+                                                                              size: 22,
+                                                                            ),
+                                                                          )
+                                                                        : null,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito',
+                                                                    fontSize:
+                                                                        18,
                                                                   ),
-                                                                  focusedBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  errorBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  focusedErrorBorder:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Color(
-                                                                          0x00000000),
-                                                                      width: 1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              4.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              4.0),
-                                                                    ),
-                                                                  ),
-                                                                  contentPadding:
-                                                                      EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              12,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
+                                                            ),
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          100, 0, 16, 0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(12),
+                                          bottomRight: Radius.circular(12),
+                                          topLeft: Radius.circular(0),
+                                          topRight: Radius.circular(0),
+                                        ),
+                                        child: Container(
+                                          width: double.infinity,
+                                          constraints: BoxConstraints(
+                                            maxHeight: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.3,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(12),
+                                              bottomRight: Radius.circular(12),
+                                              topLeft: Radius.circular(0),
+                                              topRight: Radius.circular(0),
+                                            ),
+                                          ),
+                                          child: Visibility(
+                                            visible: (searchValurTextFieldMLSController!
+                                                            .text !=
+                                                        null &&
+                                                    searchValurTextFieldMLSController!
+                                                            .text !=
+                                                        '') ||
+                                                (searchValurTextFieldAddressController!
+                                                            .text !=
+                                                        null &&
+                                                    searchValurTextFieldAddressController!
+                                                            .text !=
+                                                        ''),
+                                            child: CustomAutoCompleteWidget(
+                                              searchText:
+                                                  searchValurTextFieldMLSController!
+                                                      .text,
+                                              mls: dropDownSearchTYpeValue ==
+                                                  'MLS ID',
+                                              address:
+                                                  dropDownSearchTYpeValue ==
+                                                      'Address',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            await Future.delayed(
+                                const Duration(milliseconds: 100));
+                          },
+                          child: ClipRRect(
+                            child: Container(
+                              height: 200,
+                              constraints: BoxConstraints(
+                                maxHeight:
+                                    MediaQuery.of(context).size.height * 0.25,
+                              ),
+                              decoration: BoxDecoration(),
+                              child: Visibility(
+                                visible: getJsonField(
+                                      formMainListTransactionsRecordsResponse
+                                          .jsonBody,
+                                      r'''$.records''',
+                                    ) !=
+                                    null,
+                                child: Builder(
+                                  builder: (context) {
+                                    final record = AirtableAPIsGroup
+                                        .listTransactionsRecordsCall
+                                        .recordList(
+                                          formMainListTransactionsRecordsResponse
+                                              .jsonBody,
+                                        )
+                                        .toList();
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: record.length,
+                                      itemBuilder: (context, recordIndex) {
+                                        final recordItem = record[recordIndex];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              setState(() => FFAppState()
+                                                          .currentDisplayRecordID =
+                                                      getJsonField(
+                                                    recordItem,
+                                                    r'''$.id''',
+                                                  ).toString());
+                                              if (Navigator.of(context)
+                                                  .canPop()) {
+                                                context.pop();
+                                              }
+                                              context.pushNamed(
+                                                'Home',
+                                                queryParams: {
+                                                  'defaultPage': serializeParam(
+                                                    'PropertyDetails',
+                                                    ParamType.String,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 0),
+                                                  ),
+                                                },
+                                              );
+                                            },
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              elevation: 5,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  constraints: BoxConstraints(
+                                                    maxWidth: 350,
+                                                    maxHeight: 110,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Hero(
+                                                          tag: valueOrDefault<
+                                                              String>(
+                                                            getJsonField(
+                                                              recordItem,
+                                                              r'''$.fields['Property Image'][0].url''' +
+                                                                  '$recordIndex',
+                                                            ),
+                                                            'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                          ),
+                                                          transitionOnUserGestures:
+                                                              true,
+                                                          child: Image.network(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              getJsonField(
+                                                                recordItem,
+                                                                r'''$.fields['Property Image'][0].url''',
+                                                              ),
+                                                              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                            ),
+                                                            width: MediaQuery.of(
                                                                         context)
-                                                                    .bodyText1,
-                                                              );
-                                                            },
+                                                                    .size
+                                                                    .width *
+                                                                0.45,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                1,
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    10, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            if (dropDownSearchTYpeValue ==
-                                                                'Address') {
-                                                              if (formKey.currentState ==
-                                                                      null ||
-                                                                  !formKey
-                                                                      .currentState!
-                                                                      .validate()) {
-                                                                return;
-                                                              }
-
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                barrierColor: Colors
-                                                                    .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Padding(
-                                                                    padding: MediaQuery.of(
-                                                                            context)
-                                                                        .viewInsets,
+                                                      ),
+                                                      Expanded(
+                                                        child: Container(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        8,
+                                                                        8,
+                                                                        8),
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  if (getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['🏡 Address']''',
+                                                                      ) !=
+                                                                      null)
+                                                                    Text(
+                                                                      getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['🏡 Address']''',
+                                                                      ).toString(),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Poppins',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryColor,
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Text(
+                                                                        functions
+                                                                            .toStringConverter(getJsonField(
+                                                                          recordItem,
+                                                                          r'''$.fields['⚡❗Status']''',
+                                                                        )),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Nunito',
+                                                                              color: valueOrDefault<Color>(
+                                                                                () {
+                                                                                  if (functions.toStringConverter(getJsonField(
+                                                                                        recordItem,
+                                                                                        r'''$.fields['⚡❗Status']''',
+                                                                                      )) ==
+                                                                                      'Active') {
+                                                                                    return Color(0xFF2CFF00);
+                                                                                  } else if (functions.toStringConverter(getJsonField(
+                                                                                        recordItem,
+                                                                                        r'''$.fields['⚡❗Status']''',
+                                                                                      )) ==
+                                                                                      'Closed') {
+                                                                                    return Color(0xFFFF0B00);
+                                                                                  } else if (functions.toStringConverter(getJsonField(
+                                                                                        recordItem,
+                                                                                        r'''$.fields['⚡❗Status']''',
+                                                                                      )) ==
+                                                                                      'Executed Contract ') {
+                                                                                    return Color(0xFF007BFF);
+                                                                                  } else if (functions.toStringConverter(getJsonField(
+                                                                                        recordItem,
+                                                                                        r'''$.fields['⚡❗Status']''',
+                                                                                      )) ==
+                                                                                      'Pending') {
+                                                                                    return Color(0xFFFFB100);
+                                                                                  } else {
+                                                                                    return FlutterFlowTheme.of(context).primaryColor;
+                                                                                  }
+                                                                                }(),
+                                                                                FlutterFlowTheme.of(context).primaryColor,
+                                                                              ),
+                                                                              fontSize: 12,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            4,
+                                                                            4,
+                                                                            4),
                                                                     child:
                                                                         Container(
-                                                                      height: MediaQuery.of(context)
-                                                                              .size
-                                                                              .height *
-                                                                          0.82,
-                                                                      child:
-                                                                          SearchResultsWidget(
-                                                                        unparsedAddress:
-                                                                            searchValurTextFieldAddressController!.text,
-                                                                        statement:
-                                                                            true,
+                                                                      width: 30,
+                                                                      height:
+                                                                          30,
+                                                                      clipBehavior:
+                                                                          Clip.antiAlias,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                      ),
+                                                                      child: Image
+                                                                          .network(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          getJsonField(
+                                                                            recordItem,
+                                                                            r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                                          ),
+                                                                          'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
+                                                                        ),
+                                                                        fit: BoxFit
+                                                                            .cover,
                                                                       ),
                                                                     ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
-                                                            } else {
-                                                              if (dropDownSearchTYpeValue ==
-                                                                  'MLS ID') {
-                                                                if (formKey.currentState ==
-                                                                        null ||
-                                                                    !formKey
-                                                                        .currentState!
-                                                                        .validate()) {
-                                                                  return;
-                                                                }
-
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  barrierColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Padding(
-                                                                      padding: MediaQuery.of(
-                                                                              context)
-                                                                          .viewInsets,
-                                                                      child:
-                                                                          Container(
-                                                                        height: MediaQuery.of(context).size.height *
-                                                                            0.82,
-                                                                        child:
-                                                                            SearchResultsWidget(
-                                                                          listingId:
-                                                                              searchValurTextFieldMLSController!.text,
-                                                                          statement:
-                                                                              false,
+                                                                  ),
+                                                                  if (getJsonField(
+                                                                        recordItem,
+                                                                        r'''$.fields['💵 Purchase Price']''',
+                                                                      ) !=
+                                                                      null)
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        formatNumber(
+                                                                          functions
+                                                                              .stringToDouble(getJsonField(
+                                                                            recordItem,
+                                                                            r'''$.fields['💵 Purchase Price']''',
+                                                                          ).toString()),
+                                                                          formatType:
+                                                                              FormatType.decimal,
+                                                                          decimalType:
+                                                                              DecimalType.automatic,
+                                                                          currency:
+                                                                              '\$',
                                                                         ),
+                                                                        '\$0',
                                                                       ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
-                                                              }
-                                                            }
-                                                          },
-                                                          child: Icon(
-                                                            Icons.search,
-                                                            color: Colors.black,
-                                                            size: 20,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Poppins',
+                                                                            fontSize:
+                                                                                12,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              2,
+                                                                              4,
+                                                                              2),
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '👪 ${valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              recordItem,
+                                                                              r'''$.fields['👪 Type']''',
+                                                                            ).toString(),
+                                                                            'Not Set',
+                                                                          )}',
+                                                                          'Not Set',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2
+                                                                            .override(
+                                                                              fontFamily: 'Lato',
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -831,390 +976,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 200,
-                          constraints: BoxConstraints(
-                            maxHeight:
-                                MediaQuery.of(context).size.height * 0.25,
-                          ),
-                          decoration: BoxDecoration(),
-                          child: Visibility(
-                            visible: getJsonField(
-                                  formMainGetTransactionsResponse.jsonBody,
-                                  r'''$.records''',
-                                ) !=
-                                null,
-                            child: Builder(
-                              builder: (context) {
-                                final record =
-                                    searchValurTextFieldAddressController!
-                                                    .text !=
-                                                null &&
-                                            searchValurTextFieldAddressController!
-                                                    .text !=
-                                                ''
-                                        ? filteredRecords
-                                        : GetTransactionsCall.recordsList(
-                                            formMainGetTransactionsResponse
-                                                .jsonBody,
-                                          )
-                                            ?.map((e) => e)
-                                            .toList()
-                                            .take(100)
-                                            .toList();
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: record.length,
-                                  itemBuilder: (context, recordIndex) {
-                                    final recordItem = record[recordIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12, 12, 12, 12),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'PropertyDetails',
-                                            queryParams: {
-                                              'address': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['🏡 Address']''',
-                                                ).toString(),
-                                                ParamType.String,
-                                              ),
-                                              'status': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['⚡❗Status']''',
-                                                ).toString(),
-                                                ParamType.String,
-                                              ),
-                                              'transactionsRecord':
-                                                  serializeParam(
-                                                recordItem,
-                                                ParamType.JSON,
-                                              ),
-                                              'imagePath': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['Property Image'][0].url''',
-                                                ),
-                                                ParamType.String,
-                                              ),
-                                              'purchasePrice': serializeParam(
-                                                getJsonField(
-                                                  recordItem,
-                                                  r'''$.fields['💵 Purchase Price']''',
-                                                ).toString(),
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                              ),
-                                            },
-                                          );
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 100,
-                                            constraints: BoxConstraints(
-                                              maxWidth: 350,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Expanded(
-                                                  child: Hero(
-                                                    tag: valueOrDefault<String>(
-                                                      getJsonField(
-                                                        recordItem,
-                                                        r'''$.fields['Property Image'][0].url''' +
-                                                            '$recordIndex',
-                                                      ),
-                                                      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
-                                                    ),
-                                                    transitionOnUserGestures:
-                                                        true,
-                                                    child: Image.network(
-                                                      valueOrDefault<String>(
-                                                        getJsonField(
-                                                          recordItem,
-                                                          r'''$.fields['Property Image'][0].url''',
-                                                        ),
-                                                        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
-                                                      ),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.45,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              1,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8, 8, 8, 8),
-                                                      child:
-                                                          SingleChildScrollView(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            if (getJsonField(
-                                                                  recordItem,
-                                                                  r'''$.fields['🏡 Address']''',
-                                                                ) !=
-                                                                null)
-                                                              Text(
-                                                                getJsonField(
-                                                                  recordItem,
-                                                                  r'''$.fields['🏡 Address']''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                if (('${getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ).toString()}' ==
-                                                                        'Active') &&
-                                                                    (getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ) !=
-                                                                        null))
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        recordItem,
-                                                                        r'''$.fields['⚡❗Status']''',
-                                                                      ).toString(),
-                                                                      ' Unknown',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito',
-                                                                          color:
-                                                                              Color(0xFF5CE430),
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                  ),
-                                                                if (('${getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ).toString()}' ==
-                                                                        'Pending') &&
-                                                                    (getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ) !=
-                                                                        null))
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        recordItem,
-                                                                        r'''$.fields['⚡❗Status']''',
-                                                                      ).toString(),
-                                                                      ' Unknown',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito',
-                                                                          color:
-                                                                              Color(0xFFDF723F),
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                  ),
-                                                                if (('${getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ).toString()}' ==
-                                                                        'Black') &&
-                                                                    (getJsonField(
-                                                                          recordItem,
-                                                                          r'''$.fields['⚡❗Status']''',
-                                                                        ) !=
-                                                                        null))
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        recordItem,
-                                                                        r'''$.fields['⚡❗Status']''',
-                                                                      ).toString(),
-                                                                      'Unknown',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).customColor4,
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                  ),
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          4,
-                                                                          4,
-                                                                          4),
-                                                              child: Container(
-                                                                width: 30,
-                                                                height: 30,
-                                                                clipBehavior: Clip
-                                                                    .antiAlias,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                                child: Image
-                                                                    .network(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      recordItem,
-                                                                      r'''$.fields['🤵 Agent Image Test1'][0].url''',
-                                                                    ),
-                                                                    'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
-                                                                  ),
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            if (getJsonField(
-                                                                  recordItem,
-                                                                  r'''$.fields['💵 Purchase Price']''',
-                                                                ) !=
-                                                                null)
-                                                              Text(
-                                                                '\$ ${getJsonField(
-                                                                  recordItem,
-                                                                  r'''$.fields['💵 Purchase Price']''',
-                                                                ).toString()}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                        );
+                                      },
                                     );
                                   },
-                                );
-                              },
+                                ),
+                              ),
                             ),
                           ),
                         ),

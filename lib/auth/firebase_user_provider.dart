@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'auth_util.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 
 class FerberFirebaseUser {
   FerberFirebaseUser(this.user);
@@ -19,7 +19,9 @@ Stream<FerberFirebaseUser> ferberFirebaseUserStream() => FirebaseAuth.instance
         .map<FerberFirebaseUser>(
       (user) {
         currentUser = FerberFirebaseUser(user);
-        updateUserJwtTimer(user);
+        if (!kIsWeb) {
+          FirebaseCrashlytics.instance.setUserIdentifier(user?.uid ?? '');
+        }
         return currentUser!;
       },
     );

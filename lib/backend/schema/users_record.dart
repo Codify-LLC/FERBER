@@ -25,20 +25,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
-  String? get mls;
-
-  int? get userID;
-
-  @BuiltValueField(wireName: 'Role')
-  String? get role;
-
-  @BuiltValueField(wireName: 'BrokerFee')
-  String? get brokerFee;
-
-  String? get logoCompany;
-
-  String? get companyName;
-
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -48,13 +34,7 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..displayName = ''
     ..photoUrl = ''
     ..uid = ''
-    ..phoneNumber = ''
-    ..mls = ''
-    ..userID = 0
-    ..role = ''
-    ..brokerFee = ''
-    ..logoCompany = ''
-    ..companyName = '';
+    ..phoneNumber = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -84,12 +64,6 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  String? mls,
-  int? userID,
-  String? role,
-  String? brokerFee,
-  String? logoCompany,
-  String? companyName,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -100,13 +74,7 @@ Map<String, dynamic> createUsersRecordData({
         ..photoUrl = photoUrl
         ..uid = uid
         ..createdTime = createdTime
-        ..phoneNumber = phoneNumber
-        ..mls = mls
-        ..userID = userID
-        ..role = role
-        ..brokerFee = brokerFee
-        ..logoCompany = logoCompany
-        ..companyName = companyName,
+        ..phoneNumber = phoneNumber,
     ),
   );
 

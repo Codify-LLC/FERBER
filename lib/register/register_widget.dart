@@ -1,10 +1,11 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -18,15 +19,17 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  TextEditingController? confirmPasswordController;
-
-  late bool confirmPasswordVisibility;
-  TextEditingController? emailFieldController;
+  ApiCallResponse? newUaer;
+  String? dropDownValue;
   TextEditingController? nameController;
+  TextEditingController? emailFieldController;
   TextEditingController? mLSFieldController;
   TextEditingController? passwordFieldController;
 
   late bool passwordFieldVisibility;
+  TextEditingController? confirmPasswordController;
+
+  late bool confirmPasswordVisibility;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -75,11 +78,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/ft_logo.png',
-                          width: 250,
-                          height: 75,
-                          fit: BoxFit.contain,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: Image.asset(
+                            'assets/images/ft_logo.png',
+                            width: 250,
+                            height: 75,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ],
                     ),
@@ -88,7 +94,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         constraints: BoxConstraints(
-                          maxWidth: 500,
+                          maxWidth: 400,
                         ),
                         decoration: BoxDecoration(
                           color: Color(0xFFFAFAFA),
@@ -108,8 +114,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       12, 16, 12, 10),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       AutoSizeText(
                                         'Create Account',
@@ -129,7 +134,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         icon: Icon(
                                           Icons.phone_in_talk_sharp,
                                           color: Color(0xFFD22C23),
-                                          size: 30,
+                                          size: 25,
                                         ),
                                         onPressed: () {
                                           print('IconButton pressed ...');
@@ -207,6 +212,56 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 20, 12, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          width: 100,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                              color: Color(0x668B97A2),
+                                            ),
+                                          ),
+                                          child: FlutterFlowDropDown(
+                                            options: ['Active Agent', 'TC'],
+                                            onChanged: (val) => setState(
+                                                () => dropDownValue = val),
+                                            width: 330,
+                                            height: 50,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Colors.black,
+                                                    ),
+                                            hintText:
+                                                'Please select user role...',
+                                            fillColor: Colors.transparent,
+                                            elevation: 2,
+                                            borderColor: Colors.transparent,
+                                            borderWidth: 0,
+                                            borderRadius: 0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 4, 12, 4),
+                                            hidesUnderline: true,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12, 16, 12, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -270,18 +325,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                         .primaryColor,
                                               ),
                                           textAlign: TextAlign.start,
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Email address is required';
-                                            }
-
-                                            if (!RegExp(
-                                                    kTextValidatorEmailRegex)
-                                                .hasMatch(val)) {
-                                              return 'Has to be a valid email address.';
-                                            }
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -351,13 +394,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
                                               ),
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'MLS Number is required';
-                                            }
-
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -443,17 +479,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
                                               ),
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Password is required';
-                                            }
-
-                                            if (val.length < 8) {
-                                              return 'Requires at least 8 characters.';
-                                            }
-
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -538,17 +563,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 fontFamily: 'Nunito',
                                                 color: Color(0xFF2B343A),
                                               ),
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Password is required';
-                                            }
-
-                                            if (val.length < 8) {
-                                              return 'Requires at least 8 characters.';
-                                            }
-
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -556,7 +570,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 10, 20, 16),
+                                      60, 30, 60, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -565,6 +579,15 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       Expanded(
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            newUaer = await AirtableAPIsGroup
+                                                .createContactsRecordCall
+                                                .call(
+                                              name: nameController!.text,
+                                              email: emailFieldController!.text,
+                                              mLSUsername:
+                                                  mLSFieldController!.text,
+                                              role: dropDownValue,
+                                            );
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             if (passwordFieldController?.text !=
@@ -593,10 +616,16 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
                                             final usersCreateData =
                                                 createUsersRecordData(
-                                              mls: mLSFieldController!.text,
                                               displayName: nameController!.text,
-                                              userID: random_data.randomInteger(
-                                                  1000, 900000),
+                                              uid: getJsonField(
+                                                (newUaer?.jsonBody ?? ''),
+                                                r'''$.records.id''',
+                                              ).toString(),
+                                              email: emailFieldController!.text,
+                                              photoUrl: getJsonField(
+                                                (newUaer?.jsonBody ?? ''),
+                                                r'''$.records['Profile Picture'].url''',
+                                              ),
                                             );
                                             await UsersRecord.collection
                                                 .doc(user.uid)
@@ -604,11 +633,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
                                             context.goNamedAuth(
                                                 'Home', mounted);
+
+                                            setState(() {});
                                           },
                                           text: 'Register',
                                           options: FFButtonOptions(
                                             width: 120,
-                                            height: 50,
+                                            height: 40,
                                             color: Color(0xFF111417),
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
@@ -632,7 +663,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 0, 20, 0),
+                                      60, 4, 60, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -659,18 +690,18 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                           options: FFButtonOptions(
                                             width: 120,
                                             height: 50,
-                                            color: Colors.white,
+                                            color: Colors.transparent,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .title3
+                                                    .title2
                                                     .override(
                                                       fontFamily: 'Nunito',
-                                                      color: Color(0xFF111417),
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
-                                              color: Color(0xFF111417),
-                                              width: 1,
+                                              color: Colors.transparent,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12),

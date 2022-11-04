@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../flutter_flow/flutter_flow_util.dart';
 
 import 'api_manager.dart';
@@ -5,6 +7,627 @@ import 'api_manager.dart';
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
+/// Start Airtable APIs Group Code
+
+class AirtableAPIsGroup {
+  static String baseUrl = 'https://api.airtable.com/v0/appHdfZAMkLuAq0ad';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer keyZqynOEZ18Oqocr',
+    'Content-Type': 'application/json',
+  };
+  static ListTransactionsRecordsCall listTransactionsRecordsCall =
+      ListTransactionsRecordsCall();
+  static RetriveTransactionsRecordCall retriveTransactionsRecordCall =
+      RetriveTransactionsRecordCall();
+  static CreateTransactionsRecordCall createTransactionsRecordCall =
+      CreateTransactionsRecordCall();
+  static CreateContactsRecordCall createContactsRecordCall =
+      CreateContactsRecordCall();
+  static RetriveContactsRecordCall retriveContactsRecordCall =
+      RetriveContactsRecordCall();
+  static ListContactsRecordsCall listContactsRecordsCall =
+      ListContactsRecordsCall();
+  static ListInboxRecordsCall listInboxRecordsCall = ListInboxRecordsCall();
+}
+
+class ListTransactionsRecordsCall {
+  Future<ApiCallResponse> call({
+    int? maxRecords = 100,
+    String? sortField = 'Last Modified',
+    String? sortDirection = 'asc',
+    String? filterByFormula = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Transactions Records',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {
+        'maxRecords': maxRecords,
+        'sort[0][field]': sortField,
+        'sort[0][direction]': sortDirection,
+        'filterByFormula': filterByFormula,
+      },
+      returnBody: true,
+    );
+  }
+
+  dynamic recordList(dynamic response) => getJsonField(
+        response,
+        r'''$.records''',
+        true,
+      );
+  dynamic fields(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields''',
+        true,
+      );
+  dynamic addressList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields["🏡 Address"]''',
+        true,
+      );
+  dynamic listingId(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['ListingId']''',
+        true,
+      );
+  dynamic latitude(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['Latitude']''',
+        true,
+      );
+  dynamic longitude(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['Longitude']''',
+        true,
+      );
+  dynamic purchasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields['💵 Purchase Price']''',
+        true,
+      );
+}
+
+class RetriveTransactionsRecordCall {
+  Future<ApiCallResponse> call({
+    String? recordId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Retrive Transactions Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions/${recordId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  dynamic recordId(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic createdTime(dynamic response) => getJsonField(
+        response,
+        r'''$.createdTime''',
+      );
+  dynamic fields(dynamic response) => getJsonField(
+        response,
+        r'''$.fields''',
+      );
+  dynamic tcName(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.TC[:].name''',
+      );
+  dynamic tcEmail(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.TC[:].email''',
+      );
+  dynamic tcId(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.TC[:].id''',
+      );
+  dynamic tcData(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.TC''',
+        true,
+      );
+  dynamic broker(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Broker''',
+        true,
+      );
+  dynamic brokerageId(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Brokerage[:].id''',
+      );
+  dynamic brokerageData(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Brokerage''',
+        true,
+      );
+  dynamic status(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.⚡❗Status''',
+      );
+  dynamic propertyImages(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Property Image']''',
+        true,
+      );
+  dynamic coopAgent(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.✔Co-opAgent''',
+        true,
+      );
+  dynamic coopClient(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Co-opClient''',
+        true,
+      );
+  dynamic address(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🏡 Address']''',
+      );
+  dynamic closingDate(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🥂 Closing Date']''',
+      );
+  dynamic purchasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['💵 Purchase Price']''',
+      );
+  dynamic inspectionDeadline(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🔍 Inspection Deadline']''',
+      );
+  dynamic emdDeadlineAutomation(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['💲 EMD Deadline (Automation)']''',
+      );
+  dynamic tcFee(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🤑 TC Fee']''',
+      );
+  dynamic commissionOurSide(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['commission (OurSide)']''',
+      );
+  dynamic escrowAmount(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['💰 Escrow Amount']''',
+      );
+  dynamic inspectionDays(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Inspection Days']''',
+      );
+  dynamic submittedByOurAgent(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Submitted By (OurAgent)']''',
+        true,
+      );
+  dynamic listDateActiveDate(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['List Date (Active Date)']''',
+      );
+  dynamic contacts(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Contacts''',
+        true,
+      );
+  dynamic participantsOurAgent(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Participants (OurAgent)']''',
+        true,
+      );
+  dynamic ourClientsBuyerSellerForm(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['✔OurClient (Buyer/SELLER Form)']''',
+        true,
+      );
+  dynamic type(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['👪 Type']''',
+      );
+  dynamic newOurClientPhone(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['✔New OurClient Phone (Bform)']''',
+      );
+  dynamic typeOfFinancing(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Type of financing']''',
+      );
+  dynamic offerExpirationDate(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Offer Expiration Date']''',
+      );
+  dynamic inspections(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Inspections''',
+      );
+  dynamic acceptanceDate(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['✅Acceptance Date']''',
+      );
+  dynamic downPayment(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Down Payment']''',
+      );
+  dynamic loanApprovalDeadline(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🏦Loan Approval Deadline']''',
+      );
+  dynamic loanApprovalPeriod(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Loan Approval Period']''',
+      );
+  dynamic notesDocuments(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Notes (Documents)']''',
+      );
+  dynamic arielViewUrls(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Arial View']..url''',
+        true,
+      );
+  dynamic agentPay(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Agent Pay']''',
+      );
+  dynamic lastModified(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Last Modified']''',
+      );
+  dynamic lastModifiedBy(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Last Modified By']''',
+      );
+  dynamic agentImageTest1(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['🤵 Agent Image Test1']''',
+        true,
+      );
+  dynamic listingID(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['ListingId']''',
+      );
+  dynamic latitude(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Latitude']''',
+      );
+  dynamic longitude(dynamic response) => getJsonField(
+        response,
+        r'''$.fields['Longitude']''',
+      );
+}
+
+class CreateTransactionsRecordCall {
+  Future<ApiCallResponse> call({
+    String? address = '',
+    String? preApprovalOrProofOfFundsPOF = '',
+    String? aSISContractAndEtc = '',
+    String? status = '',
+    String? type = '',
+    List<String>? submittedByOurAgentList,
+    List<String>? ourClientBuyerSELLERFormList,
+    List<String>? participantsOurAgentList,
+    double? listingPrice,
+    List<String>? typesOfFinancingAcceptedList,
+    String? listDateActiveDate = '',
+    String? listingExpirationDate = '',
+    String? formEntry = '',
+    String? newOurClientNameBform = '',
+    String? newOurclientEmailBform = '',
+    String? newOurclientPhoneBform = '',
+    double? totalCommission,
+    double? commissionOurSide,
+    double? cooperatingBrokerCommission,
+    String? additionalTerms = '',
+    String? notes = '',
+    String? listingDocs = '',
+    double? purchasePrice,
+    double? escrowAmount,
+    String? downPayment = '',
+    String? offerExpirationDate = '',
+    String? closingDate = '',
+    int? inspectionPeriod,
+    String? signature = '',
+  }) {
+    final submittedByOurAgent = _serializeList(submittedByOurAgentList);
+    final ourClientBuyerSELLERForm =
+        _serializeList(ourClientBuyerSELLERFormList);
+    final participantsOurAgent = _serializeList(participantsOurAgentList);
+    final typesOfFinancingAccepted =
+        _serializeList(typesOfFinancingAcceptedList);
+    final body = '''
+{
+  "records": [
+    {
+      "fields": {
+        "🏡 Address": "${address}",
+        "💲 Pre Approval or Proof of Funds (POF)": [
+          {
+            "url": "${preApprovalOrProofOfFundsPOF}"
+          }
+        ],
+        "📝Listing Docs": [
+          {
+            "url": "${listingDocs}"
+          }
+        ],
+        "⭐ AS-IS Contract & etc": [
+          {
+            "url": "${aSISContractAndEtc}"
+          }
+        ],
+        "🥂 Closing Date": "${closingDate}",
+        "⚡❗Status": "${status}",
+        "👪 Type": "${type}",
+        "Participants (OurAgent)": "${participantsOurAgent}",
+        "✔New OurClient Name (Bform)": "${newOurClientNameBform}",
+        "✔New Ourclient Email (Bform)": "${newOurclientEmailBform}",
+        "✔New OurClient Phone (Bform)": "${newOurclientPhoneBform}",
+        "✔OurClient (Buyer/SELLER Form)": "${ourClientBuyerSELLERForm}",
+        "List Date (Active Date)": "${listDateActiveDate}",
+        "Listing Price": ${listingPrice},
+        "💵 Purchase Price": ${purchasePrice},
+        "💰 Escrow Amount": ${escrowAmount},
+        "Inspection Period": ${inspectionPeriod},
+        "commission (OurSide)": ${commissionOurSide},
+        "Inspections": "Let the client decide",
+        "Listing Expiration Date": "${listingExpirationDate}",
+        "Offer Expiration Date": "${offerExpirationDate}",
+        "⏲ Inspection Time (00:00PM)": "TBD",
+        "Additional Terms": "${additionalTerms}",
+        "Notes": "${notes}",
+        "Down Payment": "${downPayment}",
+        "👪Form Entry": "${formEntry}",
+        "Types of Financing Accepted": "${typesOfFinancingAccepted}",
+        "Total Commission": ${totalCommission},
+        "Cooperating Broker Commission": ${cooperatingBrokerCommission},
+        "Submitted By (OurAgent)": "${submittedByOurAgent}",
+        "Signature": [
+          {
+            "url": "${signature}"
+          }
+        ]
+      }
+    }
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Transactions Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class CreateContactsRecordCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? companyBrokerage = '',
+    String? phone = '',
+    String? email = '',
+    String? role = '',
+    String? transactions = '',
+    String? brokerages = '',
+    String? profilePicture = '',
+    String? brokerage = '',
+    String? mLSUsername = '',
+    String? mLSPassword = '',
+    String? system = '',
+    String? systemUsername = '',
+    String? systemPassword = '',
+    String? licenseNumber = '',
+    String? transactions8 = '',
+    String? transactions2 = '',
+    int? brokerFee,
+  }) {
+    final body = '''
+{
+  "records": [
+    {
+      "fields": {
+        "Name": "${name}",
+        "Company (Brokerage)": "${companyBrokerage}",
+        "Phone": "${phone}",
+        "Email": "${email}",
+        "Role": "${role}",
+        "Transactions": [
+          "${transactions}"
+        ],
+        "Brokerages": "${brokerages}",
+        "Profile Picture": [
+          {
+            "url": "${profilePicture}"
+          }
+        ],
+        "Brokerage": [
+          "${brokerage}"
+        ],
+        "MLS Username": "${mLSUsername}",
+        "MLS Password": "${mLSPassword}",
+        "System": [
+          "${system}"
+        ],
+        "System Username": "${systemUsername}",
+        "System Password": "${systemPassword}",
+        "License Number": "${licenseNumber}",
+        "Transactions 8": "${transactions8}",
+        "Transactions 2": [
+          "${transactions2}"
+        ],
+        "Broker Fee": ${brokerFee}
+      }
+    }
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Contacts Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Contacts',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class RetriveContactsRecordCall {
+  Future<ApiCallResponse> call({
+    int? maxRecords = 100,
+    String? recordId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Retrive Contacts Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Contacts/${recordId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class ListContactsRecordsCall {
+  Future<ApiCallResponse> call({
+    String? maxRecords = '',
+    String? filterByFormula = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Contacts Records',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Contacts',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {
+        'maxRecords': maxRecords,
+        'filterByFormula': filterByFormula,
+      },
+      returnBody: true,
+    );
+  }
+
+  dynamic records(dynamic response) => getJsonField(
+        response,
+        r'''$.records''',
+        true,
+      );
+  dynamic recordIds(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].id''',
+        true,
+      );
+  dynamic createdTime(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].createdTime''',
+        true,
+      );
+  dynamic fields(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields''',
+        true,
+      );
+  dynamic names(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Name''',
+        true,
+      );
+  dynamic roles(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Role''',
+        true,
+      );
+  dynamic calculations(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Calculation''',
+        true,
+      );
+}
+
+class ListInboxRecordsCall {
+  Future<ApiCallResponse> call({
+    int? maxRecords = 100,
+    String? filterByFormula = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Inbox Records',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Inbox',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {
+        'maxRecords': maxRecords,
+        'filterByFormula': filterByFormula,
+      },
+      returnBody: true,
+    );
+  }
+
+  dynamic recordsList(dynamic response) => getJsonField(
+        response,
+        r'''$.records''',
+        true,
+      );
+  dynamic recordIdList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].id''',
+        true,
+      );
+  dynamic fieldsList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields''',
+        true,
+      );
+  dynamic attachmentsList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Attachments''',
+        true,
+      );
+  dynamic attachmentUrlsList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Attachments[:].url''',
+        true,
+      );
+  dynamic addressList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Address''',
+        true,
+      );
+  dynamic tagsList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Tags''',
+        true,
+      );
+  dynamic sourceList(dynamic response) => getJsonField(
+        response,
+        r'''$.records[:].fields.Source''',
+        true,
+      );
+}
+
+/// End Airtable APIs Group Code
 
 class BridgeDataOutputCall {
   static Future<ApiCallResponse> call({
@@ -51,22 +674,16 @@ class SearchByMLSorSTREETCall {
         r'''$..Coordinates''',
         true,
       );
-}
-
-class AirtableTestCall {
-  static Future<ApiCallResponse> call() {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Airtable Test',
-      apiUrl:
-          'https://api.airtable.com/v0/appQu29ahm5ITgrwH/Transactions?view=Participants%20%F0%9F%91%AA',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer keyiAe5OpxnQbEjvx',
-      },
-      params: {},
-      returnBody: true,
-    );
-  }
+  static dynamic addressList(dynamic response) => getJsonField(
+        response,
+        r'''$..UnparsedAddress''',
+        true,
+      );
+  static dynamic bundle(dynamic response) => getJsonField(
+        response,
+        r'''$.bundle''',
+        true,
+      );
 }
 
 class MyGateWayHookCall {
@@ -88,280 +705,6 @@ class MyGateWayHookCall {
   }
 }
 
-class SellerIntakeFormCall {
-  static Future<ApiCallResponse> call({
-    String? address = '',
-    String? status = '',
-    int? listingPrice,
-    String? arrayOfTypesOfFinancingAccepted = '',
-    String? listDateActiveDate = '',
-    String? listingExpirationDate = '',
-    String? newOurClientNameBform = '',
-    String? newOurclientEmailBform = '',
-    String? newOurClientPhoneBform = '',
-    double? totalCommission,
-    double? cooperatingBrokerCommission,
-    String? additionalTerms = '',
-    String? notes = '',
-    String? listingDocs = '',
-    String? aSISContractAndEtc = '',
-    String? ourClientBuyerOrSELLERForm = '',
-    String? arrayOfParticipantsOurAgent = '',
-  }) {
-    final body = '''
-{
-  "records": [
-    {
-      "fields": {
-        "Participants (OurAgent)": [
-          "${arrayOfParticipantsOurAgent}"
-        ],
-        "🏡 Address": "${address}",
-        "⚡❗Status": "${status}",
-        "Listing Price": ${listingPrice},
-        "Types of Financing Accepted": [
-          "${arrayOfTypesOfFinancingAccepted}"
-        ],
-        "List Date (Active Date)": "${listDateActiveDate}",
-        "Listing Expiration Date": "${listingExpirationDate}",
-        "✔OurClient (Buyer/SELLER Form)": "${ourClientBuyerOrSELLERForm}",
-        "✔New OurClient Name (Bform)": "${newOurClientNameBform}",
-        "✔New Ourclient Email (Bform)": "${newOurclientEmailBform}",
-        "✔New OurClient Phone (Bform)": "${newOurClientPhoneBform}",
-        "Total Commission": ${totalCommission},
-        "Cooperating Broker Commission": ${cooperatingBrokerCommission},
-        "Additional Terms": "${additionalTerms}",
-        "Notes": "${notes}",
-        "📝Listing Docs": [
-          {
-            "url": "${listingDocs}"
-          }
-        ],
-        "⭐ AS-IS Contract & etc": [
-          {
-            "url": "${aSISContractAndEtc}"
-          }
-        ]
-      }
-    }
-  ]
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Seller Intake Form',
-      apiUrl: 'https://api.airtable.com/v0/appHdfZAMkLuAq0ad/Transactions',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer keyZqynOEZ18Oqocr',
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: body,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-    );
-  }
-
-  static dynamic createdTime(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].createdTime''',
-      );
-  static dynamic transactionRecordID(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].id''',
-      );
-  static dynamic transactionRecord(dynamic response) => getJsonField(
-        response,
-        r'''$.records''',
-        true,
-      );
-  static dynamic transactionRecordFields(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields''',
-      );
-}
-
-class BuyerIntakeFormCall {
-  static Future<ApiCallResponse> call({
-    String? mlsId = '',
-    String? status = '',
-    int? purchasePrice,
-    int? escrowAmount,
-    String? typeOfFinancing = '',
-    String? financedAmount = '',
-    String? offerExpirationDate = '',
-    String? closingDate = '',
-    int? inspectionDays,
-    String? formEntry = '',
-    String? ourClientBuyerOrSELLERForm = '',
-    String? newOurClientNameBform = '',
-    String? newOurclientEmailBform = '',
-    String? newOurClientPhoneBform = '',
-    String? additionalTerms = '',
-    String? internalNotes = '',
-    String? pDFPreApprovalOrProofOfFundsPOFPrefill = '',
-    String? participantsOurAgent = '',
-  }) {
-    final body = '''
-{
-  "records": [
-    {
-      "fields": {
-        "Participants (OurAgent)": [
-          "${participantsOurAgent}"
-        ],
-        "🏡 Address": "${mlsId}",
-        "⚡❗Status": "${status}",
-        "💵 Purchase Price": ${purchasePrice},
-        "💰 Escrow Amount": ${escrowAmount},
-        "Type of financing": "${typeOfFinancing}",
-        "Down Payment": "${financedAmount}",
-        "✔OurClient (Buyer/SELLER Form)": [
-          "${ourClientBuyerOrSELLERForm}"
-        ],
-        "✔New OurClient Name (Bform)": "${newOurClientNameBform}",
-        "✔New Ourclient Email (Bform)": "${newOurclientEmailBform}",
-        "✔New OurClient Phone (Bform)": "${newOurClientPhoneBform}",
-        "Offer Expiration Date": "${offerExpirationDate}",
-        "🥂 Closing Date": "${closingDate}",
-        "Additional Terms": "${additionalTerms}",
-        "Inspection Days": ${inspectionDays},
-        "👪Form Entry": "${formEntry}",
-        "Notes": "${internalNotes}",
-        "💲 Pre Approval or Proof of Funds (POF)": [
-          {
-            "url": "${pDFPreApprovalOrProofOfFundsPOFPrefill}"
-          }
-        ]
-      }
-    }
-  ]
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Buyer Intake Form',
-      apiUrl: 'https://api.airtable.com/v0/appHdfZAMkLuAq0ad/Transactions',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer keyZqynOEZ18Oqocr',
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: body,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-    );
-  }
-
-  static dynamic createdTime(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].createdTime''',
-      );
-  static dynamic transactionRecordID(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].id''',
-      );
-  static dynamic transactionRecord(dynamic response) => getJsonField(
-        response,
-        r'''$.records''',
-        true,
-      );
-  static dynamic transactionRecordFields(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields''',
-      );
-  static dynamic status(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.⚡❗Status''',
-      );
-  static dynamic notes(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Notes''',
-      );
-  static dynamic brokerageID(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Brokerage[:].id''',
-      );
-  static dynamic brokerage(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Brokerage''',
-        true,
-      );
-  static dynamic brokerageImageURL(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Brokerage[:].url''',
-      );
-  static dynamic brokerageImageFileName(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Brokerage[:].filename''',
-      );
-  static dynamic broker(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.Broker''',
-        true,
-      );
-}
-
-class GetTransactionsCall {
-  static Future<ApiCallResponse> call({
-    int? maxRecords = 100,
-    String? fields = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'GetTransactions',
-      apiUrl: 'https://api.airtable.com/v0/appHdfZAMkLuAq0ad/Transactions',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer keyZqynOEZ18Oqocr',
-        'Content-Type': 'application/json',
-      },
-      params: {
-        'maxRecords': maxRecords,
-      },
-      returnBody: true,
-    );
-  }
-
-  static dynamic statusList(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields.⚡❗Status''',
-        true,
-      );
-  static dynamic idList(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].id''',
-        true,
-      );
-  static dynamic recordsList(dynamic response) => getJsonField(
-        response,
-        r'''$.records''',
-        true,
-      );
-  static dynamic fieldsList(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields''',
-        true,
-      );
-  static dynamic addressesList(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:]..fields['🏡 Address']''',
-        true,
-      );
-  static dynamic mls(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:]..fields['MLS']''',
-        true,
-      );
-  static dynamic attachments(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields['💲 Pre Approval or Proof of Funds (POF)', 'Property Image', '⭐ AS-IS Contract & etc', '📃 Broker Synopsis','📂 Misc Docs','🤵 Agent Image Test1', 'Brokerage']''',
-        true,
-      );
-  static dynamic images(dynamic response) => getJsonField(
-        response,
-        r'''$.records[:].fields['Property Image']..url''',
-        true,
-      );
-}
-
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
@@ -376,4 +719,13 @@ class ApiPagingParams {
   @override
   String toString() =>
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
+}
+
+String _serializeList(List? list) {
+  list ??= <String>[];
+  try {
+    return json.encode(list);
+  } catch (_) {
+    return '[]';
+  }
 }

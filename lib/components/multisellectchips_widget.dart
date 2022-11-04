@@ -69,94 +69,100 @@ class _MultisellectchipsWidgetState extends State<MultisellectchipsWidget>
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Material(
-            color: Colors.transparent,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Container(
-              width: 330,
-              height: 80,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).secondaryColor,
-                  width: 2,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+              child: Material(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 10, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Types of Financing Accepted ',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                child: Container(
+                  width: 330,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: FlutterFlowTheme.of(context).secondaryColor,
+                      width: 2,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 10, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Types of Financing Accepted ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
                                       fontFamily: 'Nunito',
                                       fontSize: 14,
                                     ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          FlutterFlowChoiceChips(
-                            options: [
-                              ChipData('FHA Eligible'),
-                              ChipData('VA Eligible'),
-                              ChipData('Conventional'),
-                              ChipData('Cash')
+                              ),
                             ],
-                            onChanged: (val) =>
-                                setState(() => choiceChipsValues = val),
-                            selectedChipStyle: ChipStyle(
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).tertiaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.white,
-                                  ),
-                              iconColor: Colors.white,
-                              iconSize: 18,
-                              elevation: 4,
-                            ),
-                            unselectedChipStyle: ChipStyle(
-                              backgroundColor: Colors.white,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText2
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Color(0xFF323B45),
-                                  ),
-                              iconColor: Color(0xFF323B45),
-                              iconSize: 18,
-                              elevation: 4,
-                            ),
-                            chipSpacing: 10,
-                            multiselect: true,
-                            initialized: choiceChipsValues != null,
-                            alignment: WrapAlignment.start,
                           ),
-                        ],
-                      ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FlutterFlowChoiceChips(
+                                options: [
+                                  ChipData('FHA Eligible'),
+                                  ChipData('VA Eligible'),
+                                  ChipData('Conventional'),
+                                  ChipData('Cash')
+                                ],
+                                onChanged: (val) =>
+                                    setState(() => choiceChipsValues = val),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Nunito',
+                                        color: Colors.white,
+                                      ),
+                                  iconColor: Colors.white,
+                                  iconSize: 18,
+                                  elevation: 4,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor: Colors.white,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Nunito',
+                                        color: Color(0xFF323B45),
+                                      ),
+                                  iconColor: Color(0xFF323B45),
+                                  iconSize: 18,
+                                  elevation: 4,
+                                ),
+                                chipSpacing: 10,
+                                multiselect: true,
+                                initialized: choiceChipsValues != null,
+                                alignment: WrapAlignment.start,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

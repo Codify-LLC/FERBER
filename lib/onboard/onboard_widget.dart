@@ -380,6 +380,7 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                             color: Colors.transparent,
                             width: 1,
                           ),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                     ),

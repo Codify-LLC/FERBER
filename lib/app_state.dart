@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:csv/csv.dart';
 import 'flutter_flow/lat_lng.dart';
+import 'dart:convert';
 
 class FFAppState {
   static final FFAppState _instance = FFAppState._internal();
@@ -95,6 +96,23 @@ class FFAppState {
   }
 
   bool showMenu = false;
+
+  String currentDisplayRecordID = '';
+
+  List<dynamic> SellerFormContactsList = [];
+
+  DateTime? ListingDateActiveDate =
+      DateTime.fromMillisecondsSinceEpoch(1814380200000);
+
+  DateTime? ListingExpirationDate =
+      DateTime.fromMillisecondsSinceEpoch(1814380200000);
+
+  List<dynamic> BuyerFormContactsList = [];
+
+  DateTime? OfferExpirationDate =
+      DateTime.fromMillisecondsSinceEpoch(1814380200000);
+
+  DateTime? ClosingDate = DateTime.fromMillisecondsSinceEpoch(1814380200000);
 }
 
 LatLng? _latLngFromString(String? val) {

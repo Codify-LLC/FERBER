@@ -78,51 +78,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomeWidget() : OnboardWidget(),
           routes: [
             FFRoute(
-              name: 'login',
-              path: 'login',
-              builder: (context, params) => LoginWidget(),
-            ),
-            FFRoute(
-              name: 'register',
-              path: 'register',
-              builder: (context, params) => RegisterWidget(),
-            ),
-            FFRoute(
-              name: 'PropertyDetails',
-              path: 'propertyDetails',
-              requireAuth: true,
-              builder: (context, params) => PropertyDetailsWidget(
-                address: params.getParam('address', ParamType.String),
-                status: params.getParam('status', ParamType.String),
-                displayDate: params.getParam('displayDate', ParamType.String),
-                transactionsRecord:
-                    params.getParam('transactionsRecord', ParamType.JSON),
-                imagePath: params.getParam('imagePath', ParamType.String),
-                purchasePrice:
-                    params.getParam('purchasePrice', ParamType.String),
-              ),
-            ),
-            FFRoute(
-              name: 'AddServices',
-              path: 'addServices',
-              requireAuth: true,
-              builder: (context, params) => AddServicesWidget(
-                isBuyer: params.getParam('isBuyer', ParamType.bool),
-                isSeller: params.getParam('isSeller', ParamType.bool),
-              ),
-            ),
-            FFRoute(
               name: 'onboard',
               path: 'onboard',
               builder: (context, params) => OnboardWidget(),
-            ),
-            FFRoute(
-              name: 'Home',
-              path: 'home',
-              requireAuth: true,
-              builder: (context, params) => HomeWidget(
-                defaultPage: params.getParam('defaultPage', ParamType.String),
-              ),
             ),
             FFRoute(
               name: 'Subscribtions',
@@ -146,60 +104,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'BuyerIntakeStep1',
-              path: 'buyerIntakeStep1',
-              requireAuth: true,
-              builder: (context, params) => BuyerIntakeStep1Widget(
-                mLSID: params.getParam('mLSID', ParamType.String),
-                participantsID:
-                    params.getParam('participantsID', ParamType.int),
-                address: params.getParam('address', ParamType.String),
-                coordinates: params.getParam('coordinates', ParamType.LatLng),
-              ),
-            ),
-            FFRoute(
-              name: 'SellerIntakeStep1',
-              path: 'sellerIntakeStep1',
-              requireAuth: true,
-              builder: (context, params) => SellerIntakeStep1Widget(
-                address: params.getParam('address', ParamType.String),
-                participantsID:
-                    params.getParam('participantsID', ParamType.int),
-                mlsID: params.getParam('mlsID', ParamType.String),
-              ),
-            ),
-            FFRoute(
-              name: 'modifyintakestep1',
-              path: 'modifyintakestep1',
-              requireAuth: true,
-              builder: (context, params) => Modifyintakestep1Widget(
-                address: params.getParam('address', ParamType.String),
-                participantsID:
-                    params.getParam('participantsID', ParamType.int),
-                mlsID: params.getParam('mlsID', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'EditSettings',
               path: 'editSettings',
               requireAuth: true,
               builder: (context, params) => EditSettingsWidget(),
             ),
             FFRoute(
-              name: 'AddContectsAll',
-              path: 'addContectsAll',
+              name: 'Home',
+              path: 'home',
               requireAuth: true,
-              builder: (context, params) => AddContectsAllWidget(
-                participantid: params.getParam('participantid', ParamType.int),
-                contecID: params.getParam('contecID', ParamType.int),
-                isParticipent: params.getParam('isParticipent', ParamType.bool),
+              builder: (context, params) => HomeWidget(
+                defaultPage: params.getParam('defaultPage', ParamType.String),
               ),
             ),
             FFRoute(
-              name: 'AllContactsall',
-              path: 'allContactsall',
+              name: 'login',
+              path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'AddServices',
+              path: 'addServices',
               requireAuth: true,
-              builder: (context, params) => AllContactsallWidget(),
+              builder: (context, params) => AddServicesWidget(
+                isBuyer: params.getParam('isBuyer', ParamType.bool),
+                isSeller: params.getParam('isSeller', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'register',
+              path: 'register',
+              builder: (context, params) => RegisterWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -377,8 +312,9 @@ class FFRoute {
                   child: Center(
                     child: Image.asset(
                       'assets/images/ft_logo.png',
-                      width: 90,
-                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 )
@@ -417,5 +353,9 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(
+        hasTransition: true,
+        transitionType: PageTransitionType.fade,
+        duration: Duration(milliseconds: 0),
+      );
 }

@@ -22,21 +22,30 @@ class _EmptyWidgetState extends State<EmptyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional(0, 0),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset(
-            'assets/lottie_animations/empty.json',
-            width: 400,
-            height: 400,
-            fit: BoxFit.cover,
-            frameRate: FrameRate(60),
-            animate: true,
-          ),
-        ],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 1,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: Align(
+        alignment: AlignmentDirectional(0, 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Lottie.asset(
+                'assets/lottie_animations/empty.json',
+                width: 400,
+                height: 400,
+                fit: BoxFit.contain,
+                frameRate: FrameRate(60),
+                animate: true,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

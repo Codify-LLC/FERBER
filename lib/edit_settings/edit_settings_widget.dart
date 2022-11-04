@@ -568,9 +568,11 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget> {
                                             child: SwitchListTile.adaptive(
                                               value: switchListTileValue ??=
                                                   true,
-                                              onChanged: (newValue) => setState(
-                                                  () => switchListTileValue =
-                                                      newValue),
+                                              onChanged: (newValue) async {
+                                                setState(() =>
+                                                    switchListTileValue =
+                                                        newValue!);
+                                              },
                                               title: Text(
                                                 'Recieve Notifications',
                                                 style: FlutterFlowTheme.of(

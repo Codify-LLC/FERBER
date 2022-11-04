@@ -64,7 +64,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Image.asset(
-                            'assets/images/FT-LOGO-3.png',
+                            'assets/images/ft_logo.png',
                             width: 250,
                             height: 75,
                             fit: BoxFit.contain,
@@ -77,7 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         constraints: BoxConstraints(
-                          maxWidth: 500,
+                          maxWidth: 400,
                         ),
                         decoration: BoxDecoration(
                           color: Color(0xFFFAFAFA),
@@ -94,7 +94,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      12, 20, 12, 10),
+                                      12, 20, 12, 20),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -195,18 +195,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         .secondaryText,
                                               ),
                                           textAlign: TextAlign.start,
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Email address is required';
-                                            }
-
-                                            if (!RegExp(
-                                                    kTextValidatorEmailRegex)
-                                                .hasMatch(val)) {
-                                              return 'Has to be a valid email address.';
-                                            }
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -299,17 +287,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                               ),
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Password is required';
-                                            }
-
-                                            if (val.length < 8) {
-                                              return 'Requires at least 8 characters.';
-                                            }
-
-                                            return null;
-                                          },
                                         ),
                                       ),
                                     ],
@@ -317,7 +294,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 10, 20, 16),
+                                      60, 30, 60, 10),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -344,7 +321,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           text: 'Login',
                                           options: FFButtonOptions(
                                             width: 120,
-                                            height: 45,
+                                            height: 40,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             textStyle:
@@ -369,7 +346,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 0, 20, 26),
+                                      60, 0, 60, 26),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -396,7 +373,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           options: FFButtonOptions(
                                             width: 120,
                                             height: 45,
-                                            color: Colors.white,
+                                            color: Colors.transparent,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .title3
@@ -409,10 +386,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              width: 1.5,
+                                              color: Colors.transparent,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -441,7 +415,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 0, 20),
+                                      0, 6, 0, 20),
                                   child: FFButtonWidget(
                                     onPressed: () {
                                       print('ButtonForgotPassword pressed ...');
@@ -450,7 +424,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     options: FFButtonOptions(
                                       width: 220,
                                       height: 45,
-                                      color: Colors.white,
+                                      color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
@@ -461,9 +435,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           ),
                                       elevation: 0,
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .gray200,
-                                        width: 1,
+                                        color: Colors.transparent,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
