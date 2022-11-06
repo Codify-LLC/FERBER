@@ -669,15 +669,14 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
                             size: 20,
                           ),
                         ),
-                        SelectionArea(
-                            child: Text(
+                        Text(
                           'Add a new contact if it doesn\'t exist in the database',
                           style:
                               FlutterFlowTheme.of(context).subtitle2.override(
                                     fontFamily: 'Lato',
                                     fontSize: 10,
                                   ),
-                        )),
+                        ),
                       ],
                     ),
                     Padding(

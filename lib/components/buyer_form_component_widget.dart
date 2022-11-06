@@ -831,8 +831,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                                             FontWeight.bold,
                                                       ),
                                                 ),
-                                                SelectionArea(
-                                                    child: Text(
+                                                Text(
                                                   dateTimeFormat(
                                                     'yMd',
                                                     datePicked1,
@@ -850,7 +849,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                                                     context)
                                                                 .secondaryText,
                                                       ),
-                                                )),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -949,8 +948,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                                             FontWeight.bold,
                                                       ),
                                                 ),
-                                                SelectionArea(
-                                                    child: Text(
+                                                Text(
                                                   dateTimeFormat(
                                                     'yMd',
                                                     datePicked2,
@@ -968,7 +966,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                                                     context)
                                                                 .secondaryText,
                                                       ),
-                                                )),
+                                                ),
                                               ],
                                             ),
                                           ),

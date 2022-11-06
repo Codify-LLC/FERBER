@@ -101,8 +101,7 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                                     size: 20,
                                   ),
                                 ),
-                                SelectionArea(
-                                    child: Text(
+                                Text(
                                   'Start by choosing a type',
                                   style: FlutterFlowTheme.of(context)
                                       .subtitle2
@@ -110,7 +109,7 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                                         fontFamily: 'Lato',
                                         fontSize: 20,
                                       ),
-                                )),
+                                ),
                               ],
                             ),
                           ),
