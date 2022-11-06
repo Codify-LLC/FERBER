@@ -101,25 +101,11 @@ class _AllContactsWidgetState extends State<AllContactsWidget>
             child: Material(
               color: Colors.transparent,
               elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
-                ),
-              ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 1,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16),
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
-                  ),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

@@ -113,6 +113,8 @@ class FFAppState {
       DateTime.fromMillisecondsSinceEpoch(1814380200000);
 
   DateTime? ClosingDate = DateTime.fromMillisecondsSinceEpoch(1814380200000);
+
+  List<String> UploadedPOFs = [];
 }
 
 LatLng? _latLngFromString(String? val) {

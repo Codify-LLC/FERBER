@@ -12,14 +12,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TeamProfileWidget extends StatefulWidget {
-  const TeamProfileWidget({Key? key}) : super(key: key);
+class PeopleWidget extends StatefulWidget {
+  const PeopleWidget({Key? key}) : super(key: key);
 
   @override
-  _TeamProfileWidgetState createState() => _TeamProfileWidgetState();
+  _PeopleWidgetState createState() => _PeopleWidgetState();
 }
 
-class _TeamProfileWidgetState extends State<TeamProfileWidget>
+class _PeopleWidgetState extends State<PeopleWidget>
     with TickerProviderStateMixin {
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(
@@ -102,7 +102,6 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
     ),
   };
   double? ratingBarValue1;
-  double? ratingBarValue2;
 
   @override
   void initState() {
@@ -439,211 +438,6 @@ class _TeamProfileWidgetState extends State<TeamProfileWidget>
                           ],
                         ),
                       ),
-                    Container(
-                      width: 200,
-                      height: MediaQuery.of(context).size.height * 1,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      child: Visibility(
-                        visible: responsiveVisibility(
-                          context: context,
-                          tabletLandscape: false,
-                          desktop: false,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        'Job Pierre',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title3
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                    ),
-                                    FlutterFlowIconButton(
-                                      borderColor: Colors.transparent,
-                                      borderRadius: 30,
-                                      borderWidth: 1,
-                                      buttonSize: 40,
-                                      icon: FaIcon(
-                                        FontAwesomeIcons.solidEdit,
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        size: 18,
-                                      ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Text(
-                                        'Agent',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .lineColor,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Align(
-                                        alignment: AlignmentDirectional(0, 0),
-                                        child: RatingBar.builder(
-                                          onRatingUpdate: (newValue) =>
-                                              setState(() =>
-                                                  ratingBarValue2 = newValue),
-                                          itemBuilder: (context, index) => Icon(
-                                            Icons.star_rounded,
-                                            color: Color(0xFFFFA130),
-                                          ),
-                                          direction: Axis.horizontal,
-                                          initialRating: ratingBarValue2 ??= 5,
-                                          unratedColor: Color(0xFF95A1AC),
-                                          itemCount: 5,
-                                          itemSize: 16,
-                                          glowColor: Color(0xFFFFA130),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '115 Reviews',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .lineColor,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 4, 0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: Image.asset(
-                                          'assets/images/FT-LOGO-3.png',
-                                          width: 20,
-                                          height: 20,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 4, 0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: Image.asset(
-                                          'assets/images/284720-resized.jpg',
-                                          width: 20,
-                                          height: 20,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 4, 0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: Image.asset(
-                                          'assets/images/Devivo.PNG',
-                                          width: 20,
-                                          height: 20,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 0, 0, 0),
-                                        child: Text(
-                                          '3 Teammates',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lato',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .lineColor,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),

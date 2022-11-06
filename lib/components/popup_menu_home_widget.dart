@@ -1,7 +1,11 @@
 import '../components/buyer_and_seller_form_widget.dart';
+import '../components/services_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,10 +16,61 @@ class PopupMenuHomeWidget extends StatefulWidget {
   _PopupMenuHomeWidgetState createState() => _PopupMenuHomeWidgetState();
 }
 
-class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget> {
+class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'rowOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      applyInitialState: true,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(100, -200),
+          end: Offset(0, 0),
+        ),
+      ],
+    ),
+    'rowOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 1,
+          end: 0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 0),
+          end: Offset(100, -200),
+        ),
+      ],
+    ),
+  };
+
   @override
   void initState() {
     super.initState();
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -25,8 +80,8 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget> {
     return Align(
       alignment: AlignmentDirectional(1, 1),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
@@ -87,6 +142,14 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget> {
                               ),
                               InkWell(
                                 onTap: () async {
+                                  if (animationsMap[
+                                          'rowOnActionTriggerAnimation'] !=
+                                      null) {
+                                    await animationsMap[
+                                            'rowOnActionTriggerAnimation']!
+                                        .controller
+                                        .forward(from: 0.0);
+                                  }
                                   Navigator.pop(context);
                                 },
                                 child: Icon(
@@ -268,7 +331,18 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    context.pushNamed('AddServices');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: ServicesWidget(),
+                                        );
+                                      },
+                                    ).then((value) => setState(() {}));
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -358,7 +432,11 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget> {
                 ),
               ),
             ],
-          ),
+          )
+              .animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!)
+              .animateOnActionTrigger(
+                animationsMap['rowOnActionTriggerAnimation']!,
+              ),
           if (responsiveVisibility(
             context: context,
             desktop: false,

@@ -2,7 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/buyer_and_seller_form_widget.dart';
 import '../components/custom_auto_complete_widget.dart';
-import '../components/empty_widget.dart';
+import '../components/property_details_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -69,8 +69,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
                   return Center(
-                    child: Center(
-                      child: EmptyWidget(),
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: SpinKitFadingCircle(
+                        color: Color(0xFFD9180E),
+                        size: 50,
+                      ),
                     ),
                   );
                 }
@@ -655,29 +660,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     recordItem,
                                                     r'''$.id''',
                                                   ).toString());
-                                              if (Navigator.of(context)
-                                                  .canPop()) {
-                                                context.pop();
-                                              }
-                                              context.pushNamed(
-                                                'Home',
-                                                queryParams: {
-                                                  'defaultPage': serializeParam(
-                                                    'PropertyDetails',
-                                                    ParamType.String,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                    duration: Duration(
-                                                        milliseconds: 0),
-                                                  ),
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        PropertyDetailsWidget(
+                                                      recordId: FFAppState()
+                                                          .currentDisplayRecordID,
+                                                    ),
+                                                  );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Material(
                                               color: Colors.transparent,

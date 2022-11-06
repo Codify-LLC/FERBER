@@ -332,15 +332,10 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
             child: Material(
               color: Colors.transparent,
               elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(24),
                   ),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
@@ -351,7 +346,7 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
                           width: MediaQuery.of(context).size.width,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).tertiaryColor,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -813,7 +808,7 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
                                                           backgroundColor:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .tertiaryColor,
+                                                                  .primaryColor,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1249,41 +1244,39 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 16, 0, 12),
-                                        child: FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
-                                          text: 'Create Now',
-                                          options: FFButtonOptions(
-                                            width: 250,
-                                            height: 70,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .title3
-                                                    .override(
-                                                      fontFamily: 'Nunito',
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      fontSize: 16,
-                                                    ),
-                                            elevation: 0,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(2),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 16, 0, 12),
+                                      child: FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: 'Next Step',
+                                        options: FFButtonOptions(
+                                          width: 250,
+                                          height: 50,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                fontSize: 16,
+                                              ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
                                           ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'buttonOnPageLoadAnimation']!),
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'buttonOnPageLoadAnimation']!),
                                     ),
                                     Text(
                                       'back',

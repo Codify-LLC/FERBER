@@ -1,13 +1,11 @@
-import '../components/details_widget.dart';
-import '../components/end_drawer_widget.dart';
 import '../components/events_widget.dart';
 import '../components/home_calendar_widget.dart';
 import '../components/home_page_widget.dart';
 import '../components/inbox_widget.dart';
+import '../components/people_widget.dart';
 import '../components/popup_menu_home_widget.dart';
 import '../components/property_details_widget.dart';
-import '../components/stats_widget.dart';
-import '../components/team_profile_widget.dart';
+import '../components/statistics_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -66,10 +64,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
-          endDrawer: Drawer(
-            elevation: 16,
-            child: EndDrawerWidget(),
-          ),
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Container(
@@ -180,8 +174,58 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ChipData(
                                                   'Tools', Icons.handyman_sharp)
                                             ],
-                                            onChanged: (val) => setState(() =>
-                                                choiceChipsValue1 = val?.first),
+                                            onChanged: (val) async {
+                                              setState(() => choiceChipsValue1 =
+                                                  val?.first);
+                                              if (isWeb
+                                                  ? (choiceChipsValue1 ==
+                                                      'Inbox')
+                                                  : (choiceChipsValue2 ==
+                                                      'Inbox')) {
+                                                showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding:
+                                                          MediaQuery.of(context)
+                                                              .viewInsets,
+                                                      child: InboxWidget(),
+                                                    );
+                                                  },
+                                                ).then(
+                                                    (value) => setState(() {}));
+                                              } else {
+                                                if ((isWeb &&
+                                                        (choiceChipsValue1 ==
+                                                            'PropertyDetails')) ||
+                                                    (!isWeb &&
+                                                        (choiceChipsValue2 ==
+                                                            'PropertyDetails'))) {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child:
+                                                            PropertyDetailsWidget(
+                                                          recordId: FFAppState()
+                                                              .currentDisplayRecordID,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
+                                                }
+                                              }
+                                            },
                                             selectedChipStyle: ChipStyle(
                                               backgroundColor:
                                                   FlutterFlowTheme.of(context)
@@ -236,22 +280,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ),
                               ),
                             if (isWeb
-                                ? (choiceChipsValue1 == 'Home')
-                                : (choiceChipsValue2 == 'Home'))
+                                ? ((choiceChipsValue1 != 'Events') &&
+                                    (choiceChipsValue1 != 'Statistics') &&
+                                    (choiceChipsValue1 != 'People'))
+                                : ((choiceChipsValue2 != 'Events') &&
+                                    (choiceChipsValue2 != 'Statistics') &&
+                                    (choiceChipsValue2 != 'People')))
                               Expanded(
                                 child: HomePageWidget(),
-                              ),
-                            if (isWeb
-                                ? (choiceChipsValue1 == 'Inbox')
-                                : (choiceChipsValue2 == 'Inbox'))
-                              Expanded(
-                                child: InboxWidget(),
                               ),
                             if (isWeb
                                 ? (choiceChipsValue1 == 'Statistics')
                                 : (choiceChipsValue2 == 'Statistics'))
                               Expanded(
-                                child: StatsWidget(),
+                                child: StatisticsWidget(),
                               ),
                             if (isWeb
                                 ? (choiceChipsValue1 == 'Events')
@@ -263,22 +305,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ? (choiceChipsValue1 == 'People')
                                 : (choiceChipsValue2 == 'People'))
                               Expanded(
-                                child: TeamProfileWidget(),
-                              ),
-                            if ((isWeb &&
-                                    (choiceChipsValue1 == 'PropertyDetails')) ||
-                                (!isWeb &&
-                                    (choiceChipsValue2 == 'PropertyDetails')))
-                              Expanded(
-                                child: PropertyDetailsWidget(
-                                  recordId: FFAppState().currentDisplayRecordID,
-                                ),
-                              ),
-                            if (isWeb
-                                ? (choiceChipsValue1 == 'Details')
-                                : (choiceChipsValue2 == 'Details'))
-                              Expanded(
-                                child: DetailsWidget(),
+                                child: PeopleWidget(),
                               ),
                           ],
                         ),
@@ -374,76 +401,103 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         ),
                     ],
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(1, 1),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Row(
+                  if (isWeb
+                      ? ((choiceChipsValue1 != 'Events') &&
+                          (choiceChipsValue1 != 'Statistics') &&
+                          (choiceChipsValue1 != 'People') &&
+                          (widget.defaultPage != 'Property Details'))
+                      : ((choiceChipsValue2 != 'Events') &&
+                          (choiceChipsValue2 != 'Statistics') &&
+                          (choiceChipsValue2 != 'People') &&
+                          (widget.defaultPage != 'Property Details')))
+                    Align(
+                      alignment: AlignmentDirectional(1, -1),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Align(
-                              alignment: AlignmentDirectional(1, 1),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 16, 16),
-                                child: Material(
-                                  color: Colors.transparent,
-                                  elevation: 10,
-                                  shape: const CircleBorder(),
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          barrierColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: PopupMenuHomeWidget(),
-                                            );
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(1, 1),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 16, 16),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Container(
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              barrierColor: Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            1,
+                                                    child:
+                                                        PopupMenuHomeWidget(),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
                                           },
-                                        ).then((value) => setState(() {}));
-                                      },
-                                      child: Icon(
-                                        Icons.menu,
-                                        color: Colors.black,
-                                        size: 24,
+                                          child: Icon(
+                                            Icons.menu,
+                                            color: Colors.black,
+                                            size: 24,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
+                            if (responsiveVisibility(
+                              context: context,
+                              desktop: false,
+                            ))
+                              Container(
+                                width: 1,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.16,
+                                constraints: BoxConstraints(
+                                  maxHeight: 80,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                              ),
                           ],
                         ),
-                        if (responsiveVisibility(
-                          context: context,
-                          desktop: false,
-                        ))
-                          Container(
-                            width: 1,
-                            height: MediaQuery.of(context).size.height * 0.16,
-                            constraints: BoxConstraints(
-                              maxHeight: 80,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                      ],
+                      ),
                     ),
-                  ),
                   if ((isWeb
                           ? (choiceChipsValue1 == 'Home')
                           : (choiceChipsValue2 == 'Home')) &&

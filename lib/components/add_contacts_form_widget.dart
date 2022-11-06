@@ -226,17 +226,12 @@ class _AddContactsFormWidgetState extends State<AddContactsFormWidget>
               child: Material(
                 color: Colors.transparent,
                 elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 1,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBackground,
-                      borderRadius: BorderRadius.circular(25),
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),

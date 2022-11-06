@@ -95,15 +95,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SuccessNewWidget(),
             ),
             FFRoute(
-              name: 'SearchResultsMain',
-              path: 'searchResultsMain',
-              requireAuth: true,
-              builder: (context, params) => SearchResultsMainWidget(
-                searchType: params.getParam('searchType', ParamType.String),
-                searchValue: params.getParam('searchValue', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'EditSettings',
               path: 'editSettings',
               requireAuth: true,
@@ -121,15 +112,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'login',
               path: 'login',
               builder: (context, params) => LoginWidget(),
-            ),
-            FFRoute(
-              name: 'AddServices',
-              path: 'addServices',
-              requireAuth: true,
-              builder: (context, params) => AddServicesWidget(
-                isBuyer: params.getParam('isBuyer', ParamType.bool),
-                isSeller: params.getParam('isSeller', ParamType.bool),
-              ),
             ),
             FFRoute(
               name: 'register',

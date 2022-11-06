@@ -111,3 +111,19 @@ List<LatLng> dataToLatLang(
   }
   return array;
 }
+
+String toIso8601String(DateTime timestamp) {
+  // Add your function code here!
+  return DateFormat("yyyy-MM-dd").format(timestamp);
+}
+
+List<String> attachmentObjectFromUrls(List<String> urls) {
+  // Add your function code here!
+  List<String> attachments = [];
+  for (final url in urls) {
+    attachments.add({
+      "url": url,
+    }.toString());
+  }
+  return attachments;
+}

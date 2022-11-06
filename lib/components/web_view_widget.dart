@@ -32,7 +32,7 @@ class _WebViewWidgetState extends State<WebViewWidget> {
       bypass: true,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 1,
-      verticalScroll: true,
+      verticalScroll: false,
       horizontalScroll: false,
     );
   }

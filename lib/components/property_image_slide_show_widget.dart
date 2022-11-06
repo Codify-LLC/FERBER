@@ -38,7 +38,6 @@ class _PropertyImageSlideShowWidgetState
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.1,
           constraints: BoxConstraints(
             maxHeight: 150,
           ),
@@ -169,7 +168,8 @@ class _PropertyImageSlideShowWidgetState
                                     dotWidth: 12,
                                     dotHeight: 12,
                                     dotColor: Color(0xFF9E9E9E),
-                                    activeDotColor: Color(0xFF3F51B5),
+                                    activeDotColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                     paintStyle: PaintingStyle.fill,
                                   ),
                                 ),

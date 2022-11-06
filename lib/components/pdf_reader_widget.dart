@@ -33,7 +33,6 @@ class _PdfReaderWidgetState extends State<PdfReaderWidget> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.1,
           constraints: BoxConstraints(
             maxHeight: 150,
           ),
@@ -45,16 +44,14 @@ class _PdfReaderWidgetState extends State<PdfReaderWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
-                  child: Text(
-                    'PDF Viewer',
-                    style: FlutterFlowTheme.of(context).title1.override(
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
+                child: Text(
+                  'PDF Viewer',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).title1.override(
+                        fontFamily: 'Nunito',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
               FlutterFlowIconButton(

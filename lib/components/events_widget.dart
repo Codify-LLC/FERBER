@@ -416,7 +416,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                       children: [
                         Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                              EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
                           child: Container(
                             width: 100,
                             height: 100,

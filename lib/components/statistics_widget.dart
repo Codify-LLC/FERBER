@@ -10,14 +10,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class StatsWidget extends StatefulWidget {
-  const StatsWidget({Key? key}) : super(key: key);
+class StatisticsWidget extends StatefulWidget {
+  const StatisticsWidget({Key? key}) : super(key: key);
 
   @override
-  _StatsWidgetState createState() => _StatsWidgetState();
+  _StatisticsWidgetState createState() => _StatisticsWidgetState();
 }
 
-class _StatsWidgetState extends State<StatsWidget>
+class _StatisticsWidgetState extends State<StatisticsWidget>
     with TickerProviderStateMixin {
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(

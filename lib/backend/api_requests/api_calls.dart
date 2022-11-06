@@ -20,8 +20,8 @@ class AirtableAPIsGroup {
       ListTransactionsRecordsCall();
   static RetriveTransactionsRecordCall retriveTransactionsRecordCall =
       RetriveTransactionsRecordCall();
-  static CreateTransactionsRecordCall createTransactionsRecordCall =
-      CreateTransactionsRecordCall();
+  static CreateBothTransactionsRecordCall createBothTransactionsRecordCall =
+      CreateBothTransactionsRecordCall();
   static CreateContactsRecordCall createContactsRecordCall =
       CreateContactsRecordCall();
   static RetriveContactsRecordCall retriveContactsRecordCall =
@@ -29,6 +29,10 @@ class AirtableAPIsGroup {
   static ListContactsRecordsCall listContactsRecordsCall =
       ListContactsRecordsCall();
   static ListInboxRecordsCall listInboxRecordsCall = ListInboxRecordsCall();
+  static CreateInboxRecordCall createInboxRecordCall = CreateInboxRecordCall();
+  static CreateBuyersNewOfferTransactionRecordCall
+      createBuyersNewOfferTransactionRecordCall =
+      CreateBuyersNewOfferTransactionRecordCall();
 }
 
 class ListTransactionsRecordsCall {
@@ -306,7 +310,7 @@ class RetriveTransactionsRecordCall {
       );
 }
 
-class CreateTransactionsRecordCall {
+class CreateBothTransactionsRecordCall {
   Future<ApiCallResponse> call({
     String? address = '',
     String? preApprovalOrProofOfFundsPOF = '',
@@ -401,7 +405,7 @@ class CreateTransactionsRecordCall {
   ]
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'Create Transactions Record',
+      callName: 'Create Both Transactions Record',
       apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
       callType: ApiCallType.POST,
       headers: {
@@ -627,6 +631,106 @@ class ListInboxRecordsCall {
       );
 }
 
+class CreateInboxRecordCall {
+  Future<ApiCallResponse> call() {
+    final body = '''
+{
+  "fields": {
+    "Buyer Agent": "Jesus Garcia",
+    "Source": "Website",
+    "Type of Msg": "Inbound Offer on Listing",
+    "Tags": "Old",
+    "Address": [
+      "recvNDo0MCDEGv3Br"
+    ],
+    "Attachments": [
+      {
+        "url": "https://dl.airtable.com/.attachments/b0405c2823619ec4251f4b5de7890196/0274e541/1232LakePiedmont-Offer-DavisJones.pdf"
+      }
+    ],
+    "Purchase Price": 395000,
+    "Financing Type": "Conventional",
+    "Escrow Amount": 4000,
+    "Offer Expiration Date": "2022-04-18",
+    "Closing Date": "2022-05-20",
+    "Buyer's Agent Phone": "(386) 561-1276",
+    "Buyer's Agent": "jesus.garcia@live.com",
+    "Inspection Period": "7 days",
+    "Terms": "Appraisal gap - up to \$8,000 not to exceed the contract's purchase price",
+    "OurClient Email (from Address)": [
+      "recZkiWUQxMtasJPN",
+      "rec9zLOcTbsZKti6v"
+    ]
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Inbox Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Inbox',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class CreateBuyersNewOfferTransactionRecordCall {
+  Future<ApiCallResponse> call({
+    String? address = ' ',
+    double? purchasePrice = 0,
+    String? status = 'New Offer',
+    double? escrowDeposit = 0,
+    String? offerExpirationDate = '0000-00-00',
+    String? closingDate = '0000-00-00',
+    int? inspectionPeriod,
+    String? additionalTerms = ' ',
+    List<String>? preApprovalProofOfFundsList,
+    String? signature = ' ',
+    String? typeOfFinancing = 'VHA',
+  }) {
+    final preApprovalProofOfFunds = _serializeList(preApprovalProofOfFundsList);
+    final body = '''
+{
+  "fields": {
+    "👪 Type": "Buyer",
+    "🏡 Address": "${address}",
+    "💵 Purchase Price": ${purchasePrice},
+    "⚡❗Status": "${status}",
+    "💰 Escrow Amount": ${escrowDeposit},
+    "Offer Expiration Date": "${offerExpirationDate}",
+    "🥂 Closing Date": "${closingDate}",
+    "🔍 Inspection Deadline": "${inspectionPeriod}",
+    "Additional Terms": "${additionalTerms}",
+    "Type of financing": "${typeOfFinancing}",
+    "💲 Pre Approval or Proof of Funds (POF)": [
+      "${preApprovalProofOfFunds}"
+    ],
+    "Signature": [
+      {
+        "url": "${signature}"
+      }
+    ]
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Buyers New Offer Transaction Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
 /// End Airtable APIs Group Code
 
 class BridgeDataOutputCall {
@@ -682,6 +786,11 @@ class SearchByMLSorSTREETCall {
   static dynamic bundle(dynamic response) => getJsonField(
         response,
         r'''$.bundle''',
+        true,
+      );
+  static dynamic propertyPhoto(dynamic response) => getJsonField(
+        response,
+        r'''$..['Media'][0]['MediaURL']''',
         true,
       );
 }

@@ -1,11 +1,10 @@
 import '../backend/api_requests/api_calls.dart';
 import '../components/empty_search_result_widget.dart';
-import '../components/empty_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddressBridgeAPIResultsWidget extends StatefulWidget {
@@ -40,10 +39,12 @@ class _AddressBridgeAPIResultsWidgetState
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Center(
-            child: Center(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: EmptyWidget(),
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: SpinKitFadingCircle(
+                color: Color(0xFFD9180E),
+                size: 50,
               ),
             ),
           );
@@ -64,39 +65,68 @@ class _AddressBridgeAPIResultsWidgetState
               mainAxisSize: MainAxisSize.min,
               children: List.generate(record.length, (recordIndex) {
                 final recordItem = record[recordIndex];
-                return InkWell(
-                  onTap: () async {
-                    if (Navigator.of(context).canPop()) {
-                      context.pop();
-                    }
-                    context.pushNamed(
-                      'Home',
-                      queryParams: {
-                        'defaultPage': serializeParam(
-                          'PropertyDetails',
-                          ParamType.String,
+                return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(8, 4, 4, 4),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          functions.imagePathFromList(
+                              (SearchByMLSorSTREETCall.propertyPhoto(
+                                addressAPISearchByMLSorSTREETResponse.jsonBody,
+                              ) as List)
+                                  .map<String>((s) => s.toString())
+                                  .toList(),
+                              0),
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
                         ),
-                      }.withoutNulls,
-                    );
-                  },
-                  child: ListTile(
-                    leading: FaIcon(
-                      FontAwesomeIcons.globe,
+                      ),
                     ),
-                    title: Text(
-                      getJsonField(
-                        recordItem,
-                        r'''$.UnparsedAddress''',
-                      ).toString(),
-                      style: FlutterFlowTheme.of(context).title3,
+                    Expanded(
+                      child: Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: InkWell(
+                          onTap: () async {
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
+                            context.pushNamed(
+                              'Home',
+                              queryParams: {
+                                'defaultPage': serializeParam(
+                                  'PropertyDetails',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+                          },
+                          child: ListTile(
+                            title: Text(
+                              getJsonField(
+                                recordItem,
+                                r'''$.UnparsedAddress''',
+                              ).toString(),
+                              style: FlutterFlowTheme.of(context).title3,
+                            ),
+                            subtitle: Text(
+                              'External',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            tileColor: Color(0xFFF5F5F5),
+                            dense: true,
+                          ),
+                        ),
+                      ),
                     ),
-                    subtitle: Text(
-                      'External',
-                      style: FlutterFlowTheme.of(context).subtitle2,
-                    ),
-                    tileColor: Color(0xFFF5F5F5),
-                    dense: true,
-                  ),
+                  ],
                 );
               }),
             );

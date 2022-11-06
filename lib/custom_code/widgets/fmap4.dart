@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latlong2;
+import '../../flutter_flow/custom_functions.dart' as functions;
 
 class Fmap4 extends StatefulWidget {
   const Fmap4({
@@ -45,31 +46,32 @@ class _Fmap4State extends State<Fmap4> {
         .toList();
     markers = widget.coordinates
         .asMap()
-        .map((index, coordinate) => Marker(
-              anchorPos: AnchorPos.align(AnchorAlign.center),
-              height: 50,
+        .map<int, Marker>((index, coordinate) => MapEntry<int, Marker>(
+            index,
+            Marker(
               width: 50,
+              anchorPos: AnchorPos.align(AnchorAlign.center),
               point: latlong2.LatLng(coordinate.latitude, coordinate.longitude),
               builder: (ctx) => Container(
-                  height: 10,
-                  width: 10,
-                  child: Text(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black),
+                  child: Center(
+                      child: Text(
                     valueOrDefault<String>(
                       formatNumber(
                         functions.stringToDouble(getJsonField(
                           widget.recordItem[index],
                           r'''$.fields['💵 Purchase Price']''',
                         ).toString()),
-                        formatType: FormatType.decimal,
-                        decimalType: DecimalType.automatic,
-                        currency: '\$',
+                        formatType: FormatType.compact,
+                        currency: '',
                       ),
                       '\$0',
                     ),
                     style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.black),
-            ))
+                  ))),
+            )))
         .values
         .toList();
     super.initState();
@@ -114,8 +116,6 @@ class _Fmap4State extends State<Fmap4> {
                   popupSnap: PopupSnap.markerTop,
                   popupController: _popupController,
                   popupBuilder: (_, marker) => Container(
-                        width: 200,
-                        height: 100,
                         color: Colors.white,
                         child: GestureDetector(
                           onTap: () => debugPrint('Popup tap!'),

@@ -1,6 +1,5 @@
 import '../backend/api_requests/api_calls.dart';
 import '../components/address_bridge_a_p_i_results_widget.dart';
-import '../components/empty_widget.dart';
 import '../components/m_l_s_bridge_a_p_i_results_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -73,10 +72,12 @@ class _CustomAutoCompleteWidgetState extends State<CustomAutoCompleteWidget> {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
                       return Center(
-                        child: Center(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: EmptyWidget(),
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: SpinKitFadingCircle(
+                            color: Color(0xFFD9180E),
+                            size: 50,
                           ),
                         ),
                       );
@@ -163,10 +164,12 @@ class _CustomAutoCompleteWidgetState extends State<CustomAutoCompleteWidget> {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
                       return Center(
-                        child: Center(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: EmptyWidget(),
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: SpinKitFadingCircle(
+                            color: Color(0xFFD9180E),
+                            size: 50,
                           ),
                         ),
                       );
