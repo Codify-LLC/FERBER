@@ -230,24 +230,21 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     'TBD',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     'TBD',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     '\$0',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
+                                  ),
                                 ],
                               ),
                             ),
@@ -394,24 +391,21 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     '\$50',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     '\$0',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     'TBD',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
+                                  ),
                                 ],
                               ),
                             ),
@@ -558,24 +552,21 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     '\$150',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     '\$0',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     'TBD',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
+                                  ),
                                 ],
                               ),
                             ),
@@ -712,18 +703,16 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     '\$30/Mo',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
-                                  SelectionArea(
-                                      child: Text(
+                                  ),
+                                  Text(
                                     '\$450',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
+                                  ),
                                 ],
                               ),
                             ),

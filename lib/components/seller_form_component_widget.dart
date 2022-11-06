@@ -2099,12 +2099,11 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                   if (statusDropDownValue == null || statusDropDownValue == '')
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                      child: SelectionArea(
-                          child: Text(
+                      child: Text(
                         'Please select the current status of your transaction',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyText1,
-                      )).animateOnPageLoad(
+                      ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation']!),
                     ),
                 ],
