@@ -122,8 +122,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              SelectionArea(
-                                  child: Text(
+                              Text(
                                 ' Inspection',
                                 style: FlutterFlowTheme.of(context)
                                     .title2
@@ -131,12 +130,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                       fontFamily: 'Nunito',
                                       fontWeight: FontWeight.normal,
                                     ),
-                              )),
-                              SelectionArea(
-                                  child: Text(
+                              ),
+                              Text(
                                 'some text',
                                 style: FlutterFlowTheme.of(context).bodyText1,
-                              )),
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
@@ -150,17 +148,15 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                SelectionArea(
-                                    child: Text(
+                                Text(
                                   'Get it by',
                                   textAlign: TextAlign.end,
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
-                                SelectionArea(
-                                    child: Text(
+                                ),
+                                Text(
                                   'Fri, 11/11',
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
+                                ),
                               ],
                             ),
                           ),
@@ -175,15 +171,14 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: SelectionArea(
-                              child: Text(
+                          child: Text(
                             'Get ypour house insppected for discounted rates...',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: Color(0x8A000000),
                                     ),
-                          )),
+                          ),
                         ),
                       ),
                       expanded: Row(
@@ -296,8 +291,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              SelectionArea(
-                                  child: Text(
+                              Text(
                                 'Signage',
                                 style: FlutterFlowTheme.of(context)
                                     .title2
@@ -305,12 +299,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                       fontFamily: 'Nunito',
                                       fontWeight: FontWeight.normal,
                                     ),
-                              )),
-                              SelectionArea(
-                                  child: Text(
+                              ),
+                              Text(
                                 'Sign Installation',
                                 style: FlutterFlowTheme.of(context).bodyText1,
-                              )),
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
@@ -324,17 +317,15 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                SelectionArea(
-                                    child: Text(
+                                Text(
                                   'Get it by',
                                   textAlign: TextAlign.end,
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
-                                SelectionArea(
-                                    child: Text(
+                                ),
+                                Text(
                                   'Fri, 11/11',
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
+                                ),
                               ],
                             ),
                           ),
@@ -349,15 +340,14 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: SelectionArea(
-                              child: Text(
+                          child: Text(
                             'Get ypour house insppected for discounted rates...',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: Color(0x8A000000),
                                     ),
-                          )),
+                          ),
                         ),
                       ),
                       expanded: Row(
@@ -465,8 +455,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              SelectionArea(
-                                  child: Text(
+                              Text(
                                 'Photography',
                                 style: FlutterFlowTheme.of(context)
                                     .title2
@@ -474,18 +463,17 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                       fontFamily: 'Nunito',
                                       fontWeight: FontWeight.normal,
                                     ),
-                              )),
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),
                               ),
-                              SelectionArea(
-                                  child: Text(
+                              Text(
                                 'Drone, 3D Tour ..',
                                 style: FlutterFlowTheme.of(context).bodyText1,
-                              )),
+                              ),
                             ],
                           ),
                           Expanded(
@@ -493,17 +481,15 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                SelectionArea(
-                                    child: Text(
+                                Text(
                                   'Get it by',
                                   textAlign: TextAlign.end,
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
-                                SelectionArea(
-                                    child: Text(
+                                ),
+                                Text(
                                   'Thurs, 11/10',
                                   style: FlutterFlowTheme.of(context).bodyText1,
-                                )),
+                                ),
                               ],
                             ),
                           ),
@@ -518,15 +504,14 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: SelectionArea(
-                              child: Text(
+                          child: Text(
                             'HDR Photos, Drone Photos, 3D Tour, and Video Tour all included,',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: Color(0x8A000000),
                                     ),
-                          )),
+                          ),
                         ),
                       ),
                       expanded: Row(
@@ -637,8 +622,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     'Coordinator',
                                     style: FlutterFlowTheme.of(context)
                                         .title2
@@ -646,19 +630,18 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                           fontFamily: 'Nunito',
                                           fontWeight: FontWeight.normal,
                                         ),
-                                  )),
+                                  ),
                                   Container(
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
                                     ),
                                   ),
-                                  SelectionArea(
-                                      child: Text(
+                                  Text(
                                     'Your Superhero',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
-                                  )),
+                                  ),
                                 ],
                               ),
                             ],
@@ -674,15 +657,14 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: SelectionArea(
-                              child: Text(
+                          child: Text(
                             'Get ypour house insppected for discounted rates...',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: Color(0x8A000000),
                                     ),
-                          )),
+                          ),
                         ),
                       ),
                       expanded: Row(
@@ -783,12 +765,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   ),
                 ),
               ),
-              SelectionArea(
-                  child: Text(
+              Text(
                 'Back',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyText1,
-              )),
+              ),
             ],
           ),
         ),
