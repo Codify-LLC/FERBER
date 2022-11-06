@@ -449,8 +449,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                               FontWeight.bold,
                                                         ),
                                               ),
-                                              SelectionArea(
-                                                  child: Text(
+                                              Text(
                                                 dateTimeFormat(
                                                   'yMd',
                                                   datePicked1,
@@ -467,7 +466,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                   .of(context)
                                                               .secondaryText,
                                                         ),
-                                              )),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -563,8 +562,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                               FontWeight.bold,
                                                         ),
                                               ),
-                                              SelectionArea(
-                                                  child: Text(
+                                              Text(
                                                 dateTimeFormat(
                                                   'yMd',
                                                   datePicked2,
@@ -581,7 +579,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                   .of(context)
                                                               .secondaryText,
                                                         ),
-                                              )),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -1431,8 +1429,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         await launchURL(
                                                             uploadedFileUrl1);
                                                       },
-                                                      child: SelectionArea(
-                                                          child: AutoSizeText(
+                                                      child: AutoSizeText(
                                                         uploadedFileUrl1,
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1445,7 +1442,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                       TextDecoration
                                                                           .underline,
                                                                 ),
-                                                      )),
+                                                      ),
                                                     ),
                                                   ),
                                               ],
@@ -1615,8 +1612,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         await launchURL(
                                                             uploadedFileUrl1);
                                                       },
-                                                      child: SelectionArea(
-                                                          child: AutoSizeText(
+                                                      child: AutoSizeText(
                                                         uploadedFileUrl2,
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1629,7 +1625,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                       TextDecoration
                                                                           .underline,
                                                                 ),
-                                                      )),
+                                                      ),
                                                     ),
                                                   ),
                                               ],
@@ -1804,8 +1800,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         await launchURL(
                                                             uploadedFileUrl1);
                                                       },
-                                                      child: SelectionArea(
-                                                          child: AutoSizeText(
+                                                      child: AutoSizeText(
                                                         uploadedFileUrl3,
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1818,7 +1813,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                       TextDecoration
                                                                           .underline,
                                                                 ),
-                                                      )),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -1973,6 +1968,8 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                       .override(
                                                         fontFamily: 'Nunito',
                                                         fontSize: 14,
+                                                        fontStyle:
+                                                            FontStyle.italic,
                                                       ),
                                                 ),
                                                 InkWell(
