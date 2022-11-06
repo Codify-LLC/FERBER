@@ -790,66 +790,74 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
                                                           ],
                                                         ),
                                                       ),
-                                                      FlutterFlowChoiceChips(
-                                                        options: [
-                                                          ChipData(
-                                                              'Standard Addendum'),
-                                                          ChipData(
-                                                              'Closing Extension'),
-                                                          ChipData(
-                                                              'Inspection Extension')
-                                                        ],
-                                                        onChanged: (val) =>
-                                                            setState(() =>
-                                                                choiceChipsValues =
-                                                                    val),
-                                                        selectedChipStyle:
-                                                            ChipStyle(
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primaryColor,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Nunito',
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                          iconColor:
-                                                              Colors.white,
-                                                          iconSize: 18,
-                                                          elevation: 0,
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(12, 0,
+                                                                    0, 0),
+                                                        child:
+                                                            FlutterFlowChoiceChips(
+                                                          options: [
+                                                            ChipData(
+                                                                'Standard Addendum'),
+                                                            ChipData(
+                                                                'Closing Extension'),
+                                                            ChipData(
+                                                                'Inspection Extension')
+                                                          ],
+                                                          onChanged: (val) =>
+                                                              setState(() =>
+                                                                  choiceChipsValues =
+                                                                      val),
+                                                          selectedChipStyle:
+                                                              ChipStyle(
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Nunito',
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                            iconColor:
+                                                                Colors.white,
+                                                            iconSize: 18,
+                                                            elevation: 0,
+                                                          ),
+                                                          unselectedChipStyle:
+                                                              ChipStyle(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Nunito',
+                                                                      color: Color(
+                                                                          0xFF323B45),
+                                                                    ),
+                                                            iconColor: Color(
+                                                                0xFF323B45),
+                                                            iconSize: 18,
+                                                            elevation: 2,
+                                                          ),
+                                                          chipSpacing: 10,
+                                                          multiselect: true,
+                                                          initialized:
+                                                              choiceChipsValues !=
+                                                                  null,
+                                                          alignment:
+                                                              WrapAlignment
+                                                                  .spaceAround,
                                                         ),
-                                                        unselectedChipStyle:
-                                                            ChipStyle(
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Nunito',
-                                                                    color: Color(
-                                                                        0xFF323B45),
-                                                                  ),
-                                                          iconColor:
-                                                              Color(0xFF323B45),
-                                                          iconSize: 18,
-                                                          elevation: 2,
-                                                        ),
-                                                        chipSpacing: 10,
-                                                        multiselect: true,
-                                                        initialized:
-                                                            choiceChipsValues !=
-                                                                null,
-                                                        alignment:
-                                                            WrapAlignment.start,
                                                       ),
                                                     ],
                                                   ).animateOnPageLoad(animationsMap[

@@ -688,11 +688,14 @@ class CreateBuyersNewOfferTransactionRecordCall {
     String? closingDate = '0000-00-00',
     int? inspectionPeriod,
     String? additionalTerms = ' ',
-    List<String>? preApprovalProofOfFundsList,
+    String? preApprovalProofOfFunds1 = '',
     String? signature = ' ',
     String? typeOfFinancing = 'VHA',
+    String? preApprovalProofOfFunds2 = '',
+    String? preApprovalProofOfFunds3 = '',
+    String? preApprovalProofOfFunds4 = '',
+    String? preApprovalProofOfFunds5 = '',
   }) {
-    final preApprovalProofOfFunds = _serializeList(preApprovalProofOfFundsList);
     final body = '''
 {
   "fields": {
@@ -707,7 +710,12 @@ class CreateBuyersNewOfferTransactionRecordCall {
     "Additional Terms": "${additionalTerms}",
     "Type of financing": "${typeOfFinancing}",
     "💲 Pre Approval or Proof of Funds (POF)": [
-      "${preApprovalProofOfFunds}"
+      {
+        "url": "${preApprovalProofOfFunds1}"
+      },
+      {
+        "url": "${preApprovalProofOfFunds2}"
+      }
     ],
     "Signature": [
       {
@@ -729,6 +737,23 @@ class CreateBuyersNewOfferTransactionRecordCall {
       returnBody: true,
     );
   }
+
+  dynamic recordID(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic createdTime(dynamic response) => getJsonField(
+        response,
+        r'''$.createdTime''',
+      );
+  dynamic fieds(dynamic response) => getJsonField(
+        response,
+        r'''$.fields''',
+      );
+  dynamic status(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.⚡❗Status''',
+      );
 }
 
 /// End Airtable APIs Group Code

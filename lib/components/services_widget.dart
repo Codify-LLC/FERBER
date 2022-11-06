@@ -59,7 +59,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
@@ -80,7 +79,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         ),
                     iconColor: Colors.white,
                     iconSize: 18,
-                    elevation: 4,
+                    elevation: 0,
                   ),
                   unselectedChipStyle: ChipStyle(
                     backgroundColor: Colors.white,
@@ -97,667 +96,743 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   alignment: WrapAlignment.spaceBetween,
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: ExpandableNotifier(
-                    initialExpanded: false,
-                    child: ExpandablePanel(
-                      header: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/images.png',
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                ' Inspection',
-                                style: FlutterFlowTheme.of(context)
-                                    .title2
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.normal,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        child: Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: ExpandableNotifier(
+                            initialExpanded: false,
+                            child: ExpandablePanel(
+                              header: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
                                     ),
+                                    child: Image.asset(
+                                      'assets/images/images.png',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        ' Inspection',
+                                        style: FlutterFlowTheme.of(context)
+                                            .title2
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                      Text(
+                                        'some text',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Get it by',
+                                          textAlign: TextAlign.end,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                        Text(
+                                          'Fri, 11/11',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'some text',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              Container(
+                              collapsed: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Get it by',
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                Text(
-                                  'Fri, 11/11',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      collapsed: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: Text(
-                            'Get ypour house insppected for discounted rates...',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      color: Color(0x8A000000),
-                                    ),
-                          ),
-                        ),
-                      ),
-                      expanded: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                            child: FlutterFlowRadioButton(
-                              options: [
-                                'Yes,\nUse my inspector',
-                                'Send recommendations to \nthe buyer',
-                                'No Inspection '
-                              ].toList(),
-                              initialValue: 'No Inspection ',
-                              onChanged: (val) =>
-                                  setState(() => radioButtonValue1 = val),
-                              optionHeight: 55,
-                              textStyle: FlutterFlowTheme.of(context).title3,
-                              selectedTextStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.black,
-                                  ),
-                              buttonPosition: RadioButtonPosition.left,
-                              direction: Axis.vertical,
-                              radioButtonColor: Colors.blue,
-                              inactiveRadioButtonColor: Color(0x8A000000),
-                              toggleable: false,
-                              horizontalAlignment: WrapAlignment.start,
-                              verticalAlignment: WrapCrossAlignment.start,
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            constraints: BoxConstraints(
-                              maxHeight: 150,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'TBD',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    'TBD',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    '\$0',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        tapBodyToExpand: false,
-                        tapBodyToCollapse: false,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        hasIcon: true,
-                        iconSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: ExpandableNotifier(
-                    initialExpanded: false,
-                    child: ExpandablePanel(
-                      header: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/For-Sale-Sign-Mockup-3.jpg',
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Signage',
-                                style: FlutterFlowTheme.of(context)
-                                    .title2
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                              ),
-                              Text(
-                                'Sign Installation',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Get it by',
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                Text(
-                                  'Fri, 11/11',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      collapsed: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: Text(
-                            'Get ypour house insppected for discounted rates...',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      color: Color(0x8A000000),
-                                    ),
-                          ),
-                        ),
-                      ),
-                      expanded: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                            child: FlutterFlowRadioButton(
-                              options: ['Yes ', 'No', 'Maybe Later'].toList(),
-                              onChanged: (val) =>
-                                  setState(() => radioButtonValue2 = val),
-                              optionHeight: 55,
-                              textStyle: FlutterFlowTheme.of(context).title3,
-                              selectedTextStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.black,
-                                  ),
-                              buttonPosition: RadioButtonPosition.left,
-                              direction: Axis.vertical,
-                              radioButtonColor: Colors.blue,
-                              inactiveRadioButtonColor: Color(0x8A000000),
-                              toggleable: false,
-                              horizontalAlignment: WrapAlignment.start,
-                              verticalAlignment: WrapCrossAlignment.start,
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            constraints: BoxConstraints(
-                              maxHeight: 150,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '\$50',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    '\$0',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    'TBD',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        tapBodyToExpand: false,
-                        tapBodyToCollapse: false,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        hasIcon: true,
-                        iconSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: ExpandableNotifier(
-                    initialExpanded: false,
-                    child: ExpandablePanel(
-                      header: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/-_Shoot.webp',
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Photography',
-                                style: FlutterFlowTheme.of(context)
-                                    .title2
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                              ),
-                              Text(
-                                'Drone, 3D Tour ..',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Get it by',
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                Text(
-                                  'Thurs, 11/10',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      collapsed: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: Text(
-                            'HDR Photos, Drone Photos, 3D Tour, and Video Tour all included,',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      color: Color(0x8A000000),
-                                    ),
-                          ),
-                        ),
-                      ),
-                      expanded: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                            child: FlutterFlowRadioButton(
-                              options: ['Yes', 'No', 'Maybe Later'].toList(),
-                              onChanged: (val) =>
-                                  setState(() => radioButtonValue3 = val),
-                              optionHeight: 55,
-                              textStyle: FlutterFlowTheme.of(context).title3,
-                              selectedTextStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.black,
-                                  ),
-                              buttonPosition: RadioButtonPosition.left,
-                              direction: Axis.vertical,
-                              radioButtonColor: Colors.blue,
-                              inactiveRadioButtonColor: Color(0x8A000000),
-                              toggleable: false,
-                              horizontalAlignment: WrapAlignment.start,
-                              verticalAlignment: WrapCrossAlignment.start,
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            constraints: BoxConstraints(
-                              maxHeight: 150,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '\$150',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    '\$0',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                  Text(
-                                    'TBD',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        tapBodyToExpand: false,
-                        tapBodyToCollapse: false,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        hasIcon: true,
-                        iconSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: ExpandableNotifier(
-                    initialExpanded: false,
-                    child: ExpandablePanel(
-                      header: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: 60,
-                                height: 60,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  'assets/images/logo.png',
-                                ),
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'Coordinator',
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Text(
+                                    'Get ypour house insppected for discounted rates...',
                                     style: FlutterFlowTheme.of(context)
-                                        .title2
+                                        .bodyText1
                                         .override(
                                           fontFamily: 'Nunito',
-                                          fontWeight: FontWeight.normal,
+                                          color: Color(0x8A000000),
                                         ),
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Your Superhero',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      collapsed: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: Text(
-                            'Get ypour house insppected for discounted rates...',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      color: Color(0x8A000000),
-                                    ),
-                          ),
-                        ),
-                      ),
-                      expanded: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                            child: FlutterFlowRadioButton(
-                              options:
-                                  ['Self Service', 'Full Service'].toList(),
-                              onChanged: (val) =>
-                                  setState(() => radioButtonValue4 = val),
-                              optionHeight: 55,
-                              textStyle: FlutterFlowTheme.of(context).title3,
-                              selectedTextStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.black,
-                                  ),
-                              buttonPosition: RadioButtonPosition.left,
-                              direction: Axis.vertical,
-                              radioButtonColor: Colors.blue,
-                              inactiveRadioButtonColor: Color(0x8A000000),
-                              toggleable: false,
-                              horizontalAlignment: WrapAlignment.start,
-                              verticalAlignment: WrapCrossAlignment.start,
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            constraints: BoxConstraints(
-                              maxHeight: 150,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                              child: Column(
+                              expanded: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '\$30/Mo',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 0, 8),
+                                    child: FlutterFlowRadioButton(
+                                      options: [
+                                        'Yes,\nUse my inspector',
+                                        'Send recommendations to \nthe buyer',
+                                        'No Inspection '
+                                      ].toList(),
+                                      initialValue: 'No Inspection ',
+                                      onChanged: (val) => setState(
+                                          () => radioButtonValue1 = val),
+                                      optionHeight: 55,
+                                      textStyle:
+                                          FlutterFlowTheme.of(context).title3,
+                                      selectedTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color: Colors.black,
+                                              ),
+                                      buttonPosition: RadioButtonPosition.left,
+                                      direction: Axis.vertical,
+                                      radioButtonColor: Colors.blue,
+                                      inactiveRadioButtonColor:
+                                          Color(0x8A000000),
+                                      toggleable: false,
+                                      horizontalAlignment: WrapAlignment.start,
+                                      verticalAlignment:
+                                          WrapCrossAlignment.start,
+                                    ),
                                   ),
-                                  Text(
-                                    '\$450',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                  Container(
+                                    width: 100,
+                                    constraints: BoxConstraints(
+                                      maxHeight: 150,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'TBD',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            'TBD',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            '\$0',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
+                              theme: ExpandableThemeData(
+                                tapHeaderToExpand: true,
+                                tapBodyToExpand: false,
+                                tapBodyToCollapse: false,
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                hasIcon: true,
+                                iconSize: 30,
+                              ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                      theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        tapBodyToExpand: false,
-                        tapBodyToCollapse: false,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        hasIcon: true,
-                        iconSize: 30,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        child: Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: ExpandableNotifier(
+                            initialExpanded: false,
+                            child: ExpandablePanel(
+                              header: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/For-Sale-Sign-Mockup-3.jpg',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Signage',
+                                        style: FlutterFlowTheme.of(context)
+                                            .title2
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                      Text(
+                                        'Sign Installation',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Get it by',
+                                          textAlign: TextAlign.end,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                        Text(
+                                          'Fri, 11/11',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              collapsed: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Text(
+                                    'Get ypour house insppected for discounted rates...',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          color: Color(0x8A000000),
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              expanded: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 0, 8),
+                                    child: FlutterFlowRadioButton(
+                                      options: ['Yes ', 'No', 'Maybe Later']
+                                          .toList(),
+                                      onChanged: (val) => setState(
+                                          () => radioButtonValue2 = val),
+                                      optionHeight: 55,
+                                      textStyle:
+                                          FlutterFlowTheme.of(context).title3,
+                                      selectedTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color: Colors.black,
+                                              ),
+                                      buttonPosition: RadioButtonPosition.left,
+                                      direction: Axis.vertical,
+                                      radioButtonColor: Colors.blue,
+                                      inactiveRadioButtonColor:
+                                          Color(0x8A000000),
+                                      toggleable: false,
+                                      horizontalAlignment: WrapAlignment.start,
+                                      verticalAlignment:
+                                          WrapCrossAlignment.start,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    constraints: BoxConstraints(
+                                      maxHeight: 150,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '\$50',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            '\$0',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            'TBD',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              theme: ExpandableThemeData(
+                                tapHeaderToExpand: true,
+                                tapBodyToExpand: false,
+                                tapBodyToCollapse: false,
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                hasIcon: true,
+                                iconSize: 30,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        child: Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: ExpandableNotifier(
+                            initialExpanded: false,
+                            child: ExpandablePanel(
+                              header: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/-_Shoot.webp',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Photography',
+                                        style: FlutterFlowTheme.of(context)
+                                            .title2
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Drone, 3D Tour ..',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Get it by',
+                                          textAlign: TextAlign.end,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                        Text(
+                                          'Thurs, 11/10',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              collapsed: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Text(
+                                    'HDR Photos, Drone Photos, 3D Tour, and Video Tour all included,',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          color: Color(0x8A000000),
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              expanded: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 0, 8),
+                                    child: FlutterFlowRadioButton(
+                                      options:
+                                          ['Yes', 'No', 'Maybe Later'].toList(),
+                                      onChanged: (val) => setState(
+                                          () => radioButtonValue3 = val),
+                                      optionHeight: 55,
+                                      textStyle:
+                                          FlutterFlowTheme.of(context).title3,
+                                      selectedTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color: Colors.black,
+                                              ),
+                                      buttonPosition: RadioButtonPosition.left,
+                                      direction: Axis.vertical,
+                                      radioButtonColor: Colors.blue,
+                                      inactiveRadioButtonColor:
+                                          Color(0x8A000000),
+                                      toggleable: false,
+                                      horizontalAlignment: WrapAlignment.start,
+                                      verticalAlignment:
+                                          WrapCrossAlignment.start,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    constraints: BoxConstraints(
+                                      maxHeight: 150,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '\$150',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            '\$0',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            'TBD',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              theme: ExpandableThemeData(
+                                tapHeaderToExpand: true,
+                                tapBodyToExpand: false,
+                                tapBodyToCollapse: false,
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                hasIcon: true,
+                                iconSize: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        child: Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: ExpandableNotifier(
+                            initialExpanded: false,
+                            child: ExpandablePanel(
+                              header: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/logo.png',
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'Coordinator',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title2
+                                                .override(
+                                                  fontFamily: 'Nunito',
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Your Superhero',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              collapsed: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Text(
+                                    'Get ypour house insppected for discounted rates...',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          color: Color(0x8A000000),
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              expanded: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 0, 8),
+                                    child: FlutterFlowRadioButton(
+                                      options: ['Self Service', 'Full Service']
+                                          .toList(),
+                                      onChanged: (val) => setState(
+                                          () => radioButtonValue4 = val),
+                                      optionHeight: 55,
+                                      textStyle:
+                                          FlutterFlowTheme.of(context).title3,
+                                      selectedTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color: Colors.black,
+                                              ),
+                                      buttonPosition: RadioButtonPosition.left,
+                                      direction: Axis.vertical,
+                                      radioButtonColor: Colors.blue,
+                                      inactiveRadioButtonColor:
+                                          Color(0x8A000000),
+                                      toggleable: false,
+                                      horizontalAlignment: WrapAlignment.start,
+                                      verticalAlignment:
+                                          WrapCrossAlignment.start,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    constraints: BoxConstraints(
+                                      maxHeight: 150,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '\$30/Mo',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                          Text(
+                                            '\$450',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              theme: ExpandableThemeData(
+                                tapHeaderToExpand: true,
+                                tapBodyToExpand: false,
+                                tapBodyToCollapse: false,
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                hasIcon: true,
+                                iconSize: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 4),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('Button pressed ...');
+                    },
+                    text: 'Next Step',
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 40,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Lato',
+                                color: Colors.white,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(50, 50, 50, 5),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  text: 'Next Step',
-                  options: FFButtonOptions(
-                    width: 130,
-                    height: 40,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Lato',
-                          color: Colors.white,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                child: Text(
+                  'Back',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyText1,
                 ),
-              ),
-              Text(
-                'Back',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).bodyText1,
               ),
             ],
           ),

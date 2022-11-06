@@ -2115,94 +2115,120 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
             child: FFButtonWidget(
               onPressed: () async {
                 if (checkboxValue!) {
-                  final signatureImage = await signatureController.toPngBytes();
+                  var confirmDialogResponse = await showDialog<bool>(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Validate Information'),
+                            content: Text(
+                                'Confirm the accuracy of the data provided by you before proceeding to the best of your ability.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, false),
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, true),
+                                child: Text('Confirm'),
+                              ),
+                            ],
+                          );
+                        },
+                      ) ??
+                      false;
+                  if (confirmDialogResponse) {
+                    final signatureImage =
+                        await signatureController.toPngBytes();
 
-                  if (signatureImage == null) {
-                    return;
-                  }
+                    if (signatureImage == null) {
+                      return;
+                    }
 
-                  showUploadMessage(
-                    context,
-                    'Uploading signature...',
-                    showLoading: true,
-                  );
-                  final downloadUrl = (await uploadData(
-                      signatureStoragePath(currentUserUid), signatureImage));
-
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  if (downloadUrl != null) {
-                    setState(() => uploadedSignatureUrl = downloadUrl);
                     showUploadMessage(
                       context,
-                      'Success!',
+                      'Uploading signature...',
+                      showLoading: true,
                     );
-                  } else {
-                    showUploadMessage(
-                      context,
-                      'Failed to upload signature',
-                    );
-                    return;
-                  }
+                    final downloadUrl = (await uploadData(
+                        signatureStoragePath(currentUserUid), signatureImage));
 
-                  apiResultmiv = await AirtableAPIsGroup
-                      .createBothTransactionsRecordCall
-                      .call(
-                    address: addressTextFieldController!.text,
-                    type: 'Seller',
-                    listingPrice: double.parse(listingPriceController!.text),
-                    status: statusDropDownValue,
-                    typesOfFinancingAcceptedList: choiceChipsValues,
-                    listDateActiveDate:
-                        FFAppState().ListingDateActiveDate?.toString(),
-                    listingExpirationDate:
-                        FFAppState().ListingExpirationDate?.toString(),
-                    listingDocs: uploadedFileUrl1,
-                    aSISContractAndEtc: uploadedFileUrl2,
-                    totalCommission:
-                        double.parse(totalCommissionController!.text),
-                    cooperatingBrokerCommission: double.parse(
-                        cooperatingBrokerCommissionController!.text),
-                    additionalTerms: additionalTermsController!.text,
-                    notes: notesController!.text,
-                    signature: uploadedSignatureUrl,
-                  );
-                  if ((apiResultmiv?.succeeded ?? true)) {
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Success'),
-                          content: Text('Successfully Submitted'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
-                        );
-                      },
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    if (downloadUrl != null) {
+                      setState(() => uploadedSignatureUrl = downloadUrl);
+                      showUploadMessage(
+                        context,
+                        'Success!',
+                      );
+                    } else {
+                      showUploadMessage(
+                        context,
+                        'Failed to upload signature',
+                      );
+                      return;
+                    }
+
+                    apiResultmiv = await AirtableAPIsGroup
+                        .createBothTransactionsRecordCall
+                        .call(
+                      address: addressTextFieldController!.text,
+                      type: 'Seller',
+                      listingPrice: double.parse(listingPriceController!.text),
+                      status: statusDropDownValue,
+                      typesOfFinancingAcceptedList: choiceChipsValues,
+                      listDateActiveDate:
+                          FFAppState().ListingDateActiveDate?.toString(),
+                      listingExpirationDate:
+                          FFAppState().ListingExpirationDate?.toString(),
+                      listingDocs: uploadedFileUrl1,
+                      aSISContractAndEtc: uploadedFileUrl2,
+                      totalCommission:
+                          double.parse(totalCommissionController!.text),
+                      cooperatingBrokerCommission: double.parse(
+                          cooperatingBrokerCommissionController!.text),
+                      additionalTerms: additionalTermsController!.text,
+                      notes: notesController!.text,
+                      signature: uploadedSignatureUrl,
                     );
-                  } else {
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Failure'),
-                          content: Text(getJsonField(
-                            (apiResultmiv?.jsonBody ?? ''),
-                            r'''$''',
-                          ).toString()),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    if ((apiResultmiv?.succeeded ?? true)) {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Success'),
+                            content: Text('Successfully Submitted'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Ok'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Failure'),
+                            content: Text(getJsonField(
+                              (apiResultmiv?.jsonBody ?? ''),
+                              r'''$''',
+                            ).toString()),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Ok'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   }
                 } else {
                   await showDialog(

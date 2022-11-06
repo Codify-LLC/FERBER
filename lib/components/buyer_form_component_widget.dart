@@ -596,7 +596,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                 ),
                               ),
                             ),
-                          if (statusDropDownValue == 'Pre-listing')
+                          if (statusDropDownValue == 'New Offer')
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12, 12, 12, 12),
@@ -665,7 +665,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                         ),
                                         chipSpacing: 10,
                                         multiselect: false,
-                                        alignment: WrapAlignment.start,
+                                        alignment: WrapAlignment.spaceAround,
                                       ),
                                     ),
                                   ),
@@ -1272,133 +1272,126 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                               ],
                             ),
                           ),
-                          if ((statusDropDownValue == 'New Offer') &&
-                              (statusDropDownValue == 'Executed Contract'))
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller:
-                                          additionalTermsTextFieldController,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        'additionalTermsTextFieldController',
-                                        Duration(milliseconds: 2000),
-                                        () => setState(() {}),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    controller:
+                                        additionalTermsTextFieldController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      'additionalTermsTextFieldController',
+                                      Duration(milliseconds: 2000),
+                                      () => setState(() {}),
+                                    ),
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Internal Notes',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        labelText: 'Internal Notes',
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
                                         ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                12, 12, 12, 12),
-                                        suffixIcon:
-                                            additionalTermsTextFieldController!
-                                                    .text.isNotEmpty
-                                                ? InkWell(
-                                                    onTap: () async {
-                                                      additionalTermsTextFieldController
-                                                          ?.clear();
-                                                      setState(() {});
-                                                    },
-                                                    child: Icon(
-                                                      Icons.clear,
-                                                      color: Color(0xFF757575),
-                                                      size: 22,
-                                                    ),
-                                                  )
-                                                : null,
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            fontSize: 16,
-                                          ),
-                                      maxLines: 3,
-                                      minLines: 1,
-                                      keyboardType: TextInputType.multiline,
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              12, 12, 12, 12),
+                                      suffixIcon:
+                                          additionalTermsTextFieldController!
+                                                  .text.isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    additionalTermsTextFieldController
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons.clear,
+                                                    color: Color(0xFF757575),
+                                                    size: 22,
+                                                  ),
+                                                )
+                                              : null,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          fontSize: 16,
+                                        ),
+                                    maxLines: 3,
+                                    minLines: 1,
+                                    keyboardType: TextInputType.multiline,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 0, 0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Additional Terms '),
+                                            content: Text(
+                                                'Use the exact verbiage, spelling & punctuation you would like in the contract. This will be copied & pasted directly!\n*We are not responsible for your typos'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.info_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 24,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 0, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Additional Terms '),
-                                              content: Text(
-                                                  'Use the exact verbiage, spelling & punctuation you would like in the contract. This will be copied & pasted directly!\n*We are not responsible for your typos'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.info_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ).animateOnPageLoad(
-                                  animationsMap['rowOnPageLoadAnimation4']!),
-                            ),
+                                ),
+                              ],
+                            ).animateOnPageLoad(
+                                animationsMap['rowOnPageLoadAnimation4']!),
+                          ),
                           if (statusDropDownValue == 'New Offer')
                             Container(
                               decoration: BoxDecoration(),
@@ -1618,47 +1611,42 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                             12, 12, 12, 12),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            final selectedFile =
-                                                await selectFile(
-                                                    allowedExtensions: ['pdf']);
-                                            if (selectedFile != null) {
-                                              setState(() =>
-                                                  isMediaUploading = true);
-                                              String? downloadUrl;
-                                              try {
-                                                showUploadMessage(
-                                                  context,
-                                                  'Uploading file...',
-                                                  showLoading: true,
-                                                );
-                                                downloadUrl = await uploadData(
-                                                    selectedFile.storagePath,
-                                                    selectedFile.bytes);
-                                              } finally {
-                                                ScaffoldMessenger.of(context)
-                                                    .hideCurrentSnackBar();
-                                                isMediaUploading = false;
+                                            if (FFAppState()
+                                                    .UploadedPOFs
+                                                    .length <
+                                                5) {
+                                              final selectedFile =
+                                                  await selectFile(
+                                                      allowedExtensions: [
+                                                    'pdf'
+                                                  ]);
+                                              if (selectedFile != null) {
+                                                setState(() =>
+                                                    isMediaUploading = true);
+                                                String? downloadUrl;
+                                                try {
+                                                  downloadUrl =
+                                                      await uploadData(
+                                                          selectedFile
+                                                              .storagePath,
+                                                          selectedFile.bytes);
+                                                } finally {
+                                                  isMediaUploading = false;
+                                                }
+                                                if (downloadUrl != null) {
+                                                  setState(() =>
+                                                      uploadedFileUrl =
+                                                          downloadUrl!);
+                                                } else {
+                                                  setState(() {});
+                                                  return;
+                                                }
                                               }
-                                              if (downloadUrl != null) {
-                                                setState(() => uploadedFileUrl =
-                                                    downloadUrl!);
-                                                showUploadMessage(
-                                                  context,
-                                                  'Success!',
-                                                );
-                                              } else {
-                                                setState(() {});
-                                                showUploadMessage(
-                                                  context,
-                                                  'Failed to upload file',
-                                                );
-                                                return;
-                                              }
-                                            }
 
-                                            setState(() => FFAppState()
-                                                .UploadedPOFs
-                                                .add(uploadedFileUrl));
+                                              setState(() => FFAppState()
+                                                  .UploadedPOFs
+                                                  .add(uploadedFileUrl));
+                                            }
                                           },
                                           text: 'Click to upload',
                                           icon: Icon(
@@ -1944,10 +1932,18 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                             inspectionPeriodTextFieldController!.text),
                         additionalTerms:
                             additionalTermsTextFieldController!.text,
-                        preApprovalProofOfFundsList:
-                            functions.attachmentObjectFromUrls(
-                                FFAppState().UploadedPOFs.toList()),
+                        preApprovalProofOfFunds1: functions.stringFromList(
+                            FFAppState().UploadedPOFs.toList(), 0),
                         signature: uploadedSignatureUrl,
+                        preApprovalProofOfFunds2: functions.stringFromList(
+                            FFAppState().UploadedPOFs.toList(), 1),
+                        preApprovalProofOfFunds3: functions.stringFromList(
+                            FFAppState().UploadedPOFs.toList(), 2),
+                        preApprovalProofOfFunds4: functions.stringFromList(
+                            FFAppState().UploadedPOFs.toList(), 3),
+                        preApprovalProofOfFunds5: functions.stringFromList(
+                            FFAppState().UploadedPOFs.toList(), 4),
+                        typeOfFinancing: typeofFinancingValue,
                       );
                       if ((apiResultp2v?.succeeded ?? true)) {
                         ScaffoldMessenger.of(context).showSnackBar(
