@@ -33,6 +33,9 @@ class AirtableAPIsGroup {
   static CreateBuyersNewOfferTransactionRecordCall
       createBuyersNewOfferTransactionRecordCall =
       CreateBuyersNewOfferTransactionRecordCall();
+  static CreateExecutedContractTransactionRecordCall
+      createExecutedContractTransactionRecordCall =
+      CreateExecutedContractTransactionRecordCall();
 }
 
 class ListTransactionsRecordsCall {
@@ -56,6 +59,7 @@ class ListTransactionsRecordsCall {
         'filterByFormula': filterByFormula,
       },
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -109,6 +113,7 @@ class RetriveTransactionsRecordCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -415,6 +420,7 @@ class CreateBothTransactionsRecordCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -490,6 +496,7 @@ class CreateContactsRecordCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -508,6 +515,7 @@ class RetriveContactsRecordCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -529,6 +537,7 @@ class ListContactsRecordsCall {
         'filterByFormula': filterByFormula,
       },
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -586,6 +595,7 @@ class ListInboxRecordsCall {
         'filterByFormula': filterByFormula,
       },
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -674,6 +684,7 @@ class CreateInboxRecordCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -735,6 +746,7 @@ class CreateBuyersNewOfferTransactionRecordCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -756,6 +768,54 @@ class CreateBuyersNewOfferTransactionRecordCall {
       );
 }
 
+class CreateExecutedContractTransactionRecordCall {
+  Future<ApiCallResponse> call({
+    String? something = '',
+  }) {
+    final body = '''
+{
+  "fields": {
+    "👪 Type": "Buyer",
+    "🏡 Address": "",
+    "💵 Purchase Price": 0,
+    "⚡❗Status": "",
+    "💰 Escrow Amount": 0,
+    "Offer Expiration Date": "",
+    "🥂 Closing Date": "",
+    "🔍 Inspection Deadline": "",
+    "Additional Terms": "",
+    "Type of financing": "",
+    "💲 Pre Approval or Proof of Funds (POF)": [
+      {
+        "url": ""
+      },
+      {
+        "url": ""
+      }
+    ],
+    "Signature": [
+      {
+        "url": ""
+      }
+    ]
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Executed Contract Transaction Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
 /// End Airtable APIs Group Code
 
 class BridgeDataOutputCall {
@@ -770,6 +830,7 @@ class BridgeDataOutputCall {
       headers: {},
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -795,6 +856,7 @@ class SearchByMLSorSTREETCall {
         'ListingId': listingId,
       },
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -835,6 +897,7 @@ class MyGateWayHookCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }

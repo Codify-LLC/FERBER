@@ -72,11 +72,14 @@ class _PdfReaderWidgetState extends State<PdfReaderWidget> {
           ),
         ),
         Expanded(
-          child: FlutterFlowPdfViewer(
-            networkPath: widget.pdfLink!,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 1,
-            horizontalScroll: false,
+          child: Align(
+            alignment: AlignmentDirectional(0, 0),
+            child: FlutterFlowPdfViewer(
+              networkPath: widget.pdfLink!,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 1,
+              horizontalScroll: true,
+            ),
           ),
         ),
       ],

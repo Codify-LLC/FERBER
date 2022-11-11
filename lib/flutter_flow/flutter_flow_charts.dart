@@ -243,12 +243,14 @@ class FlutterFlowPieChart extends StatelessWidget {
                     ? data.radius.first
                     : data.radius[index],
                 borderSide: BorderSide(
-                  color: otherPropsLength == 1
-                      ? data.borderColor.first
-                      : data.borderColor[index],
-                  width: otherPropsLength == 1
-                      ? data.borderWidth.first
-                      : data.borderWidth[index],
+                  color: (otherPropsLength == 1
+                          ? data.borderColor?.first
+                          : data.borderColor?.elementAt(index)) ??
+                      Colors.transparent,
+                  width: (otherPropsLength == 1
+                          ? data.borderWidth?.first
+                          : data.borderWidth?.elementAt(index)) ??
+                      0.0,
                 ),
                 showTitle: sectionLabelType != PieChartSectionLabelType.none,
                 titleStyle: sectionLabelStyle,
@@ -427,15 +429,15 @@ class FFPieChartData {
     required this.values,
     required this.colors,
     required this.radius,
-    this.borderWidth = const [0],
-    this.borderColor = const [Colors.transparent],
+    this.borderWidth,
+    this.borderColor,
   });
 
   final List<dynamic> values;
   final List<Color> colors;
   final List<double> radius;
-  final List<double> borderWidth;
-  final List<Color> borderColor;
+  final List<double>? borderWidth;
+  final List<Color>? borderColor;
 
   List<double> get data => _dataToDouble(values).map((e) => e ?? 0.0).toList();
 }

@@ -117,6 +117,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'register',
               path: 'register',
               builder: (context, params) => RegisterWidget(),
+            ),
+            FFRoute(
+              name: 'SwipeTest',
+              path: 'swipeTest',
+              requireAuth: true,
+              builder: (context, params) => SwipeTestWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

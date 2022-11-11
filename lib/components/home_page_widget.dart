@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/buyer_and_seller_form_widget.dart';
+import '../components/confirm_t_c_widget.dart';
 import '../components/custom_auto_complete_widget.dart';
 import '../components/property_details_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -205,23 +206,45 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 ),
                                                 Expanded(
                                                   child: AuthUserStreamWidget(
-                                                    child: Text(
-                                                      currentUserDisplayName,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .tertiaryColor,
-                                                                fontSize: 26,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child:
+                                                                  ConfirmTCWidget(),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+                                                      },
+                                                      child: Text(
+                                                        currentUserDisplayName,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Nunito',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .tertiaryColor,
+                                                                  fontSize: 26,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -260,7 +283,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     12, 0, 12, 0),
                                             child: Material(
                                               color: Colors.transparent,
-                                              elevation: 5,
+                                              elevation: 0,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
@@ -554,53 +577,66 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          100, 0, 16, 0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(12),
-                                          bottomRight: Radius.circular(12),
-                                          topLeft: Radius.circular(0),
-                                          topRight: Radius.circular(0),
+                                          16, 0, 16, 0),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 5,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(12),
+                                            bottomRight: Radius.circular(12),
+                                            topLeft: Radius.circular(0),
+                                            topRight: Radius.circular(0),
+                                          ),
                                         ),
-                                        child: Container(
-                                          width: double.infinity,
-                                          constraints: BoxConstraints(
-                                            maxHeight: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.3,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(12),
+                                            bottomRight: Radius.circular(12),
+                                            topLeft: Radius.circular(0),
+                                            topRight: Radius.circular(0),
                                           ),
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(12),
-                                              bottomRight: Radius.circular(12),
-                                              topLeft: Radius.circular(0),
-                                              topRight: Radius.circular(0),
+                                          child: Container(
+                                            width: double.infinity,
+                                            constraints: BoxConstraints(
+                                              maxHeight: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.3,
                                             ),
-                                          ),
-                                          child: Visibility(
-                                            visible: (searchValurTextFieldMLSController!
-                                                            .text !=
-                                                        null &&
+                                            decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(12),
+                                                bottomRight:
+                                                    Radius.circular(12),
+                                                topLeft: Radius.circular(0),
+                                                topRight: Radius.circular(0),
+                                              ),
+                                            ),
+                                            child: Visibility(
+                                              visible: (searchValurTextFieldMLSController!
+                                                              .text !=
+                                                          null &&
+                                                      searchValurTextFieldMLSController!
+                                                              .text !=
+                                                          '') ||
+                                                  (searchValurTextFieldAddressController!
+                                                              .text !=
+                                                          null &&
+                                                      searchValurTextFieldAddressController!
+                                                              .text !=
+                                                          ''),
+                                              child: CustomAutoCompleteWidget(
+                                                searchText:
                                                     searchValurTextFieldMLSController!
-                                                            .text !=
-                                                        '') ||
-                                                (searchValurTextFieldAddressController!
-                                                            .text !=
-                                                        null &&
-                                                    searchValurTextFieldAddressController!
-                                                            .text !=
-                                                        ''),
-                                            child: CustomAutoCompleteWidget(
-                                              searchText:
-                                                  searchValurTextFieldMLSController!
-                                                      .text,
-                                              mls: dropDownSearchTYpeValue ==
-                                                  'MLS ID',
-                                              address:
-                                                  dropDownSearchTYpeValue ==
-                                                      'Address',
+                                                        .text,
+                                                mls: dropDownSearchTYpeValue ==
+                                                    'MLS ID',
+                                                address:
+                                                    dropDownSearchTYpeValue ==
+                                                        'Address',
+                                              ),
                                             ),
                                           ),
                                         ),

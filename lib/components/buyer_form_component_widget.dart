@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../components/all_contacts_widget.dart';
+import '../components/services_widget.dart';
 import '../components/web_view_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
@@ -1574,32 +1575,45 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                             itemBuilder: (context, filesIndex) {
                                               final filesItem =
                                                   files[filesIndex];
-                                              return Align(
-                                                alignment:
-                                                    AlignmentDirectional(-1, 0),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 12, 12, 0),
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(
-                                                          filesItem);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'Uploaded Document',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 12, 12, 0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 12, 0),
+                                                      child: Icon(
+                                                        Icons.picture_as_pdf,
+                                                        color: Colors.black,
+                                                        size: 24,
+                                                      ),
                                                     ),
-                                                  ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        await launchURL(
+                                                            filesItem);
+                                                      },
+                                                      child: AutoSizeText(
+                                                        'Uploaded Document',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Nunito',
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               );
                                             },
@@ -1959,6 +1973,21 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                 FlutterFlowTheme.of(context).customColor1,
                           ),
                         );
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: ServicesWidget(
+                                type: 'Buyer',
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+
+                        Navigator.pop(context);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -2021,14 +2050,19 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-              child: Text(
-                'back',
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Outfit',
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                    ),
+              child: InkWell(
+                onTap: () async {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'back',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Outfit',
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
               ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation2']!),
             ),
           ],

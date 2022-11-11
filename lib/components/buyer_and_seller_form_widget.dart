@@ -62,7 +62,7 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                 desktop: false,
               ))
                 Expanded(
-                  flex: 25,
+                  flex: 15,
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
@@ -72,7 +72,7 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                   ),
                 ),
               Expanded(
-                flex: 75,
+                flex: 85,
                 child: Material(
                   color: Colors.transparent,
                   elevation: 5,

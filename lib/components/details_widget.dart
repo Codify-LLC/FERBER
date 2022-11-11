@@ -2346,7 +2346,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                 size: 24,
                               ),
                               onPressed: () async {
-                                context.pop();
+                                Navigator.pop(context);
                               },
                             ),
                           ),

@@ -10,13 +10,6 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-LatLng geopoint(
-  double? latitude,
-  double? longitude,
-) {
-  return LatLng(latitude!, longitude!);
-}
-
 DateTime closingDateFun(String? closingDate) {
   // Add your function code here!
   return DateTime.parse(closingDate!);

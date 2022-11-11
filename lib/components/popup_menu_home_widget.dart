@@ -23,17 +23,17 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
       trigger: AnimationTrigger.onPageLoad,
       applyInitialState: true,
       effects: [
-        VisibilityEffect(duration: 1.ms),
+        VisibilityEffect(duration: 250.ms),
         ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 0.ms,
+          delay: 250.ms,
           duration: 600.ms,
           begin: 0,
           end: 1,
         ),
         MoveEffect(
           curve: Curves.easeInOut,
-          delay: 0.ms,
+          delay: 250.ms,
           duration: 600.ms,
           begin: Offset(100, -200),
           end: Offset(0, 0),
@@ -130,7 +130,7 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Let\'s get started!',
+                                'Main Menu',
                                 style: FlutterFlowTheme.of(context)
                                     .title2
                                     .override(
@@ -210,7 +210,7 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Buyer Transaction',
+                                            'Start a Transaction',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -271,7 +271,7 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Seller Transaction',
+                                            'Add Addendum',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -284,44 +284,6 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(
-                                      color: Color(0xFFF1F4F8),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 12, 16, 12),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Addendum',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color: Color(0xFF090F13),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ),
@@ -363,7 +325,61 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Services',
+                                            'Add Services',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: ServicesWidget(),
+                                        );
+                                      },
+                                    ).then((value) => setState(() {}));
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(
+                                        color: Color(0xFFF1F4F8),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 12, 16, 12),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Add Teammate',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -406,7 +422,61 @@ class _PopupMenuHomeWidgetState extends State<PopupMenuHomeWidget>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Team',
+                                            'Chat',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: ServicesWidget(),
+                                        );
+                                      },
+                                    ).then((value) => setState(() {}));
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(
+                                        color: Color(0xFFF1F4F8),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 12, 16, 12),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Settings',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1

@@ -89,8 +89,7 @@ class _MLSBridgeAPIResultsWidgetState extends State<MLSBridgeAPIResultsWidget> {
                       child: Container(
                         width: 100,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: Colors.white,
                         ),
                         child: ListTile(
                           title: Text(
@@ -104,8 +103,8 @@ class _MLSBridgeAPIResultsWidgetState extends State<MLSBridgeAPIResultsWidget> {
                             'External',
                             style: FlutterFlowTheme.of(context).subtitle2,
                           ),
-                          tileColor: Color(0xFFF5F5F5),
-                          dense: true,
+                          tileColor: Colors.transparent,
+                          dense: false,
                         ),
                       ),
                     ),

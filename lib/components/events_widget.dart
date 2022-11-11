@@ -294,7 +294,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                               ),
                             ],
                           ),
-                          ClipRect(
+                          ClipRRect(
                             child: BackdropFilter(
                               filter: ImageFilter.blur(
                                 sigmaX: 4,
