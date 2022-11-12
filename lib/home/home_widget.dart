@@ -99,7 +99,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Column(
@@ -153,7 +153,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     onPressed: () {
                                       print('Button pressed ...');
                                     },
-                                    text: 'Button',
+                                    text: 'Home',
                                     icon: Icon(
                                       Icons.home,
                                       size: 14,
@@ -164,6 +164,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1,
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 0,
@@ -222,6 +223,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1,
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 0,
@@ -270,6 +272,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1,
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 0,
@@ -317,6 +320,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1,
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 0,
@@ -365,6 +369,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: Colors.transparent,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1,
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 0,
@@ -515,30 +520,25 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       }
                                       final formMainListTransactionsRecordsResponse =
                                           snapshot.data!;
-                                      return Form(
-                                        key: formKey,
-                                        autovalidateMode:
-                                            AutovalidateMode.always,
-                                        child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              1,
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional(0, 1),
-                                            children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
+                                      return Container(
+                                        width: double.infinity,
+                                        child: Form(
+                                          key: formKey,
+                                          autovalidateMode:
+                                              AutovalidateMode.disabled,
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: MediaQuery.of(context)
                                                     .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    1,
-                                                child: custom_widgets.Fmap4(
+                                                    .height *
+                                                1,
+                                            child: Stack(
+                                              alignment:
+                                                  AlignmentDirectional(0, 1),
+                                              children: [
+                                                Container(
                                                   width: MediaQuery.of(context)
                                                       .size
                                                       .width,
@@ -546,536 +546,97 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           .size
                                                           .height *
                                                       1,
-                                                  coordinates: functions
-                                                      .dataToLatLang(
-                                                          (AirtableAPIsGroup
-                                                                  .listTransactionsRecordsCall
-                                                                  .latitude(
-                                                            formMainListTransactionsRecordsResponse
-                                                                .jsonBody,
-                                                          ) as List)
-                                                              .map<String>((s) =>
-                                                                  s.toString())
-                                                              .toList(),
-                                                          (AirtableAPIsGroup
-                                                                  .listTransactionsRecordsCall
-                                                                  .longitude(
-                                                            formMainListTransactionsRecordsResponse
-                                                                .jsonBody,
-                                                          ) as List)
-                                                              .map<String>((s) =>
-                                                                  s.toString())
-                                                              .toList())
-                                                      .toList(),
-                                                  recordItem: AirtableAPIsGroup
-                                                      .listTransactionsRecordsCall
-                                                      .recordList(
-                                                        formMainListTransactionsRecordsResponse
-                                                            .jsonBody,
-                                                      )
-                                                      .toList(),
+                                                  child: custom_widgets.Fmap4(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            1,
+                                                    coordinates: functions
+                                                        .dataToLatLang(
+                                                            (AirtableAPIsGroup
+                                                                    .listTransactionsRecordsCall
+                                                                    .latitude(
+                                                              formMainListTransactionsRecordsResponse
+                                                                  .jsonBody,
+                                                            ) as List)
+                                                                .map<String>(
+                                                                    (s) => s
+                                                                        .toString())
+                                                                .toList(),
+                                                            (AirtableAPIsGroup
+                                                                    .listTransactionsRecordsCall
+                                                                    .longitude(
+                                                              formMainListTransactionsRecordsResponse
+                                                                  .jsonBody,
+                                                            ) as List)
+                                                                .map<String>((s) =>
+                                                                    s.toString())
+                                                                .toList())
+                                                        .toList(),
+                                                    recordItem: AirtableAPIsGroup
+                                                        .listTransactionsRecordsCall
+                                                        .recordList(
+                                                          formMainListTransactionsRecordsResponse
+                                                              .jsonBody,
+                                                        )
+                                                        .toList(),
+                                                  ),
                                                 ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                    tabletLandscape: false,
-                                                  ))
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(24, 16,
-                                                                  12, 16),
-                                                      child: Material(
-                                                        color:
-                                                            Colors.transparent,
-                                                        elevation: 5,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(12),
-                                                        ),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(12),
-                                                          child: Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                1,
-                                                            constraints:
-                                                                BoxConstraints(
-                                                              maxWidth: 300,
-                                                            ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12),
-                                                            ),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16,
-                                                                          16,
-                                                                          16,
-                                                                          16),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .stretch,
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            2,
-                                                                            20,
-                                                                            2,
-                                                                            0),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.min,
-                                                                          children: [
-                                                                            InkWell(
-                                                                              onTap: () async {
-                                                                                await showModalBottomSheet(
-                                                                                  isScrollControlled: true,
-                                                                                  backgroundColor: Colors.transparent,
-                                                                                  barrierColor: Colors.transparent,
-                                                                                  context: context,
-                                                                                  builder: (context) {
-                                                                                    return Padding(
-                                                                                      padding: MediaQuery.of(context).viewInsets,
-                                                                                      child: Container(
-                                                                                        height: MediaQuery.of(context).size.height * 1,
-                                                                                        child: BuyerAndSellerFormWidget(),
-                                                                                      ),
-                                                                                    );
-                                                                                  },
-                                                                                ).then((value) => setState(() {}));
-                                                                              },
-                                                                              child: Text(
-                                                                                'Hello ',
-                                                                                style: FlutterFlowTheme.of(context).title2,
-                                                                              ),
-                                                                            ),
-                                                                            Expanded(
-                                                                              child: AuthUserStreamWidget(
-                                                                                child: InkWell(
-                                                                                  onTap: () async {
-                                                                                    await showModalBottomSheet(
-                                                                                      isScrollControlled: true,
-                                                                                      backgroundColor: Colors.transparent,
-                                                                                      context: context,
-                                                                                      builder: (context) {
-                                                                                        return Padding(
-                                                                                          padding: MediaQuery.of(context).viewInsets,
-                                                                                          child: ConfirmTCWidget(),
-                                                                                        );
-                                                                                      },
-                                                                                    ).then((value) => setState(() {}));
-                                                                                  },
-                                                                                  child: Text(
-                                                                                    currentUserDisplayName,
-                                                                                    style: FlutterFlowTheme.of(context).title2.override(
-                                                                                          fontFamily: 'Nunito',
-                                                                                          color: FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            2,
-                                                                            0,
-                                                                            2,
-                                                                            0),
-                                                                        child:
-                                                                            Text(
-                                                                          '{\$Total Commission YTD]',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyText1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            12,
-                                                                            0,
-                                                                            12,
-                                                                            0),
-                                                                        child:
-                                                                            Material(
-                                                                          color:
-                                                                              Colors.transparent,
-                                                                          elevation:
-                                                                              0,
-                                                                          shape:
-                                                                              RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8),
-                                                                          ),
-                                                                          child:
-                                                                              ClipRRect(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8),
-                                                                            child:
-                                                                                Container(
-                                                                              width: MediaQuery.of(context).size.width * 0.95,
-                                                                              decoration: BoxDecoration(
-                                                                                color: Colors.white,
-                                                                                borderRadius: BorderRadius.circular(8),
-                                                                                border: Border.all(
-                                                                                  color: Color(0xFFF1F4F8),
-                                                                                  width: 2,
-                                                                                ),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    FlutterFlowDropDown(
-                                                                                      initialOption: dropDownSearchTypeWebValue ??= 'MLS ID',
-                                                                                      options: [
-                                                                                        'Address',
-                                                                                        'MLS ID',
-                                                                                        'Agent'
-                                                                                      ],
-                                                                                      onChanged: (val) => setState(() => dropDownSearchTypeWebValue = val),
-                                                                                      width: 90,
-                                                                                      height: 50,
-                                                                                      textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                            fontFamily: 'Nunito',
-                                                                                            color: Colors.black,
-                                                                                            fontSize: 13,
-                                                                                            fontWeight: FontWeight.bold,
-                                                                                          ),
-                                                                                      hintText: 'Select',
-                                                                                      fillColor: Colors.white,
-                                                                                      elevation: 2,
-                                                                                      borderColor: Colors.transparent,
-                                                                                      borderWidth: 0,
-                                                                                      borderRadius: 0,
-                                                                                      margin: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                                                                                      hidesUnderline: true,
-                                                                                    ),
-                                                                                    if (dropDownSearchTypeWebValue == 'MLS ID')
-                                                                                      Expanded(
-                                                                                        child: TextFormField(
-                                                                                          controller: searchValurTextFieldMLSWebController,
-                                                                                          onChanged: (_) => EasyDebounce.debounce(
-                                                                                            'searchValurTextFieldMLSWebController',
-                                                                                            Duration(milliseconds: 0),
-                                                                                            () async {
-                                                                                              bridgeAPIResultsWeb = await SearchByMLSorSTREETCall.call(
-                                                                                                listingId: searchValurTextFieldMLSWebController!.text,
-                                                                                              );
-                                                                                              if ((bridgeAPIResultsWeb?.succeeded ?? true)) {
-                                                                                                filteredRecordsWeb = await actions.searchRecordsData(
-                                                                                                  searchValurTextFieldMLSWebController!.text,
-                                                                                                  AirtableAPIsGroup.listTransactionsRecordsCall
-                                                                                                      .recordList(
-                                                                                                        formMainListTransactionsRecordsResponse.jsonBody,
-                                                                                                      )
-                                                                                                      .toList(),
-                                                                                                );
-                                                                                              }
-
-                                                                                              setState(() {});
-                                                                                            },
-                                                                                          ),
-                                                                                          obscureText: false,
-                                                                                          decoration: InputDecoration(
-                                                                                            hintText: 'Search',
-                                                                                            enabledBorder: InputBorder.none,
-                                                                                            focusedBorder: InputBorder.none,
-                                                                                            errorBorder: InputBorder.none,
-                                                                                            focusedErrorBorder: InputBorder.none,
-                                                                                            suffixIcon: searchValurTextFieldMLSWebController!.text.isNotEmpty
-                                                                                                ? InkWell(
-                                                                                                    onTap: () async {
-                                                                                                      searchValurTextFieldMLSWebController?.clear();
-                                                                                                      bridgeAPIResultsWeb = await SearchByMLSorSTREETCall.call(
-                                                                                                        listingId: searchValurTextFieldMLSWebController!.text,
-                                                                                                      );
-                                                                                                      if ((bridgeAPIResultsWeb?.succeeded ?? true)) {
-                                                                                                        filteredRecordsWeb = await actions.searchRecordsData(
-                                                                                                          searchValurTextFieldMLSWebController!.text,
-                                                                                                          AirtableAPIsGroup.listTransactionsRecordsCall
-                                                                                                              .recordList(
-                                                                                                                formMainListTransactionsRecordsResponse.jsonBody,
-                                                                                                              )
-                                                                                                              .toList(),
-                                                                                                        );
-                                                                                                      }
-
-                                                                                                      setState(() {});
-                                                                                                      setState(() {});
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.clear,
-                                                                                                      color: Color(0xFF757575),
-                                                                                                      size: 22,
-                                                                                                    ),
-                                                                                                  )
-                                                                                                : null,
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).bodyText1,
-                                                                                        ),
-                                                                                      ),
-                                                                                    if (dropDownSearchTypeWebValue == 'Address')
-                                                                                      Expanded(
-                                                                                        child: TextFormField(
-                                                                                          controller: searchValurTextFieldAddressWebController,
-                                                                                          onChanged: (_) => EasyDebounce.debounce(
-                                                                                            'searchValurTextFieldAddressWebController',
-                                                                                            Duration(milliseconds: 0),
-                                                                                            () async {
-                                                                                              apiResult = await SearchByMLSorSTREETCall.call(
-                                                                                                unparsedAddress: searchValurTextFieldAddressWebController!.text,
-                                                                                              );
-                                                                                              if ((apiResult?.succeeded ?? true)) {
-                                                                                                filteredRecordsSecond = await actions.searchRecordsData(
-                                                                                                  searchValurTextFieldAddressWebController!.text,
-                                                                                                  AirtableAPIsGroup.listTransactionsRecordsCall
-                                                                                                      .recordList(
-                                                                                                        formMainListTransactionsRecordsResponse.jsonBody,
-                                                                                                      )
-                                                                                                      .toList(),
-                                                                                                );
-                                                                                              }
-
-                                                                                              setState(() {});
-                                                                                            },
-                                                                                          ),
-                                                                                          obscureText: false,
-                                                                                          decoration: InputDecoration(
-                                                                                            hintText: 'Search',
-                                                                                            enabledBorder: InputBorder.none,
-                                                                                            focusedBorder: InputBorder.none,
-                                                                                            errorBorder: InputBorder.none,
-                                                                                            focusedErrorBorder: InputBorder.none,
-                                                                                            suffixIcon: searchValurTextFieldAddressWebController!.text.isNotEmpty
-                                                                                                ? InkWell(
-                                                                                                    onTap: () async {
-                                                                                                      searchValurTextFieldAddressWebController?.clear();
-                                                                                                      apiResult = await SearchByMLSorSTREETCall.call(
-                                                                                                        unparsedAddress: searchValurTextFieldAddressWebController!.text,
-                                                                                                      );
-                                                                                                      if ((apiResult?.succeeded ?? true)) {
-                                                                                                        filteredRecordsSecond = await actions.searchRecordsData(
-                                                                                                          searchValurTextFieldAddressWebController!.text,
-                                                                                                          AirtableAPIsGroup.listTransactionsRecordsCall
-                                                                                                              .recordList(
-                                                                                                                formMainListTransactionsRecordsResponse.jsonBody,
-                                                                                                              )
-                                                                                                              .toList(),
-                                                                                                        );
-                                                                                                      }
-
-                                                                                                      setState(() {});
-                                                                                                      setState(() {});
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.clear,
-                                                                                                      color: Color(0xFF757575),
-                                                                                                      size: 22,
-                                                                                                    ),
-                                                                                                  )
-                                                                                                : null,
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                                fontFamily: 'Nunito',
-                                                                                                fontSize: 18,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16,
-                                                                          0,
-                                                                          16,
-                                                                          0),
-                                                                  child:
-                                                                      Material(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    elevation:
-                                                                        5,
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .only(
-                                                                        bottomLeft:
-                                                                            Radius.circular(12),
-                                                                        bottomRight:
-                                                                            Radius.circular(12),
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                      ),
-                                                                    ),
-                                                                    child:
-                                                                        ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .only(
-                                                                        bottomLeft:
-                                                                            Radius.circular(12),
-                                                                        bottomRight:
-                                                                            Radius.circular(12),
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                      ),
-                                                                      child:
-                                                                          Container(
-                                                                        width: double
-                                                                            .infinity,
-                                                                        constraints:
-                                                                            BoxConstraints(
-                                                                          maxHeight:
-                                                                              MediaQuery.of(context).size.height * 0.3,
-                                                                        ),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Colors.transparent,
-                                                                          borderRadius:
-                                                                              BorderRadius.only(
-                                                                            bottomLeft:
-                                                                                Radius.circular(12),
-                                                                            bottomRight:
-                                                                                Radius.circular(12),
-                                                                            topLeft:
-                                                                                Radius.circular(0),
-                                                                            topRight:
-                                                                                Radius.circular(0),
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Visibility(
-                                                                          visible:
-                                                                              (searchValurTextFieldMLSWebController!.text != null && searchValurTextFieldMLSWebController!.text != '') || (searchValurTextFieldAddressWebController!.text != null && searchValurTextFieldAddressWebController!.text != ''),
-                                                                          child:
-                                                                              CustomAutoCompleteWidget(
-                                                                            searchText:
-                                                                                searchValurTextFieldMLSWebController!.text,
-                                                                            mls:
-                                                                                dropDownSearchTypeWebValue == 'MLS ID',
-                                                                            address:
-                                                                                dropDownSearchTypeWebValue == 'Address',
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      phone: false,
+                                                      tablet: false,
+                                                      tabletLandscape: false,
+                                                    ))
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(24,
+                                                                    16, 12, 16),
+                                                        child: Material(
+                                                          color: Colors
+                                                              .transparent,
+                                                          elevation: 5,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
                                                           ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              1,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          if (responsiveVisibility(
-                                                            context: context,
-                                                            tabletLandscape:
-                                                                false,
-                                                            desktop: false,
-                                                          ))
-                                                            Container(
-                                                              width: double
-                                                                  .infinity,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            child: Container(
+                                                              height: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  1,
+                                                              constraints:
+                                                                  BoxConstraints(
+                                                                maxWidth: 300,
+                                                              ),
                                                               decoration:
                                                                   BoxDecoration(
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                  colors: [
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    Color(
-                                                                        0x00FFFFFF)
-                                                                  ],
-                                                                  stops: [0, 1],
-                                                                  begin:
-                                                                      AlignmentDirectional(
-                                                                          0,
-                                                                          -1),
-                                                                  end:
-                                                                      AlignmentDirectional(
-                                                                          0, 1),
-                                                                ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
                                                               ),
                                                               child: Column(
                                                                 mainAxisSize:
@@ -1129,11 +690,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                 },
                                                                                 child: Text(
                                                                                   'Hello ',
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'Nunito',
-                                                                                        fontSize: 28,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                      ),
+                                                                                  style: FlutterFlowTheme.of(context).title2,
                                                                                 ),
                                                                               ),
                                                                               Expanded(
@@ -1154,11 +711,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                     },
                                                                                     child: Text(
                                                                                       currentUserDisplayName,
-                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      style: FlutterFlowTheme.of(context).title2.override(
                                                                                             fontFamily: 'Nunito',
                                                                                             color: FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                            fontSize: 26,
-                                                                                            fontWeight: FontWeight.bold,
                                                                                           ),
                                                                                     ),
                                                                                   ),
@@ -1176,11 +731,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                           child:
                                                                               Text(
                                                                             '{\$Total Commission YTD]',
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'Nunito',
-                                                                                  fontSize: 16,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                ),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodyText1,
                                                                           ),
                                                                         ),
                                                                       ],
@@ -1231,13 +783,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     children: [
                                                                                       FlutterFlowDropDown(
-                                                                                        initialOption: dropDownSearchTYpeValue ??= 'MLS ID',
+                                                                                        initialOption: dropDownSearchTypeWebValue ??= 'MLS ID',
                                                                                         options: [
                                                                                           'Address',
                                                                                           'MLS ID',
                                                                                           'Agent'
                                                                                         ],
-                                                                                        onChanged: (val) => setState(() => dropDownSearchTYpeValue = val),
+                                                                                        onChanged: (val) => setState(() => dropDownSearchTypeWebValue = val),
                                                                                         width: 90,
                                                                                         height: 50,
                                                                                         textStyle: FlutterFlowTheme.of(context).bodyText1.override(
@@ -1255,20 +807,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                         margin: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                                                                                         hidesUnderline: true,
                                                                                       ),
-                                                                                      if (dropDownSearchTYpeValue == 'MLS ID')
+                                                                                      if (dropDownSearchTypeWebValue == 'MLS ID')
                                                                                         Expanded(
                                                                                           child: TextFormField(
-                                                                                            controller: searchValurTextFieldMLSController,
+                                                                                            controller: searchValurTextFieldMLSWebController,
                                                                                             onChanged: (_) => EasyDebounce.debounce(
-                                                                                              'searchValurTextFieldMLSController',
+                                                                                              'searchValurTextFieldMLSWebController',
                                                                                               Duration(milliseconds: 0),
                                                                                               () async {
-                                                                                                apiResultcre = await SearchByMLSorSTREETCall.call(
-                                                                                                  listingId: searchValurTextFieldMLSController!.text,
+                                                                                                bridgeAPIResultsWeb = await SearchByMLSorSTREETCall.call(
+                                                                                                  listingId: searchValurTextFieldMLSWebController!.text,
                                                                                                 );
-                                                                                                if ((apiResultcre?.succeeded ?? true)) {
-                                                                                                  filteredRecords = await actions.searchRecordsData(
-                                                                                                    searchValurTextFieldMLSController!.text,
+                                                                                                if ((bridgeAPIResultsWeb?.succeeded ?? true)) {
+                                                                                                  filteredRecordsWeb = await actions.searchRecordsData(
+                                                                                                    searchValurTextFieldMLSWebController!.text,
                                                                                                     AirtableAPIsGroup.listTransactionsRecordsCall
                                                                                                         .recordList(
                                                                                                           formMainListTransactionsRecordsResponse.jsonBody,
@@ -1287,16 +839,16 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                               focusedBorder: InputBorder.none,
                                                                                               errorBorder: InputBorder.none,
                                                                                               focusedErrorBorder: InputBorder.none,
-                                                                                              suffixIcon: searchValurTextFieldMLSController!.text.isNotEmpty
+                                                                                              suffixIcon: searchValurTextFieldMLSWebController!.text.isNotEmpty
                                                                                                   ? InkWell(
                                                                                                       onTap: () async {
-                                                                                                        searchValurTextFieldMLSController?.clear();
-                                                                                                        apiResultcre = await SearchByMLSorSTREETCall.call(
-                                                                                                          listingId: searchValurTextFieldMLSController!.text,
+                                                                                                        searchValurTextFieldMLSWebController?.clear();
+                                                                                                        bridgeAPIResultsWeb = await SearchByMLSorSTREETCall.call(
+                                                                                                          listingId: searchValurTextFieldMLSWebController!.text,
                                                                                                         );
-                                                                                                        if ((apiResultcre?.succeeded ?? true)) {
-                                                                                                          filteredRecords = await actions.searchRecordsData(
-                                                                                                            searchValurTextFieldMLSController!.text,
+                                                                                                        if ((bridgeAPIResultsWeb?.succeeded ?? true)) {
+                                                                                                          filteredRecordsWeb = await actions.searchRecordsData(
+                                                                                                            searchValurTextFieldMLSWebController!.text,
                                                                                                             AirtableAPIsGroup.listTransactionsRecordsCall
                                                                                                                 .recordList(
                                                                                                                   formMainListTransactionsRecordsResponse.jsonBody,
@@ -1319,20 +871,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                             style: FlutterFlowTheme.of(context).bodyText1,
                                                                                           ),
                                                                                         ),
-                                                                                      if (dropDownSearchTYpeValue == 'Address')
+                                                                                      if (dropDownSearchTypeWebValue == 'Address')
                                                                                         Expanded(
                                                                                           child: TextFormField(
-                                                                                            controller: searchValurTextFieldAddressController,
+                                                                                            controller: searchValurTextFieldAddressWebController,
                                                                                             onChanged: (_) => EasyDebounce.debounce(
-                                                                                              'searchValurTextFieldAddressController',
+                                                                                              'searchValurTextFieldAddressWebController',
                                                                                               Duration(milliseconds: 0),
                                                                                               () async {
-                                                                                                bridgeAPIAddressResultsWeb = await SearchByMLSorSTREETCall.call(
-                                                                                                  unparsedAddress: searchValurTextFieldAddressController!.text,
+                                                                                                apiResult = await SearchByMLSorSTREETCall.call(
+                                                                                                  unparsedAddress: searchValurTextFieldAddressWebController!.text,
                                                                                                 );
-                                                                                                if ((bridgeAPIAddressResultsWeb?.succeeded ?? true)) {
-                                                                                                  filteredRecordsSecondWeb = await actions.searchRecordsData(
-                                                                                                    searchValurTextFieldAddressController!.text,
+                                                                                                if ((apiResult?.succeeded ?? true)) {
+                                                                                                  filteredRecordsSecond = await actions.searchRecordsData(
+                                                                                                    searchValurTextFieldAddressWebController!.text,
                                                                                                     AirtableAPIsGroup.listTransactionsRecordsCall
                                                                                                         .recordList(
                                                                                                           formMainListTransactionsRecordsResponse.jsonBody,
@@ -1351,16 +903,16 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                               focusedBorder: InputBorder.none,
                                                                                               errorBorder: InputBorder.none,
                                                                                               focusedErrorBorder: InputBorder.none,
-                                                                                              suffixIcon: searchValurTextFieldAddressController!.text.isNotEmpty
+                                                                                              suffixIcon: searchValurTextFieldAddressWebController!.text.isNotEmpty
                                                                                                   ? InkWell(
                                                                                                       onTap: () async {
-                                                                                                        searchValurTextFieldAddressController?.clear();
-                                                                                                        bridgeAPIAddressResultsWeb = await SearchByMLSorSTREETCall.call(
-                                                                                                          unparsedAddress: searchValurTextFieldAddressController!.text,
+                                                                                                        searchValurTextFieldAddressWebController?.clear();
+                                                                                                        apiResult = await SearchByMLSorSTREETCall.call(
+                                                                                                          unparsedAddress: searchValurTextFieldAddressWebController!.text,
                                                                                                         );
-                                                                                                        if ((bridgeAPIAddressResultsWeb?.succeeded ?? true)) {
-                                                                                                          filteredRecordsSecondWeb = await actions.searchRecordsData(
-                                                                                                            searchValurTextFieldAddressController!.text,
+                                                                                                        if ((apiResult?.succeeded ?? true)) {
+                                                                                                          filteredRecordsSecond = await actions.searchRecordsData(
+                                                                                                            searchValurTextFieldAddressWebController!.text,
                                                                                                             AirtableAPIsGroup.listTransactionsRecordsCall
                                                                                                                 .recordList(
                                                                                                                   formMainListTransactionsRecordsResponse.jsonBody,
@@ -1460,12 +1012,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                           child:
                                                                               Visibility(
                                                                             visible:
-                                                                                (searchValurTextFieldMLSController!.text != null && searchValurTextFieldMLSController!.text != '') || (searchValurTextFieldAddressController!.text != null && searchValurTextFieldAddressController!.text != ''),
+                                                                                (searchValurTextFieldMLSWebController!.text != null && searchValurTextFieldMLSWebController!.text != '') || (searchValurTextFieldAddressWebController!.text != null && searchValurTextFieldAddressWebController!.text != ''),
                                                                             child:
                                                                                 CustomAutoCompleteWidget(
-                                                                              searchText: searchValurTextFieldMLSController!.text,
-                                                                              mls: dropDownSearchTYpeValue == 'MLS ID',
-                                                                              address: dropDownSearchTYpeValue == 'Address',
+                                                                              searchText: searchValurTextFieldMLSWebController!.text,
+                                                                              mls: dropDownSearchTypeWebValue == 'MLS ID',
+                                                                              address: dropDownSearchTypeWebValue == 'Address',
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1475,328 +1027,769 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                 ],
                                                               ),
                                                             ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              ClipRRect(
-                                                                child:
-                                                                    Container(
-                                                                  height: 200,
-                                                                  constraints:
-                                                                      BoxConstraints(
-                                                                    maxHeight: MediaQuery.of(context)
-                                                                            .size
-                                                                            .height *
-                                                                        0.25,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            1,
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              Container(
+                                                                width: double
+                                                                    .infinity,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  gradient:
+                                                                      LinearGradient(
+                                                                    colors: [
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      Color(
+                                                                          0x00FFFFFF)
+                                                                    ],
+                                                                    stops: [
+                                                                      0,
+                                                                      1
+                                                                    ],
+                                                                    begin:
+                                                                        AlignmentDirectional(
+                                                                            0,
+                                                                            -1),
+                                                                    end:
+                                                                        AlignmentDirectional(
+                                                                            0,
+                                                                            1),
                                                                   ),
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                  child:
-                                                                      Visibility(
-                                                                    visible:
-                                                                        getJsonField(
-                                                                              formMainListTransactionsRecordsResponse.jsonBody,
-                                                                              r'''$.records''',
-                                                                            ) !=
-                                                                            null,
-                                                                    child:
-                                                                        Builder(
-                                                                      builder:
-                                                                          (context) {
-                                                                        final record = AirtableAPIsGroup
-                                                                            .listTransactionsRecordsCall
-                                                                            .recordList(
-                                                                              formMainListTransactionsRecordsResponse.jsonBody,
-                                                                            )
-                                                                            .toList();
-                                                                        return ListView
-                                                                            .builder(
-                                                                          padding:
-                                                                              EdgeInsets.zero,
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          scrollDirection:
-                                                                              Axis.horizontal,
-                                                                          itemCount:
-                                                                              record.length,
-                                                                          itemBuilder:
-                                                                              (context, recordIndex) {
-                                                                            final recordItem =
-                                                                                record[recordIndex];
-                                                                            return Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                                                                              child: InkWell(
-                                                                                onTap: () async {
-                                                                                  setState(() => FFAppState().currentDisplayRecordID = getJsonField(
-                                                                                        recordItem,
-                                                                                        r'''$.id''',
-                                                                                      ).toString());
-                                                                                  await showModalBottomSheet(
-                                                                                    isScrollControlled: true,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    context: context,
-                                                                                    builder: (context) {
-                                                                                      return Padding(
-                                                                                        padding: MediaQuery.of(context).viewInsets,
-                                                                                        child: PropertyDetailsWidget(
-                                                                                          recordId: FFAppState().currentDisplayRecordID,
+                                                                ),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              16,
+                                                                              16,
+                                                                              16,
+                                                                              16),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.stretch,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                2,
+                                                                                20,
+                                                                                2,
+                                                                                0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              children: [
+                                                                                InkWell(
+                                                                                  onTap: () async {
+                                                                                    await showModalBottomSheet(
+                                                                                      isScrollControlled: true,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      barrierColor: Colors.transparent,
+                                                                                      context: context,
+                                                                                      builder: (context) {
+                                                                                        return Padding(
+                                                                                          padding: MediaQuery.of(context).viewInsets,
+                                                                                          child: Container(
+                                                                                            height: MediaQuery.of(context).size.height * 1,
+                                                                                            child: BuyerAndSellerFormWidget(),
+                                                                                          ),
+                                                                                        );
+                                                                                      },
+                                                                                    ).then((value) => setState(() {}));
+                                                                                  },
+                                                                                  child: Text(
+                                                                                    'Hello ',
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                          fontFamily: 'Nunito',
+                                                                                          fontSize: 28,
+                                                                                          fontWeight: FontWeight.bold,
                                                                                         ),
-                                                                                      );
-                                                                                    },
-                                                                                  ).then((value) => setState(() {}));
-                                                                                },
-                                                                                child: Material(
-                                                                                  color: Colors.transparent,
-                                                                                  elevation: 5,
-                                                                                  shape: RoundedRectangleBorder(
-                                                                                    borderRadius: BorderRadius.circular(12),
                                                                                   ),
-                                                                                  child: ClipRRect(
-                                                                                    borderRadius: BorderRadius.circular(12),
-                                                                                    child: Container(
-                                                                                      width: MediaQuery.of(context).size.width,
-                                                                                      constraints: BoxConstraints(
-                                                                                        maxWidth: 350,
-                                                                                        maxHeight: 110,
-                                                                                      ),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                        borderRadius: BorderRadius.circular(12),
-                                                                                      ),
-                                                                                      child: Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Expanded(
-                                                                                            child: Hero(
-                                                                                              tag: valueOrDefault<String>(
-                                                                                                getJsonField(
-                                                                                                  recordItem,
-                                                                                                  r'''$.fields['Property Image'][0].url''' + '$recordIndex',
-                                                                                                ),
-                                                                                                'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
-                                                                                              ),
-                                                                                              transitionOnUserGestures: true,
-                                                                                              child: Image.network(
-                                                                                                valueOrDefault<String>(
-                                                                                                  getJsonField(
-                                                                                                    recordItem,
-                                                                                                    r'''$.fields['Property Image'][0].url''',
-                                                                                                  ),
-                                                                                                  'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
-                                                                                                ),
-                                                                                                width: MediaQuery.of(context).size.width * 0.45,
-                                                                                                height: MediaQuery.of(context).size.height * 1,
-                                                                                                fit: BoxFit.cover,
-                                                                                              ),
+                                                                                ),
+                                                                                Expanded(
+                                                                                  child: AuthUserStreamWidget(
+                                                                                    child: InkWell(
+                                                                                      onTap: () async {
+                                                                                        await showModalBottomSheet(
+                                                                                          isScrollControlled: true,
+                                                                                          backgroundColor: Colors.transparent,
+                                                                                          context: context,
+                                                                                          builder: (context) {
+                                                                                            return Padding(
+                                                                                              padding: MediaQuery.of(context).viewInsets,
+                                                                                              child: ConfirmTCWidget(),
+                                                                                            );
+                                                                                          },
+                                                                                        ).then((value) => setState(() {}));
+                                                                                      },
+                                                                                      child: Text(
+                                                                                        currentUserDisplayName,
+                                                                                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                              fontFamily: 'Nunito',
+                                                                                              color: FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                              fontSize: 26,
+                                                                                              fontWeight: FontWeight.bold,
                                                                                             ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Container(
-                                                                                              width: MediaQuery.of(context).size.width * 0.4,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              ),
-                                                                                              child: Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                                                                                child: SingleChildScrollView(
-                                                                                                  child: Column(
-                                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                    children: [
-                                                                                                      if (getJsonField(
-                                                                                                            recordItem,
-                                                                                                            r'''$.fields['🏡 Address']''',
-                                                                                                          ) !=
-                                                                                                          null)
-                                                                                                        Text(
-                                                                                                          getJsonField(
-                                                                                                            recordItem,
-                                                                                                            r'''$.fields['🏡 Address']''',
-                                                                                                          ).toString(),
-                                                                                                          style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                                                fontFamily: 'Poppins',
-                                                                                                                color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                                fontSize: 14,
-                                                                                                                fontWeight: FontWeight.bold,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      Column(
-                                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                                        children: [
-                                                                                                          Text(
-                                                                                                            functions.toStringConverter(getJsonField(
-                                                                                                              recordItem,
-                                                                                                              r'''$.fields['⚡❗Status']''',
-                                                                                                            )),
-                                                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                                                  fontFamily: 'Nunito',
-                                                                                                                  color: valueOrDefault<Color>(
-                                                                                                                    () {
-                                                                                                                      if (functions.toStringConverter(getJsonField(
-                                                                                                                            recordItem,
-                                                                                                                            r'''$.fields['⚡❗Status']''',
-                                                                                                                          )) ==
-                                                                                                                          'Active') {
-                                                                                                                        return Color(0xFF2CFF00);
-                                                                                                                      } else if (functions.toStringConverter(getJsonField(
-                                                                                                                            recordItem,
-                                                                                                                            r'''$.fields['⚡❗Status']''',
-                                                                                                                          )) ==
-                                                                                                                          'Closed') {
-                                                                                                                        return Color(0xFFFF0B00);
-                                                                                                                      } else if (functions.toStringConverter(getJsonField(
-                                                                                                                            recordItem,
-                                                                                                                            r'''$.fields['⚡❗Status']''',
-                                                                                                                          )) ==
-                                                                                                                          'Executed Contract ') {
-                                                                                                                        return Color(0xFF007BFF);
-                                                                                                                      } else if (functions.toStringConverter(getJsonField(
-                                                                                                                            recordItem,
-                                                                                                                            r'''$.fields['⚡❗Status']''',
-                                                                                                                          )) ==
-                                                                                                                          'Pending') {
-                                                                                                                        return Color(0xFFFFB100);
-                                                                                                                      } else {
-                                                                                                                        return FlutterFlowTheme.of(context).primaryColor;
-                                                                                                                      }
-                                                                                                                    }(),
-                                                                                                                    FlutterFlowTheme.of(context).primaryColor,
-                                                                                                                  ),
-                                                                                                                  fontSize: 12,
-                                                                                                                  fontWeight: FontWeight.bold,
-                                                                                                                ),
-                                                                                                          ),
-                                                                                                        ],
-                                                                                                      ),
-                                                                                                      Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 4),
-                                                                                                        child: Container(
-                                                                                                          width: 30,
-                                                                                                          height: 30,
-                                                                                                          clipBehavior: Clip.antiAlias,
-                                                                                                          decoration: BoxDecoration(
-                                                                                                            shape: BoxShape.circle,
-                                                                                                          ),
-                                                                                                          child: Image.network(
-                                                                                                            valueOrDefault<String>(
-                                                                                                              getJsonField(
-                                                                                                                recordItem,
-                                                                                                                r'''$.fields['🤵 Agent Image Test1'][0].url''',
-                                                                                                              ),
-                                                                                                              'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
-                                                                                                            ),
-                                                                                                            fit: BoxFit.cover,
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      if (getJsonField(
-                                                                                                            recordItem,
-                                                                                                            r'''$.fields['💵 Purchase Price']''',
-                                                                                                          ) !=
-                                                                                                          null)
-                                                                                                        Text(
-                                                                                                          valueOrDefault<String>(
-                                                                                                            formatNumber(
-                                                                                                              functions.stringToDouble(getJsonField(
-                                                                                                                recordItem,
-                                                                                                                r'''$.fields['💵 Purchase Price']''',
-                                                                                                              ).toString()),
-                                                                                                              formatType: FormatType.decimal,
-                                                                                                              decimalType: DecimalType.automatic,
-                                                                                                              currency: '\$',
-                                                                                                            ),
-                                                                                                            '\$0',
-                                                                                                          ),
-                                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                                                fontFamily: 'Poppins',
-                                                                                                                fontSize: 12,
-                                                                                                                fontWeight: FontWeight.bold,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      Card(
-                                                                                                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                        shape: RoundedRectangleBorder(
-                                                                                                          borderRadius: BorderRadius.circular(10),
-                                                                                                        ),
-                                                                                                        child: Padding(
-                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
-                                                                                                          child: Text(
-                                                                                                            valueOrDefault<String>(
-                                                                                                              '👪 ${valueOrDefault<String>(
-                                                                                                                getJsonField(
-                                                                                                                  recordItem,
-                                                                                                                  r'''$.fields['👪 Type']''',
-                                                                                                                ).toString(),
-                                                                                                                'Not Set',
-                                                                                                              )}',
-                                                                                                              'Not Set',
-                                                                                                            ),
-                                                                                                            style: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                                                  fontFamily: 'Lato',
-                                                                                                                  color: Colors.white,
-                                                                                                                ),
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                        ],
                                                                                       ),
                                                                                     ),
                                                                                   ),
                                                                                 ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                2,
+                                                                                0,
+                                                                                2,
+                                                                                0),
+                                                                            child:
+                                                                                Text(
+                                                                              '{\$Total Commission YTD]',
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'Nunito',
+                                                                                    fontSize: 16,
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                12,
+                                                                                0,
+                                                                                12,
+                                                                                0),
+                                                                            child:
+                                                                                Material(
+                                                                              color: Colors.transparent,
+                                                                              elevation: 0,
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(8),
                                                                               ),
-                                                                            );
-                                                                          },
-                                                                        );
-                                                                      },
+                                                                              child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(8),
+                                                                                child: Container(
+                                                                                  width: MediaQuery.of(context).size.width * 0.95,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: Colors.white,
+                                                                                    borderRadius: BorderRadius.circular(8),
+                                                                                    border: Border.all(
+                                                                                      color: Color(0xFFF1F4F8),
+                                                                                      width: 2,
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        FlutterFlowDropDown(
+                                                                                          initialOption: dropDownSearchTYpeValue ??= 'MLS ID',
+                                                                                          options: [
+                                                                                            'Address',
+                                                                                            'MLS ID',
+                                                                                            'Agent'
+                                                                                          ],
+                                                                                          onChanged: (val) => setState(() => dropDownSearchTYpeValue = val),
+                                                                                          width: 90,
+                                                                                          height: 50,
+                                                                                          textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'Nunito',
+                                                                                                color: Colors.black,
+                                                                                                fontSize: 13,
+                                                                                                fontWeight: FontWeight.bold,
+                                                                                              ),
+                                                                                          hintText: 'Select',
+                                                                                          fillColor: Colors.white,
+                                                                                          elevation: 2,
+                                                                                          borderColor: Colors.transparent,
+                                                                                          borderWidth: 0,
+                                                                                          borderRadius: 0,
+                                                                                          margin: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                                                                                          hidesUnderline: true,
+                                                                                        ),
+                                                                                        if (dropDownSearchTYpeValue == 'MLS ID')
+                                                                                          Expanded(
+                                                                                            child: TextFormField(
+                                                                                              controller: searchValurTextFieldMLSController,
+                                                                                              onChanged: (_) => EasyDebounce.debounce(
+                                                                                                'searchValurTextFieldMLSController',
+                                                                                                Duration(milliseconds: 0),
+                                                                                                () async {
+                                                                                                  apiResultcre = await SearchByMLSorSTREETCall.call(
+                                                                                                    listingId: searchValurTextFieldMLSController!.text,
+                                                                                                  );
+                                                                                                  if ((apiResultcre?.succeeded ?? true)) {
+                                                                                                    filteredRecords = await actions.searchRecordsData(
+                                                                                                      searchValurTextFieldMLSController!.text,
+                                                                                                      AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                                          .recordList(
+                                                                                                            formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                                          )
+                                                                                                          .toList(),
+                                                                                                    );
+                                                                                                  }
+
+                                                                                                  setState(() {});
+                                                                                                },
+                                                                                              ),
+                                                                                              obscureText: false,
+                                                                                              decoration: InputDecoration(
+                                                                                                hintText: 'Search',
+                                                                                                enabledBorder: InputBorder.none,
+                                                                                                focusedBorder: InputBorder.none,
+                                                                                                errorBorder: InputBorder.none,
+                                                                                                focusedErrorBorder: InputBorder.none,
+                                                                                                suffixIcon: searchValurTextFieldMLSController!.text.isNotEmpty
+                                                                                                    ? InkWell(
+                                                                                                        onTap: () async {
+                                                                                                          searchValurTextFieldMLSController?.clear();
+                                                                                                          apiResultcre = await SearchByMLSorSTREETCall.call(
+                                                                                                            listingId: searchValurTextFieldMLSController!.text,
+                                                                                                          );
+                                                                                                          if ((apiResultcre?.succeeded ?? true)) {
+                                                                                                            filteredRecords = await actions.searchRecordsData(
+                                                                                                              searchValurTextFieldMLSController!.text,
+                                                                                                              AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                                                  .recordList(
+                                                                                                                    formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                                                  )
+                                                                                                                  .toList(),
+                                                                                                            );
+                                                                                                          }
+
+                                                                                                          setState(() {});
+                                                                                                          setState(() {});
+                                                                                                        },
+                                                                                                        child: Icon(
+                                                                                                          Icons.clear,
+                                                                                                          color: Color(0xFF757575),
+                                                                                                          size: 22,
+                                                                                                        ),
+                                                                                                      )
+                                                                                                    : null,
+                                                                                              ),
+                                                                                              style: FlutterFlowTheme.of(context).bodyText1,
+                                                                                            ),
+                                                                                          ),
+                                                                                        if (dropDownSearchTYpeValue == 'Address')
+                                                                                          Expanded(
+                                                                                            child: TextFormField(
+                                                                                              controller: searchValurTextFieldAddressController,
+                                                                                              onChanged: (_) => EasyDebounce.debounce(
+                                                                                                'searchValurTextFieldAddressController',
+                                                                                                Duration(milliseconds: 0),
+                                                                                                () async {
+                                                                                                  bridgeAPIAddressResultsWeb = await SearchByMLSorSTREETCall.call(
+                                                                                                    unparsedAddress: searchValurTextFieldAddressController!.text,
+                                                                                                  );
+                                                                                                  if ((bridgeAPIAddressResultsWeb?.succeeded ?? true)) {
+                                                                                                    filteredRecordsSecondWeb = await actions.searchRecordsData(
+                                                                                                      searchValurTextFieldAddressController!.text,
+                                                                                                      AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                                          .recordList(
+                                                                                                            formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                                          )
+                                                                                                          .toList(),
+                                                                                                    );
+                                                                                                  }
+
+                                                                                                  setState(() {});
+                                                                                                },
+                                                                                              ),
+                                                                                              obscureText: false,
+                                                                                              decoration: InputDecoration(
+                                                                                                hintText: 'Search',
+                                                                                                enabledBorder: InputBorder.none,
+                                                                                                focusedBorder: InputBorder.none,
+                                                                                                errorBorder: InputBorder.none,
+                                                                                                focusedErrorBorder: InputBorder.none,
+                                                                                                suffixIcon: searchValurTextFieldAddressController!.text.isNotEmpty
+                                                                                                    ? InkWell(
+                                                                                                        onTap: () async {
+                                                                                                          searchValurTextFieldAddressController?.clear();
+                                                                                                          bridgeAPIAddressResultsWeb = await SearchByMLSorSTREETCall.call(
+                                                                                                            unparsedAddress: searchValurTextFieldAddressController!.text,
+                                                                                                          );
+                                                                                                          if ((bridgeAPIAddressResultsWeb?.succeeded ?? true)) {
+                                                                                                            filteredRecordsSecondWeb = await actions.searchRecordsData(
+                                                                                                              searchValurTextFieldAddressController!.text,
+                                                                                                              AirtableAPIsGroup.listTransactionsRecordsCall
+                                                                                                                  .recordList(
+                                                                                                                    formMainListTransactionsRecordsResponse.jsonBody,
+                                                                                                                  )
+                                                                                                                  .toList(),
+                                                                                                            );
+                                                                                                          }
+
+                                                                                                          setState(() {});
+                                                                                                          setState(() {});
+                                                                                                        },
+                                                                                                        child: Icon(
+                                                                                                          Icons.clear,
+                                                                                                          color: Color(0xFF757575),
+                                                                                                          size: 22,
+                                                                                                        ),
+                                                                                                      )
+                                                                                                    : null,
+                                                                                              ),
+                                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                    fontFamily: 'Nunito',
+                                                                                                    fontSize: 18,
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              16,
+                                                                              0,
+                                                                              16,
+                                                                              0),
+                                                                      child:
+                                                                          Material(
+                                                                        color: Colors
+                                                                            .transparent,
+                                                                        elevation:
+                                                                            5,
+                                                                        shape:
+                                                                            RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.only(
+                                                                            bottomLeft:
+                                                                                Radius.circular(12),
+                                                                            bottomRight:
+                                                                                Radius.circular(12),
+                                                                            topLeft:
+                                                                                Radius.circular(0),
+                                                                            topRight:
+                                                                                Radius.circular(0),
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadius.only(
+                                                                            bottomLeft:
+                                                                                Radius.circular(12),
+                                                                            bottomRight:
+                                                                                Radius.circular(12),
+                                                                            topLeft:
+                                                                                Radius.circular(0),
+                                                                            topRight:
+                                                                                Radius.circular(0),
+                                                                          ),
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            constraints:
+                                                                                BoxConstraints(
+                                                                              maxHeight: MediaQuery.of(context).size.height * 0.3,
+                                                                            ),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Colors.transparent,
+                                                                              borderRadius: BorderRadius.only(
+                                                                                bottomLeft: Radius.circular(12),
+                                                                                bottomRight: Radius.circular(12),
+                                                                                topLeft: Radius.circular(0),
+                                                                                topRight: Radius.circular(0),
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Visibility(
+                                                                              visible: (searchValurTextFieldMLSController!.text != null && searchValurTextFieldMLSController!.text != '') || (searchValurTextFieldAddressController!.text != null && searchValurTextFieldAddressController!.text != ''),
+                                                                              child: CustomAutoCompleteWidget(
+                                                                                searchText: searchValurTextFieldMLSController!.text,
+                                                                                mls: dropDownSearchTYpeValue == 'MLS ID',
+                                                                                address: dropDownSearchTYpeValue == 'Address',
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                ClipRRect(
+                                                                  child:
+                                                                      Container(
+                                                                    height: 200,
+                                                                    constraints:
+                                                                        BoxConstraints(
+                                                                      maxHeight:
+                                                                          MediaQuery.of(context).size.height *
+                                                                              0.25,
+                                                                    ),
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child:
+                                                                        Visibility(
+                                                                      visible: getJsonField(
+                                                                            formMainListTransactionsRecordsResponse.jsonBody,
+                                                                            r'''$.records''',
+                                                                          ) !=
+                                                                          null,
+                                                                      child:
+                                                                          Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final record = AirtableAPIsGroup
+                                                                              .listTransactionsRecordsCall
+                                                                              .recordList(
+                                                                                formMainListTransactionsRecordsResponse.jsonBody,
+                                                                              )
+                                                                              .toList();
+                                                                          return ListView
+                                                                              .builder(
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            shrinkWrap:
+                                                                                true,
+                                                                            scrollDirection:
+                                                                                Axis.horizontal,
+                                                                            itemCount:
+                                                                                record.length,
+                                                                            itemBuilder:
+                                                                                (context, recordIndex) {
+                                                                              final recordItem = record[recordIndex];
+                                                                              return Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                                                                                child: InkWell(
+                                                                                  onTap: () async {
+                                                                                    setState(() => FFAppState().currentDisplayRecordID = getJsonField(
+                                                                                          recordItem,
+                                                                                          r'''$.id''',
+                                                                                        ).toString());
+                                                                                    await showModalBottomSheet(
+                                                                                      isScrollControlled: true,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      context: context,
+                                                                                      builder: (context) {
+                                                                                        return Padding(
+                                                                                          padding: MediaQuery.of(context).viewInsets,
+                                                                                          child: PropertyDetailsWidget(
+                                                                                            recordId: FFAppState().currentDisplayRecordID,
+                                                                                          ),
+                                                                                        );
+                                                                                      },
+                                                                                    ).then((value) => setState(() {}));
+                                                                                  },
+                                                                                  child: Material(
+                                                                                    color: Colors.transparent,
+                                                                                    elevation: 5,
+                                                                                    shape: RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(12),
+                                                                                    ),
+                                                                                    child: ClipRRect(
+                                                                                      borderRadius: BorderRadius.circular(12),
+                                                                                      child: Container(
+                                                                                        width: MediaQuery.of(context).size.width,
+                                                                                        constraints: BoxConstraints(
+                                                                                          maxWidth: 350,
+                                                                                          maxHeight: 110,
+                                                                                        ),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                          borderRadius: BorderRadius.circular(12),
+                                                                                        ),
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Expanded(
+                                                                                              child: Hero(
+                                                                                                tag: valueOrDefault<String>(
+                                                                                                  getJsonField(
+                                                                                                    recordItem,
+                                                                                                    r'''$.fields['Property Image'][0].url''' + '$recordIndex',
+                                                                                                  ),
+                                                                                                  'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                                                                ),
+                                                                                                transitionOnUserGestures: true,
+                                                                                                child: Image.network(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    getJsonField(
+                                                                                                      recordItem,
+                                                                                                      r'''$.fields['Property Image'][0].url''',
+                                                                                                    ),
+                                                                                                    'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
+                                                                                                  ),
+                                                                                                  width: MediaQuery.of(context).size.width * 0.45,
+                                                                                                  height: MediaQuery.of(context).size.height * 1,
+                                                                                                  fit: BoxFit.cover,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Container(
+                                                                                                width: MediaQuery.of(context).size.width * 0.4,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                ),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                                                                                  child: SingleChildScrollView(
+                                                                                                    child: Column(
+                                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                      children: [
+                                                                                                        if (getJsonField(
+                                                                                                              recordItem,
+                                                                                                              r'''$.fields['🏡 Address']''',
+                                                                                                            ) !=
+                                                                                                            null)
+                                                                                                          Text(
+                                                                                                            getJsonField(
+                                                                                                              recordItem,
+                                                                                                              r'''$.fields['🏡 Address']''',
+                                                                                                            ).toString(),
+                                                                                                            style: FlutterFlowTheme.of(context).subtitle1.override(
+                                                                                                                  fontFamily: 'Poppins',
+                                                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                                  fontSize: 14,
+                                                                                                                  fontWeight: FontWeight.bold,
+                                                                                                                ),
+                                                                                                          ),
+                                                                                                        Column(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          children: [
+                                                                                                            Text(
+                                                                                                              functions.toStringConverter(getJsonField(
+                                                                                                                recordItem,
+                                                                                                                r'''$.fields['⚡❗Status']''',
+                                                                                                              )),
+                                                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                                    fontFamily: 'Nunito',
+                                                                                                                    color: valueOrDefault<Color>(
+                                                                                                                      () {
+                                                                                                                        if (functions.toStringConverter(getJsonField(
+                                                                                                                              recordItem,
+                                                                                                                              r'''$.fields['⚡❗Status']''',
+                                                                                                                            )) ==
+                                                                                                                            'Active') {
+                                                                                                                          return Color(0xFF2CFF00);
+                                                                                                                        } else if (functions.toStringConverter(getJsonField(
+                                                                                                                              recordItem,
+                                                                                                                              r'''$.fields['⚡❗Status']''',
+                                                                                                                            )) ==
+                                                                                                                            'Closed') {
+                                                                                                                          return Color(0xFFFF0B00);
+                                                                                                                        } else if (functions.toStringConverter(getJsonField(
+                                                                                                                              recordItem,
+                                                                                                                              r'''$.fields['⚡❗Status']''',
+                                                                                                                            )) ==
+                                                                                                                            'Executed Contract ') {
+                                                                                                                          return Color(0xFF007BFF);
+                                                                                                                        } else if (functions.toStringConverter(getJsonField(
+                                                                                                                              recordItem,
+                                                                                                                              r'''$.fields['⚡❗Status']''',
+                                                                                                                            )) ==
+                                                                                                                            'Pending') {
+                                                                                                                          return Color(0xFFFFB100);
+                                                                                                                        } else {
+                                                                                                                          return FlutterFlowTheme.of(context).primaryColor;
+                                                                                                                        }
+                                                                                                                      }(),
+                                                                                                                      FlutterFlowTheme.of(context).primaryColor,
+                                                                                                                    ),
+                                                                                                                    fontSize: 12,
+                                                                                                                    fontWeight: FontWeight.bold,
+                                                                                                                  ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 4),
+                                                                                                          child: Container(
+                                                                                                            width: 30,
+                                                                                                            height: 30,
+                                                                                                            clipBehavior: Clip.antiAlias,
+                                                                                                            decoration: BoxDecoration(
+                                                                                                              shape: BoxShape.circle,
+                                                                                                            ),
+                                                                                                            child: Image.network(
+                                                                                                              valueOrDefault<String>(
+                                                                                                                getJsonField(
+                                                                                                                  recordItem,
+                                                                                                                  r'''$.fields['🤵 Agent Image Test1'][0].url''',
+                                                                                                                ),
+                                                                                                                'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg',
+                                                                                                              ),
+                                                                                                              fit: BoxFit.cover,
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        if (getJsonField(
+                                                                                                              recordItem,
+                                                                                                              r'''$.fields['💵 Purchase Price']''',
+                                                                                                            ) !=
+                                                                                                            null)
+                                                                                                          Text(
+                                                                                                            valueOrDefault<String>(
+                                                                                                              formatNumber(
+                                                                                                                functions.stringToDouble(getJsonField(
+                                                                                                                  recordItem,
+                                                                                                                  r'''$.fields['💵 Purchase Price']''',
+                                                                                                                ).toString()),
+                                                                                                                formatType: FormatType.decimal,
+                                                                                                                decimalType: DecimalType.automatic,
+                                                                                                                currency: '\$',
+                                                                                                              ),
+                                                                                                              '\$0',
+                                                                                                            ),
+                                                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                                  fontFamily: 'Poppins',
+                                                                                                                  fontSize: 12,
+                                                                                                                  fontWeight: FontWeight.bold,
+                                                                                                                ),
+                                                                                                          ),
+                                                                                                        Card(
+                                                                                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                                                                          color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                          shape: RoundedRectangleBorder(
+                                                                                                            borderRadius: BorderRadius.circular(10),
+                                                                                                          ),
+                                                                                                          child: Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
+                                                                                                            child: Text(
+                                                                                                              valueOrDefault<String>(
+                                                                                                                '👪 ${valueOrDefault<String>(
+                                                                                                                  getJsonField(
+                                                                                                                    recordItem,
+                                                                                                                    r'''$.fields['👪 Type']''',
+                                                                                                                  ).toString(),
+                                                                                                                  'Not Set',
+                                                                                                                )}',
+                                                                                                                'Not Set',
+                                                                                                              ),
+                                                                                                              style: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                                                    fontFamily: 'Lato',
+                                                                                                                    color: Colors.white,
+                                                                                                                  ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        },
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                tabletLandscape:
-                                                                    false,
-                                                                desktop: false,
-                                                              ))
-                                                                Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: MediaQuery.of(
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  tabletLandscape:
+                                                                      false,
+                                                                  desktop:
+                                                                      false,
+                                                                ))
+                                                                  Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height *
+                                                                        0.15,
+                                                                    constraints:
+                                                                        BoxConstraints(
+                                                                      maxHeight:
+                                                                          70,
+                                                                    ),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .size
-                                                                          .height *
-                                                                      0.15,
-                                                                  constraints:
-                                                                      BoxConstraints(
-                                                                    maxHeight:
-                                                                        70,
+                                                                          .secondaryBackground,
+                                                                    ),
                                                                   ),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                  ),
-                                                                ),
-                                                            ],
-                                                          ),
-                                                        ],
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
