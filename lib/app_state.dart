@@ -1,4 +1,5 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:csv/csv.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
 
@@ -14,10 +15,13 @@ class FFAppState {
   }
 
   Future initializePersistedState() async {
-    prefs = await SharedPreferences.getInstance();
+    secureStorage = FlutterSecureStorage();
+    _currentSelectedDashboardPage =
+        await secureStorage.getString('ff_currentSelectedDashboardPage') ??
+            _currentSelectedDashboardPage;
   }
 
-  late SharedPreferences prefs;
+  late FlutterSecureStorage secureStorage;
 
   bool TermsOfServiceAccepted = false;
 
@@ -38,9 +42,42 @@ class FFAppState {
 
   DateTime? ClosingDate = DateTime.fromMillisecondsSinceEpoch(1814380200000);
 
-  List<String> UploadedPOFs = [];
+  String MiscDocs1 = '';
 
-  String currentSelectedDashboardPage = '';
+  String MiscDocs2 = '';
+
+  String MiscDocs3 = '';
+
+  String PreApprovalProofofFunds = '';
+
+  String ASISContractandetc = '';
+
+  String currentDocType = '';
+
+  String _currentSelectedDashboardPage = '';
+  String get currentSelectedDashboardPage => _currentSelectedDashboardPage;
+  set currentSelectedDashboardPage(String _value) {
+    _currentSelectedDashboardPage = _value;
+    secureStorage.setString('ff_currentSelectedDashboardPage', _value);
+  }
+
+  void deleteCurrentSelectedDashboardPage() {
+    secureStorage.delete(key: 'ff_currentSelectedDashboardPage');
+  }
+
+  String panelDisplay = '';
+
+  String ListingDocs1 = '';
+
+  String ListingDocs2 = '';
+
+  String ListingDocs3 = '';
+
+  String ListingDocs4 = '';
+
+  String ListingDocs5 = '';
+
+  List<String> propertyPhotosUploaded = [];
 }
 
 LatLng? _latLngFromString(String? val) {
@@ -51,4 +88,38 @@ LatLng? _latLngFromString(String? val) {
   final lat = double.parse(split.first);
   final lng = double.parse(split.last);
   return LatLng(lat, lng);
+}
+
+extension FlutterSecureStorageExtensions on FlutterSecureStorage {
+  Future<String?> getString(String key) async => await read(key: key);
+  Future<void> setString(String key, String value) async =>
+      await write(key: key, value: value);
+
+  Future<bool?> getBool(String key) async => (await read(key: key)) == 'true';
+  Future<void> setBool(String key, bool value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<int?> getInt(String key) async =>
+      int.tryParse(await read(key: key) ?? '');
+  Future<void> setInt(String key, int value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<double?> getDouble(String key) async =>
+      double.tryParse(await read(key: key) ?? '');
+  Future<void> setDouble(String key, double value) async =>
+      await write(key: key, value: value.toString());
+
+  Future<List<String>?> getStringList(String key) async =>
+      await read(key: key).then((result) {
+        if (result == null || result.isEmpty) {
+          return null;
+        }
+        return CsvToListConverter()
+            .convert(result)
+            .first
+            .map((e) => e.toString())
+            .toList();
+      });
+  Future<void> setStringList(String key, List<String> value) async =>
+      await write(key: key, value: ListToCsvConverter().convert([value]));
 }

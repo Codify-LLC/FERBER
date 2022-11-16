@@ -413,7 +413,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(8,
                                                                       4, 8, 4),
-                                                          child: Text(
+                                                          child: SelectionArea(
+                                                              child: Text(
                                                             'Hello World',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
@@ -425,7 +426,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                           context)
                                                                       .primaryBackground,
                                                                 ),
-                                                          ),
+                                                          )),
                                                         ),
                                                       ),
                                                     ),
@@ -666,14 +667,15 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                             CrossAxisAlignment
                                                                 .end,
                                                         children: [
-                                                          Text(
+                                                          SelectionArea(
+                                                              child: Text(
                                                             isWeb
                                                                 ? 'Closing Date'
                                                                 : 'Listing Date',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle2,
-                                                          ),
+                                                          )),
                                                           Text(
                                                             isWeb
                                                                 ? AirtableAPIsGroup
@@ -833,408 +835,427 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(8,
-                                                                      8, 0, 8),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Padding(
-                                                                    padding: MediaQuery.of(
-                                                                            context)
-                                                                        .viewInsets,
-                                                                    child:
-                                                                        DetailsWidget(),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
-                                                            },
-                                                            child: Container(
-                                                              width: 80,
-                                                              height: 80,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFF1F4F8),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    blurRadius:
-                                                                        5,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryColor,
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            2),
-                                                                  )
-                                                                ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .playlist_add_check_rounded,
-                                                                    color: Color(
-                                                                        0xFF95A1AC),
-                                                                    size: 40,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            8,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Details',
-                                                                      style: FlutterFlowTheme.of(
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                8, 0, 8, 0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        8,
+                                                                        0,
+                                                                        8),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Padding(
+                                                                      padding: MediaQuery.of(
                                                                               context)
-                                                                          .subtitle2,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(8,
-                                                                      8, 0, 8),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                barrierColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Padding(
-                                                                    padding: MediaQuery.of(
-                                                                            context)
-                                                                        .viewInsets,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          MediaQuery.of(context).size.height *
-                                                                              1,
+                                                                          .viewInsets,
                                                                       child:
-                                                                          DocumentsScreenWidget(
-                                                                        record:
-                                                                            getJsonField(
-                                                                          columnRetriveTransactionsRecordResponse
-                                                                              .jsonBody,
-                                                                          r'''$''',
-                                                                        ),
+                                                                          DetailsWidget(),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Container(
+                                                                width: 80,
+                                                                height: 80,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFF1F4F8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          5,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryColor,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                ),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .playlist_add_check_rounded,
+                                                                      color: Color(
+                                                                          0xFF95A1AC),
+                                                                      size: 40,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              8,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Details',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2,
                                                                       ),
                                                                     ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
-                                                            },
-                                                            child: Container(
-                                                              width: 80,
-                                                              height: 80,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFF1F4F8),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    blurRadius:
-                                                                        5,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryColor,
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            2),
-                                                                  )
-                                                                ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .picture_as_pdf,
-                                                                    color: Color(
-                                                                        0xFF95A1AC),
-                                                                    size: 40,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            8,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Docs',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle2,
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(8,
-                                                                      8, 0, 8),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              if (Navigator.of(
-                                                                      context)
-                                                                  .canPop()) {
-                                                                context.pop();
-                                                              }
-                                                              context.pushNamed(
-                                                                'Home',
-                                                                queryParams: {
-                                                                  'defaultPage':
-                                                                      serializeParam(
-                                                                    'Details',
-                                                                    ParamType
-                                                                        .String,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                                extra: <String,
-                                                                    dynamic>{
-                                                                  kTransitionInfoKey:
-                                                                      TransitionInfo(
-                                                                    hasTransition:
-                                                                        true,
-                                                                    transitionType:
-                                                                        PageTransitionType
-                                                                            .fade,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            0),
-                                                                  ),
-                                                                },
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              width: 80,
-                                                              height: 80,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFF1F4F8),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    blurRadius:
-                                                                        5,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryColor,
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            2),
-                                                                  )
-                                                                ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .date_range_sharp,
-                                                                    color: Color(
-                                                                        0xFF95A1AC),
-                                                                    size: 40,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            8,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Dates',
-                                                                      style: FlutterFlowTheme.of(
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        8,
+                                                                        0,
+                                                                        8),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(8,
-                                                                      8, 8, 8),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Padding(
-                                                                    padding: MediaQuery.of(
-                                                                            context)
-                                                                        .viewInsets,
-                                                                    child:
-                                                                        ServicesWidget(
-                                                                      type: AirtableAPIsGroup
-                                                                          .retriveTransactionsRecordCall
-                                                                          .type(
+                                                                          .primaryColor,
+                                                                  barrierColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Padding(
+                                                                      padding: MediaQuery.of(
+                                                                              context)
+                                                                          .viewInsets,
+                                                                      child:
+                                                                          Container(
+                                                                        height:
+                                                                            MediaQuery.of(context).size.height *
+                                                                                1,
+                                                                        child:
+                                                                            DocumentsScreenWidget(
+                                                                          record:
+                                                                              getJsonField(
                                                                             columnRetriveTransactionsRecordResponse.jsonBody,
-                                                                          )
-                                                                          .toString(),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
-                                                            },
-                                                            child: Container(
-                                                              width: 80,
-                                                              height: 80,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFF1F4F8),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    blurRadius:
-                                                                        5,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryColor,
-                                                                    offset:
-                                                                        Offset(
-                                                                            0,
-                                                                            2),
-                                                                  )
-                                                                ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons
-                                                                        .support_agent_rounded,
-                                                                    color: Color(
-                                                                        0xFF95A1AC),
-                                                                    size: 40,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            8,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Notes',
-                                                                      style: FlutterFlowTheme.of(
+                                                                            r'''$''',
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Container(
+                                                                width: 80,
+                                                                height: 80,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFF1F4F8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          5,
+                                                                      color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2,
+                                                                          .secondaryColor,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                ),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .picture_as_pdf,
+                                                                      color: Color(
+                                                                          0xFF95A1AC),
+                                                                      size: 40,
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              8,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Docs',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        8,
+                                                                        0,
+                                                                        8),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                if (Navigator.of(
+                                                                        context)
+                                                                    .canPop()) {
+                                                                  context.pop();
+                                                                }
+                                                                context
+                                                                    .pushNamed(
+                                                                  'Home',
+                                                                  queryParams: {
+                                                                    'defaultPage':
+                                                                        serializeParam(
+                                                                      'Details',
+                                                                      ParamType
+                                                                          .String,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                  extra: <
+                                                                      String,
+                                                                      dynamic>{
+                                                                    kTransitionInfoKey:
+                                                                        TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              0),
+                                                                    ),
+                                                                  },
+                                                                );
+                                                              },
+                                                              child: Container(
+                                                                width: 80,
+                                                                height: 80,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFF1F4F8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          5,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryColor,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                ),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .date_range_sharp,
+                                                                      color: Color(
+                                                                          0xFF95A1AC),
+                                                                      size: 40,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              8,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Dates',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        8,
+                                                                        8,
+                                                                        8),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Padding(
+                                                                      padding: MediaQuery.of(
+                                                                              context)
+                                                                          .viewInsets,
+                                                                      child:
+                                                                          ServicesWidget(
+                                                                        type: AirtableAPIsGroup
+                                                                            .retriveTransactionsRecordCall
+                                                                            .type(
+                                                                              columnRetriveTransactionsRecordResponse.jsonBody,
+                                                                            )
+                                                                            .toString(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Container(
+                                                                width: 80,
+                                                                height: 80,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFF1F4F8),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          5,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryColor,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                ),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .support_agent_rounded,
+                                                                      color: Color(
+                                                                          0xFF95A1AC),
+                                                                      size: 40,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              8,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Notes',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   Padding(
                                                     padding:

@@ -18,9 +18,12 @@ class SearchingForTCCopyWidget extends StatefulWidget {
 }
 
 class _SearchingForTCCopyWidgetState extends State<SearchingForTCCopyWidget> {
-  StopWatchTimer? timerController;
-  String? timerValue;
-  int? timerMilliseconds;
+  StopWatchTimer? timerController1;
+  String? timerValue1;
+  int? timerMilliseconds1;
+  StopWatchTimer? timerController2;
+  String? timerValue2;
+  int? timerMilliseconds2;
   double? ratingBarValue;
 
   @override
@@ -32,7 +35,8 @@ class _SearchingForTCCopyWidgetState extends State<SearchingForTCCopyWidget> {
 
   @override
   void dispose() {
-    timerController?.dispose();
+    timerController1?.dispose();
+    timerController2?.dispose();
     super.dispose();
   }
 
@@ -105,23 +109,23 @@ class _SearchingForTCCopyWidgetState extends State<SearchingForTCCopyWidget> {
                                         animate: true,
                                       ),
                                       FlutterFlowTimer(
-                                        timerValue: timerValue ??=
+                                        timerValue: timerValue1 ??=
                                             StopWatchTimer.getDisplayTime(
-                                          timerMilliseconds ??= 0,
+                                          timerMilliseconds1 ??= 0,
                                           hours: false,
                                           minute: true,
                                           second: true,
                                           milliSecond: false,
                                         ),
-                                        timer: timerController ??=
+                                        timer: timerController1 ??=
                                             StopWatchTimer(
                                           mode: StopWatchMode.countDown,
                                           presetMillisecond:
-                                              timerMilliseconds ??= 0,
+                                              timerMilliseconds1 ??= 0,
                                           onChange: (value) {
                                             setState(() {
-                                              timerMilliseconds = value;
-                                              timerValue =
+                                              timerMilliseconds1 = value;
+                                              timerValue1 =
                                                   StopWatchTimer.getDisplayTime(
                                                 value,
                                                 hours: false,
@@ -176,7 +180,7 @@ class _SearchingForTCCopyWidgetState extends State<SearchingForTCCopyWidget> {
                                       children: [
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(-0.8, 0),
+                                              AlignmentDirectional(-0.6, 0),
                                           child: Image.asset(
                                             'assets/images/MacBook-2017-PureFront-Open-Gold-SCREEN.png',
                                             width: 250,
@@ -203,33 +207,108 @@ class _SearchingForTCCopyWidgetState extends State<SearchingForTCCopyWidget> {
                                                 ),
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: Align(
-                                                alignment: AlignmentDirectional(
-                                                    -0.05, -0.25),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(4, 4, 4, 4),
-                                                  child: Container(
-                                                    width: 120,
-                                                    height: 120,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.network(
-                                                      'https://uploads-ssl.webflow.com/626628e5d71f1c19545cefaa/62ee2ba41cef28769d15e0d5_619458cd5b21d6434837e15d_image-3-agents-realtor-template-p-800.jpeg',
-                                                      fit: BoxFit.cover,
+                                              child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -0.05, -0.25),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4, 4, 4, 4),
+                                                      child: Container(
+                                                        width: 120,
+                                                        height: 120,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          'https://uploads-ssl.webflow.com/626628e5d71f1c19545cefaa/62ee2ba41cef28769d15e0d5_619458cd5b21d6434837e15d_image-3-agents-realtor-template-p-800.jpeg',
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
+                                                  Stack(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0, 0),
+                                                    children: [
+                                                      Lottie.asset(
+                                                        'assets/lottie_animations/98241-countdown-circle.json',
+                                                        height: 100,
+                                                        fit: BoxFit.contain,
+                                                        frameRate:
+                                                            FrameRate(180),
+                                                        animate: true,
+                                                      ),
+                                                      FlutterFlowTimer(
+                                                        timerValue: timerValue2 ??=
+                                                            StopWatchTimer
+                                                                .getDisplayTime(
+                                                          timerMilliseconds2 ??=
+                                                              0,
+                                                          hours: false,
+                                                          minute: true,
+                                                          second: true,
+                                                          milliSecond: false,
+                                                        ),
+                                                        timer:
+                                                            timerController2 ??=
+                                                                StopWatchTimer(
+                                                          mode: StopWatchMode
+                                                              .countDown,
+                                                          presetMillisecond:
+                                                              timerMilliseconds2 ??=
+                                                                  0,
+                                                          onChange: (value) {
+                                                            setState(() {
+                                                              timerMilliseconds2 =
+                                                                  value;
+                                                              timerValue2 =
+                                                                  StopWatchTimer
+                                                                      .getDisplayTime(
+                                                                value,
+                                                                hours: false,
+                                                                minute: true,
+                                                                second: true,
+                                                                milliSecond:
+                                                                    false,
+                                                              );
+                                                            });
+                                                          },
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Nunito',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                ),
+                                                        onEnded: () {},
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
                                         ),
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.6, -0.66),
+                                              AlignmentDirectional(-0.06, 0.88),
                                           child: RatingBar.builder(
                                             onRatingUpdate: (newValue) =>
                                                 setState(() =>

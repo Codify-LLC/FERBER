@@ -17,9 +17,12 @@ class ConfirmTCCopyWidget extends StatefulWidget {
 }
 
 class _ConfirmTCCopyWidgetState extends State<ConfirmTCCopyWidget> {
-  StopWatchTimer? timerController;
-  String? timerValue;
-  int? timerMilliseconds;
+  StopWatchTimer? timerController1;
+  String? timerValue1;
+  int? timerMilliseconds1;
+  StopWatchTimer? timerController2;
+  String? timerValue2;
+  int? timerMilliseconds2;
   double? ratingBarValue;
 
   @override
@@ -31,7 +34,8 @@ class _ConfirmTCCopyWidgetState extends State<ConfirmTCCopyWidget> {
 
   @override
   void dispose() {
-    timerController?.dispose();
+    timerController1?.dispose();
+    timerController2?.dispose();
     super.dispose();
   }
 
@@ -95,21 +99,22 @@ class _ConfirmTCCopyWidgetState extends State<ConfirmTCCopyWidget> {
                               animate: true,
                             ),
                             FlutterFlowTimer(
-                              timerValue: timerValue ??=
+                              timerValue: timerValue1 ??=
                                   StopWatchTimer.getDisplayTime(
-                                timerMilliseconds ??= 120000,
+                                timerMilliseconds1 ??= 120000,
                                 hours: false,
                                 minute: true,
                                 second: true,
                                 milliSecond: false,
                               ),
-                              timer: timerController ??= StopWatchTimer(
+                              timer: timerController1 ??= StopWatchTimer(
                                 mode: StopWatchMode.countDown,
-                                presetMillisecond: timerMilliseconds ??= 120000,
+                                presetMillisecond: timerMilliseconds1 ??=
+                                    120000,
                                 onChange: (value) {
                                   setState(() {
-                                    timerMilliseconds = value;
-                                    timerValue = StopWatchTimer.getDisplayTime(
+                                    timerMilliseconds1 = value;
+                                    timerValue1 = StopWatchTimer.getDisplayTime(
                                       value,
                                       hours: false,
                                       minute: true,
@@ -203,26 +208,81 @@ class _ConfirmTCCopyWidgetState extends State<ConfirmTCCopyWidget> {
                                     ),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4, 4, 4, 4),
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
+                                  child: Stack(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 4, 4, 4),
+                                        child: Container(
+                                          width: 120,
+                                          height: 120,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/Capture_(1).PNG',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                      child: Image.asset(
-                                        'assets/images/Capture_(1).PNG',
-                                        fit: BoxFit.cover,
+                                      Stack(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        children: [
+                                          Lottie.asset(
+                                            'assets/lottie_animations/98241-countdown-circle.json',
+                                            height: 100,
+                                            fit: BoxFit.contain,
+                                            frameRate: FrameRate(180),
+                                            animate: true,
+                                          ),
+                                          FlutterFlowTimer(
+                                            timerValue: timerValue2 ??=
+                                                StopWatchTimer.getDisplayTime(
+                                              timerMilliseconds2 ??= 0,
+                                              hours: false,
+                                              minute: true,
+                                              second: true,
+                                              milliSecond: false,
+                                            ),
+                                            timer: timerController2 ??=
+                                                StopWatchTimer(
+                                              mode: StopWatchMode.countDown,
+                                              presetMillisecond:
+                                                  timerMilliseconds2 ??= 0,
+                                              onChange: (value) {
+                                                setState(() {
+                                                  timerMilliseconds2 = value;
+                                                  timerValue2 = StopWatchTimer
+                                                      .getDisplayTime(
+                                                    value,
+                                                    hours: false,
+                                                    minute: true,
+                                                    second: true,
+                                                    milliSecond: false,
+                                                  );
+                                                });
+                                              },
+                                            ),
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Nunito',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                ),
+                                            onEnded: () {},
+                                          ),
+                                        ],
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.91, 0.69),
+                                alignment: AlignmentDirectional(0.47, 0.98),
                                 child: RatingBar.builder(
                                   onRatingUpdate: (newValue) =>
                                       setState(() => ratingBarValue = newValue),

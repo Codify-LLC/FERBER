@@ -10,11 +10,6 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-DateTime closingDateFun(String? closingDate) {
-  // Add your function code here!
-  return DateTime.parse(closingDate!);
-}
-
 String stringtoImage(String? stringImgPath) {
   // String to ImagePath
   return 'assets/images/$stringImgPath';
@@ -119,4 +114,22 @@ List<String> attachmentObjectFromUrls(List<String> urls) {
     }.toString());
   }
   return attachments;
+}
+
+List<String> contactRecordID(List<dynamic> contactsRecords) {
+  // get contactrecordid from json
+  List<String> ids = [];
+  for (final contact in contactsRecords) {
+    ids.add(contact);
+  }
+  return ids;
+}
+
+List<String> attachmentListFromURLs(List<String> photoUrls) {
+  // Add your function code here!
+  List<String> photosAttachments = [];
+  for (final photo in photoUrls) {
+    photosAttachments.add('{"url" : "$photo"}');
+  }
+  return photosAttachments;
 }

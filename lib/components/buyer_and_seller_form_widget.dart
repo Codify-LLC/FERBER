@@ -37,21 +37,6 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        if (responsiveVisibility(
-          context: context,
-          phone: false,
-          tablet: false,
-        ))
-          Expanded(
-            flex: 3,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 1,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
-            ),
-          ),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -156,49 +141,57 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                                   alignment: WrapAlignment.spaceEvenly,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 12, 8, 12),
-                                child: Material(
-                                  color: Colors.transparent,
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 1),
-                                        child: FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 0,
-                                          borderWidth: 1,
-                                          buttonSize: 40,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            size: 20,
+                              if (responsiveVisibility(
+                                context: context,
+                                tabletLandscape: false,
+                                desktop: false,
+                              ))
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 8, 12),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 1),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 0,
+                                            borderWidth: 1,
+                                            buttonSize: 40,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                            icon: Icon(
+                                              Icons.close,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 20,
+                                            ),
+                                            onPressed: () async {
+                                              Navigator.pop(context);
+                                            },
                                           ),
-                                          onPressed: () async {
-                                            Navigator.pop(context);
-                                          },
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
                             ],
                           ),
                           Expanded(

@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_swipeable_stack.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -34,18 +33,6 @@ class _SwipeTestWidgetState extends State<SwipeTestWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Color(0xFFF1F4F8),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              print('FloatingActionButton pressed ...');
-            },
-            backgroundColor: Color(0xFF4B39EF),
-            elevation: 8,
-            child: Icon(
-              Icons.create_rounded,
-              color: Colors.white,
-              size: 24,
-            ),
-          ),
           body: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -89,7 +76,7 @@ class _SwipeTestWidgetState extends State<SwipeTestWidget> {
                                 ),
                               ),
                               Text(
-                                'Welcome',
+                                'Team',
                                 style: FlutterFlowTheme.of(context)
                                     .title2
                                     .override(
@@ -98,23 +85,6 @@ class _SwipeTestWidgetState extends State<SwipeTestWidget> {
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                                child: AuthUserStreamWidget(
-                                  child: Text(
-                                    currentUserDisplayName,
-                                    style: FlutterFlowTheme.of(context)
-                                        .subtitle1
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF4B39EF),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -265,10 +235,10 @@ class _SwipeTestWidgetState extends State<SwipeTestWidget> {
                                       itemBuilder: (context, index) {
                                         return [
                                           () => Image.asset(
-                                                'assets/images/Capture.PNG',
+                                                'assets/images/Devivo.PNG',
                                                 width: 100,
                                                 height: 100,
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.fitHeight,
                                               ),
                                         ][index]();
                                       },

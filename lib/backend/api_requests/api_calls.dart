@@ -33,9 +33,16 @@ class AirtableAPIsGroup {
   static CreateBuyersNewOfferTransactionRecordCall
       createBuyersNewOfferTransactionRecordCall =
       CreateBuyersNewOfferTransactionRecordCall();
-  static CreateExecutedContractTransactionRecordCall
-      createExecutedContractTransactionRecordCall =
-      CreateExecutedContractTransactionRecordCall();
+  static CreateBuyerExecutedContractTransactionRecordCall
+      createBuyerExecutedContractTransactionRecordCall =
+      CreateBuyerExecutedContractTransactionRecordCall();
+  static CreateSellerActiveListingRecordCall
+      createSellerActiveListingRecordCall =
+      CreateSellerActiveListingRecordCall();
+  static CreateSellerPreListingRecordCall createSellerPreListingRecordCall =
+      CreateSellerPreListingRecordCall();
+  static CreateSellerExecutedContractCall createSellerExecutedContractCall =
+      CreateSellerExecutedContractCall();
 }
 
 class ListTransactionsRecordsCall {
@@ -699,33 +706,50 @@ class CreateBuyersNewOfferTransactionRecordCall {
     String? closingDate = '0000-00-00',
     int? inspectionPeriod,
     String? additionalTerms = ' ',
-    String? preApprovalProofOfFunds1 = '',
+    String? preApprovalProofOfFunds = '',
     String? signature = ' ',
     String? typeOfFinancing = 'VHA',
-    String? preApprovalProofOfFunds2 = '',
-    String? preApprovalProofOfFunds3 = '',
-    String? preApprovalProofOfFunds4 = '',
-    String? preApprovalProofOfFunds5 = '',
+    String? aSISContractAndEtc = '',
+    String? miscDocs1 = '',
+    String? miscDocs2 = '',
+    String? miscDocs3 = '',
+    List<String>? ourClientBuyerSELLERFormList,
   }) {
+    final ourClientBuyerSELLERForm =
+        _serializeList(ourClientBuyerSELLERFormList);
     final body = '''
 {
   "fields": {
     "👪 Type": "Buyer",
     "🏡 Address": "${address}",
     "💵 Purchase Price": ${purchasePrice},
-    "⚡❗Status": "${status}",
+    "⚡❗Status": "New Offer",
     "💰 Escrow Amount": ${escrowDeposit},
     "Offer Expiration Date": "${offerExpirationDate}",
     "🥂 Closing Date": "${closingDate}",
     "🔍 Inspection Deadline": "${inspectionPeriod}",
     "Additional Terms": "${additionalTerms}",
     "Type of financing": "${typeOfFinancing}",
+    "✔OurClient (Buyer/SELLER Form)": ${ourClientBuyerSELLERForm},
     "💲 Pre Approval or Proof of Funds (POF)": [
       {
-        "url": "${preApprovalProofOfFunds1}"
+        "url": "${preApprovalProofOfFunds}"
+      }
+    ],
+    "⭐ AS-IS Contract & etc": [
+      {
+        "url": "${aSISContractAndEtc}"
+      }
+    ],
+    "📂 Misc Docs": [
+      {
+        "url": "${miscDocs1}"
       },
       {
-        "url": "${preApprovalProofOfFunds2}"
+        "url": "${miscDocs2}"
+      },
+      {
+        "url": "${miscDocs3}"
       }
     ],
     "Signature": [
@@ -768,40 +792,213 @@ class CreateBuyersNewOfferTransactionRecordCall {
       );
 }
 
-class CreateExecutedContractTransactionRecordCall {
+class CreateBuyerExecutedContractTransactionRecordCall {
   Future<ApiCallResponse> call({
-    String? something = '',
+    String? internalNotes = '',
+    String? preApprovalProofOfFunds = '',
+    String? aSISContractAndEtc = '',
+    String? miscDocs1 = '',
+    String? miscDocs2 = '',
+    String? miscDocs3 = '',
+    String? signature = '',
   }) {
     final body = '''
 {
   "fields": {
     "👪 Type": "Buyer",
-    "🏡 Address": "",
-    "💵 Purchase Price": 0,
-    "⚡❗Status": "",
-    "💰 Escrow Amount": 0,
-    "Offer Expiration Date": "",
-    "🥂 Closing Date": "",
-    "🔍 Inspection Deadline": "",
-    "Additional Terms": "",
-    "Type of financing": "",
+    "⚡❗Status": "Executed Contract",
+    "Additional Terms": "${internalNotes}",
     "💲 Pre Approval or Proof of Funds (POF)": [
       {
-        "url": ""
+        "url": "${preApprovalProofOfFunds}"
+      }
+    ],
+    "📂 Misc Docs": [
+      {
+        "url": "${miscDocs1}"
       },
       {
-        "url": ""
+        "url": "${miscDocs2}"
+      },
+      {
+        "url": "${miscDocs3}"
       }
     ],
     "Signature": [
       {
-        "url": ""
+        "url": "${signature}"
       }
     ]
   }
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'Create Executed Contract Transaction Record',
+      callName: 'Create Buyer Executed Contract Transaction Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class CreateSellerActiveListingRecordCall {
+  Future<ApiCallResponse> call({
+    List<String>? buyerSellerContactsList,
+    String? listingDocs1 = '',
+    String? listingDocs2 = '',
+    String? listingDocs3 = '',
+    String? listingDocs4 = '',
+    String? listingDocs5 = '',
+  }) {
+    final buyerSellerContacts = _serializeList(buyerSellerContactsList);
+    final body = '''
+{
+  "fields": {
+    "👪 Type": "Seller",
+    "⚡❗Status": "Active Listing",
+    "✔OurClient (Buyer/SELLER Form)": ${buyerSellerContacts},
+    "📝Listing Docs": [
+      {
+        "url": "${listingDocs1}"
+      },
+      {
+        "url": "${listingDocs2}"
+      },
+      {
+        "url": "${listingDocs3}"
+      },
+      {
+        "url": "${listingDocs4}"
+      },
+      {
+        "url": "${listingDocs5}"
+      }
+    ]
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Seller Active Listing Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class CreateSellerPreListingRecordCall {
+  Future<ApiCallResponse> call({
+    int? listingPrice,
+    String? address = '',
+    List<String>? typesOfFinancingAcceptedList,
+    String? listingDate = '',
+    String? activeDate = '',
+    List<String>? buyerSellerContactList,
+    double? totalCommision,
+    String? listingAgentCommission = '',
+    double? coOpBrokerCommission,
+    String? additionalTerms = '',
+    String? notes = '',
+  }) {
+    final typesOfFinancingAccepted =
+        _serializeList(typesOfFinancingAcceptedList);
+    final buyerSellerContact = _serializeList(buyerSellerContactList);
+    final body = '''
+{
+  "fields": {
+    "👪 Type": "Seller",
+    "🏡 Address": "${address}",
+    "⚡❗Status": "Pre-Listing",
+    "Listing Price": ${listingPrice},
+    "Total Commission": ${totalCommision},
+    "Agent Pay": "${listingAgentCommission}",
+    "Additional Terms": "${additionalTerms}",
+    "Type of financing": ${typesOfFinancingAccepted},
+    "✔OurClient (Buyer/SELLER Form)": ${buyerSellerContact},
+    "Cooperating Broker Commission": ${coOpBrokerCommission},
+    "Notes": "${notes}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Seller PreListing Record',
+      apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AirtableAPIsGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class CreateSellerExecutedContractCall {
+  Future<ApiCallResponse> call({
+    List<String>? ourClientBuyerSELLERFormList,
+    String? notes = '',
+    String? listingDocs1 = '',
+    String? listingDocs2 = '',
+    String? listingDocs3 = '',
+    String? listingDocs4 = '',
+    String? listingDocs5 = '',
+    String? asIsContractAndEtc = '',
+    List<String>? uploadPhotoList,
+    String? signature = '',
+  }) {
+    final ourClientBuyerSELLERForm =
+        _serializeList(ourClientBuyerSELLERFormList);
+    final uploadPhoto = _serializeList(uploadPhotoList);
+    final body = '''
+{
+  "👪 Type": "Seller",
+  "⚡❗Status": "Executed Contract",
+  "Notes": "${notes}",
+  "📝Listing Docs": [
+    {
+      "url": "${listingDocs1}"
+    },
+    {
+      "url": "${listingDocs2}"
+    },
+    {
+      "url": "${listingDocs3}"
+    },
+    {
+      "url": "${listingDocs4}"
+    },
+    {
+      "url": "${listingDocs5}"
+    }
+  ],
+  "⭐ AS-IS Contract & etc": [
+    {
+      "url": "${asIsContractAndEtc}"
+    }
+  ],
+  "Signature": [
+    {
+      "url": "${signature}"
+    }
+  ],
+  "Property Image": ${uploadPhoto}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Create Seller Executed Contract',
       apiUrl: '${AirtableAPIsGroup.baseUrl}/Transactions',
       callType: ApiCallType.POST,
       headers: {
