@@ -3,7 +3,6 @@ import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../components/all_contacts_widget.dart';
 import '../components/document_type_selector_widget.dart';
-import '../components/web_view_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -151,19 +150,18 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
   TextEditingController? addressTextFieldController;
   TextEditingController? listingPriceController;
   TextEditingController? totalCommissionController;
-  TextEditingController? listingAgentCommissionController;
   TextEditingController? cooperatingBrokerCommissionController;
+  TextEditingController? listingAgentCommissionController;
   TextEditingController? additionalTermsController;
   TextEditingController? notesController;
   bool isMediaUploading2 = false;
   String uploadedFileUrl2 = '';
 
   late SignatureController signatureController;
-  bool? checkboxValue;
+  bool? checkboxListTileValue;
   String? statusDropDownValue;
   ApiCallResponse? apiResultmiv2;
   ApiCallResponse? apiResultmiv;
-  String uploadedSignatureUrl = '';
   String uploadedSignatureUrl = '';
   ApiCallResponse? apiResultmiv3;
   final formKey = GlobalKey<FormState>();
@@ -176,8 +174,8 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
     addressTextFieldController = TextEditingController();
     listingPriceController = TextEditingController();
     totalCommissionController = TextEditingController();
-    listingAgentCommissionController = TextEditingController();
     cooperatingBrokerCommissionController = TextEditingController();
+    listingAgentCommissionController = TextEditingController();
     notesController = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 4,
@@ -193,8 +191,8 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
     addressTextFieldController?.dispose();
     listingPriceController?.dispose();
     totalCommissionController?.dispose();
-    listingAgentCommissionController?.dispose();
     cooperatingBrokerCommissionController?.dispose();
+    listingAgentCommissionController?.dispose();
     notesController?.dispose();
     super.dispose();
   }
@@ -206,6 +204,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
       autovalidateMode: AutovalidateMode.disabled,
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -759,46 +758,66 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                           (contactIndex) {
                                         final contactItem =
                                             contact[contactIndex];
-                                        return Stack(
-                                          alignment:
-                                              AlignmentDirectional(1, -1),
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 8, 8, 8),
-                                              child: Container(
-                                                width: 40,
-                                                height: 40,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    getJsonField(
-                                                      contactItem,
-                                                      r'''$['Profile Picture'].url''',
+                                        return Container(
+                                          width: 50,
+                                          height: 50,
+                                          child: Stack(
+                                            alignment:
+                                                AlignmentDirectional(1, -1),
+                                            children: [
+                                              Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: SelectionArea(
+                                                    child: Text(
+                                                  functions.initialsFromName(
+                                                      getJsonField(
+                                                    contactItem,
+                                                    r'''$.fields.Name''',
+                                                  ).toString()),
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle2,
+                                                )),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(8, 8, 8, 8),
+                                                child: Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Image.network(
+                                                    valueOrDefault<String>(
+                                                      getJsonField(
+                                                        contactItem,
+                                                        r'''$['Profile Picture'].url''',
+                                                      ),
+                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1280px-HD_transparent_picture.png',
                                                     ),
-                                                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            InkWell(
-                                              onTap: () async {
-                                                setState(() => FFAppState()
-                                                    .SellerFormContactsList
-                                                    .remove(contactItem));
-                                              },
-                                              child: FaIcon(
-                                                FontAwesomeIcons
-                                                    .solidTimesCircle,
-                                                color: Colors.black,
-                                                size: 20,
-                                              ),
-                                            ).animateOnPageLoad(animationsMap[
-                                                'iconOnPageLoadAnimation1']!),
-                                          ],
+                                              InkWell(
+                                                onTap: () async {
+                                                  setState(() => FFAppState()
+                                                      .SellerFormContactsList
+                                                      .remove(contactItem));
+                                                },
+                                                child: FaIcon(
+                                                  FontAwesomeIcons
+                                                      .solidTimesCircle,
+                                                  color: Colors.black,
+                                                  size: 20,
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'iconOnPageLoadAnimation1']!),
+                                            ],
+                                          ),
                                         );
                                       }),
                                     );
@@ -958,21 +977,86 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                               ],
                             ),
                           ),
-                        if (statusDropDownValue == 'Pre-listing')
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            if (statusDropDownValue == 'Pre-listing')
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 0, 6, 0),
+                                  child: TextFormField(
+                                    controller:
+                                        cooperatingBrokerCommissionController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Co-op Broker\nCommission ',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .subtitle1,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              12, 12, 12, 12),
+                                      suffixIcon: FaIcon(
+                                        FontAwesomeIcons.percentage,
+                                        color: Color(0xFF757575),
+                                        size: 30,
+                                      ),
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                    textAlign: TextAlign.center,
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                              ),
+                            if (statusDropDownValue == 'Pre-listing')
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      6, 0, 12, 0),
                                   child: TextFormField(
                                     controller:
                                         listingAgentCommissionController,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'Listing Agent Commission ',
+                                      labelText: 'Listing Agent\nCommission ',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .subtitle1,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -1023,145 +1107,13 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                           fontFamily: 'Nunito',
                                           fontSize: 16,
                                         ),
+                                    textAlign: TextAlign.center,
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'Listing Agent Commission '),
-                                            content: Text(
-                                                'Listing Agent Commission'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.info_rounded,
-                                      color: Color(0xFF111111),
-                                      size: 24,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        if (statusDropDownValue == 'Pre-listing')
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller:
-                                        cooperatingBrokerCommissionController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Co-op Broker Commission ',
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 12, 12, 12),
-                                      suffixIcon: FaIcon(
-                                        FontAwesomeIcons.percentage,
-                                        color: Color(0xFF757575),
-                                        size: 30,
-                                      ),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Nunito',
-                                          fontSize: 16,
-                                        ),
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title:
-                                                Text('Co-op Broker Commission'),
-                                            content:
-                                                Text('Buyer Agent Commission'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.info_rounded,
-                                      color: Colors.black,
-                                      size: 24,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                              ),
+                          ],
+                        ),
                         if (statusDropDownValue == 'Pre-listing')
                           Padding(
                             padding:
@@ -1925,76 +1877,71 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           MediaQuery.of(context)
                                                               .viewInsets,
                                                       child:
-                                                          DocumentTypeSelectorWidget(),
+                                                          DocumentTypeSelectorWidget(
+                                                        status:
+                                                            statusDropDownValue,
+                                                      ),
                                                     );
                                                   },
                                                 ).then(
                                                     (value) => setState(() {}));
 
-                                                if ((FFAppState()
-                                                            .currentDocType ==
-                                                        'Misc Docs') ||
-                                                    (FFAppState()
-                                                            .currentDocType ==
-                                                        'AS-IS Contract') ||
-                                                    (FFAppState()
-                                                            .currentDocType ==
-                                                        'POF')) {
-                                                  final selectedFile =
-                                                      await selectFile(
-                                                          allowedExtensions: [
-                                                        'pdf'
-                                                      ]);
-                                                  if (selectedFile != null) {
-                                                    setState(() =>
-                                                        isMediaUploading1 =
-                                                            true);
-                                                    String? downloadUrl;
-                                                    try {
-                                                      showUploadMessage(
-                                                        context,
-                                                        'Uploading file...',
-                                                        showLoading: true,
-                                                      );
-                                                      downloadUrl =
-                                                          await uploadData(
-                                                              selectedFile
-                                                                  .storagePath,
-                                                              selectedFile
-                                                                  .bytes);
-                                                    } finally {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .hideCurrentSnackBar();
-                                                      isMediaUploading1 = false;
-                                                    }
-                                                    if (downloadUrl != null) {
-                                                      setState(() =>
-                                                          uploadedFileUrl1 =
-                                                              downloadUrl!);
-                                                      showUploadMessage(
-                                                        context,
-                                                        'Success!',
-                                                      );
-                                                    } else {
-                                                      setState(() {});
-                                                      showUploadMessage(
-                                                        context,
-                                                        'Failed to upload file',
-                                                      );
-                                                      return;
-                                                    }
+                                                final selectedFile =
+                                                    await selectFile(
+                                                        allowedExtensions: [
+                                                      'pdf'
+                                                    ]);
+                                                if (selectedFile != null) {
+                                                  setState(() =>
+                                                      isMediaUploading1 = true);
+                                                  String? downloadUrl;
+                                                  try {
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Uploading file...',
+                                                      showLoading: true,
+                                                    );
+                                                    downloadUrl =
+                                                        await uploadData(
+                                                            selectedFile
+                                                                .storagePath,
+                                                            selectedFile.bytes);
+                                                  } finally {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .hideCurrentSnackBar();
+                                                    isMediaUploading1 = false;
                                                   }
+                                                  if (downloadUrl != null) {
+                                                    setState(() =>
+                                                        uploadedFileUrl1 =
+                                                            downloadUrl!);
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Success!',
+                                                    );
+                                                  } else {
+                                                    setState(() {});
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Failed to upload file',
+                                                    );
+                                                    return;
+                                                  }
+                                                }
 
+                                                if (FFAppState()
+                                                        .currentDocType ==
+                                                    'Listing Docs') {
                                                   if (FFAppState()
                                                               .ListingDocs1 !=
                                                           null &&
                                                       FFAppState()
                                                               .ListingDocs1 !=
                                                           '') {
-                                                    setState(() =>
-                                                        FFAppState().MiscDocs1 =
-                                                            uploadedFileUrl1);
+                                                    setState(() => FFAppState()
+                                                            .ListingDocs1 =
+                                                        uploadedFileUrl1);
                                                   } else {
                                                     if (FFAppState()
                                                                 .ListingDocs2 !=
@@ -2002,10 +1949,9 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         FFAppState()
                                                                 .ListingDocs2 !=
                                                             '') {
-                                                      setState(() =>
-                                                          FFAppState()
-                                                                  .MiscDocs1 =
-                                                              uploadedFileUrl1);
+                                                      setState(() => FFAppState()
+                                                              .ListingDocs2 =
+                                                          uploadedFileUrl1);
                                                     } else {
                                                       if (FFAppState()
                                                                   .ListingDocs3 !=
@@ -2013,10 +1959,9 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           FFAppState()
                                                                   .ListingDocs3 !=
                                                               '') {
-                                                        setState(() =>
-                                                            FFAppState()
-                                                                    .MiscDocs2 =
-                                                                uploadedFileUrl1);
+                                                        setState(() => FFAppState()
+                                                                .ListingDocs3 =
+                                                            uploadedFileUrl1);
                                                       } else {
                                                         if (FFAppState()
                                                                     .ListingDocs4 !=
@@ -2025,27 +1970,49 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                     .ListingDocs4 !=
                                                                 '') {
                                                           setState(() => FFAppState()
-                                                                  .MiscDocs1 =
+                                                                  .ListingDocs4 =
                                                               uploadedFileUrl1);
                                                         } else {
                                                           if (FFAppState()
-                                                                      .ListingDocs4 ==
-                                                                  null ||
+                                                                      .ListingDocs5 !=
+                                                                  null &&
                                                               FFAppState()
-                                                                      .ListingDocs4 ==
+                                                                      .ListingDocs5 !=
                                                                   '') {
                                                             setState(() => FFAppState()
-                                                                    .MiscDocs2 =
+                                                                    .ListingDocs5 =
                                                                 uploadedFileUrl1);
                                                           } else {
-                                                            setState(() => FFAppState()
-                                                                    .MiscDocs3 =
-                                                                uploadedFileUrl1);
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Highest Document Upload Limit Reached',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0x00000000),
+                                                              ),
+                                                            );
                                                           }
                                                         }
                                                       }
                                                     }
                                                   }
+                                                } else {
+                                                  setState(() => FFAppState()
+                                                          .ASISContractandetc =
+                                                      uploadedFileUrl1);
                                                 }
                                               },
                                               text: 'Click to upload',
@@ -2379,7 +2346,6 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                     ),
                                     child: Container(
                                       width: 330,
-                                      height: 180,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
@@ -2435,7 +2401,6 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                           ),
                                           Container(
                                             width: double.infinity,
-                                            height: 150,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -2460,70 +2425,37 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                             ),
                           ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 5),
-                          child: InkWell(
-                            onTap: () async {
-                              setState(() =>
-                                  FFAppState().TermsOfServiceAccepted = true);
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Theme(
-                                  data: ThemeData(
-                                    checkboxTheme: CheckboxThemeData(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                    ),
-                                    unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                  ),
-                                  child: Checkbox(
-                                    value: checkboxValue ??= false,
-                                    onChanged: (newValue) async {
-                                      setState(() => checkboxValue = newValue!);
-                                    },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    checkColor: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                  ),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Color(0xFF95A1AC),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 0, 0, 0),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return Padding(
-                                            padding: MediaQuery.of(context)
-                                                .viewInsets,
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  1,
-                                              child: WebViewWidget(),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => setState(() {}));
-                                    },
-                                    child: Text(
-                                      'I Agree to Terms & Conditions',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
+                                child: CheckboxListTile(
+                                  value: checkboxListTileValue ??= true,
+                                  onChanged: (newValue) async {
+                                    setState(() =>
+                                        checkboxListTileValue = newValue!);
+                                  },
+                                  title: Text(
+                                    'I Agree to Terms & Conditions',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context).title3,
                                   ),
+                                  tileColor: Color(0xFFF5F5F5),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  dense: true,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          40, 0, 0, 0),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
@@ -2555,133 +2487,50 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 22),
-            child: FFButtonWidget(
-              onPressed: () async {
-                if (checkboxValue!) {
-                  var confirmDialogResponse = await showDialog<bool>(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('Validate Information'),
-                            content: Text(
-                                'Confirm the accuracy of the data provided by you before proceeding to the best of your ability.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, false),
-                                child: Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, true),
-                                child: Text('Confirm'),
-                              ),
-                            ],
-                          );
-                        },
-                      ) ??
-                      false;
-                  if (confirmDialogResponse) {
-                    if (statusDropDownValue == 'Active Listing') {
-                      apiResultmiv = await AirtableAPIsGroup
-                          .createSellerActiveListingRecordCall
-                          .call(
-                        buyerSellerContactsList: functions.contactRecordID(
-                            FFAppState().SellerFormContactsList.toList()),
-                      );
-                      if ((apiResultmiv?.succeeded ?? true)) {
-                        await showDialog(
+          Align(
+            alignment: AlignmentDirectional(0, 0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+              child: InkWell(
+                onTap: () async {
+                  if (checkboxListTileValue!) {
+                    var confirmDialogResponse = await showDialog<bool>(
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: Text('Success'),
-                              content: Text('Successfully Submitted'),
+                              title: Text('Validate Information'),
+                              content: Text(
+                                  'Confirm the accuracy of the data provided by you before proceeding to the best of your ability.'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Confirm'),
                                 ),
                               ],
                             );
                           },
-                        );
-                      } else {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Failure'),
-                              content: Text(getJsonField(
-                                (apiResultmiv?.jsonBody ?? ''),
-                                r'''$''',
-                              ).toString()),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    } else {
-                      if (statusDropDownValue == 'Pre-listing') {
-                        final signatureImage =
-                            await signatureController.toPngBytes();
-
-                        if (signatureImage == null) {
-                          return;
-                        }
-
-                        showUploadMessage(
-                          context,
-                          'Uploading signature...',
-                          showLoading: true,
-                        );
-                        final downloadUrl = (await uploadData(
-                            signatureStoragePath(currentUserUid),
-                            signatureImage));
-
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        if (downloadUrl != null) {
-                          setState(() => uploadedSignatureUrl = downloadUrl);
-                          showUploadMessage(
-                            context,
-                            'Success!',
-                          );
-                        } else {
-                          showUploadMessage(
-                            context,
-                            'Failed to upload signature',
-                          );
-                          return;
-                        }
-
-                        apiResultmiv2 = await AirtableAPIsGroup
-                            .createSellerPreListingRecordCall
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      if (statusDropDownValue == 'Active Listing') {
+                        apiResultmiv = await AirtableAPIsGroup
+                            .createSellerActiveListingRecordCall
                             .call(
-                          listingPrice: int.parse(listingPriceController!.text),
-                          typesOfFinancingAcceptedList: choiceChipsValues,
-                          address: addressTextFieldController!.text,
-                          listingDate: functions.toIso8601String(datePicked1!),
-                          activeDate: functions.toIso8601String(datePicked1!),
-                          buyerSellerContactList:
-                              FFAppState().SellerFormContactsList,
-                          totalCommision:
-                              double.parse(totalCommissionController!.text),
-                          listingAgentCommission:
-                              listingAgentCommissionController!.text,
-                          coOpBrokerCommission: double.parse(
-                              cooperatingBrokerCommissionController!.text),
-                          additionalTerms: additionalTermsController!.text,
-                          notes: notesController!.text,
+                          buyerSellerContactsList: functions.contactRecordID(
+                              FFAppState().SellerFormContactsList.toList()),
+                          listingDocs1: FFAppState().ListingDocs1,
+                          listingDocs3: FFAppState().ListingDocs3,
+                          listingDocs2: FFAppState().ListingDocs2,
+                          listingDocs4: FFAppState().ListingDocs4,
+                          listingDocs5: FFAppState().ListingDocs5,
                         );
-                        if ((apiResultmiv2?.succeeded ?? true)) {
+                        if ((apiResultmiv?.succeeded ?? true)) {
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -2705,7 +2554,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                               return AlertDialog(
                                 title: Text('Failure'),
                                 content: Text(getJsonField(
-                                  (apiResultmiv2?.jsonBody ?? ''),
+                                  (apiResultmiv?.jsonBody ?? ''),
                                   r'''$''',
                                 ).toString()),
                                 actions: [
@@ -2751,98 +2600,164 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                           return;
                         }
 
-                        apiResultmiv3 = await AirtableAPIsGroup
-                            .createSellerExecutedContractCall
-                            .call(
-                          ourClientBuyerSELLERFormList:
-                              functions.contactRecordID(
-                                  FFAppState().SellerFormContactsList.toList()),
-                          notes: notesController!.text,
-                          listingDocs1: FFAppState().ListingDocs1,
-                          listingDocs2: FFAppState().ListingDocs2,
-                          listingDocs3: FFAppState().ListingDocs3,
-                          listingDocs4: FFAppState().ListingDocs4,
-                          listingDocs5: FFAppState().ListingDocs5,
-                          asIsContractAndEtc: FFAppState().ASISContractandetc,
-                          uploadPhotoList: functions.attachmentListFromURLs(
-                              FFAppState().propertyPhotosUploaded.toList()),
-                          signature: uploadedSignatureUrl,
-                        );
-                        if ((apiResultmiv3?.succeeded ?? true)) {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Success'),
-                                content: Text('Successfully Submitted'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
+                        if (statusDropDownValue == 'Pre-listing') {
+                          apiResultmiv2 = await AirtableAPIsGroup
+                              .createSellerPreListingRecordCall
+                              .call(
+                            listingPrice:
+                                int.parse(listingPriceController!.text),
+                            typesOfFinancingAcceptedList: choiceChipsValues,
+                            address: addressTextFieldController!.text,
+                            listingDate:
+                                functions.toIso8601String(datePicked1!),
+                            activeDate: functions.toIso8601String(datePicked1!),
+                            buyerSellerContactList: functions.contactRecordID(
+                                FFAppState().SellerFormContactsList.toList()),
+                            totalCommision:
+                                double.parse(totalCommissionController!.text),
+                            listingAgentCommission:
+                                listingAgentCommissionController!.text,
+                            coOpBrokerCommission: double.parse(
+                                cooperatingBrokerCommissionController!.text),
+                            additionalTerms: additionalTermsController!.text,
+                            notes: notesController!.text,
                           );
+                          if ((apiResultmiv2?.succeeded ?? true)) {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Success'),
+                                  content: Text('Successfully Submitted'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Failure'),
+                                  content: Text(getJsonField(
+                                    (apiResultmiv2?.jsonBody ?? ''),
+                                    r'''$''',
+                                  ).toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Failure'),
-                                content: Text((apiResultmiv3?.jsonBody ?? '')),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
+                          apiResultmiv3 = await AirtableAPIsGroup
+                              .createSellerExecutedContractCall
+                              .call(
+                            ourClientBuyerSELLERFormList:
+                                functions.contactRecordID(FFAppState()
+                                    .SellerFormContactsList
+                                    .toList()),
+                            notes: notesController!.text,
+                            listingDocs1: FFAppState().ListingDocs1,
+                            listingDocs2: FFAppState().ListingDocs2,
+                            listingDocs3: FFAppState().ListingDocs3,
+                            listingDocs4: FFAppState().ListingDocs4,
+                            listingDocs5: FFAppState().ListingDocs5,
+                            asIsContractAndEtc: FFAppState().ASISContractandetc,
+                            uploadPhotoList: functions.attachmentListFromURLs(
+                                FFAppState().propertyPhotosUploaded.toList()),
+                            signature: uploadedFileUrl2,
                           );
+                          if ((apiResultmiv3?.succeeded ?? true)) {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Success'),
+                                  content: Text('Successfully Submitted'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Failure'),
+                                  content: Text(getJsonField(
+                                    (apiResultmiv3?.jsonBody ?? ''),
+                                    r'''$''',
+                                  ).toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         }
                       }
                     }
+                  } else {
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                          content: Text(
+                              'Please accept the terms & conditions before proceeding'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
-                } else {
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('Error'),
-                        content: Text(
-                            'Please accept the terms & conditions before proceeding'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
 
-                setState(() {});
-              },
-              text: 'Next Step',
-              options: FFButtonOptions(
-                width: 250,
-                height: 50,
-                color: FlutterFlowTheme.of(context).primaryColor,
-                textStyle: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Nunito',
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      fontSize: 16,
-                    ),
-                elevation: 0,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
+                  setState(() {});
+                },
+                child: Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
+                    child: SelectionArea(
+                        child: Text(
+                      'Next Step',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Nunito',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
+                    )),
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),

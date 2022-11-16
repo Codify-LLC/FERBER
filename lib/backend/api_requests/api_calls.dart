@@ -525,6 +525,27 @@ class RetriveContactsRecordCall {
       cache: false,
     );
   }
+
+  dynamic fullName(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Name''',
+      );
+  dynamic createdTime(dynamic response) => getJsonField(
+        response,
+        r'''$.createdTime''',
+      );
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic fields(dynamic response) => getJsonField(
+        response,
+        r'''$.fields''',
+      );
+  dynamic role(dynamic response) => getJsonField(
+        response,
+        r'''$.fields.Role''',
+      );
 }
 
 class ListContactsRecordsCall {

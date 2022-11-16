@@ -6,7 +6,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DocumentTypeSelectorWidget extends StatefulWidget {
-  const DocumentTypeSelectorWidget({Key? key}) : super(key: key);
+  const DocumentTypeSelectorWidget({
+    Key? key,
+    this.status,
+  }) : super(key: key);
+
+  final String? status;
 
   @override
   _DocumentTypeSelectorWidgetState createState() =>
@@ -26,7 +31,9 @@ class _DocumentTypeSelectorWidgetState
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 270,
+      constraints: BoxConstraints(
+        maxHeight: 350,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         boxShadow: [
@@ -47,6 +54,7 @@ class _DocumentTypeSelectorWidgetState
         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FFButtonWidget(
               onPressed: () async {
@@ -78,6 +86,30 @@ class _DocumentTypeSelectorWidgetState
                   Navigator.pop(context);
                 },
                 text: 'AS-IS Contract & etc',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: Colors.black,
+                  textStyle: FlutterFlowTheme.of(context).title3.override(
+                        fontFamily: 'Nunito',
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  setState(() => FFAppState().currentDocType = 'Listing Docs');
+                  Navigator.pop(context);
+                },
+                text: 'Listing Docs',
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 60,

@@ -133,3 +133,14 @@ List<String> attachmentListFromURLs(List<String> photoUrls) {
   }
   return photosAttachments;
 }
+
+String initialsFromName(String fullName) {
+  // initials from name
+  final List<String> fullNames = fullName.split(' '); // get first and last
+  var key = fullNames[0][0].toUpperCase(); // get first letter
+  key += fullNames[fullNames.length - 1].length > 1
+      ? fullNames[fullNames.length - 1][0].toUpperCase()
+      : "";
+  key += fullNames.length > 2 ? fullNames[1][0].toUpperCase() : "";
+  return key.toString();
+}
