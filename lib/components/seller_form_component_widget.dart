@@ -2520,36 +2520,6 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                       );
                     }
                   } else {
-                    final signatureImage =
-                        await signatureController.toPngBytes();
-
-                    if (signatureImage == null) {
-                      return;
-                    }
-
-                    showUploadMessage(
-                      context,
-                      'Uploading signature...',
-                      showLoading: true,
-                    );
-                    final downloadUrl = (await uploadData(
-                        signatureStoragePath(currentUserUid), signatureImage));
-
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    if (downloadUrl != null) {
-                      setState(() => uploadedSignatureUrl = downloadUrl);
-                      showUploadMessage(
-                        context,
-                        'Success!',
-                      );
-                    } else {
-                      showUploadMessage(
-                        context,
-                        'Failed to upload signature',
-                      );
-                      return;
-                    }
-
                     if (statusDropDownValue == 'Pre-listing') {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -2626,6 +2596,37 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                         );
                       }
                     } else {
+                      final signatureImage =
+                          await signatureController.toPngBytes();
+
+                      if (signatureImage == null) {
+                        return;
+                      }
+
+                      showUploadMessage(
+                        context,
+                        'Uploading signature...',
+                        showLoading: true,
+                      );
+                      final downloadUrl = (await uploadData(
+                          signatureStoragePath(currentUserUid),
+                          signatureImage));
+
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      if (downloadUrl != null) {
+                        setState(() => uploadedSignatureUrl = downloadUrl);
+                        showUploadMessage(
+                          context,
+                          'Success!',
+                        );
+                      } else {
+                        showUploadMessage(
+                          context,
+                          'Failed to upload signature',
+                        );
+                        return;
+                      }
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(

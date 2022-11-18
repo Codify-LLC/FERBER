@@ -932,6 +932,7 @@ class CreateSellerPreListingRecordCall {
     double? coOpBrokerCommission,
     String? additionalTerms = '',
     String? notes = '',
+    String? coOpBrokerCommissionString = '',
   }) {
     final typesOfFinancingAccepted =
         _serializeList(typesOfFinancingAcceptedList);
@@ -943,12 +944,12 @@ class CreateSellerPreListingRecordCall {
     "🏡 Address": "${address}",
     "⚡❗Status": "Pre-Listing",
     "Listing Price": ${listingPrice},
-    "Total Commission": ${totalCommision},
-    "Agent Pay": "${listingAgentCommission}",
+    "commission (OurSide)": "${listingAgentCommission}",
     "Additional Terms": "${additionalTerms}",
     "Type of financing": ${typesOfFinancingAccepted},
     "✔OurClient (Buyer/SELLER Form)": ${buyerSellerContact},
     "Cooperating Broker Commission": ${coOpBrokerCommission},
+    "BuyerAgencyCompensation": "${coOpBrokerCommissionString}",
     "Notes": "${notes}"
   }
 }''';
