@@ -2382,32 +2382,26 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                         child: Container(
                           decoration: BoxDecoration(),
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Theme(
-                              data: ThemeData(
-                                unselectedWidgetColor: Color(0xFF95A1AC),
+                          child: Theme(
+                            data: ThemeData(
+                              unselectedWidgetColor: Color(0xFF95A1AC),
+                            ),
+                            child: CheckboxListTile(
+                              value: checkboxListTileValue ??= false,
+                              onChanged: (newValue) async {
+                                setState(
+                                    () => checkboxListTileValue = newValue!);
+                              },
+                              title: Text(
+                                'I Agree to Terms & Conditions',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).title3,
                               ),
-                              child: CheckboxListTile(
-                                value: checkboxListTileValue ??= false,
-                                onChanged: (newValue) async {
-                                  setState(
-                                      () => checkboxListTileValue = newValue!);
-                                },
-                                title: Text(
-                                  'I Agree to Terms & Conditions',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context).title3,
-                                ),
-                                tileColor: Color(0xFFF5F5F5),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                dense: true,
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                contentPadding:
-                                    EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
-                              ),
+                              tileColor: Color(0xFFF5F5F5),
+                              activeColor:
+                                  FlutterFlowTheme.of(context).primaryColor,
+                              dense: true,
+                              controlAffinity: ListTileControlAffinity.leading,
                             ),
                           ),
                         ),
