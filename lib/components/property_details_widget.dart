@@ -413,8 +413,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(8,
                                                                       4, 8, 4),
-                                                          child: SelectionArea(
-                                                              child: Text(
+                                                          child: Text(
                                                             'Hello World',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
@@ -426,7 +425,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                                           context)
                                                                       .primaryBackground,
                                                                 ),
-                                                          )),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
