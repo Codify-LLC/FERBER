@@ -120,7 +120,7 @@ List<String> contactRecordID(List<dynamic> contactsRecords) {
   // get contactrecordid from json
   List<String> ids = [];
   for (final contact in contactsRecords) {
-    ids.add(contact);
+    ids.add(contact["id"]);
   }
   return ids;
 }

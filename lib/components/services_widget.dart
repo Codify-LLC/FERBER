@@ -92,17 +92,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                 header: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Container(
-                                      width: 60,
-                                      height: 60,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/images.png',
-                                        fit: BoxFit.contain,
-                                      ),
+                                    Image.asset(
+                                      'assets/images/home-inspection-3d-icon-illustration_390543-9.webp',
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -485,12 +479,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                   header: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Lottie.asset(
-                                        'assets/lottie_animations/68898-cameras-and-photography.json',
-                                        width: 60,
-                                        height: 60,
+                                      Image.asset(
+                                        'assets/images/cHJpdmF0ZS9zdGF0aWMvaW1hZ2VzL3dlYnNpdGUvMjAyMi0xMS9ybTQ2N2JhdGNoMi1jYW1lcmEtMDAyYS5wbmc.webp',
+                                        width: 50,
+                                        height: 50,
                                         fit: BoxFit.cover,
-                                        animate: true,
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -734,6 +727,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                             ),
                                             Text(
                                               'Thurs, 11/10',
+                                              textAlign: TextAlign.end,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1,
@@ -1012,7 +1006,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
-                                            'assets/images/logo.png',
+                                            'assets/images/926e2790294a40051bba0faf3956e618.jpg',
                                           ),
                                         ),
                                         Padding(
@@ -1043,7 +1037,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                 ),
                                               ),
                                               Text(
-                                                'Your Superhero',
+                                                'Ferber Transactions',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1,

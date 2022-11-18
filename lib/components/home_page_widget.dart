@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/buyer_and_seller_form_widget.dart';
+import '../components/confirm_t_c_copy_widget.dart';
 import '../components/custom_auto_complete_widget.dart';
 import '../components/property_details_widget.dart';
-import '../components/searching_for_t_c_copy_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -221,7 +221,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       .of(context)
                                                                   .viewInsets,
                                                               child:
-                                                                  SearchingForTCCopyWidget(),
+                                                                  ConfirmTCCopyWidget(),
                                                             );
                                                           },
                                                         ).then((value) =>
