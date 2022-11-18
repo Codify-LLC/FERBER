@@ -666,15 +666,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget>
                                                             CrossAxisAlignment
                                                                 .end,
                                                         children: [
-                                                          SelectionArea(
-                                                              child: Text(
+                                                          Text(
                                                             isWeb
                                                                 ? 'Closing Date'
                                                                 : 'Listing Date',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle2,
-                                                          )),
+                                                          ),
                                                           Text(
                                                             isWeb
                                                                 ? AirtableAPIsGroup

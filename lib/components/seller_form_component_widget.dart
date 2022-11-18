@@ -787,8 +787,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         alignment:
                                                             AlignmentDirectional(
                                                                 0, 0),
-                                                        child: SelectionArea(
-                                                            child: AutoSizeText(
+                                                        child: AutoSizeText(
                                                           functions
                                                               .initialsFromName(
                                                                   getJsonField(
@@ -808,7 +807,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                                 color: Colors
                                                                     .white,
                                                               ),
-                                                        )),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
