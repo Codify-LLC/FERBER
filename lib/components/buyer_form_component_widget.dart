@@ -347,7 +347,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                      child: FlutterFlowDropDown(
+                      child: FlutterFlowDropDown<String>(
                         options: ['New Offer', 'Executed Contract'],
                         onChanged: (val) =>
                             setState(() => statusDropDownValue = val),

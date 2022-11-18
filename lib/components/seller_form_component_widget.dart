@@ -213,7 +213,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                    child: FlutterFlowDropDown(
+                    child: FlutterFlowDropDown<String>(
                       options: [
                         'Active Listing',
                         'Pre-listing',
@@ -758,35 +758,64 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                           (contactIndex) {
                                         final contactItem =
                                             contact[contactIndex];
-                                        return Container(
-                                          width: 50,
-                                          height: 50,
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional(1, -1),
-                                            children: [
-                                              Align(
-                                                alignment:
-                                                    AlignmentDirectional(0, 0),
-                                                child: SelectionArea(
-                                                    child: Text(
-                                                  functions.initialsFromName(
-                                                      getJsonField(
-                                                    contactItem,
-                                                    r'''$.fields.Name''',
-                                                  ).toString()),
-                                                  textAlign: TextAlign.center,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle2,
-                                                )),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 8, 8, 8),
-                                                child: Container(
-                                                  width: 40,
-                                                  height: 40,
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 2, 2, 2),
+                                          child: Container(
+                                            width: 50,
+                                            height: 50,
+                                            child: Stack(
+                                              alignment:
+                                                  AlignmentDirectional(1, -1),
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(8, 8, 8, 8),
+                                                  child: ClipOval(
+                                                    child: Container(
+                                                      width: 100,
+                                                      height: 100,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0, 0),
+                                                        child: SelectionArea(
+                                                            child: AutoSizeText(
+                                                          functions
+                                                              .initialsFromName(
+                                                                  getJsonField(
+                                                                contactItem,
+                                                                r'''$.fields.Name''',
+                                                              ).toString())
+                                                              .maybeHandleOverflow(
+                                                                  maxChars: 2),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lato',
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                        )),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
                                                   clipBehavior: Clip.antiAlias,
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
@@ -801,22 +830,22 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              InkWell(
-                                                onTap: () async {
-                                                  setState(() => FFAppState()
-                                                      .SellerFormContactsList
-                                                      .remove(contactItem));
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .solidTimesCircle,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'iconOnPageLoadAnimation1']!),
-                                            ],
+                                                InkWell(
+                                                  onTap: () async {
+                                                    setState(() => FFAppState()
+                                                        .SellerFormContactsList
+                                                        .remove(contactItem));
+                                                  },
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .solidTimesCircle,
+                                                    color: Colors.black,
+                                                    size: 20,
+                                                  ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'iconOnPageLoadAnimation1']!),
+                                              ],
+                                            ),
                                           ),
                                         );
                                       }),
@@ -1395,7 +1424,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Listing Docs',
+                                                  'Docs',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
@@ -1934,50 +1963,50 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                         .currentDocType ==
                                                     'Listing Docs') {
                                                   if (FFAppState()
-                                                              .ListingDocs1 !=
-                                                          null &&
+                                                              .ListingDocs1 ==
+                                                          null ||
                                                       FFAppState()
-                                                              .ListingDocs1 !=
+                                                              .ListingDocs1 ==
                                                           '') {
                                                     setState(() => FFAppState()
                                                             .ListingDocs1 =
                                                         uploadedFileUrl1);
                                                   } else {
                                                     if (FFAppState()
-                                                                .ListingDocs2 !=
-                                                            null &&
+                                                                .ListingDocs2 ==
+                                                            null ||
                                                         FFAppState()
-                                                                .ListingDocs2 !=
+                                                                .ListingDocs2 ==
                                                             '') {
                                                       setState(() => FFAppState()
                                                               .ListingDocs2 =
                                                           uploadedFileUrl1);
                                                     } else {
                                                       if (FFAppState()
-                                                                  .ListingDocs3 !=
-                                                              null &&
+                                                                  .ListingDocs3 ==
+                                                              null ||
                                                           FFAppState()
-                                                                  .ListingDocs3 !=
+                                                                  .ListingDocs3 ==
                                                               '') {
                                                         setState(() => FFAppState()
                                                                 .ListingDocs3 =
                                                             uploadedFileUrl1);
                                                       } else {
                                                         if (FFAppState()
-                                                                    .ListingDocs4 !=
-                                                                null &&
+                                                                    .ListingDocs4 ==
+                                                                null ||
                                                             FFAppState()
-                                                                    .ListingDocs4 !=
+                                                                    .ListingDocs4 ==
                                                                 '') {
                                                           setState(() => FFAppState()
                                                                   .ListingDocs4 =
                                                               uploadedFileUrl1);
                                                         } else {
                                                           if (FFAppState()
-                                                                      .ListingDocs5 !=
-                                                                  null &&
+                                                                      .ListingDocs5 ==
+                                                                  null ||
                                                               FFAppState()
-                                                                      .ListingDocs5 !=
+                                                                      .ListingDocs5 ==
                                                                   '') {
                                                             setState(() => FFAppState()
                                                                     .ListingDocs5 =
@@ -2056,376 +2085,346 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Column(
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 5, 10, 0),
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8, 5, 10, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Upload Photos',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        fontSize: 14,
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
+                                          Text(
+                                            'Upload Photos',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Nunito',
+                                                  fontSize: 14,
+                                                  fontStyle: FontStyle.italic,
                                                 ),
-                                                InkWell(
-                                                  onTap: () async {
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text(
-                                                              'Pre Approval or Proof of Funds (POF)'),
-                                                          content: Text(
-                                                              'We will NOT send an offer without one!'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: Text('Ok'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Icon(
-                                                    Icons.info_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
-                                          Container(
-                                            width: double.infinity,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 0, 12, 0),
-                                              child: Builder(
-                                                builder: (context) {
-                                                  final photo = FFAppState()
-                                                      .propertyPhotosUploaded
-                                                      .toList();
-                                                  return ListView.builder(
-                                                    padding: EdgeInsets.zero,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    itemCount: photo.length,
-                                                    itemBuilder:
-                                                        (context, photoIndex) {
-                                                      final photoItem =
-                                                          photo[photoIndex];
-                                                      return Stack(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                1, -1),
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        4,
-                                                                        4,
-                                                                        4,
-                                                                        4),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                imageUrl: functions
-                                                                    .stringtoImage(
-                                                                        photoItem),
-                                                                width: 100,
-                                                                height: 100,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 4,
-                                                            borderWidth: 1,
-                                                            buttonSize: 30,
-                                                            fillColor: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryBackground,
-                                                            icon: Icon(
-                                                              Icons.close,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 12,
-                                                            ),
-                                                            onPressed:
-                                                                () async {
-                                                              setState(() =>
-                                                                  FFAppState()
-                                                                      .propertyPhotosUploaded
-                                                                      .remove(
-                                                                          photoItem));
-                                                            },
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
+                                          InkWell(
+                                            onTap: () async {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Pre Approval or Proof of Funds (POF)'),
+                                                    content: Text(
+                                                        'We will NOT send an offer without one!'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
                                                   );
                                                 },
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 12, 12, 12),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                final selectedMedia =
-                                                    await selectMediaWithSourceBottomSheet(
-                                                  context: context,
-                                                  allowPhoto: true,
-                                                );
-                                                if (selectedMedia != null &&
-                                                    selectedMedia.every((m) =>
-                                                        validateFileFormat(
-                                                            m.storagePath,
-                                                            context))) {
-                                                  setState(() =>
-                                                      isMediaUploading2 = true);
-                                                  var downloadUrls = <String>[];
-                                                  try {
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Uploading file...',
-                                                      showLoading: true,
-                                                    );
-                                                    downloadUrls = (await Future
-                                                            .wait(
-                                                      selectedMedia.map(
-                                                        (m) async =>
-                                                            await uploadData(
-                                                                m.storagePath,
-                                                                m.bytes),
-                                                      ),
-                                                    ))
-                                                        .where((u) => u != null)
-                                                        .map((u) => u!)
-                                                        .toList();
-                                                  } finally {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .hideCurrentSnackBar();
-                                                    isMediaUploading2 = false;
-                                                  }
-                                                  if (downloadUrls.length ==
-                                                      selectedMedia.length) {
-                                                    setState(() =>
-                                                        uploadedFileUrl2 =
-                                                            downloadUrls.first);
-                                                    showUploadMessage(
-                                                        context, 'Success!');
-                                                  } else {
-                                                    setState(() {});
-                                                    showUploadMessage(context,
-                                                        'Failed to upload media');
-                                                    return;
-                                                  }
-                                                }
-
-                                                if (uploadedFileUrl2 != null &&
-                                                    uploadedFileUrl2 != '') {
-                                                  setState(() => FFAppState()
-                                                      .propertyPhotosUploaded
-                                                      .add(uploadedFileUrl2));
-                                                }
-                                              },
-                                              text: 'Click to upload',
-                                              icon: Icon(
-                                                Icons.upload_file,
-                                                size: 15,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: double.infinity,
-                                                height: 40,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryColor,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
+                                              );
+                                            },
+                                            child: Icon(
+                                              Icons.info_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 24,
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12, 0, 12, 0),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final photo = FFAppState()
+                                                .propertyPhotosUploaded
+                                                .toList();
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: photo.length,
+                                              itemBuilder:
+                                                  (context, photoIndex) {
+                                                final photoItem =
+                                                    photo[photoIndex];
+                                                return Stack(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1, -1),
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4, 4, 4, 4),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  12),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  12),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  0),
+                                                        ),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: functions
+                                                              .stringtoImage(
+                                                                  photoItem),
+                                                          width: 100,
+                                                          height: 100,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 4,
+                                                      borderWidth: 1,
+                                                      buttonSize: 30,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      icon: Icon(
+                                                        Icons.close,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        size: 12,
+                                                      ),
+                                                      onPressed: () async {
+                                                        setState(() => FFAppState()
+                                                            .propertyPhotosUploaded
+                                                            .remove(photoItem));
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 12, 12, 12),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          final selectedMedia =
+                                              await selectMediaWithSourceBottomSheet(
+                                            context: context,
+                                            allowPhoto: true,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            setState(
+                                                () => isMediaUploading2 = true);
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
+                                              );
+                                              downloadUrls = (await Future.wait(
+                                                selectedMedia.map(
+                                                  (m) async => await uploadData(
+                                                      m.storagePath, m.bytes),
+                                                ),
+                                              ))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
+                                            } finally {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              isMediaUploading2 = false;
+                                            }
+                                            if (downloadUrls.length ==
+                                                selectedMedia.length) {
+                                              setState(() => uploadedFileUrl2 =
+                                                  downloadUrls.first);
+                                              showUploadMessage(
+                                                  context, 'Success!');
+                                            } else {
+                                              setState(() {});
+                                              showUploadMessage(context,
+                                                  'Failed to upload media');
+                                              return;
+                                            }
+                                          }
+
+                                          if (uploadedFileUrl2 != null &&
+                                              uploadedFileUrl2 != '') {
+                                            setState(() => FFAppState()
+                                                .propertyPhotosUploaded
+                                                .add(uploadedFileUrl2));
+                                          }
+                                        },
+                                        text: 'Click to upload',
+                                        icon: Icon(
+                                          Icons.upload_file,
+                                          size: 15,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 40,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle1
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryColor,
+                                              ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         if (statusDropDownValue == 'Executed Contract')
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Container(
-                                      width: 330,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Column(
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 5, 5, 0),
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Signature Pad ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        fontSize: 14,
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
+                                          Text(
+                                            'Signature Pad ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Nunito',
+                                                  fontSize: 14,
+                                                  fontStyle: FontStyle.italic,
                                                 ),
-                                                InkWell(
-                                                  onTap: () async {
-                                                    setState(() {
-                                                      signatureController
-                                                          .clear();
-                                                    });
-                                                  },
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: Colors.black,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
-                                          Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                            child: ClipRect(
-                                              child: Signature(
-                                                controller: signatureController,
-                                                backgroundColor:
-                                                    Color(0x80DBE2E7),
-                                                width: double.infinity,
-                                                height: 150,
-                                              ),
+                                          InkWell(
+                                            onTap: () async {
+                                              setState(() {
+                                                signatureController.clear();
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.black,
+                                              size: 24,
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                      ),
+                                      child: ClipRect(
+                                        child: Signature(
+                                          controller: signatureController,
+                                          backgroundColor: Color(0x80DBE2E7),
+                                          width: double.infinity,
+                                          height: 150,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                           child: Container(
                             decoration: BoxDecoration(),
                             child: Align(
@@ -2435,7 +2434,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                   unselectedWidgetColor: Color(0xFF95A1AC),
                                 ),
                                 child: CheckboxListTile(
-                                  value: checkboxListTileValue ??= true,
+                                  value: checkboxListTileValue ??= false,
                                   onChanged: (newValue) async {
                                     setState(() =>
                                         checkboxListTileValue = newValue!);
@@ -2490,9 +2489,9 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
           Align(
             alignment: AlignmentDirectional(0, 0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
-              child: InkWell(
-                onTap: () async {
+              padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+              child: FFButtonWidget(
+                onPressed: () async {
                   if (checkboxListTileValue!) {
                     var confirmDialogResponse = await showDialog<bool>(
                           context: context,
@@ -2531,41 +2530,37 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                           listingDocs5: FFAppState().ListingDocs5,
                         );
                         if ((apiResultmiv?.succeeded ?? true)) {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Success'),
-                                content: Text('Successfully Submitted'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Record Created',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).customColor1,
+                            ),
                           );
                         } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Failure'),
-                                content: Text(getJsonField(
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                getJsonField(
                                   (apiResultmiv?.jsonBody ?? ''),
                                   r'''$''',
-                                ).toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
+                                ).toString(),
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).customColor1,
+                            ),
                           );
                         }
                       } else {
@@ -2623,41 +2618,37 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                             notes: notesController!.text,
                           );
                           if ((apiResultmiv2?.succeeded ?? true)) {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Success'),
-                                  content: Text('Successfully Submitted'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Record Created',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).customColor1,
+                              ),
                             );
                           } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Failure'),
-                                  content: Text(getJsonField(
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  getJsonField(
                                     (apiResultmiv2?.jsonBody ?? ''),
                                     r'''$''',
-                                  ).toString()),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
+                                  ).toString(),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).customColor1,
+                              ),
                             );
                           }
                         } else {
@@ -2680,41 +2671,37 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                             signature: uploadedFileUrl2,
                           );
                           if ((apiResultmiv3?.succeeded ?? true)) {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Success'),
-                                  content: Text('Successfully Submitted'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Record Created',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).customColor1,
+                              ),
                             );
                           } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Failure'),
-                                  content: Text(getJsonField(
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  getJsonField(
                                     (apiResultmiv3?.jsonBody ?? ''),
                                     r'''$''',
-                                  ).toString()),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
+                                  ).toString(),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).customColor1,
+                              ),
                             );
                           }
                         }
@@ -2742,21 +2729,20 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
 
                   setState(() {});
                 },
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
-                    child: SelectionArea(
-                        child: Text(
-                      'Next Step',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Nunito',
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                          ),
-                    )),
+                text: 'Next Step',
+                options: FFButtonOptions(
+                  width: 130,
+                  height: 40,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lato',
+                        color: Colors.white,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
                   ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ),

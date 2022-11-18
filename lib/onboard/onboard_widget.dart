@@ -358,7 +358,7 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 1),
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.goNamed('login');

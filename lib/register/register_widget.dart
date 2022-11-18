@@ -230,7 +230,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               color: Color(0x668B97A2),
                                             ),
                                           ),
-                                          child: FlutterFlowDropDown(
+                                          child: FlutterFlowDropDown<String>(
                                             options: ['Active Agent', 'TC'],
                                             onChanged: (val) => setState(
                                                 () => dropDownValue = val),

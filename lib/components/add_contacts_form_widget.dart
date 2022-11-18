@@ -654,7 +654,7 @@ class _AddContactsFormWidgetState extends State<AddContactsFormWidget>
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 12, 0, 0),
-                                  child: FlutterFlowDropDown(
+                                  child: FlutterFlowDropDown<String>(
                                     options: [
                                       'Inspector',
                                       'Photographer',

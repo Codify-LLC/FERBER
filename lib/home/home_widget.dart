@@ -842,7 +842,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                     child: Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
-                                                                                        FlutterFlowDropDown(
+                                                                                        FlutterFlowDropDown<String>(
                                                                                           initialOption: dropDownSearchTYpeValue ??= 'MLS ID',
                                                                                           options: [
                                                                                             'Address',
@@ -1262,7 +1262,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                                       child: Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         children: [
-                                                                                          FlutterFlowDropDown(
+                                                                                          FlutterFlowDropDown<String>(
                                                                                             initialOption: dropDownSearchTypeWebValue ??= 'MLS ID',
                                                                                             options: [
                                                                                               'Address',

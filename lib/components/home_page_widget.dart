@@ -315,7 +315,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        FlutterFlowDropDown(
+                                                        FlutterFlowDropDown<
+                                                            String>(
                                                           initialOption:
                                                               dropDownSearchTYpeValue ??=
                                                                   'MLS ID',

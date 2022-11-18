@@ -580,7 +580,7 @@ class _ModifyFormWidgetState extends State<ModifyFormWidget>
                                                   ),
                                                 ).animateOnPageLoad(animationsMap[
                                                     'containerOnPageLoadAnimation2']!),
-                                                FlutterFlowDropDown(
+                                                FlutterFlowDropDown<String>(
                                                   options: [
                                                     'New Offer',
                                                     'Executed Contract '
