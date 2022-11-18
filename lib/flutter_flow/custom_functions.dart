@@ -144,3 +144,8 @@ String initialsFromName(String fullName) {
   key += fullNames.length > 2 ? fullNames[1][0].toUpperCase() : "";
   return key.toString();
 }
+
+double convertToDecimalPercentage(double inputValue) {
+  // Add your function code here!
+  return inputValue / 100;
+}
