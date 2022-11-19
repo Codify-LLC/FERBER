@@ -2562,6 +2562,8 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                         ),
                         additionalTerms: additionalTermsController!.text,
                         notes: notesController!.text,
+                        coOpBrokerCommissionString:
+                            cooperatingBrokerCommissionController!.text,
                       );
                       if ((apiResultmiv2?.succeeded ?? true)) {
                         ScaffoldMessenger.of(context).showSnackBar(
