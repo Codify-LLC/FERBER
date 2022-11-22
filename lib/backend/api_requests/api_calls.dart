@@ -923,30 +923,28 @@ class CreateSellerPreListingRecordCall {
   Future<ApiCallResponse> call({
     int? listingPrice,
     String? address = '',
-    List<String>? typesOfFinancingAcceptedList,
+    String? typesOfFinancingAccepted = '',
     String? listingDate = '',
     String? activeDate = '',
     List<String>? buyerSellerContactList,
     double? totalCommision,
-    String? listingAgentCommission = '',
+    double? listingAgentCommission,
     double? coOpBrokerCommission,
     String? additionalTerms = '',
     String? notes = '',
     String? coOpBrokerCommissionString = '',
   }) {
-    final typesOfFinancingAccepted =
-        _serializeList(typesOfFinancingAcceptedList);
     final buyerSellerContact = _serializeList(buyerSellerContactList);
     final body = '''
 {
   "fields": {
     "👪 Type": "Seller",
     "🏡 Address": "${address}",
-    "⚡❗Status": "Pre-Listing",
+    "⚡❗Status": "Pre-listing",
     "Listing Price": ${listingPrice},
-    "commission (OurSide)": "${listingAgentCommission}",
+    "commission (OurSide)": ${listingAgentCommission},
     "Additional Terms": "${additionalTerms}",
-    "Type of financing": ${typesOfFinancingAccepted},
+    "Type of financing": "${typesOfFinancingAccepted}",
     "✔OurClient (Buyer/SELLER Form)": ${buyerSellerContact},
     "Cooperating Broker Commission": ${coOpBrokerCommission},
     "BuyerAgencyCompensation": "${coOpBrokerCommissionString}",

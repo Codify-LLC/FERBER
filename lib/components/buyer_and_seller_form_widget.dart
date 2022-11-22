@@ -70,128 +70,162 @@ class _BuyerAndSellerFormWidgetState extends State<BuyerAndSellerFormWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 8, 0),
-                                  child: Icon(
-                                    Icons.info_outline_rounded,
-                                    color: Colors.black,
-                                    size: 20,
-                                  ),
-                                ),
-                                Text(
-                                  'Start by choosing a type',
-                                  style: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        fontSize: 20,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
+                          Column(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Expanded(
-                                child: FlutterFlowChoiceChips(
-                                  options: [
-                                    ChipData('Buyer', Icons.business),
-                                    ChipData(
-                                        'Seller', FontAwesomeIcons.dollarSign),
-                                    ChipData('Both', Icons.people)
-                                  ],
-                                  onChanged: (val) => setState(
-                                      () => choiceChipsValue = val?.first),
-                                  selectedChipStyle: ChipStyle(
-                                    backgroundColor: Color(0xFF323B45),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Nunito',
-                                          color: Colors.white,
-                                        ),
-                                    iconColor: Colors.white,
-                                    iconSize: 18,
-                                    elevation: 4,
-                                  ),
-                                  unselectedChipStyle: ChipStyle(
-                                    backgroundColor: Colors.white,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText2
-                                        .override(
-                                          fontFamily: 'Nunito',
-                                          color: Color(0xFF323B45),
-                                        ),
-                                    iconColor: Color(0xFF323B45),
-                                    iconSize: 18,
-                                    elevation: 4,
-                                  ),
-                                  chipSpacing: 0,
-                                  multiselect: false,
-                                  alignment: WrapAlignment.spaceEvenly,
-                                ),
-                              ),
-                              if (responsiveVisibility(
-                                context: context,
-                                tabletLandscape: false,
-                                desktop: false,
-                              ))
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 12, 8, 12),
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.65, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 20, 0, 10),
+                                      child: Text(
+                                        'Add Details',
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 37,
+                                              fontWeight: FontWeight.w900,
+                                              lineHeight: 0.9,
+                                            ),
+                                      ),
                                     ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                  ),
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    tabletLandscape: false,
+                                    desktop: false,
+                                  ))
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 12, 15, 12),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 5,
+                                        shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 1),
-                                          child: FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 0,
-                                            borderWidth: 1,
-                                            buttonSize: 40,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                            icon: Icon(
-                                              Icons.close,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          child: Container(
+                                            decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              size: 20,
+                                                      .primaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
-                                            onPressed: () async {
-                                              Navigator.pop(context);
-                                            },
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 1),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 0,
+                                                borderWidth: 1,
+                                                buttonSize: 40,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                icon: Icon(
+                                                  Icons.close,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 20,
+                                                ),
+                                                onPressed: () async {
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                                child: Icon(
+                                  Icons.info_outline,
+                                  color: Colors.black,
+                                  size: 24,
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.8, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 0, 0, 0),
+                                  child: Text(
+                                    'Choose Transaction Type',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(-0.25, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      15, 5, 0, 0),
+                                  child: FlutterFlowChoiceChips(
+                                    options: [
+                                      ChipData('Buyer', Icons.business),
+                                      ChipData(
+                                          'Seller', FontAwesomeIcons.dollarSign)
+                                    ],
+                                    onChanged: (val) => setState(
+                                        () => choiceChipsValue = val?.first),
+                                    selectedChipStyle: ChipStyle(
+                                      backgroundColor: Color(0xFF323B45),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Nunito',
+                                            color: Colors.white,
+                                          ),
+                                      iconColor: Colors.white,
+                                      iconSize: 18,
+                                      elevation: 4,
+                                    ),
+                                    unselectedChipStyle: ChipStyle(
+                                      backgroundColor: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Nunito',
+                                            color: Color(0xFF323B45),
+                                          ),
+                                      iconColor: Color(0xFF323B45),
+                                      iconSize: 18,
+                                      elevation: 4,
+                                    ),
+                                    chipSpacing: 10,
+                                    multiselect: false,
+                                    alignment: WrapAlignment.spaceEvenly,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           Expanded(

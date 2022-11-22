@@ -146,19 +146,6 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
         ),
       ],
     ),
-    'iconOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        ShakeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          hz: 10,
-          offset: Offset(0, 0),
-          rotation: 0.087,
-        ),
-      ],
-    ),
     'rowOnPageLoadAnimation4': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
@@ -182,6 +169,19 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
           duration: 600.ms,
           begin: 0,
           end: 1,
+        ),
+      ],
+    ),
+    'iconOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ShakeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1000.ms,
+          hz: 10,
+          offset: Offset(0, 0),
+          rotation: 0.087,
         ),
       ],
     ),
@@ -278,16 +278,17 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
   bool isMediaUploading = false;
   String uploadedFileUrl = '';
 
+  TextEditingController? additionalTermsTextFieldController;
   DateTime? datePicked1;
   DateTime? datePicked2;
   String? typeofFinancingValue;
   TextEditingController? addressTextFieldController;
-  TextEditingController? purchasePriceController;
-  TextEditingController? escrowDespositTextFieldController;
-  TextEditingController? financedAmountTextFieldController;
   TextEditingController? inspectionPeriodTextFieldController;
-  TextEditingController? additionalTermsTextFieldController;
-  TextEditingController? internalNotesTextFieldController;
+  TextEditingController? purchasePriceController2;
+  TextEditingController? purchasePriceController1;
+  TextEditingController? financedAmountTextFieldController1;
+  TextEditingController? financedAmountTextFieldController2;
+  String? choiceChipsValue;
   late SignatureController signatureController;
   bool? checkboxValue;
   String? statusDropDownValue;
@@ -303,11 +304,11 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
     additionalTermsTextFieldController = TextEditingController();
     addressTextFieldController =
         TextEditingController(text: widget.prefillAddress);
-    purchasePriceController = TextEditingController();
-    escrowDespositTextFieldController = TextEditingController();
-    financedAmountTextFieldController = TextEditingController();
     inspectionPeriodTextFieldController = TextEditingController();
-    internalNotesTextFieldController = TextEditingController();
+    purchasePriceController2 = TextEditingController();
+    purchasePriceController1 = TextEditingController();
+    financedAmountTextFieldController1 = TextEditingController();
+    financedAmountTextFieldController2 = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 4,
       penColor: Colors.black,
@@ -320,11 +321,11 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
   void dispose() {
     additionalTermsTextFieldController?.dispose();
     addressTextFieldController?.dispose();
-    purchasePriceController?.dispose();
-    escrowDespositTextFieldController?.dispose();
-    financedAmountTextFieldController?.dispose();
     inspectionPeriodTextFieldController?.dispose();
-    internalNotesTextFieldController?.dispose();
+    purchasePriceController2?.dispose();
+    purchasePriceController1?.dispose();
+    financedAmountTextFieldController1?.dispose();
+    financedAmountTextFieldController2?.dispose();
     super.dispose();
   }
 
@@ -394,9 +395,9 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                 child: Container(
                                   width: double.infinity,
                                   child: TextFormField(
-                                    controller: purchasePriceController,
+                                    controller: purchasePriceController1,
                                     onChanged: (_) => EasyDebounce.debounce(
-                                      'purchasePriceController',
+                                      'purchasePriceController1',
                                       Duration(milliseconds: 2000),
                                       () => setState(() {}),
                                     ),
@@ -455,11 +456,11 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                         color: Color(0xFFA32019),
                                         size: 32,
                                       ),
-                                      suffixIcon: purchasePriceController!
+                                      suffixIcon: purchasePriceController1!
                                               .text.isNotEmpty
                                           ? InkWell(
                                               onTap: () async {
-                                                purchasePriceController
+                                                purchasePriceController1
                                                     ?.clear();
                                                 setState(() {});
                                               },
@@ -488,6 +489,192 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                               ),
                             ),
                           ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if (statusDropDownValue != 'Executed Contract')
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        15, 0, 5, 0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      child: TextFormField(
+                                        controller: purchasePriceController2,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          'purchasePriceController2',
+                                          Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Deposit',
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          prefixIcon: Icon(
+                                            Icons.attach_money,
+                                            color: Color(0xFFA32019),
+                                            size: 28,
+                                          ),
+                                          suffixIcon: purchasePriceController2!
+                                                  .text.isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    purchasePriceController2
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons.clear,
+                                                    color: Color(0xFF757575),
+                                                    size: 20,
+                                                  ),
+                                                )
+                                              : null,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                        textAlign: TextAlign.start,
+                                        maxLines: null,
+                                        keyboardType: TextInputType.number,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 0, 15, 0),
+                                  child: TextFormField(
+                                    controller:
+                                        inspectionPeriodTextFieldController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      'inspectionPeriodTextFieldController',
+                                      Duration(milliseconds: 2000),
+                                      () => setState(() {}),
+                                    ),
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Inspection Days',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              12, 12, 12, 12),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          fontSize: 15,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (statusDropDownValue == 'New Offer')
+                            Container(
+                              decoration: BoxDecoration(),
+                            ),
                           if (statusDropDownValue == 'New Offer')
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -572,87 +759,6 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                               ),
                             ),
                           if (statusDropDownValue == 'New Offer')
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12, 12, 12, 12),
-                                child: TextFormField(
-                                  controller: escrowDespositTextFieldController,
-                                  onChanged: (_) => EasyDebounce.debounce(
-                                    'escrowDespositTextFieldController',
-                                    Duration(milliseconds: 2000),
-                                    () => setState(() {}),
-                                  ),
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Escrow Desposit',
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                    suffixIcon:
-                                        escrowDespositTextFieldController!
-                                                .text.isNotEmpty
-                                            ? InkWell(
-                                                onTap: () async {
-                                                  escrowDespositTextFieldController
-                                                      ?.clear();
-                                                  setState(() {});
-                                                },
-                                                child: Icon(
-                                                  Icons.clear,
-                                                  color: Color(0xFF757575),
-                                                  size: 22,
-                                                ),
-                                              )
-                                            : null,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Nunito',
-                                        fontSize: 16,
-                                      ),
-                                  keyboardType: TextInputType.number,
-                                ),
-                              ),
-                            ),
-                          if (statusDropDownValue == 'New Offer')
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12, 12, 12, 12),
@@ -662,7 +768,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    'Types of Financing Accepted ',
+                                    'Type of Financing',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
@@ -737,105 +843,164 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Expanded(
-                                    child: TextFormField(
-                                      controller:
-                                          financedAmountTextFieldController,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        'financedAmountTextFieldController',
-                                        Duration(milliseconds: 2000),
-                                        () => setState(() {}),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: TextFormField(
+                                        controller:
+                                            financedAmountTextFieldController1,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          'financedAmountTextFieldController1',
+                                          Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Financed Amount',
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          suffixIcon: FaIcon(
+                                            FontAwesomeIcons.percentage,
+                                            color: Color(0x7F757575),
+                                            size: 30,
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontSize: 16,
+                                            ),
+                                        keyboardType: const TextInputType
+                                                .numberWithOptions(
+                                            signed: true, decimal: true),
                                       ),
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        labelText: 'Financed Amount',
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                12, 12, 12, 12),
-                                        suffixIcon: FaIcon(
-                                          FontAwesomeIcons.percentage,
-                                          color: Color(0x7F757575),
-                                          size: 30,
-                                        ),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            fontSize: 16,
-                                          ),
-                                      keyboardType:
-                                          const TextInputType.numberWithOptions(
-                                              signed: true, decimal: true),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 0, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Financed Amount'),
-                                              content: Text(
-                                                  'How much is the financing amount (Ex: 80% or \$394,000'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.info_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 24,
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 0, 0, 0),
+                                      child: TextFormField(
+                                        controller:
+                                            financedAmountTextFieldController2,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          'financedAmountTextFieldController2',
+                                          Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Loan Period',
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          suffixIcon: Icon(
+                                            Icons.today_sharp,
+                                            color: Color(0x7F757575),
+                                            size: 30,
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontSize: 16,
+                                            ),
+                                        keyboardType: const TextInputType
+                                                .numberWithOptions(
+                                            signed: true, decimal: true),
                                       ),
                                     ),
                                   ),
@@ -1094,100 +1259,64 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                   12, 12, 12, 12),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller:
-                                          inspectionPeriodTextFieldController,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        'inspectionPeriodTextFieldController',
-                                        Duration(milliseconds: 2000),
-                                        () => setState(() {}),
-                                      ),
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        labelText: 'Inspection Period',
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiaryColor,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                12, 12, 12, 12),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            fontSize: 16,
-                                          ),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 0, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Inspection Period'),
-                                              content:
-                                                  Text('# of Inspection Days'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.info_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 24,
+                                        10, 0, 0, 0),
+                                    child: Text(
+                                      'Additional Terms',
+                                      textAlign: TextAlign.start,
+                                      style:
+                                          FlutterFlowTheme.of(context).title2,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: AlignmentDirectional(0.7, 0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 10, 0),
+                                        child: FlutterFlowChoiceChips(
+                                          options: [
+                                            ChipData('Added', Icons.check)
+                                          ],
+                                          onChanged: (val) => setState(() =>
+                                              choiceChipsValue = val?.first),
+                                          selectedChipStyle: ChipStyle(
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .customColor1,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Colors.white,
+                                                    ),
+                                            iconColor: Colors.white,
+                                            iconSize: 18,
+                                            elevation: 4,
+                                          ),
+                                          unselectedChipStyle: ChipStyle(
+                                            backgroundColor: Colors.white,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Nunito',
+                                                      color: Color(0xFF323B45),
+                                                    ),
+                                            iconColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .iconGray,
+                                            iconSize: 18,
+                                            elevation: 4,
+                                          ),
+                                          chipSpacing: 20,
+                                          multiselect: false,
+                                          alignment: WrapAlignment.start,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -1195,79 +1324,806 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                               ).animateOnPageLoad(
                                   animationsMap['rowOnPageLoadAnimation3']!),
                             ),
+                          if (statusDropDownValue == 'New Offer')
+                            Container(
+                              decoration: BoxDecoration(),
+                            ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12, 12, 12, 12),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        controller:
+                                            additionalTermsTextFieldController,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          'additionalTermsTextFieldController',
+                                          Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Internal Notes',
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          suffixIcon:
+                                              additionalTermsTextFieldController!
+                                                      .text.isNotEmpty
+                                                  ? InkWell(
+                                                      onTap: () async {
+                                                        additionalTermsTextFieldController
+                                                            ?.clear();
+                                                        setState(() {});
+                                                      },
+                                                      child: Icon(
+                                                        Icons.clear,
+                                                        color:
+                                                            Color(0xFF757575),
+                                                        size: 22,
+                                                      ),
+                                                    )
+                                                  : null,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Nunito',
+                                              fontSize: 16,
+                                            ),
+                                        maxLines: 3,
+                                        minLines: 1,
+                                        keyboardType: TextInputType.multiline,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 0, 0, 0),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title:
+                                                    Text('Additional Terms '),
+                                                content: Text(
+                                                    'Use the exact verbiage, spelling & punctuation you would like in the contract. This will be copied & pasted directly!\n*We are not responsible for your typos'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.info_outlined,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ).animateOnPageLoad(
+                                    animationsMap['rowOnPageLoadAnimation4']!),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12, 12, 12, 12),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Container(
+                                      width: double.infinity,
+                                      constraints: BoxConstraints(
+                                        maxWidth: double.infinity,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8, 5, 10, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Add Documents',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Nunito',
+                                                        fontSize: 14,
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                      ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () async {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Pre Approval or Proof of Funds (POF)'),
+                                                          content: Text(
+                                                              'We will NOT send an offer without one!'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('Ok'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    Icons.info_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 24,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          ListView(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            children: [
+                                              if (FFAppState()
+                                                          .ASISContractandetc !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .ASISContractandetc !=
+                                                      '')
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    12, 0),
+                                                        child: Icon(
+                                                          Icons.picture_as_pdf,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              FFAppState()
+                                                                  .ASISContractandetc);
+                                                        },
+                                                        child: AutoSizeText(
+                                                          'Purchase Contract',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1, 0),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              setState(() =>
+                                                                  FFAppState()
+                                                                          .ASISContractandetc =
+                                                                      '');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                              animationsMap[
+                                                                  'iconOnPageLoadAnimation1']!),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              if (FFAppState()
+                                                          .PreApprovalProofofFunds !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .PreApprovalProofofFunds !=
+                                                      '')
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    12, 0),
+                                                        child: Icon(
+                                                          Icons.picture_as_pdf,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              FFAppState()
+                                                                  .PreApprovalProofofFunds);
+                                                        },
+                                                        child: AutoSizeText(
+                                                          'Proof of Funds',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1, 0),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              setState(() =>
+                                                                  FFAppState()
+                                                                          .PreApprovalProofofFunds =
+                                                                      '');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                              animationsMap[
+                                                                  'iconOnPageLoadAnimation2']!),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              if (FFAppState().MiscDocs1 !=
+                                                      null &&
+                                                  FFAppState().MiscDocs1 != '')
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    12, 0),
+                                                        child: Icon(
+                                                          Icons.picture_as_pdf,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              FFAppState()
+                                                                  .MiscDocs1);
+                                                        },
+                                                        child: AutoSizeText(
+                                                          'Misc Docs',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1, 0),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              setState(() =>
+                                                                  FFAppState()
+                                                                          .MiscDocs1 =
+                                                                      '');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                              animationsMap[
+                                                                  'iconOnPageLoadAnimation3']!),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              if (FFAppState().MiscDocs2 !=
+                                                      null &&
+                                                  FFAppState().MiscDocs2 != '')
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    12, 0),
+                                                        child: Icon(
+                                                          Icons.picture_as_pdf,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              FFAppState()
+                                                                  .MiscDocs2);
+                                                        },
+                                                        child: AutoSizeText(
+                                                          'Misc Docs',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1, 0),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              setState(() =>
+                                                                  FFAppState()
+                                                                          .MiscDocs2 =
+                                                                      '');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                              animationsMap[
+                                                                  'iconOnPageLoadAnimation4']!),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              if (FFAppState().MiscDocs3 !=
+                                                      null &&
+                                                  FFAppState().MiscDocs3 != '')
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    12, 0),
+                                                        child: Icon(
+                                                          Icons.picture_as_pdf,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              FFAppState()
+                                                                  .MiscDocs3);
+                                                        },
+                                                        child: AutoSizeText(
+                                                          'Misc Docs',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1, 0),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              setState(() =>
+                                                                  FFAppState()
+                                                                          .MiscDocs3 =
+                                                                      '');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                              animationsMap[
+                                                                  'iconOnPageLoadAnimation5']!),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 12, 12, 12),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding:
+                                                          MediaQuery.of(context)
+                                                              .viewInsets,
+                                                      child:
+                                                          DocumentTypeSelectorWidget(),
+                                                    );
+                                                  },
+                                                ).then(
+                                                    (value) => setState(() {}));
+
+                                                if ((FFAppState()
+                                                            .currentDocType ==
+                                                        'Misc Docs') ||
+                                                    (FFAppState()
+                                                            .currentDocType ==
+                                                        'AS-IS Contract') ||
+                                                    (FFAppState()
+                                                            .currentDocType ==
+                                                        'POF')) {
+                                                  final selectedFile =
+                                                      await selectFile(
+                                                          allowedExtensions: [
+                                                        'pdf'
+                                                      ]);
+                                                  if (selectedFile != null) {
+                                                    setState(() =>
+                                                        isMediaUploading =
+                                                            true);
+                                                    String? downloadUrl;
+                                                    try {
+                                                      showUploadMessage(
+                                                        context,
+                                                        'Uploading file...',
+                                                        showLoading: true,
+                                                      );
+                                                      downloadUrl =
+                                                          await uploadData(
+                                                              selectedFile
+                                                                  .storagePath,
+                                                              selectedFile
+                                                                  .bytes);
+                                                    } finally {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .hideCurrentSnackBar();
+                                                      isMediaUploading = false;
+                                                    }
+                                                    if (downloadUrl != null) {
+                                                      setState(() =>
+                                                          uploadedFileUrl =
+                                                              downloadUrl!);
+                                                      showUploadMessage(
+                                                        context,
+                                                        'Success!',
+                                                      );
+                                                    } else {
+                                                      setState(() {});
+                                                      showUploadMessage(
+                                                        context,
+                                                        'Failed to upload file',
+                                                      );
+                                                      return;
+                                                    }
+                                                  }
+
+                                                  if (FFAppState()
+                                                          .currentDocType ==
+                                                      'POF') {
+                                                    setState(() => FFAppState()
+                                                            .PreApprovalProofofFunds =
+                                                        uploadedFileUrl);
+                                                  } else {
+                                                    if (FFAppState()
+                                                            .currentDocType ==
+                                                        'AS-IS Contract') {
+                                                      setState(() => FFAppState()
+                                                              .ASISContractandetc =
+                                                          uploadedFileUrl);
+                                                    } else {
+                                                      if (FFAppState()
+                                                              .currentDocType ==
+                                                          'Misc Docs') {
+                                                        if (FFAppState()
+                                                                    .MiscDocs1 ==
+                                                                null ||
+                                                            FFAppState()
+                                                                    .MiscDocs1 ==
+                                                                '') {
+                                                          setState(() => FFAppState()
+                                                                  .MiscDocs1 =
+                                                              uploadedFileUrl);
+                                                        } else {
+                                                          if (FFAppState()
+                                                                      .MiscDocs2 ==
+                                                                  null ||
+                                                              FFAppState()
+                                                                      .MiscDocs2 ==
+                                                                  '') {
+                                                            setState(() => FFAppState()
+                                                                    .MiscDocs2 =
+                                                                uploadedFileUrl);
+                                                          } else {
+                                                            setState(() => FFAppState()
+                                                                    .MiscDocs3 =
+                                                                uploadedFileUrl);
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              text: 'Click to upload',
+                                              icon: Icon(
+                                                Icons.upload_file,
+                                                size: 15,
+                                              ),
+                                              options: FFButtonOptions(
+                                                width: double.infinity,
+                                                height: 40,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryColor,
+                                                        ),
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(-0.75, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 20, 0, 10),
+                                  child: Text(
+                                    'Add People',
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .grayDark,
+                                          fontSize: 37,
+                                          fontWeight: FontWeight.w900,
+                                          lineHeight: 0.9,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 0, 0),
+                                    child: Icon(
+                                      Icons.info_outline,
+                                      color: Colors.black,
+                                      size: 24,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.8, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 0, 0, 0),
+                                      child: Text(
+                                        'Add your client(s)',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Expanded(
-                                  child: Builder(
-                                    builder: (context) {
-                                      final contact = FFAppState()
-                                          .BuyerFormContactsList
-                                          .toList();
-                                      return Wrap(
-                                        spacing: 0,
-                                        runSpacing: 0,
-                                        alignment: WrapAlignment.start,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        direction: Axis.horizontal,
-                                        runAlignment: WrapAlignment.start,
-                                        verticalDirection:
-                                            VerticalDirection.down,
-                                        clipBehavior: Clip.antiAlias,
-                                        children: List.generate(contact.length,
-                                            (contactIndex) {
-                                          final contactItem =
-                                              contact[contactIndex];
-                                          return Stack(
-                                            alignment:
-                                                AlignmentDirectional(1, -1),
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 8, 8, 8),
-                                                child: Container(
-                                                  width: 40,
-                                                  height: 40,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Image.network(
-                                                    valueOrDefault<String>(
-                                                      getJsonField(
-                                                        contactItem,
-                                                        r'''$['Profile Picture'].url''',
-                                                      ),
-                                                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () async {
-                                                  setState(() => FFAppState()
-                                                      .BuyerFormContactsList
-                                                      .remove(contactItem));
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .solidTimesCircle,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'iconOnPageLoadAnimation1']!),
-                                            ],
-                                          );
-                                        }),
-                                      );
-                                    },
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8, 0, 0, 0),
@@ -1292,9 +2148,9 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                         },
                                       ).then((value) => setState(() {}));
                                     },
-                                    text: 'Add Contact',
+                                    text: 'Contacts',
                                     icon: Icon(
-                                      Icons.contacts,
+                                      Icons.people,
                                       size: 15,
                                     ),
                                     options: FFButtonOptions(
@@ -1316,794 +2172,134 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
                                 Expanded(
-                                  child: TextFormField(
-                                    controller:
-                                        additionalTermsTextFieldController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      'additionalTermsTextFieldController',
-                                      Duration(milliseconds: 2000),
-                                      () => setState(() {}),
-                                    ),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Internal Notes',
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 12, 12, 12),
-                                      suffixIcon:
-                                          additionalTermsTextFieldController!
-                                                  .text.isNotEmpty
-                                              ? InkWell(
-                                                  onTap: () async {
-                                                    additionalTermsTextFieldController
-                                                        ?.clear();
-                                                    setState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.clear,
-                                                    color: Color(0xFF757575),
-                                                    size: 22,
-                                                  ),
-                                                )
-                                              : null,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Nunito',
-                                          fontSize: 16,
-                                        ),
-                                    maxLines: 3,
-                                    minLines: 1,
-                                    keyboardType: TextInputType.multiline,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Additional Terms '),
-                                            content: Text(
-                                                'Use the exact verbiage, spelling & punctuation you would like in the contract. This will be copied & pasted directly!\n*We are not responsible for your typos'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 0, 0),
+                                    child: Builder(
+                                      builder: (context) {
+                                        final contact = FFAppState()
+                                            .SellerFormContactsList
+                                            .toList();
+                                        return Wrap(
+                                          spacing: 0,
+                                          runSpacing: 0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.start,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.antiAlias,
+                                          children: List.generate(
+                                              contact.length, (contactIndex) {
+                                            final contactItem =
+                                                contact[contactIndex];
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(2, 2, 2, 2),
+                                              child: Container(
+                                                width: 50,
+                                                height: 50,
+                                                child: Stack(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1, -1),
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8, 8, 8, 8),
+                                                      child: ClipOval(
+                                                        child: Container(
+                                                          width: 100,
+                                                          height: 100,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0, 0),
+                                                            child: AutoSizeText(
+                                                              functions
+                                                                  .initialsFromName(
+                                                                      getJsonField(
+                                                                    contactItem,
+                                                                    r'''$.fields.Name''',
+                                                                  ).toString())
+                                                                  .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          2),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Lato',
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Image.network(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            contactItem,
+                                                            r'''$['Profile Picture'].url''',
+                                                          ),
+                                                          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1280px-HD_transparent_picture.png',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        setState(() => FFAppState()
+                                                            .SellerFormContactsList
+                                                            .remove(
+                                                                contactItem));
+                                                      },
+                                                      child: FaIcon(
+                                                        FontAwesomeIcons
+                                                            .solidTimesCircle,
+                                                        color: Colors.black,
+                                                        size: 20,
+                                                      ),
+                                                    ).animateOnPageLoad(
+                                                        animationsMap[
+                                                            'iconOnPageLoadAnimation6']!),
+                                                  ],
+                                                ),
                                               ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.info_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      size: 24,
+                                            );
+                                          }),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
                               ],
-                            ).animateOnPageLoad(
-                                animationsMap['rowOnPageLoadAnimation4']!),
-                          ),
-                          if (statusDropDownValue == 'New Offer')
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12, 12, 12, 12),
-                                child: TextFormField(
-                                  controller: internalNotesTextFieldController,
-                                  onChanged: (_) => EasyDebounce.debounce(
-                                    'internalNotesTextFieldController',
-                                    Duration(milliseconds: 2000),
-                                    () => setState(() {}),
-                                  ),
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Additional Terms',
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                    suffixIcon:
-                                        internalNotesTextFieldController!
-                                                .text.isNotEmpty
-                                            ? InkWell(
-                                                onTap: () async {
-                                                  internalNotesTextFieldController
-                                                      ?.clear();
-                                                  setState(() {});
-                                                },
-                                                child: Icon(
-                                                  Icons.clear,
-                                                  color: Color(0xFF757575),
-                                                  size: 22,
-                                                ),
-                                              )
-                                            : null,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Nunito',
-                                        fontSize: 16,
-                                      ),
-                                  maxLines: 3,
-                                  minLines: 1,
-                                ),
-                              ),
-                            ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Container(
-                                  width: double.infinity,
-                                  constraints: BoxConstraints(
-                                    maxWidth: double.infinity,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryColor,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 5, 10, 0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Pre Approval/Proof of Funds',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        fontSize: 14,
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
-                                            ),
-                                            InkWell(
-                                              onTap: () async {
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'Pre Approval or Proof of Funds (POF)'),
-                                                      content: Text(
-                                                          'We will NOT send an offer without one!'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child: Icon(
-                                                Icons.info_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 24,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      ListView(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        children: [
-                                          if (FFAppState().ASISContractandetc !=
-                                                  null &&
-                                              FFAppState().ASISContractandetc !=
-                                                  '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 12, 12, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Icon(
-                                                      Icons.picture_as_pdf,
-                                                      color: Colors.black,
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(FFAppState()
-                                                          .ASISContractandetc);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'AS-IS Contract and etc',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              1, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          setState(() =>
-                                                              FFAppState()
-                                                                      .ASISContractandetc =
-                                                                  '');
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 24,
-                                                        ),
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation2']!),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (FFAppState()
-                                                      .PreApprovalProofofFunds !=
-                                                  null &&
-                                              FFAppState()
-                                                      .PreApprovalProofofFunds !=
-                                                  '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 12, 12, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Icon(
-                                                      Icons.picture_as_pdf,
-                                                      color: Colors.black,
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(FFAppState()
-                                                          .PreApprovalProofofFunds);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'Pre Approval or Proof of Funds (POF)',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              1, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          setState(() =>
-                                                              FFAppState()
-                                                                      .PreApprovalProofofFunds =
-                                                                  '');
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 24,
-                                                        ),
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation3']!),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (FFAppState().MiscDocs1 != null &&
-                                              FFAppState().MiscDocs1 != '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 12, 12, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Icon(
-                                                      Icons.picture_as_pdf,
-                                                      color: Colors.black,
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(
-                                                          FFAppState()
-                                                              .MiscDocs1);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'Misc Docs',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              1, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          setState(() =>
-                                                              FFAppState()
-                                                                      .MiscDocs1 =
-                                                                  '');
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 24,
-                                                        ),
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation4']!),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (FFAppState().MiscDocs2 != null &&
-                                              FFAppState().MiscDocs2 != '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 12, 12, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Icon(
-                                                      Icons.picture_as_pdf,
-                                                      color: Colors.black,
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(
-                                                          FFAppState()
-                                                              .MiscDocs2);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'Misc Docs',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              1, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          setState(() =>
-                                                              FFAppState()
-                                                                      .MiscDocs2 =
-                                                                  '');
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 24,
-                                                        ),
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation5']!),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (FFAppState().MiscDocs3 != null &&
-                                              FFAppState().MiscDocs3 != '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 12, 12, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Icon(
-                                                      Icons.picture_as_pdf,
-                                                      color: Colors.black,
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await launchURL(
-                                                          FFAppState()
-                                                              .MiscDocs3);
-                                                    },
-                                                    child: AutoSizeText(
-                                                      'Misc Docs',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .underline,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              1, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          setState(() =>
-                                                              FFAppState()
-                                                                      .MiscDocs3 =
-                                                                  '');
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 24,
-                                                        ),
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation6']!),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              context: context,
-                                              builder: (context) {
-                                                return Padding(
-                                                  padding:
-                                                      MediaQuery.of(context)
-                                                          .viewInsets,
-                                                  child:
-                                                      DocumentTypeSelectorWidget(),
-                                                );
-                                              },
-                                            ).then((value) => setState(() {}));
-
-                                            if ((FFAppState().currentDocType ==
-                                                    'Misc Docs') ||
-                                                (FFAppState().currentDocType ==
-                                                    'AS-IS Contract') ||
-                                                (FFAppState().currentDocType ==
-                                                    'POF')) {
-                                              final selectedFile =
-                                                  await selectFile(
-                                                      allowedExtensions: [
-                                                    'pdf'
-                                                  ]);
-                                              if (selectedFile != null) {
-                                                setState(() =>
-                                                    isMediaUploading = true);
-                                                String? downloadUrl;
-                                                try {
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Uploading file...',
-                                                    showLoading: true,
-                                                  );
-                                                  downloadUrl =
-                                                      await uploadData(
-                                                          selectedFile
-                                                              .storagePath,
-                                                          selectedFile.bytes);
-                                                } finally {
-                                                  ScaffoldMessenger.of(context)
-                                                      .hideCurrentSnackBar();
-                                                  isMediaUploading = false;
-                                                }
-                                                if (downloadUrl != null) {
-                                                  setState(() =>
-                                                      uploadedFileUrl =
-                                                          downloadUrl!);
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Success!',
-                                                  );
-                                                } else {
-                                                  setState(() {});
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Failed to upload file',
-                                                  );
-                                                  return;
-                                                }
-                                              }
-
-                                              if (FFAppState().currentDocType ==
-                                                  'POF') {
-                                                setState(() => FFAppState()
-                                                        .PreApprovalProofofFunds =
-                                                    uploadedFileUrl);
-                                              } else {
-                                                if (FFAppState()
-                                                        .currentDocType ==
-                                                    'AS-IS Contract') {
-                                                  setState(() => FFAppState()
-                                                          .ASISContractandetc =
-                                                      uploadedFileUrl);
-                                                } else {
-                                                  if (FFAppState()
-                                                          .currentDocType ==
-                                                      'Misc Docs') {
-                                                    if (FFAppState()
-                                                                .MiscDocs1 ==
-                                                            null ||
-                                                        FFAppState()
-                                                                .MiscDocs1 ==
-                                                            '') {
-                                                      setState(() =>
-                                                          FFAppState()
-                                                                  .MiscDocs1 =
-                                                              uploadedFileUrl);
-                                                    } else {
-                                                      if (FFAppState()
-                                                                  .MiscDocs2 ==
-                                                              null ||
-                                                          FFAppState()
-                                                                  .MiscDocs2 ==
-                                                              '') {
-                                                        setState(() =>
-                                                            FFAppState()
-                                                                    .MiscDocs2 =
-                                                                uploadedFileUrl);
-                                                      } else {
-                                                        setState(() =>
-                                                            FFAppState()
-                                                                    .MiscDocs3 =
-                                                                uploadedFileUrl);
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          },
-                                          text: 'Click to upload',
-                                          icon: Icon(
-                                            Icons.upload_file,
-                                            size: 15,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: double.infinity,
-                                            height: 40,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle1
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryColor,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
                           Padding(
@@ -2143,28 +2339,28 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Signature Pad ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Nunito',
-                                                        fontSize: 14,
-                                                        fontStyle:
-                                                            FontStyle.italic,
-                                                      ),
+                                              'Review & Sign',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Nunito',
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w900,
+                                                    fontStyle: FontStyle.italic,
+                                                  ),
                                             ),
-                                            InkWell(
-                                              onTap: () async {
-                                                setState(() {
-                                                  signatureController.clear();
-                                                });
-                                              },
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.black,
-                                                size: 24,
-                                              ),
+                                            Text(
+                                              'CLEAR',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Nunito',
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle: FontStyle.italic,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -2244,7 +2440,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                                         ).then((value) => setState(() {}));
                                       },
                                       child: Text(
-                                        'I Agree to Terms & Conditions',
+                                        'I have read Terms & Conditions',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1,
                                       ),
@@ -2320,33 +2516,7 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                     }
 
                     if (statusDropDownValue == 'New Offer') {
-                      apiResultp2v = await AirtableAPIsGroup
-                          .createBuyersNewOfferTransactionRecordCall
-                          .call(
-                        address: addressTextFieldController!.text,
-                        purchasePrice:
-                            double.parse(purchasePriceController!.text),
-                        status: statusDropDownValue,
-                        escrowDeposit: double.parse(
-                            escrowDespositTextFieldController!.text),
-                        offerExpirationDate:
-                            functions.toIso8601String(datePicked1!),
-                        closingDate: functions.toIso8601String(datePicked2!),
-                        inspectionPeriod: int.parse(
-                            inspectionPeriodTextFieldController!.text),
-                        additionalTerms:
-                            additionalTermsTextFieldController!.text,
-                        preApprovalProofOfFunds:
-                            FFAppState().PreApprovalProofofFunds,
-                        signature: uploadedSignatureUrl,
-                        aSISContractAndEtc: FFAppState().ASISContractandetc,
-                        miscDocs1: FFAppState().MiscDocs1,
-                        miscDocs2: FFAppState().MiscDocs2,
-                        miscDocs3: FFAppState().MiscDocs3,
-                        typeOfFinancing: typeofFinancingValue,
-                        ourClientBuyerSELLERFormList: functions.contactRecordID(
-                            FFAppState().BuyerFormContactsList.toList()),
-                      );
+                      apiResultp2v = await MyGateWayHookCall.call();
                       if ((apiResultp2v?.succeeded ?? true)) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -2398,7 +2568,6 @@ class _BuyerFormComponentWidgetState extends State<BuyerFormComponentWidget>
                       apiResultcct = await AirtableAPIsGroup
                           .createBuyerExecutedContractTransactionRecordCall
                           .call(
-                        internalNotes: internalNotesTextFieldController!.text,
                         preApprovalProofOfFunds:
                             FFAppState().PreApprovalProofofFunds,
                         aSISContractAndEtc: FFAppState().ASISContractandetc,

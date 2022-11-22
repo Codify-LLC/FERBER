@@ -146,12 +146,12 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
 
   DateTime? datePicked1;
   DateTime? datePicked2;
-  List<String>? choiceChipsValues;
   TextEditingController? addressTextFieldController;
   TextEditingController? listingPriceController;
-  TextEditingController? totalCommissionController;
+  String? choiceChipsValue;
   TextEditingController? cooperatingBrokerCommissionController;
   TextEditingController? listingAgentCommissionController;
+  TextEditingController? totalCommissionController;
   TextEditingController? additionalTermsController;
   TextEditingController? notesController;
   bool isMediaUploading2 = false;
@@ -172,9 +172,9 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
     additionalTermsController = TextEditingController();
     addressTextFieldController = TextEditingController();
     listingPriceController = TextEditingController();
-    totalCommissionController = TextEditingController();
     cooperatingBrokerCommissionController = TextEditingController();
     listingAgentCommissionController = TextEditingController();
+    totalCommissionController = TextEditingController();
     notesController = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 4,
@@ -189,9 +189,9 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
     additionalTermsController?.dispose();
     addressTextFieldController?.dispose();
     listingPriceController?.dispose();
-    totalCommissionController?.dispose();
     cooperatingBrokerCommissionController?.dispose();
     listingAgentCommissionController?.dispose();
+    totalCommissionController?.dispose();
     notesController?.dispose();
     super.dispose();
   }
@@ -412,81 +412,6 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                     ),
                             textAlign: TextAlign.start,
                             keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      if (statusDropDownValue == 'Pre-listing')
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                'Types of Financing Accepted ',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      fontSize: 14,
-                                    ),
-                              ),
-                              Container(
-                                width: 200,
-                                decoration: BoxDecoration(),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 8, 0, 0),
-                                  child: FlutterFlowChoiceChips(
-                                    options: [
-                                      ChipData('FHA'),
-                                      ChipData('VA'),
-                                      ChipData('Conventional'),
-                                      ChipData('Cash')
-                                    ],
-                                    onChanged: (val) =>
-                                        setState(() => choiceChipsValues = val),
-                                    selectedChipStyle: ChipStyle(
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            color: Colors.white,
-                                          ),
-                                      iconColor: Colors.white,
-                                      iconSize: 0,
-                                      labelPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              8, 4, 8, 4),
-                                      elevation: 0,
-                                    ),
-                                    unselectedChipStyle: ChipStyle(
-                                      backgroundColor: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily: 'Nunito',
-                                            color: Color(0xFF323B45),
-                                          ),
-                                      iconColor: Color(0xFF323B45),
-                                      iconSize: 0,
-                                      labelPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              8, 4, 8, 4),
-                                      elevation: 5,
-                                    ),
-                                    chipSpacing: 10,
-                                    multiselect: true,
-                                    initialized: choiceChipsValues != null,
-                                    alignment: WrapAlignment.spaceAround,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                       if (statusDropDownValue == 'Pre-listing')
@@ -721,270 +646,74 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                             ],
                           ),
                         ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Builder(
-                                builder: (context) {
-                                  final contact = FFAppState()
-                                      .SellerFormContactsList
-                                      .toList();
-                                  return Wrap(
-                                    spacing: 0,
-                                    runSpacing: 0,
-                                    alignment: WrapAlignment.start,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.start,
-                                    direction: Axis.horizontal,
-                                    runAlignment: WrapAlignment.start,
-                                    verticalDirection: VerticalDirection.down,
-                                    clipBehavior: Clip.antiAlias,
-                                    children: List.generate(contact.length,
-                                        (contactIndex) {
-                                      final contactItem = contact[contactIndex];
-                                      return Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            2, 2, 2, 2),
-                                        child: Container(
-                                          width: 50,
-                                          height: 50,
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional(1, -1),
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 8, 8, 8),
-                                                child: ClipOval(
-                                                  child: Container(
-                                                    width: 100,
-                                                    height: 100,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0, 0),
-                                                      child: AutoSizeText(
-                                                        functions
-                                                            .initialsFromName(
-                                                                getJsonField(
-                                                              contactItem,
-                                                              r'''$.fields.Name''',
-                                                            ).toString())
-                                                            .maybeHandleOverflow(
-                                                                maxChars: 2),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .subtitle2
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Lato',
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 50,
-                                                height: 50,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    getJsonField(
-                                                      contactItem,
-                                                      r'''$['Profile Picture'].url''',
-                                                    ),
-                                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1280px-HD_transparent_picture.png',
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () async {
-                                                  setState(() => FFAppState()
-                                                      .SellerFormContactsList
-                                                      .remove(contactItem));
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .solidTimesCircle,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'iconOnPageLoadAnimation1']!),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  );
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              1,
-                                          child: AllContactsWidget(
-                                            formType: 'Seller',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => setState(() {}));
-                                },
-                                text: 'Add Contact',
-                                icon: Icon(
-                                  Icons.contacts,
-                                  size: 15,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 50,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        color: Colors.white,
-                                      ),
-                                  elevation: 5,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       if (statusDropDownValue == 'Pre-listing')
                         Padding(
                           padding:
                               EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Expanded(
-                                child: TextFormField(
-                                  controller: totalCommissionController,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Total Commission ',
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
+                              Text(
+                                'Types of Financing Accepted ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Nunito',
+                                      fontSize: 14,
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                    suffixIcon: FaIcon(
-                                      FontAwesomeIcons.percentage,
-                                      color: Color(0xFF757575),
-                                      size: 30,
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Nunito',
-                                        fontSize: 16,
-                                      ),
-                                  keyboardType: TextInputType.number,
-                                ),
                               ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Total Commission '),
-                                          content: Text(
-                                              'Total Commission paid by Seller (Both Sides)'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Icon(
-                                    Icons.info_rounded,
-                                    color: Color(0xFF111111),
-                                    size: 24,
+                              Container(
+                                width: 200,
+                                decoration: BoxDecoration(),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: FlutterFlowChoiceChips(
+                                    options: [
+                                      ChipData('FHA'),
+                                      ChipData('VA'),
+                                      ChipData('Conventional'),
+                                      ChipData('Cash')
+                                    ],
+                                    onChanged: (val) => setState(
+                                        () => choiceChipsValue = val?.first),
+                                    selectedChipStyle: ChipStyle(
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Nunito',
+                                            color: Colors.white,
+                                          ),
+                                      iconColor: Colors.white,
+                                      iconSize: 0,
+                                      labelPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              8, 4, 8, 4),
+                                      elevation: 0,
+                                    ),
+                                    unselectedChipStyle: ChipStyle(
+                                      backgroundColor: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Nunito',
+                                            color: Color(0xFF323B45),
+                                          ),
+                                      iconColor: Color(0xFF323B45),
+                                      iconSize: 0,
+                                      labelPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              8, 4, 8, 4),
+                                      elevation: 5,
+                                    ),
+                                    chipSpacing: 10,
+                                    multiselect: false,
+                                    alignment: WrapAlignment.spaceAround,
                                   ),
                                 ),
                               ),
@@ -1133,6 +862,117 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: totalCommissionController,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: 'Additional Fee',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    filled: true,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            12, 12, 12, 12),
+                                    prefixIcon: Icon(
+                                      Icons.attach_money_outlined,
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Nunito',
+                                        fontSize: 16,
+                                      ),
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
+                                child: Text(
+                                  ' Buyer Agent',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Total Commission '),
+                                          content: Text(
+                                              'Total Commission paid by Seller (Both Sides)'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down_sharp,
+                                    color: Color(0xFF111111),
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      if (statusDropDownValue == 'Pre-listing')
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
@@ -1235,7 +1075,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                     );
                                   },
                                   child: Icon(
-                                    Icons.info_rounded,
+                                    Icons.info_outline_rounded,
                                     color: Color(0xFF111111),
                                     size: 24,
                                   ),
@@ -1259,7 +1099,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                 ),
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Notes',
+                                  labelText: 'Internal Notes',
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -1347,7 +1187,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                   );
                                 },
                                 child: Icon(
-                                  Icons.info_rounded,
+                                  Icons.info_outline,
                                   color: Color(0xFF111111),
                                   size: 24,
                                 ),
@@ -1398,7 +1238,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Docs',
+                                                'Add Documents',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
@@ -1510,7 +1350,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           ),
                                                         ).animateOnPageLoad(
                                                             animationsMap[
-                                                                'iconOnPageLoadAnimation2']!),
+                                                                'iconOnPageLoadAnimation1']!),
                                                       ),
                                                     ),
                                                   ],
@@ -1578,7 +1418,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           ),
                                                         ).animateOnPageLoad(
                                                             animationsMap[
-                                                                'iconOnPageLoadAnimation3']!),
+                                                                'iconOnPageLoadAnimation2']!),
                                                       ),
                                                     ),
                                                   ],
@@ -1647,7 +1487,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           ),
                                                         ).animateOnPageLoad(
                                                             animationsMap[
-                                                                'iconOnPageLoadAnimation4']!),
+                                                                'iconOnPageLoadAnimation3']!),
                                                       ),
                                                     ),
                                                   ],
@@ -1716,7 +1556,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           ),
                                                         ).animateOnPageLoad(
                                                             animationsMap[
-                                                                'iconOnPageLoadAnimation5']!),
+                                                                'iconOnPageLoadAnimation4']!),
                                                       ),
                                                     ),
                                                   ],
@@ -1785,7 +1625,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                           ),
                                                         ).animateOnPageLoad(
                                                             animationsMap[
-                                                                'iconOnPageLoadAnimation6']!),
+                                                                'iconOnPageLoadAnimation5']!),
                                                       ),
                                                     ),
                                                   ],
@@ -1852,7 +1692,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                                       ),
                                                     ).animateOnPageLoad(
                                                         animationsMap[
-                                                            'iconOnPageLoadAnimation7']!),
+                                                            'iconOnPageLoadAnimation6']!),
                                                   ),
                                                 ),
                                               ],
@@ -2083,7 +1923,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Upload Photos',
+                                          'Upload Photos (Optional)',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -2298,6 +2138,250 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                             ),
                           ),
                         ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.75, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                              child: Text(
+                                'Add People',
+                                style: FlutterFlowTheme.of(context)
+                                    .title1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color:
+                                          FlutterFlowTheme.of(context).grayDark,
+                                      fontSize: 37,
+                                      fontWeight: FontWeight.w900,
+                                      lineHeight: 0.9,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                                child: Icon(
+                                  Icons.info_outline,
+                                  color: Colors.black,
+                                  size: 24,
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.8, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 0, 0, 0),
+                                  child: Text(
+                                    'Add your client(s)',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 0, 0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.of(context)
+                                                .viewInsets,
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  1,
+                                              child: AllContactsWidget(
+                                                formType: 'Seller',
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => setState(() {}));
+                                    },
+                                    text: 'Contacts',
+                                    icon: Icon(
+                                      Icons.people,
+                                      size: 15,
+                                    ),
+                                    options: FFButtonOptions(
+                                      height: 50,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            color: Colors.white,
+                                          ),
+                                      elevation: 5,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 5, 0),
+                                    child: Builder(
+                                      builder: (context) {
+                                        final contact = FFAppState()
+                                            .SellerFormContactsList
+                                            .toList();
+                                        return Wrap(
+                                          spacing: 0,
+                                          runSpacing: 0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.start,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.antiAlias,
+                                          children: List.generate(
+                                              contact.length, (contactIndex) {
+                                            final contactItem =
+                                                contact[contactIndex];
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(2, 2, 2, 2),
+                                              child: Container(
+                                                width: 50,
+                                                height: 50,
+                                                child: Stack(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1, -1),
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8, 8, 8, 8),
+                                                      child: ClipOval(
+                                                        child: Container(
+                                                          width: 100,
+                                                          height: 100,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0, 0),
+                                                            child: AutoSizeText(
+                                                              functions
+                                                                  .initialsFromName(
+                                                                      getJsonField(
+                                                                    contactItem,
+                                                                    r'''$.fields.Name''',
+                                                                  ).toString())
+                                                                  .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          2),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Lato',
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Image.network(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            contactItem,
+                                                            r'''$['Profile Picture'].url''',
+                                                          ),
+                                                          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1280px-HD_transparent_picture.png',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        setState(() => FFAppState()
+                                                            .SellerFormContactsList
+                                                            .remove(
+                                                                contactItem));
+                                                      },
+                                                      child: FaIcon(
+                                                        FontAwesomeIcons
+                                                            .solidTimesCircle,
+                                                        color: Colors.black,
+                                                        size: 20,
+                                                      ),
+                                                    ).animateOnPageLoad(
+                                                        animationsMap[
+                                                            'iconOnPageLoadAnimation7']!),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       if (statusDropDownValue == 'Executed Contract')
                         Padding(
                           padding:
@@ -2382,26 +2466,31 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                         child: Container(
                           decoration: BoxDecoration(),
-                          child: Theme(
-                            data: ThemeData(
-                              unselectedWidgetColor: Color(0xFF95A1AC),
-                            ),
-                            child: CheckboxListTile(
-                              value: checkboxListTileValue ??= false,
-                              onChanged: (newValue) async {
-                                setState(
-                                    () => checkboxListTileValue = newValue!);
-                              },
-                              title: Text(
-                                'I Agree to Terms & Conditions',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).title3,
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                            child: Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Color(0xFF95A1AC),
                               ),
-                              tileColor: Color(0xFFF5F5F5),
-                              activeColor:
-                                  FlutterFlowTheme.of(context).primaryColor,
-                              dense: true,
-                              controlAffinity: ListTileControlAffinity.leading,
+                              child: CheckboxListTile(
+                                value: checkboxListTileValue ??= false,
+                                onChanged: (newValue) async {
+                                  setState(
+                                      () => checkboxListTileValue = newValue!);
+                                },
+                                title: Text(
+                                  'I Agree to Terms & Conditions',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context).title3,
+                                ),
+                                tileColor: Color(0xFFF5F5F5),
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                dense: true,
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                              ),
                             ),
                           ),
                         ),
@@ -2537,7 +2626,7 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                           .createSellerPreListingRecordCall
                           .call(
                         listingPrice: int.parse(listingPriceController!.text),
-                        typesOfFinancingAcceptedList: choiceChipsValues,
+                        typesOfFinancingAccepted: choiceChipsValue,
                         address: addressTextFieldController!.text,
                         listingDate: functions.toIso8601String(datePicked1!),
                         activeDate: functions.toIso8601String(datePicked1!),
@@ -2548,12 +2637,10 @@ class _SellerFormComponentWidgetState extends State<SellerFormComponentWidget>
                               double.parse(totalCommissionController!.text)),
                           0.0,
                         ),
-                        listingAgentCommission: valueOrDefault<String>(
-                          functions
-                              .convertToDecimalPercentage(double.parse(
-                                  listingAgentCommissionController!.text))
-                              .toString(),
-                          '0.0',
+                        listingAgentCommission: valueOrDefault<double>(
+                          functions.convertToDecimalPercentage(double.parse(
+                              listingAgentCommissionController!.text)),
+                          0.0,
                         ),
                         coOpBrokerCommission: valueOrDefault<double>(
                           functions.convertToDecimalPercentage(double.parse(

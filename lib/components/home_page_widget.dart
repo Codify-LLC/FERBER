@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/buyer_and_seller_form_widget.dart';
 import '../components/confirm_t_c_copy_widget.dart';
 import '../components/custom_auto_complete_widget.dart';
 import '../components/property_details_widget.dart';
@@ -162,88 +161,76 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                InkWell(
-                                                  onTap: () async {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      barrierColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return Padding(
-                                                          padding:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .viewInsets,
-                                                          child: Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                1,
-                                                            child:
-                                                                BuyerAndSellerFormWidget(),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -0.8, 0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 20, 0, 10),
+                                                    child: Text(
+                                                      'Hello,',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .title1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontSize: 350,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            lineHeight: 0.9,
                                                           ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        setState(() {}));
-                                                  },
-                                                  child: Text(
-                                                    'Hello ',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Nunito',
-                                                          fontSize: 28,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  child: AuthUserStreamWidget(
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return Padding(
-                                                              padding: MediaQuery
-                                                                      .of(context)
-                                                                  .viewInsets,
-                                                              child:
-                                                                  ConfirmTCCopyWidget(),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            setState(() {}));
-                                                      },
-                                                      child: Text(
-                                                        currentUserDisplayName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Nunito',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .tertiaryColor,
-                                                                  fontSize: 26,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 10, 0, 0),
+                                                    child: AuthUserStreamWidget(
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Padding(
+                                                                padding: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                                child:
+                                                                    ConfirmTCCopyWidget(),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        },
+                                                        child: Text(
+                                                          currentUserDisplayName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiaryColor,
+                                                                fontSize: 26,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
